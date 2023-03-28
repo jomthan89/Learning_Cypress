@@ -6,7 +6,7 @@
 
 #Build Date:         Sep  9 2019 11:47:43
 
-#File Generated:     Mar 28 2023 11:07:34
+#File Generated:     Mar 28 2023 14:29:23
 
 #Purpose:            
 
@@ -80,13 +80,13 @@ analysis after routing.
                      Clock Summary 
 ======================================================================
 Number of clocks: 7
-Clock: CyBUS_CLK            | Frequency:  49.2 MHz | Target:  24.0 MHz
+Clock: CyBUS_CLK            | Frequency:  49.8 MHz | Target:  24.0 MHz
 Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  48.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
 Clock: GPS_UART_IntClock    | Frequency:  51.4 MHz | Target:   0.2 MHz
-Clock: OUTPUT_UART_IntClock | Frequency:  49.2 MHz | Target:   0.2 MHz
+Clock: OUTPUT_UART_IntClock | Frequency:  49.8 MHz | Target:   0.2 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -110,7 +110,7 @@ Clock: OUTPUT_UART_IntClock | Frequency:   2.5 MHz | Target:   0.2 MHz
 ======================================================================
                      End of Clock Summary
 ######################################################################
-D2088: Phase 7, elapsed time : 0.4 (sec)
+D2088: Phase 7, elapsed time : 0.3 (sec)
 
 Final Design Statistics
     Number of Combinational MCs 	:	18

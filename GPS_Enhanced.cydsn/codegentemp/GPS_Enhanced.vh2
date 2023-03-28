@@ -2,7 +2,7 @@
 --	Conversion of GPS_Enhanced.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Mar 28 11:07:34 2023
+--	Tue Mar 28 14:29:22 2023
 --
 
 USE cypress.cypress.all;
@@ -1339,7 +1339,7 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 		clock=>\GPS_UART:BUART:clock_op\,
 		status=>(zero, \GPS_UART:BUART:rx_status_5\, \GPS_UART:BUART:rx_status_4\, \GPS_UART:BUART:rx_status_3\,
 			\GPS_UART:BUART:rx_status_2\, zero, zero),
-		interrupt=>\GPS_UART:BUART:rx_interrupt_out\);
+		interrupt=>Net_8);
 Rx_1:cy_psoc3_pins_v1_10
 	GENERIC MAP(id=>"1425177d-0d0e-4468-8bcc-e638e5509a9b",
 		drive_mode=>"001",
@@ -1995,6 +1995,10 @@ PW_GPS:cy_psoc3_pins_v1_10
 		out_clock_en=>one,
 		out_reset=>zero,
 		interrupt=>tmpINTERRUPT_0__PW_GPS_net_0);
+GPS_UART_RX_ISR:cy_isr_v1_0
+	GENERIC MAP(int_type=>"10",
+		is_nmi=>'0')
+	PORT MAP(int_signal=>Net_8);
 \GPS_UART:BUART:reset_reg\:cy_dff
 	PORT MAP(d=>zero,
 		clk=>\GPS_UART:BUART:clock_op\,

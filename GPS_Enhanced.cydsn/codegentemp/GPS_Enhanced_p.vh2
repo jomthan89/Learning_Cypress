@@ -1,5 +1,5 @@
 -- Project:   GPS_Enhanced
--- Generated: 03/28/2023 11:07:34
+-- Generated: 03/28/2023 14:29:23
 -- PSoC Creator  4.4
 
 ENTITY GPS_Enhanced IS
@@ -41,6 +41,7 @@ ARCHITECTURE __DEFAULT__ OF GPS_Enhanced IS
     SIGNAL Net_18 : bit;
     SIGNAL Net_22 : bit;
     SIGNAL Net_5 : bit;
+    SIGNAL Net_8 : bit;
     SIGNAL Net_9 : bit;
     SIGNAL PW_GPS(0)__PA : bit;
     SIGNAL Rx_1(0)__PA : bit;
@@ -411,6 +412,11 @@ ARCHITECTURE __DEFAULT__ OF GPS_Enhanced IS
     ATTRIBUTE udb_chain OF datapathcell : COMPONENT IS "ce0i,ce0,cl0i,cl0,z0i,z0,ff0i,ff0,ce1i,ce1,cl1i,cl1,z1i,z1,ff1i,ff1,cap0i,cap0,cap1i,cap1,ci,co_msb,sir,sol_msb,cfbi,cfbo,sil,sor,cmsbi,cmsbo";
     ATTRIBUTE chain_lsb OF datapathcell : COMPONENT IS "ce0i,cl0i,z0i,ff0i,ce1i,cl1i,z1i,ff1i,cap0i,cap1i,ci,sir,cfbi,sor,cmsbo";
     ATTRIBUTE chain_msb OF datapathcell : COMPONENT IS "ce0,cl0,z0,ff0,ce1,cl1,z1,ff1,cap0,cap1,co_msb,sol_msb,cfbo,sil,cmsbi";
+    COMPONENT interrupt
+        PORT (
+            interrupt : IN std_ulogic;
+            clock : IN std_ulogic);
+    END COMPONENT;
     COMPONENT iocell
         PORT (
             oe : IN std_ulogic;
@@ -1347,7 +1353,8 @@ BEGIN
             status_3 => \GPS_UART:BUART:rx_status_3\,
             status_2 => open,
             status_1 => open,
-            status_0 => open);
+            status_0 => open,
+            interrupt => Net_8);
 
     \OUTPUT_UART:BUART:sTX:TxShifter:u0\:datapathcell
         GENERIC MAP(
@@ -1519,6 +1526,14 @@ BEGIN
             status_2 => open,
             status_1 => open,
             status_0 => open);
+
+    GPS_UART_RX_ISR:interrupt
+        GENERIC MAP(
+            int_type => "10",
+            is_nmi => 0)
+        PORT MAP(
+            interrupt => Net_8,
+            clock => ClockBlock_BUS_CLK);
 
     \GPS_UART:BUART:txn\:macrocell
         GENERIC MAP(

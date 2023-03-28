@@ -23,6 +23,7 @@
 #include "OUTPUT_UART.h"
 #include "PW_GPS_aliases.h"
 #include "PW_GPS.h"
+#include "GPS_UART_RX_ISR.h"
 #include "GPS_UART_IntClock.h"
 #include "OUTPUT_UART_IntClock.h"
 #include "core_cm3_psoc5.h"

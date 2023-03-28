@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 1
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 1
 
 
    1              		.syntax unified
@@ -20,16 +20,15 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 1
   17              	.Ltext0:
   18              		.cfi_sections	.debug_frame
   19              		.global	__aeabi_d2f
-  20              		.global	__aeabi_f2d
-  21              		.section	.text.main,"ax",%progbits
-  22              		.align	2
-  23              		.global	main
-  24              		.thumb
-  25              		.thumb_func
-  26              		.type	main, %function
-  27              	main:
-  28              	.LFB64:
-  29              		.file 1 "main.c"
+  20              		.section	.text.uart1_rx_isr,"ax",%progbits
+  21              		.align	2
+  22              		.global	uart1_rx_isr
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	uart1_rx_isr, %function
+  26              	uart1_rx_isr:
+  27              	.LFB64:
+  28              		.file 1 "main.c"
    1:main.c        **** /* ========================================
    2:main.c        ****  *
    3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
@@ -46,1252 +45,1591 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 1
   14:main.c        **** #include <stdlib.h>
   15:main.c        **** #include <string.h>
   16:main.c        **** 
-  17:main.c        **** #define BUFFER_SIZE 80
-  18:main.c        **** 
-  19:main.c        **** char gps_buffer[BUFFER_SIZE];
-  20:main.c        **** char lat_str[12], lon_str[12], time_str[10], date_str[10];
-  21:main.c        **** float lat_val, lon_val;
-  22:main.c        **** 
-  23:main.c        **** int main(void)
-  24:main.c        **** {
-  30              		.loc 1 24 0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 56
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 2
+  17:main.c        **** #define UART1_BUFFER_SIZE 64
+  18:main.c        **** #define UART2_BUFFER_SIZE 64
+  19:main.c        **** #define MESSAGE_INTERVAL_MS 1000
+  20:main.c        **** 
+  21:main.c        **** char uart1_rx_buffer[UART1_BUFFER_SIZE];
+  22:main.c        **** char uart2_tx_buffer[UART2_BUFFER_SIZE];
+  23:main.c        **** 
+  24:main.c        **** char* token;
+  25:main.c        **** 
+  26:main.c        **** float latitude, longitude, speed;
+  27:main.c        **** char ns_indicator, ew_indicator, timestamp[10];
+  28:main.c        **** 
+  29:main.c        **** CY_ISR(uart1_rx_isr)
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 2
 
 
-  34 0000 F0B5     		push	{r4, r5, r6, r7, lr}
-  35              		.cfi_def_cfa_offset 20
-  36              		.cfi_offset 4, -20
-  37              		.cfi_offset 5, -16
-  38              		.cfi_offset 6, -12
-  39              		.cfi_offset 7, -8
-  40              		.cfi_offset 14, -4
-  41 0002 91B0     		sub	sp, sp, #68
-  42              		.cfi_def_cfa_offset 88
-  25:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
-  43              		.loc 1 25 0
-  44              		.syntax unified
-  45              	@ 25 "main.c" 1
-  46 0004 62B6     		CPSIE   i
-  47              	@ 0 "" 2
-  26:main.c        **** 
-  27:main.c        ****     PW_GPS_Write(1);
-  48              		.loc 1 27 0
-  49              		.thumb
-  50              		.syntax unified
-  51 0006 0120     		movs	r0, #1
-  52 0008 FFF7FEFF 		bl	PW_GPS_Write
-  53              	.LVL0:
-  28:main.c        ****     GPS_UART_Start(); // Initialize UART1
-  54              		.loc 1 28 0
-  55 000c FFF7FEFF 		bl	GPS_UART_Start
-  56              	.LVL1:
-  29:main.c        ****     OUTPUT_UART_Start(); // Initialize UART2
-  57              		.loc 1 29 0
-  58 0010 FFF7FEFF 		bl	OUTPUT_UART_Start
-  59              	.LVL2:
-  30:main.c        **** 
-  31:main.c        ****     // Send initial message
-  32:main.c        ****     OUTPUT_UART_PutString("Initializing...\r\n");
-  60              		.loc 1 32 0
-  61 0014 2848     		ldr	r0, .L7
-  62 0016 FFF7FEFF 		bl	OUTPUT_UART_PutString
-  63              	.LVL3:
-  33:main.c        ****     OUTPUT_UART_PutString("Getting GPS Data...\r\n");
-  64              		.loc 1 33 0
-  65 001a 2848     		ldr	r0, .L7+4
-  66 001c FFF7FEFF 		bl	OUTPUT_UART_PutString
-  67              	.LVL4:
-  34:main.c        ****     GPS_UART_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
-  68              		.loc 1 34 0
-  69 0020 2748     		ldr	r0, .L7+8
-  70 0022 FFF7FEFF 		bl	GPS_UART_PutString
-  71              	.LVL5:
-  35:main.c        ****     OUTPUT_UART_PutString("GPS data:\r\n");
-  72              		.loc 1 35 0
-  73 0026 2748     		ldr	r0, .L7+12
-  74 0028 FFF7FEFF 		bl	OUTPUT_UART_PutString
-  75              	.LVL6:
-  76              	.L2:
-  36:main.c        **** 
-  37:main.c        ****     while(1)
-  38:main.c        ****     {
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 3
+  30:main.c        **** {
+  29              		.loc 1 30 0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33 0000 38B5     		push	{r3, r4, r5, lr}
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 3, -16
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 14, -4
+  31:main.c        ****     static uint8_t uart1_rx_index = 0;
+  32:main.c        ****     
+  33:main.c        ****     // Read the received data and store it in the buffer
+  34:main.c        ****     uart1_rx_buffer[uart1_rx_index] = GPS_UART_GetChar();
+  39              		.loc 1 34 0
+  40 0002 314C     		ldr	r4, .L5
+  41 0004 2578     		ldrb	r5, [r4]	@ zero_extendqisi2
+  42 0006 FFF7FEFF 		bl	GPS_UART_GetChar
+  43              	.LVL0:
+  44 000a 304A     		ldr	r2, .L5+4
+  45 000c 5055     		strb	r0, [r2, r5]
+  35:main.c        ****     
+  36:main.c        ****     // Check if the end of message character has been received
+  37:main.c        ****     if (uart1_rx_buffer[uart1_rx_index] == '\n') {
+  46              		.loc 1 37 0
+  47 000e 2378     		ldrb	r3, [r4]	@ zero_extendqisi2
+  48 0010 D25C     		ldrb	r2, [r2, r3]	@ zero_extendqisi2
+  49 0012 0A2A     		cmp	r2, #10
+  50 0014 53D1     		bne	.L2
+  38:main.c        ****         
+  39:main.c        ****         // Null-terminate the buffer to create a C string
+  40:main.c        ****         uart1_rx_buffer[uart1_rx_index+1] = '\0';
+  51              		.loc 1 40 0
+  52 0016 0133     		adds	r3, r3, #1
+  53 0018 2C48     		ldr	r0, .L5+4
+  54 001a 0022     		movs	r2, #0
+  55 001c C254     		strb	r2, [r0, r3]
+  41:main.c        ****         
+  42:main.c        ****         // Reset the buffer index
+  43:main.c        ****         uart1_rx_index = 0;
+  56              		.loc 1 43 0
+  57 001e 2270     		strb	r2, [r4]
+  44:main.c        ****         
+  45:main.c        ****         // Parse the GNRMC message
+  46:main.c        ****         token = strtok(uart1_rx_buffer, ",");
+  58              		.loc 1 46 0
+  59 0020 2B49     		ldr	r1, .L5+8
+  60 0022 FFF7FEFF 		bl	strtok
+  61              	.LVL1:
+  62 0026 2B4B     		ldr	r3, .L5+12
+  63 0028 1860     		str	r0, [r3]
+  47:main.c        ****         
+  48:main.c        ****         if (strcmp(token, "$GNRMC") == 0) {
+  64              		.loc 1 48 0
+  65 002a 2B49     		ldr	r1, .L5+16
+  66 002c FFF7FEFF 		bl	strcmp
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 3
 
 
-  39:main.c        ****         if(GPS_UART_GetRxBufferSize() > 0) // Check if there is data in UART1 buffer
-  77              		.loc 1 39 0
-  78 002c FFF7FEFF 		bl	GPS_UART_GetRxBufferSize
-  79              	.LVL7:
-  80 0030 0028     		cmp	r0, #0
-  81 0032 FBD0     		beq	.L2
-  82              	.LBB2:
-  40:main.c        ****         {
-  41:main.c        ****             char rx_char = GPS_UART_GetChar(); // Read a character from UART1
-  83              		.loc 1 41 0
-  84 0034 FFF7FEFF 		bl	GPS_UART_GetChar
-  85              	.LVL8:
-  86 0038 8DF80B00 		strb	r0, [sp, #11]
-  42:main.c        **** 
-  43:main.c        ****             if(rx_char == '\n') // End of GPS message
-  87              		.loc 1 43 0
-  88 003c 0A28     		cmp	r0, #10
-  89 003e 33D1     		bne	.L3
-  90              	.LBB3:
-  44:main.c        ****             {
-  45:main.c        ****                 // Extract relevant data from GPS message
-  46:main.c        ****                 sscanf(gps_buffer, "$GNRMC,%[^,],%*c,%[^,],%*c,%[^,],%*c,%[^,],%*c,%*c,%*c,%*c,%*c,
-  91              		.loc 1 46 0
-  92 0040 214D     		ldr	r5, .L7+16
-  93 0042 224E     		ldr	r6, .L7+20
-  94 0044 224B     		ldr	r3, .L7+24
-  95 0046 0193     		str	r3, [sp, #4]
-  96 0048 224C     		ldr	r4, .L7+28
-  97 004a 0094     		str	r4, [sp]
-  98 004c 2B46     		mov	r3, r5
-  99 004e 224A     		ldr	r2, .L7+32
- 100 0050 2249     		ldr	r1, .L7+36
- 101 0052 3046     		mov	r0, r6
- 102 0054 FFF7FEFF 		bl	sscanf
+  67              	.LVL2:
+  68 0030 0028     		cmp	r0, #0
+  69 0032 47D1     		bne	.L1
+  49:main.c        ****             token = strtok(NULL, ",");
+  70              		.loc 1 49 0
+  71 0034 264D     		ldr	r5, .L5+8
+  72 0036 2946     		mov	r1, r5
+  73 0038 FFF7FEFF 		bl	strtok
+  74              	.LVL3:
+  75 003c 0146     		mov	r1, r0
+  76 003e 254C     		ldr	r4, .L5+12
+  77 0040 2060     		str	r0, [r4]
+  50:main.c        ****             strcpy(timestamp, token);
+  78              		.loc 1 50 0
+  79 0042 2648     		ldr	r0, .L5+20
+  80 0044 FFF7FEFF 		bl	strcpy
+  81              	.LVL4:
+  51:main.c        ****             token = strtok(NULL, ",");
+  82              		.loc 1 51 0
+  83 0048 2946     		mov	r1, r5
+  84 004a 0020     		movs	r0, #0
+  85 004c FFF7FEFF 		bl	strtok
+  86              	.LVL5:
+  87 0050 2060     		str	r0, [r4]
+  52:main.c        ****             if (strcmp(token, "A") == 0) {
+  88              		.loc 1 52 0
+  89 0052 2349     		ldr	r1, .L5+24
+  90 0054 FFF7FEFF 		bl	strcmp
+  91              	.LVL6:
+  92 0058 0028     		cmp	r0, #0
+  93 005a 33D1     		bne	.L1
+  53:main.c        ****                 token = strtok(NULL, ",");
+  94              		.loc 1 53 0
+  95 005c 2946     		mov	r1, r5
+  96 005e FFF7FEFF 		bl	strtok
+  97              	.LVL7:
+  98 0062 2060     		str	r0, [r4]
+  54:main.c        ****                 latitude = atof(token);
+  99              		.loc 1 54 0
+ 100 0064 FFF7FEFF 		bl	atof
+ 101              	.LVL8:
+ 102 0068 FFF7FEFF 		bl	__aeabi_d2f
  103              	.LVL9:
-  47:main.c        **** 
-  48:main.c        ****                 // Convert latitude and longitude from string to float
-  49:main.c        ****                 lat_val = atof(lat_str);
- 104              		.loc 1 49 0
- 105 0058 2846     		mov	r0, r5
- 106 005a FFF7FEFF 		bl	atof
- 107              	.LVL10:
- 108 005e 204D     		ldr	r5, .L7+40
- 109 0060 FFF7FEFF 		bl	__aeabi_d2f
- 110              	.LVL11:
- 111 0064 2860     		str	r0, [r5]	@ float
-  50:main.c        ****                 lon_val = atof(lon_str);
- 112              		.loc 1 50 0
- 113 0066 2046     		mov	r0, r4
- 114 0068 FFF7FEFF 		bl	atof
- 115              	.LVL12:
- 116 006c FFF7FEFF 		bl	__aeabi_d2f
- 117              	.LVL13:
- 118 0070 0446     		mov	r4, r0
- 119 0072 1C4B     		ldr	r3, .L7+44
- 120 0074 1860     		str	r0, [r3]	@ float
-  51:main.c        **** 
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 4
+ 104 006c 1D4B     		ldr	r3, .L5+28
+ 105 006e 1860     		str	r0, [r3]	@ float
+  55:main.c        ****                 token = strtok(NULL, ",");
+ 106              		.loc 1 55 0
+ 107 0070 2946     		mov	r1, r5
+ 108 0072 0020     		movs	r0, #0
+ 109 0074 FFF7FEFF 		bl	strtok
+ 110              	.LVL10:
+ 111 0078 2060     		str	r0, [r4]
+  56:main.c        ****                 ns_indicator = *token;
+ 112              		.loc 1 56 0
+ 113 007a 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 114 007c 1A4B     		ldr	r3, .L5+32
+ 115 007e 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 4
 
 
-  52:main.c        ****                 // Clear GPS buffer for next message
-  53:main.c        ****                 memset(gps_buffer, 0, BUFFER_SIZE);
- 121              		.loc 1 53 0
- 122 0076 5022     		movs	r2, #80
- 123 0078 0021     		movs	r1, #0
- 124 007a 3046     		mov	r0, r6
- 125 007c FFF7FEFF 		bl	memset
- 126              	.LVL14:
-  54:main.c        **** 
-  55:main.c        ****                 // Send GPS data to UART2
-  56:main.c        ****                 char gps_data[50];
-  57:main.c        ****                 sprintf(gps_data, "Lat: %.6f, Lon: %.6f\r\n", lat_val, lon_val);
- 127              		.loc 1 57 0
- 128 0080 2868     		ldr	r0, [r5]	@ float
- 129 0082 FFF7FEFF 		bl	__aeabi_f2d
- 130              	.LVL15:
- 131 0086 0646     		mov	r6, r0
- 132 0088 0F46     		mov	r7, r1
- 133 008a 2046     		mov	r0, r4
- 134 008c FFF7FEFF 		bl	__aeabi_f2d
- 135              	.LVL16:
- 136 0090 CDE90001 		strd	r0, [sp]
- 137 0094 3246     		mov	r2, r6
- 138 0096 3B46     		mov	r3, r7
- 139 0098 1349     		ldr	r1, .L7+48
- 140 009a 03A8     		add	r0, sp, #12
- 141 009c FFF7FEFF 		bl	sprintf
- 142              	.LVL17:
-  58:main.c        ****                 OUTPUT_UART_PutString(gps_data);
- 143              		.loc 1 58 0
- 144 00a0 03A8     		add	r0, sp, #12
- 145 00a2 FFF7FEFF 		bl	OUTPUT_UART_PutString
- 146              	.LVL18:
- 147              	.LBE3:
- 148 00a6 C1E7     		b	.L2
- 149              	.L3:
-  59:main.c        ****             }
-  60:main.c        ****             else // Add character to GPS buffer
-  61:main.c        ****             {
-  62:main.c        ****                 strncat(gps_buffer, &rx_char, 1);
- 150              		.loc 1 62 0
- 151 00a8 0122     		movs	r2, #1
- 152 00aa 0DF10B01 		add	r1, sp, #11
- 153 00ae 0748     		ldr	r0, .L7+20
- 154 00b0 FFF7FEFF 		bl	strncat
- 155              	.LVL19:
- 156 00b4 BAE7     		b	.L2
- 157              	.L8:
- 158 00b6 00BF     		.align	2
- 159              	.L7:
- 160 00b8 00000000 		.word	.LC0
- 161 00bc 14000000 		.word	.LC1
- 162 00c0 2C000000 		.word	.LC2
- 163 00c4 60000000 		.word	.LC3
- 164 00c8 00000000 		.word	lat_str
- 165 00cc 00000000 		.word	gps_buffer
- 166 00d0 00000000 		.word	date_str
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 5
+  57:main.c        ****                 token = strtok(NULL, ",");
+ 116              		.loc 1 57 0
+ 117 0080 2946     		mov	r1, r5
+ 118 0082 0020     		movs	r0, #0
+ 119 0084 FFF7FEFF 		bl	strtok
+ 120              	.LVL11:
+ 121 0088 2060     		str	r0, [r4]
+  58:main.c        ****                 longitude = atof(token);
+ 122              		.loc 1 58 0
+ 123 008a FFF7FEFF 		bl	atof
+ 124              	.LVL12:
+ 125 008e FFF7FEFF 		bl	__aeabi_d2f
+ 126              	.LVL13:
+ 127 0092 164B     		ldr	r3, .L5+36
+ 128 0094 1860     		str	r0, [r3]	@ float
+  59:main.c        ****                 token = strtok(NULL, ",");
+ 129              		.loc 1 59 0
+ 130 0096 2946     		mov	r1, r5
+ 131 0098 0020     		movs	r0, #0
+ 132 009a FFF7FEFF 		bl	strtok
+ 133              	.LVL14:
+ 134 009e 2060     		str	r0, [r4]
+  60:main.c        ****                 ew_indicator = *token;
+ 135              		.loc 1 60 0
+ 136 00a0 0278     		ldrb	r2, [r0]	@ zero_extendqisi2
+ 137 00a2 134B     		ldr	r3, .L5+40
+ 138 00a4 1A70     		strb	r2, [r3]
+  61:main.c        ****                 token = strtok(NULL, ",");
+ 139              		.loc 1 61 0
+ 140 00a6 2946     		mov	r1, r5
+ 141 00a8 0020     		movs	r0, #0
+ 142 00aa FFF7FEFF 		bl	strtok
+ 143              	.LVL15:
+ 144 00ae 2060     		str	r0, [r4]
+  62:main.c        ****                 speed = atof(token);
+ 145              		.loc 1 62 0
+ 146 00b0 FFF7FEFF 		bl	atof
+ 147              	.LVL16:
+ 148 00b4 FFF7FEFF 		bl	__aeabi_d2f
+ 149              	.LVL17:
+ 150 00b8 0E4B     		ldr	r3, .L5+44
+ 151 00ba 1860     		str	r0, [r3]	@ float
+ 152 00bc 38BD     		pop	{r3, r4, r5, pc}
+ 153              	.L2:
+  63:main.c        ****             }
+  64:main.c        ****         }
+  65:main.c        ****     }
+  66:main.c        ****     else {
+  67:main.c        ****         uart1_rx_index++;
+ 154              		.loc 1 67 0
+ 155 00be 0133     		adds	r3, r3, #1
+ 156 00c0 014A     		ldr	r2, .L5
+ 157 00c2 1370     		strb	r3, [r2]
+ 158              	.L1:
+ 159 00c4 38BD     		pop	{r3, r4, r5, pc}
+ 160              	.L6:
+ 161 00c6 00BF     		.align	2
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 5
 
 
- 167 00d4 00000000 		.word	lon_str
- 168 00d8 00000000 		.word	time_str
- 169 00dc 6C000000 		.word	.LC4
- 170 00e0 00000000 		.word	lat_val
- 171 00e4 00000000 		.word	lon_val
- 172 00e8 BC000000 		.word	.LC5
- 173              	.LBE2:
- 174              		.cfi_endproc
- 175              	.LFE64:
- 176              		.size	main, .-main
- 177              		.comm	lon_val,4,4
- 178              		.comm	lat_val,4,4
- 179              		.comm	date_str,10,4
- 180              		.comm	time_str,10,4
- 181              		.comm	lon_str,12,4
- 182              		.comm	lat_str,12,4
- 183              		.comm	gps_buffer,80,4
- 184              		.section	.rodata.str1.4,"aMS",%progbits,1
- 185              		.align	2
- 186              	.LC0:
- 187 0000 496E6974 		.ascii	"Initializing...\015\012\000"
- 187      69616C69 
- 187      7A696E67 
- 187      2E2E2E0D 
- 187      0A00
- 188 0012 0000     		.space	2
- 189              	.LC1:
- 190 0014 47657474 		.ascii	"Getting GPS Data...\015\012\000"
- 190      696E6720 
- 190      47505320 
- 190      44617461 
- 190      2E2E2E0D 
- 191 002a 0000     		.space	2
- 192              	.LC2:
- 193 002c 24504D54 		.ascii	"$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\015"
- 193      4B333134 
- 193      2C302C31 
- 193      2C302C31 
- 193      2C302C30 
- 194 005e 0A00     		.ascii	"\012\000"
- 195              	.LC3:
- 196 0060 47505320 		.ascii	"GPS data:\015\012\000"
- 196      64617461 
- 196      3A0D0A00 
- 197              	.LC4:
- 198 006c 24474E52 		.ascii	"$GNRMC,%[^,],%*c,%[^,],%*c,%[^,],%*c,%[^,],%*c,%*c,"
- 198      4D432C25 
- 198      5B5E2C5D 
- 198      2C252A63 
- 198      2C255B5E 
- 199 009f 252A632C 		.ascii	"%*c,%*c,%*c,%*c,%*c,%*c,%*c\000"
- 199      252A632C 
- 199      252A632C 
- 199      252A632C 
- 199      252A632C 
- 200 00bb 00       		.space	1
- 201              	.LC5:
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 6
+ 162              	.L5:
+ 163 00c8 00000000 		.word	.LANCHOR0
+ 164 00cc 00000000 		.word	uart1_rx_buffer
+ 165 00d0 00000000 		.word	.LC0
+ 166 00d4 00000000 		.word	token
+ 167 00d8 04000000 		.word	.LC1
+ 168 00dc 00000000 		.word	timestamp
+ 169 00e0 0C000000 		.word	.LC2
+ 170 00e4 00000000 		.word	latitude
+ 171 00e8 00000000 		.word	ns_indicator
+ 172 00ec 00000000 		.word	longitude
+ 173 00f0 00000000 		.word	ew_indicator
+ 174 00f4 00000000 		.word	speed
+ 175              		.cfi_endproc
+ 176              	.LFE64:
+ 177              		.size	uart1_rx_isr, .-uart1_rx_isr
+ 178              		.global	__aeabi_f2d
+ 179              		.section	.text.main,"ax",%progbits
+ 180              		.align	2
+ 181              		.global	main
+ 182              		.thumb
+ 183              		.thumb_func
+ 184              		.type	main, %function
+ 185              	main:
+ 186              	.LFB65:
+  68:main.c        ****     }
+  69:main.c        **** }
+  70:main.c        **** 
+  71:main.c        **** int main(void)
+  72:main.c        **** {
+ 187              		.loc 1 72 0
+ 188              		.cfi_startproc
+ 189              		@ Volatile: function does not return.
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192 0000 80B5     		push	{r7, lr}
+ 193              		.cfi_def_cfa_offset 8
+ 194              		.cfi_offset 7, -8
+ 195              		.cfi_offset 14, -4
+ 196 0002 8AB0     		sub	sp, sp, #40
+ 197              		.cfi_def_cfa_offset 48
+  73:main.c        ****     
+  74:main.c        ****     // Enable global interrupts
+  75:main.c        ****     CyGlobalIntEnable;
+ 198              		.loc 1 75 0
+ 199              		.syntax unified
+ 200              	@ 75 "main.c" 1
+ 201 0004 62B6     		CPSIE   i
+ 202              	@ 0 "" 2
+  76:main.c        ****     
+  77:main.c        ****     // Start the message timer
+  78:main.c        ****     CySysTickStart();
+ 203              		.loc 1 78 0
+ 204              		.thumb
+ 205              		.syntax unified
+ 206 0006 FFF7FEFF 		bl	CySysTickStart
+ 207              	.LVL18:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 6
 
 
- 202 00bc 4C61743A 		.ascii	"Lat: %.6f, Lon: %.6f\015\012\000"
- 202      20252E36 
- 202      662C204C 
- 202      6F6E3A20 
- 202      252E3666 
- 203              		.text
- 204              	.Letext0:
- 205              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 206              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 207              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
- 208              		.file 5 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 209              		.file 6 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 210              		.file 7 "Generated_Source\\PSoC5/OUTPUT_UART.h"
- 211              		.file 8 "Generated_Source\\PSoC5/GPS_UART.h"
- 212              		.file 9 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
- 213              		.file 10 "Generated_Source\\PSoC5/PW_GPS.h"
- 214              		.section	.debug_info,"",%progbits
- 215              	.Ldebug_info0:
- 216 0000 A4030000 		.4byte	0x3a4
- 217 0004 0400     		.2byte	0x4
- 218 0006 00000000 		.4byte	.Ldebug_abbrev0
- 219 000a 04       		.byte	0x4
- 220 000b 01       		.uleb128 0x1
- 221 000c 67000000 		.4byte	.LASF37
- 222 0010 0C       		.byte	0xc
- 223 0011 F3010000 		.4byte	.LASF38
- 224 0015 22020000 		.4byte	.LASF39
- 225 0019 00000000 		.4byte	.Ldebug_ranges0+0
- 226 001d 00000000 		.4byte	0
- 227 0021 00000000 		.4byte	.Ldebug_line0
- 228 0025 02       		.uleb128 0x2
- 229 0026 01       		.byte	0x1
- 230 0027 06       		.byte	0x6
- 231 0028 9B020000 		.4byte	.LASF0
- 232 002c 02       		.uleb128 0x2
- 233 002d 01       		.byte	0x1
- 234 002e 08       		.byte	0x8
- 235 002f 59000000 		.4byte	.LASF1
- 236 0033 02       		.uleb128 0x2
- 237 0034 02       		.byte	0x2
- 238 0035 05       		.byte	0x5
- 239 0036 5B010000 		.4byte	.LASF2
- 240 003a 02       		.uleb128 0x2
- 241 003b 02       		.byte	0x2
- 242 003c 07       		.byte	0x7
- 243 003d 1D010000 		.4byte	.LASF3
- 244 0041 03       		.uleb128 0x3
- 245 0042 10000000 		.4byte	.LASF9
- 246 0046 02       		.byte	0x2
- 247 0047 3F       		.byte	0x3f
- 248 0048 4C000000 		.4byte	0x4c
- 249 004c 02       		.uleb128 0x2
- 250 004d 04       		.byte	0x4
- 251 004e 05       		.byte	0x5
- 252 004f 7B020000 		.4byte	.LASF4
- 253 0053 02       		.uleb128 0x2
- 254 0054 04       		.byte	0x4
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 7
+  79:main.c        **** 
+  80:main.c        ****     PW_GPS_Write(1);
+ 208              		.loc 1 80 0
+ 209 000a 0120     		movs	r0, #1
+ 210 000c FFF7FEFF 		bl	PW_GPS_Write
+ 211              	.LVL19:
+  81:main.c        ****     GPS_UART_Start(); // Initialize UART1
+ 212              		.loc 1 81 0
+ 213 0010 FFF7FEFF 		bl	GPS_UART_Start
+ 214              	.LVL20:
+  82:main.c        ****     OUTPUT_UART_Start(); // Initialize UART2
+ 215              		.loc 1 82 0
+ 216 0014 FFF7FEFF 		bl	OUTPUT_UART_Start
+ 217              	.LVL21:
+  83:main.c        **** 
+  84:main.c        ****     // Enable the UART1 RX interrupt
+  85:main.c        ****     GPS_UART_RX_ISR_StartEx(uart1_rx_isr);
+ 218              		.loc 1 85 0
+ 219 0018 1F48     		ldr	r0, .L11
+ 220 001a FFF7FEFF 		bl	GPS_UART_RX_ISR_StartEx
+ 221              	.LVL22:
+  86:main.c        ****     
+  87:main.c        ****     // Send initial message
+  88:main.c        ****     OUTPUT_UART_PutString("Initializing...\r\n");
+ 222              		.loc 1 88 0
+ 223 001e 1F48     		ldr	r0, .L11+4
+ 224 0020 FFF7FEFF 		bl	OUTPUT_UART_PutString
+ 225              	.LVL23:
+  89:main.c        ****     OUTPUT_UART_PutString("Getting GPS Data...\r\n");
+ 226              		.loc 1 89 0
+ 227 0024 1E48     		ldr	r0, .L11+8
+ 228 0026 FFF7FEFF 		bl	OUTPUT_UART_PutString
+ 229              	.LVL24:
+  90:main.c        ****     GPS_UART_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+ 230              		.loc 1 90 0
+ 231 002a 1E48     		ldr	r0, .L11+12
+ 232 002c FFF7FEFF 		bl	GPS_UART_PutString
+ 233              	.LVL25:
+  91:main.c        ****     OUTPUT_UART_PutString("GPS data:\r\n");
+ 234              		.loc 1 91 0
+ 235 0030 1D48     		ldr	r0, .L11+16
+ 236 0032 FFF7FEFF 		bl	OUTPUT_UART_PutString
+ 237              	.LVL26:
+ 238              	.L8:
+  92:main.c        **** 
+  93:main.c        ****     while(1)
+  94:main.c        ****     {
+  95:main.c        ****         // Check if it's time to send a message
+  96:main.c        ****         if (CySysTickGetValue() % (MESSAGE_INTERVAL_MS * 1000) == 0) {
+ 239              		.loc 1 96 0
+ 240 0036 FFF7FEFF 		bl	CySysTickGetValue
+ 241              	.LVL27:
+ 242 003a 1C4B     		ldr	r3, .L11+20
+ 243 003c A3FB0023 		umull	r2, r3, r3, r0
+ 244 0040 9B0C     		lsrs	r3, r3, #18
+ 245 0042 1B4A     		ldr	r2, .L11+24
+ 246 0044 02FB1303 		mls	r3, r2, r3, r0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 7
 
 
- 255 0055 07       		.byte	0x7
- 256 0056 F5000000 		.4byte	.LASF5
- 257 005a 02       		.uleb128 0x2
- 258 005b 08       		.byte	0x8
- 259 005c 05       		.byte	0x5
- 260 005d E5010000 		.4byte	.LASF6
- 261 0061 02       		.uleb128 0x2
- 262 0062 08       		.byte	0x8
- 263 0063 07       		.byte	0x7
- 264 0064 80010000 		.4byte	.LASF7
- 265 0068 04       		.uleb128 0x4
- 266 0069 04       		.byte	0x4
- 267 006a 05       		.byte	0x5
- 268 006b 696E7400 		.ascii	"int\000"
- 269 006f 02       		.uleb128 0x2
- 270 0070 04       		.byte	0x4
- 271 0071 07       		.byte	0x7
- 272 0072 6A010000 		.4byte	.LASF8
- 273 0076 03       		.uleb128 0x3
- 274 0077 D4010000 		.4byte	.LASF10
- 275 007b 03       		.byte	0x3
- 276 007c 2C       		.byte	0x2c
- 277 007d 41000000 		.4byte	0x41
- 278 0081 02       		.uleb128 0x2
- 279 0082 04       		.byte	0x4
- 280 0083 04       		.byte	0x4
- 281 0084 46000000 		.4byte	.LASF11
- 282 0088 02       		.uleb128 0x2
- 283 0089 08       		.byte	0x8
- 284 008a 04       		.byte	0x4
- 285 008b 4C010000 		.4byte	.LASF12
- 286 008f 02       		.uleb128 0x2
- 287 0090 01       		.byte	0x1
- 288 0091 08       		.byte	0x8
- 289 0092 FA010000 		.4byte	.LASF13
- 290 0096 02       		.uleb128 0x2
- 291 0097 08       		.byte	0x8
- 292 0098 04       		.byte	0x4
- 293 0099 8F020000 		.4byte	.LASF14
- 294 009d 02       		.uleb128 0x2
- 295 009e 04       		.byte	0x4
- 296 009f 07       		.byte	0x7
- 297 00a0 DC010000 		.4byte	.LASF15
- 298 00a4 05       		.uleb128 0x5
- 299 00a5 65010000 		.4byte	.LASF40
- 300 00a9 01       		.byte	0x1
- 301 00aa 17       		.byte	0x17
- 302 00ab 68000000 		.4byte	0x68
- 303 00af 00000000 		.4byte	.LFB64
- 304 00b3 EC000000 		.4byte	.LFE64-.LFB64
- 305 00b7 01       		.uleb128 0x1
- 306 00b8 9C       		.byte	0x9c
- 307 00b9 5D020000 		.4byte	0x25d
- 308 00bd 06       		.uleb128 0x6
- 309 00be 34000000 		.4byte	.LBB2
- 310 00c2 B8000000 		.4byte	.LBE2-.LBB2
- 311 00c6 D2010000 		.4byte	0x1d2
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 8
+ 247 0048 002B     		cmp	r3, #0
+ 248 004a F4D1     		bne	.L8
+  97:main.c        ****             
+  98:main.c        ****             // Format the message
+  99:main.c        ****             sprintf(uart2_tx_buffer, "LAT: %f %c, LON: %f %c, SPD: %f, TIME: %s \r\n", latitude, ns
+ 249              		.loc 1 99 0
+ 250 004c 194B     		ldr	r3, .L11+28
+ 251 004e 1868     		ldr	r0, [r3]	@ float
+ 252 0050 FFF7FEFF 		bl	__aeabi_f2d
+ 253              	.LVL28:
+ 254 0054 0646     		mov	r6, r0
+ 255 0056 0F46     		mov	r7, r1
+ 256 0058 174C     		ldr	r4, .L11+32
+ 257 005a 184B     		ldr	r3, .L11+36
+ 258 005c 0893     		str	r3, [sp, #32]
+ 259 005e 184B     		ldr	r3, .L11+40
+ 260 0060 1868     		ldr	r0, [r3]	@ float
+ 261 0062 FFF7FEFF 		bl	__aeabi_f2d
+ 262              	.LVL29:
+ 263 0066 CDE90601 		strd	r0, [sp, #24]
+ 264 006a 164B     		ldr	r3, .L11+44
+ 265 006c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 266 006e 0493     		str	r3, [sp, #16]
+ 267 0070 154B     		ldr	r3, .L11+48
+ 268 0072 1868     		ldr	r0, [r3]	@ float
+ 269 0074 FFF7FEFF 		bl	__aeabi_f2d
+ 270              	.LVL30:
+ 271 0078 CDE90201 		strd	r0, [sp, #8]
+ 272 007c 134B     		ldr	r3, .L11+52
+ 273 007e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 274 0080 0093     		str	r3, [sp]
+ 275 0082 3246     		mov	r2, r6
+ 276 0084 3B46     		mov	r3, r7
+ 277 0086 1249     		ldr	r1, .L11+56
+ 278 0088 2046     		mov	r0, r4
+ 279 008a FFF7FEFF 		bl	sprintf
+ 280              	.LVL31:
+ 100:main.c        ****             
+ 101:main.c        ****             // Send the message via UART2
+ 102:main.c        ****             OUTPUT_UART_PutString(uart2_tx_buffer);
+ 281              		.loc 1 102 0
+ 282 008e 2046     		mov	r0, r4
+ 283 0090 FFF7FEFF 		bl	OUTPUT_UART_PutString
+ 284              	.LVL32:
+ 285 0094 CFE7     		b	.L8
+ 286              	.L12:
+ 287 0096 00BF     		.align	2
+ 288              	.L11:
+ 289 0098 00000000 		.word	uart1_rx_isr
+ 290 009c 10000000 		.word	.LC3
+ 291 00a0 24000000 		.word	.LC4
+ 292 00a4 3C000000 		.word	.LC5
+ 293 00a8 70000000 		.word	.LC6
+ 294 00ac 83DE1B43 		.word	1125899907
+ 295 00b0 40420F00 		.word	1000000
+ 296 00b4 00000000 		.word	latitude
+ 297 00b8 00000000 		.word	uart2_tx_buffer
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 8
 
 
- 312 00ca 07       		.uleb128 0x7
- 313 00cb 30010000 		.4byte	.LASF16
- 314 00cf 01       		.byte	0x1
- 315 00d0 29       		.byte	0x29
- 316 00d1 8F000000 		.4byte	0x8f
- 317 00d5 03       		.uleb128 0x3
- 318 00d6 91       		.byte	0x91
- 319 00d7 B37F     		.sleb128 -77
- 320 00d9 06       		.uleb128 0x6
- 321 00da 40000000 		.4byte	.LBB3
- 322 00de 66000000 		.4byte	.LBE3-.LBB3
- 323 00e2 A9010000 		.4byte	0x1a9
- 324 00e6 07       		.uleb128 0x7
- 325 00e7 3D000000 		.4byte	.LASF17
- 326 00eb 01       		.byte	0x1
- 327 00ec 38       		.byte	0x38
- 328 00ed 5D020000 		.4byte	0x25d
- 329 00f1 03       		.uleb128 0x3
- 330 00f2 91       		.byte	0x91
- 331 00f3 B47F     		.sleb128 -76
- 332 00f5 08       		.uleb128 0x8
- 333 00f6 58000000 		.4byte	.LVL9
- 334 00fa 25030000 		.4byte	0x325
- 335 00fe 32010000 		.4byte	0x132
- 336 0102 09       		.uleb128 0x9
- 337 0103 01       		.uleb128 0x1
- 338 0104 50       		.byte	0x50
- 339 0105 02       		.uleb128 0x2
- 340 0106 76       		.byte	0x76
- 341 0107 00       		.sleb128 0
- 342 0108 09       		.uleb128 0x9
- 343 0109 01       		.uleb128 0x1
- 344 010a 51       		.byte	0x51
- 345 010b 05       		.uleb128 0x5
- 346 010c 03       		.byte	0x3
- 347 010d 6C000000 		.4byte	.LC4
- 348 0111 09       		.uleb128 0x9
- 349 0112 01       		.uleb128 0x1
- 350 0113 52       		.byte	0x52
- 351 0114 05       		.uleb128 0x5
- 352 0115 03       		.byte	0x3
- 353 0116 00000000 		.4byte	time_str
- 354 011a 09       		.uleb128 0x9
- 355 011b 01       		.uleb128 0x1
- 356 011c 53       		.byte	0x53
- 357 011d 02       		.uleb128 0x2
- 358 011e 75       		.byte	0x75
- 359 011f 00       		.sleb128 0
- 360 0120 09       		.uleb128 0x9
- 361 0121 02       		.uleb128 0x2
- 362 0122 7D       		.byte	0x7d
- 363 0123 00       		.sleb128 0
- 364 0124 02       		.uleb128 0x2
- 365 0125 74       		.byte	0x74
- 366 0126 00       		.sleb128 0
- 367 0127 09       		.uleb128 0x9
- 368 0128 02       		.uleb128 0x2
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 9
+ 298 00bc 00000000 		.word	timestamp
+ 299 00c0 00000000 		.word	speed
+ 300 00c4 00000000 		.word	ew_indicator
+ 301 00c8 00000000 		.word	longitude
+ 302 00cc 00000000 		.word	ns_indicator
+ 303 00d0 7C000000 		.word	.LC7
+ 304              		.cfi_endproc
+ 305              	.LFE65:
+ 306              		.size	main, .-main
+ 307              		.comm	timestamp,10,4
+ 308              		.comm	ew_indicator,1,1
+ 309              		.comm	ns_indicator,1,1
+ 310              		.comm	speed,4,4
+ 311              		.comm	longitude,4,4
+ 312              		.comm	latitude,4,4
+ 313              		.comm	token,4,4
+ 314              		.comm	uart2_tx_buffer,64,4
+ 315              		.comm	uart1_rx_buffer,64,4
+ 316              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 317              		.align	2
+ 318              	.LC0:
+ 319 0000 2C00     		.ascii	",\000"
+ 320 0002 0000     		.space	2
+ 321              	.LC1:
+ 322 0004 24474E52 		.ascii	"$GNRMC\000"
+ 322      4D4300
+ 323 000b 00       		.space	1
+ 324              	.LC2:
+ 325 000c 4100     		.ascii	"A\000"
+ 326 000e 0000     		.space	2
+ 327              	.LC3:
+ 328 0010 496E6974 		.ascii	"Initializing...\015\012\000"
+ 328      69616C69 
+ 328      7A696E67 
+ 328      2E2E2E0D 
+ 328      0A00
+ 329 0022 0000     		.space	2
+ 330              	.LC4:
+ 331 0024 47657474 		.ascii	"Getting GPS Data...\015\012\000"
+ 331      696E6720 
+ 331      47505320 
+ 331      44617461 
+ 331      2E2E2E0D 
+ 332 003a 0000     		.space	2
+ 333              	.LC5:
+ 334 003c 24504D54 		.ascii	"$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\015"
+ 334      4B333134 
+ 334      2C302C31 
+ 334      2C302C31 
+ 334      2C302C30 
+ 335 006e 0A00     		.ascii	"\012\000"
+ 336              	.LC6:
+ 337 0070 47505320 		.ascii	"GPS data:\015\012\000"
+ 337      64617461 
+ 337      3A0D0A00 
+ 338              	.LC7:
+ 339 007c 4C41543A 		.ascii	"LAT: %f %c, LON: %f %c, SPD: %f, TIME: %s \015\012\000"
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 9
 
 
- 369 0129 7D       		.byte	0x7d
- 370 012a 04       		.sleb128 4
- 371 012b 05       		.uleb128 0x5
- 372 012c 03       		.byte	0x3
- 373 012d 00000000 		.4byte	date_str
- 374 0131 00       		.byte	0
- 375 0132 08       		.uleb128 0x8
- 376 0133 5E000000 		.4byte	.LVL10
- 377 0137 30030000 		.4byte	0x330
- 378 013b 46010000 		.4byte	0x146
- 379 013f 09       		.uleb128 0x9
- 380 0140 01       		.uleb128 0x1
- 381 0141 50       		.byte	0x50
- 382 0142 02       		.uleb128 0x2
- 383 0143 75       		.byte	0x75
- 384 0144 00       		.sleb128 0
- 385 0145 00       		.byte	0
- 386 0146 08       		.uleb128 0x8
- 387 0147 6C000000 		.4byte	.LVL12
- 388 014b 30030000 		.4byte	0x330
- 389 014f 5A010000 		.4byte	0x15a
- 390 0153 09       		.uleb128 0x9
- 391 0154 01       		.uleb128 0x1
- 392 0155 50       		.byte	0x50
- 393 0156 02       		.uleb128 0x2
- 394 0157 74       		.byte	0x74
- 395 0158 00       		.sleb128 0
- 396 0159 00       		.byte	0
- 397 015a 08       		.uleb128 0x8
- 398 015b 80000000 		.4byte	.LVL14
- 399 015f 3B030000 		.4byte	0x33b
- 400 0163 79010000 		.4byte	0x179
- 401 0167 09       		.uleb128 0x9
- 402 0168 01       		.uleb128 0x1
- 403 0169 50       		.byte	0x50
- 404 016a 02       		.uleb128 0x2
- 405 016b 76       		.byte	0x76
- 406 016c 00       		.sleb128 0
- 407 016d 09       		.uleb128 0x9
- 408 016e 01       		.uleb128 0x1
- 409 016f 51       		.byte	0x51
- 410 0170 01       		.uleb128 0x1
- 411 0171 30       		.byte	0x30
- 412 0172 09       		.uleb128 0x9
- 413 0173 01       		.uleb128 0x1
- 414 0174 52       		.byte	0x52
- 415 0175 02       		.uleb128 0x2
- 416 0176 08       		.byte	0x8
- 417 0177 50       		.byte	0x50
- 418 0178 00       		.byte	0
- 419 0179 08       		.uleb128 0x8
- 420 017a A0000000 		.4byte	.LVL17
- 421 017e 44030000 		.4byte	0x344
- 422 0182 97010000 		.4byte	0x197
- 423 0186 09       		.uleb128 0x9
- 424 0187 01       		.uleb128 0x1
- 425 0188 50       		.byte	0x50
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 10
+ 339      20256620 
+ 339      25632C20 
+ 339      4C4F4E3A 
+ 339      20256620 
+ 340              		.bss
+ 341              		.set	.LANCHOR0,. + 0
+ 342              		.type	uart1_rx_index.6926, %object
+ 343              		.size	uart1_rx_index.6926, 1
+ 344              	uart1_rx_index.6926:
+ 345 0000 00       		.space	1
+ 346              		.text
+ 347              	.Letext0:
+ 348              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 349              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 350              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 351              		.file 5 "Generated_Source\\PSoC5/GPS_UART.h"
+ 352              		.file 6 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 353              		.file 7 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 354              		.file 8 "Generated_Source\\PSoC5/CyLib.h"
+ 355              		.file 9 "Generated_Source\\PSoC5/PW_GPS.h"
+ 356              		.file 10 "Generated_Source\\PSoC5/OUTPUT_UART.h"
+ 357              		.file 11 "Generated_Source\\PSoC5/GPS_UART_RX_ISR.h"
+ 358              		.file 12 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4
+ 359              		.section	.debug_info,"",%progbits
+ 360              	.Ldebug_info0:
+ 361 0000 71040000 		.4byte	0x471
+ 362 0004 0400     		.2byte	0x4
+ 363 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 364 000a 04       		.byte	0x4
+ 365 000b 01       		.uleb128 0x1
+ 366 000c FF000000 		.4byte	.LASF42
+ 367 0010 0C       		.byte	0xc
+ 368 0011 A5020000 		.4byte	.LASF43
+ 369 0015 7D000000 		.4byte	.LASF44
+ 370 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 371 001d 00000000 		.4byte	0
+ 372 0021 00000000 		.4byte	.Ldebug_line0
+ 373 0025 02       		.uleb128 0x2
+ 374 0026 01       		.byte	0x1
+ 375 0027 06       		.byte	0x6
+ 376 0028 FD020000 		.4byte	.LASF0
+ 377 002c 03       		.uleb128 0x3
+ 378 002d 18000000 		.4byte	.LASF4
+ 379 0031 02       		.byte	0x2
+ 380 0032 1D       		.byte	0x1d
+ 381 0033 37000000 		.4byte	0x37
+ 382 0037 02       		.uleb128 0x2
+ 383 0038 01       		.byte	0x1
+ 384 0039 08       		.byte	0x8
+ 385 003a F1000000 		.4byte	.LASF1
+ 386 003e 02       		.uleb128 0x2
+ 387 003f 02       		.byte	0x2
+ 388 0040 05       		.byte	0x5
+ 389 0041 BE020000 		.4byte	.LASF2
+ 390 0045 02       		.uleb128 0x2
+ 391 0046 02       		.byte	0x2
+ 392 0047 07       		.byte	0x7
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 10
 
 
- 426 0189 03       		.uleb128 0x3
- 427 018a 91       		.byte	0x91
- 428 018b B47F     		.sleb128 -76
- 429 018d 09       		.uleb128 0x9
- 430 018e 01       		.uleb128 0x1
- 431 018f 51       		.byte	0x51
- 432 0190 05       		.uleb128 0x5
- 433 0191 03       		.byte	0x3
- 434 0192 BC000000 		.4byte	.LC5
- 435 0196 00       		.byte	0
- 436 0197 0A       		.uleb128 0xa
- 437 0198 A6000000 		.4byte	.LVL18
- 438 019c 4F030000 		.4byte	0x34f
- 439 01a0 09       		.uleb128 0x9
- 440 01a1 01       		.uleb128 0x1
- 441 01a2 50       		.byte	0x50
- 442 01a3 03       		.uleb128 0x3
- 443 01a4 91       		.byte	0x91
- 444 01a5 B47F     		.sleb128 -76
- 445 01a7 00       		.byte	0
- 446 01a8 00       		.byte	0
- 447 01a9 0B       		.uleb128 0xb
- 448 01aa 38000000 		.4byte	.LVL8
- 449 01ae 5A030000 		.4byte	0x35a
- 450 01b2 0A       		.uleb128 0xa
- 451 01b3 B4000000 		.4byte	.LVL19
- 452 01b7 65030000 		.4byte	0x365
- 453 01bb 09       		.uleb128 0x9
- 454 01bc 01       		.uleb128 0x1
- 455 01bd 50       		.byte	0x50
- 456 01be 05       		.uleb128 0x5
- 457 01bf 03       		.byte	0x3
- 458 01c0 00000000 		.4byte	gps_buffer
- 459 01c4 09       		.uleb128 0x9
- 460 01c5 01       		.uleb128 0x1
- 461 01c6 51       		.byte	0x51
- 462 01c7 03       		.uleb128 0x3
- 463 01c8 91       		.byte	0x91
- 464 01c9 B37F     		.sleb128 -77
- 465 01cb 09       		.uleb128 0x9
- 466 01cc 01       		.uleb128 0x1
- 467 01cd 52       		.byte	0x52
- 468 01ce 01       		.uleb128 0x1
- 469 01cf 31       		.byte	0x31
- 470 01d0 00       		.byte	0
- 471 01d1 00       		.byte	0
- 472 01d2 08       		.uleb128 0x8
- 473 01d3 0C000000 		.4byte	.LVL0
- 474 01d7 70030000 		.4byte	0x370
- 475 01db E5010000 		.4byte	0x1e5
- 476 01df 09       		.uleb128 0x9
- 477 01e0 01       		.uleb128 0x1
- 478 01e1 50       		.byte	0x50
- 479 01e2 01       		.uleb128 0x1
- 480 01e3 31       		.byte	0x31
- 481 01e4 00       		.byte	0
- 482 01e5 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 11
+ 393 0048 35000000 		.4byte	.LASF3
+ 394 004c 03       		.uleb128 0x3
+ 395 004d 22000000 		.4byte	.LASF5
+ 396 0051 02       		.byte	0x2
+ 397 0052 3F       		.byte	0x3f
+ 398 0053 57000000 		.4byte	0x57
+ 399 0057 02       		.uleb128 0x2
+ 400 0058 04       		.byte	0x4
+ 401 0059 05       		.byte	0x5
+ 402 005a 2C000000 		.4byte	.LASF6
+ 403 005e 02       		.uleb128 0x2
+ 404 005f 04       		.byte	0x4
+ 405 0060 07       		.byte	0x7
+ 406 0061 A3010000 		.4byte	.LASF7
+ 407 0065 02       		.uleb128 0x2
+ 408 0066 08       		.byte	0x8
+ 409 0067 05       		.byte	0x5
+ 410 0068 97020000 		.4byte	.LASF8
+ 411 006c 02       		.uleb128 0x2
+ 412 006d 08       		.byte	0x8
+ 413 006e 07       		.byte	0x7
+ 414 006f 3B020000 		.4byte	.LASF9
+ 415 0073 04       		.uleb128 0x4
+ 416 0074 04       		.byte	0x4
+ 417 0075 05       		.byte	0x5
+ 418 0076 696E7400 		.ascii	"int\000"
+ 419 007a 02       		.uleb128 0x2
+ 420 007b 04       		.byte	0x4
+ 421 007c 07       		.byte	0x7
+ 422 007d 1A020000 		.4byte	.LASF10
+ 423 0081 03       		.uleb128 0x3
+ 424 0082 52020000 		.4byte	.LASF11
+ 425 0086 03       		.byte	0x3
+ 426 0087 18       		.byte	0x18
+ 427 0088 2C000000 		.4byte	0x2c
+ 428 008c 03       		.uleb128 0x3
+ 429 008d D6000000 		.4byte	.LASF12
+ 430 0091 03       		.byte	0x3
+ 431 0092 2C       		.byte	0x2c
+ 432 0093 4C000000 		.4byte	0x4c
+ 433 0097 02       		.uleb128 0x2
+ 434 0098 04       		.byte	0x4
+ 435 0099 04       		.byte	0x4
+ 436 009a DE000000 		.4byte	.LASF13
+ 437 009e 02       		.uleb128 0x2
+ 438 009f 08       		.byte	0x8
+ 439 00a0 04       		.byte	0x4
+ 440 00a1 07020000 		.4byte	.LASF14
+ 441 00a5 02       		.uleb128 0x2
+ 442 00a6 01       		.byte	0x1
+ 443 00a7 08       		.byte	0x8
+ 444 00a8 AC020000 		.4byte	.LASF15
+ 445 00ac 02       		.uleb128 0x2
+ 446 00ad 08       		.byte	0x8
+ 447 00ae 04       		.byte	0x4
+ 448 00af F1020000 		.4byte	.LASF16
+ 449 00b3 02       		.uleb128 0x2
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 11
 
 
- 483 01e6 10000000 		.4byte	.LVL1
- 484 01ea 7B030000 		.4byte	0x37b
- 485 01ee 0B       		.uleb128 0xb
- 486 01ef 14000000 		.4byte	.LVL2
- 487 01f3 86030000 		.4byte	0x386
- 488 01f7 08       		.uleb128 0x8
- 489 01f8 1A000000 		.4byte	.LVL3
- 490 01fc 4F030000 		.4byte	0x34f
- 491 0200 0E020000 		.4byte	0x20e
- 492 0204 09       		.uleb128 0x9
- 493 0205 01       		.uleb128 0x1
- 494 0206 50       		.byte	0x50
- 495 0207 05       		.uleb128 0x5
- 496 0208 03       		.byte	0x3
- 497 0209 00000000 		.4byte	.LC0
- 498 020d 00       		.byte	0
- 499 020e 08       		.uleb128 0x8
- 500 020f 20000000 		.4byte	.LVL4
- 501 0213 4F030000 		.4byte	0x34f
- 502 0217 25020000 		.4byte	0x225
- 503 021b 09       		.uleb128 0x9
- 504 021c 01       		.uleb128 0x1
- 505 021d 50       		.byte	0x50
- 506 021e 05       		.uleb128 0x5
- 507 021f 03       		.byte	0x3
- 508 0220 14000000 		.4byte	.LC1
- 509 0224 00       		.byte	0
- 510 0225 08       		.uleb128 0x8
- 511 0226 26000000 		.4byte	.LVL5
- 512 022a 91030000 		.4byte	0x391
- 513 022e 3C020000 		.4byte	0x23c
- 514 0232 09       		.uleb128 0x9
- 515 0233 01       		.uleb128 0x1
- 516 0234 50       		.byte	0x50
- 517 0235 05       		.uleb128 0x5
- 518 0236 03       		.byte	0x3
- 519 0237 2C000000 		.4byte	.LC2
- 520 023b 00       		.byte	0
- 521 023c 08       		.uleb128 0x8
- 522 023d 2C000000 		.4byte	.LVL6
- 523 0241 4F030000 		.4byte	0x34f
- 524 0245 53020000 		.4byte	0x253
- 525 0249 09       		.uleb128 0x9
- 526 024a 01       		.uleb128 0x1
- 527 024b 50       		.byte	0x50
- 528 024c 05       		.uleb128 0x5
- 529 024d 03       		.byte	0x3
- 530 024e 60000000 		.4byte	.LC3
- 531 0252 00       		.byte	0
- 532 0253 0B       		.uleb128 0xb
- 533 0254 30000000 		.4byte	.LVL7
- 534 0258 9C030000 		.4byte	0x39c
- 535 025c 00       		.byte	0
- 536 025d 0C       		.uleb128 0xc
- 537 025e 8F000000 		.4byte	0x8f
- 538 0262 6D020000 		.4byte	0x26d
- 539 0266 0D       		.uleb128 0xd
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 12
+ 450 00b4 04       		.byte	0x4
+ 451 00b5 07       		.byte	0x7
+ 452 00b6 8E020000 		.4byte	.LASF17
+ 453 00ba 05       		.uleb128 0x5
+ 454 00bb 04       		.byte	0x4
+ 455 00bc A5000000 		.4byte	0xa5
+ 456 00c0 06       		.uleb128 0x6
+ 457 00c1 B1020000 		.4byte	.LASF45
+ 458 00c5 01       		.byte	0x1
+ 459 00c6 1D       		.byte	0x1d
+ 460 00c7 00000000 		.4byte	.LFB64
+ 461 00cb F8000000 		.4byte	.LFE64-.LFB64
+ 462 00cf 01       		.uleb128 0x1
+ 463 00d0 9C       		.byte	0x9c
+ 464 00d1 15020000 		.4byte	0x215
+ 465 00d5 07       		.uleb128 0x7
+ 466 00d6 64000000 		.4byte	.LASF46
+ 467 00da 01       		.byte	0x1
+ 468 00db 1F       		.byte	0x1f
+ 469 00dc 81000000 		.4byte	0x81
+ 470 00e0 05       		.uleb128 0x5
+ 471 00e1 03       		.byte	0x3
+ 472 00e2 00000000 		.4byte	uart1_rx_index.6926
+ 473 00e6 08       		.uleb128 0x8
+ 474 00e7 0A000000 		.4byte	.LVL0
+ 475 00eb DA030000 		.4byte	0x3da
+ 476 00ef 09       		.uleb128 0x9
+ 477 00f0 26000000 		.4byte	.LVL1
+ 478 00f4 E5030000 		.4byte	0x3e5
+ 479 00f8 0F010000 		.4byte	0x10f
+ 480 00fc 0A       		.uleb128 0xa
+ 481 00fd 01       		.uleb128 0x1
+ 482 00fe 50       		.byte	0x50
+ 483 00ff 05       		.uleb128 0x5
+ 484 0100 03       		.byte	0x3
+ 485 0101 00000000 		.4byte	uart1_rx_buffer
+ 486 0105 0A       		.uleb128 0xa
+ 487 0106 01       		.uleb128 0x1
+ 488 0107 51       		.byte	0x51
+ 489 0108 05       		.uleb128 0x5
+ 490 0109 03       		.byte	0x3
+ 491 010a 00000000 		.4byte	.LC0
+ 492 010e 00       		.byte	0
+ 493 010f 09       		.uleb128 0x9
+ 494 0110 30000000 		.4byte	.LVL2
+ 495 0114 F0030000 		.4byte	0x3f0
+ 496 0118 26010000 		.4byte	0x126
+ 497 011c 0A       		.uleb128 0xa
+ 498 011d 01       		.uleb128 0x1
+ 499 011e 51       		.byte	0x51
+ 500 011f 05       		.uleb128 0x5
+ 501 0120 03       		.byte	0x3
+ 502 0121 04000000 		.4byte	.LC1
+ 503 0125 00       		.byte	0
+ 504 0126 09       		.uleb128 0x9
+ 505 0127 3C000000 		.4byte	.LVL3
+ 506 012b E5030000 		.4byte	0x3e5
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 12
 
 
- 540 0267 9D000000 		.4byte	0x9d
- 541 026b 31       		.byte	0x31
- 542 026c 00       		.byte	0
- 543 026d 0E       		.uleb128 0xe
- 544 026e 38010000 		.4byte	.LASF18
- 545 0272 04       		.byte	0x4
- 546 0273 1207     		.2byte	0x712
- 547 0275 79020000 		.4byte	0x279
- 548 0279 0F       		.uleb128 0xf
- 549 027a 76000000 		.4byte	0x76
- 550 027e 0C       		.uleb128 0xc
- 551 027f 8F000000 		.4byte	0x8f
- 552 0283 8E020000 		.4byte	0x28e
- 553 0287 0D       		.uleb128 0xd
- 554 0288 9D000000 		.4byte	0x9d
- 555 028c 4F       		.byte	0x4f
- 556 028d 00       		.byte	0
- 557 028e 10       		.uleb128 0x10
- 558 028f 84020000 		.4byte	.LASF19
- 559 0293 01       		.byte	0x1
- 560 0294 13       		.byte	0x13
- 561 0295 7E020000 		.4byte	0x27e
- 562 0299 05       		.uleb128 0x5
- 563 029a 03       		.byte	0x3
- 564 029b 00000000 		.4byte	gps_buffer
- 565 029f 0C       		.uleb128 0xc
- 566 02a0 8F000000 		.4byte	0x8f
- 567 02a4 AF020000 		.4byte	0x2af
- 568 02a8 0D       		.uleb128 0xd
- 569 02a9 9D000000 		.4byte	0x9d
- 570 02ad 0B       		.byte	0xb
- 571 02ae 00       		.byte	0
- 572 02af 10       		.uleb128 0x10
- 573 02b0 07020000 		.4byte	.LASF20
- 574 02b4 01       		.byte	0x1
- 575 02b5 14       		.byte	0x14
- 576 02b6 9F020000 		.4byte	0x29f
- 577 02ba 05       		.uleb128 0x5
- 578 02bb 03       		.byte	0x3
- 579 02bc 00000000 		.4byte	lat_str
- 580 02c0 10       		.uleb128 0x10
- 581 02c1 B3010000 		.4byte	.LASF21
- 582 02c5 01       		.byte	0x1
- 583 02c6 14       		.byte	0x14
- 584 02c7 9F020000 		.4byte	0x29f
- 585 02cb 05       		.uleb128 0x5
- 586 02cc 03       		.byte	0x3
- 587 02cd 00000000 		.4byte	lon_str
- 588 02d1 0C       		.uleb128 0xc
- 589 02d2 8F000000 		.4byte	0x8f
- 590 02d6 E1020000 		.4byte	0x2e1
- 591 02da 0D       		.uleb128 0xd
- 592 02db 9D000000 		.4byte	0x9d
- 593 02df 09       		.byte	0x9
- 594 02e0 00       		.byte	0
- 595 02e1 10       		.uleb128 0x10
- 596 02e2 07000000 		.4byte	.LASF22
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 13
+ 507 012f 3A010000 		.4byte	0x13a
+ 508 0133 0A       		.uleb128 0xa
+ 509 0134 01       		.uleb128 0x1
+ 510 0135 51       		.byte	0x51
+ 511 0136 02       		.uleb128 0x2
+ 512 0137 75       		.byte	0x75
+ 513 0138 00       		.sleb128 0
+ 514 0139 00       		.byte	0
+ 515 013a 09       		.uleb128 0x9
+ 516 013b 48000000 		.4byte	.LVL4
+ 517 013f FB030000 		.4byte	0x3fb
+ 518 0143 51010000 		.4byte	0x151
+ 519 0147 0A       		.uleb128 0xa
+ 520 0148 01       		.uleb128 0x1
+ 521 0149 50       		.byte	0x50
+ 522 014a 05       		.uleb128 0x5
+ 523 014b 03       		.byte	0x3
+ 524 014c 00000000 		.4byte	timestamp
+ 525 0150 00       		.byte	0
+ 526 0151 09       		.uleb128 0x9
+ 527 0152 50000000 		.4byte	.LVL5
+ 528 0156 E5030000 		.4byte	0x3e5
+ 529 015a 6A010000 		.4byte	0x16a
+ 530 015e 0A       		.uleb128 0xa
+ 531 015f 01       		.uleb128 0x1
+ 532 0160 50       		.byte	0x50
+ 533 0161 01       		.uleb128 0x1
+ 534 0162 30       		.byte	0x30
+ 535 0163 0A       		.uleb128 0xa
+ 536 0164 01       		.uleb128 0x1
+ 537 0165 51       		.byte	0x51
+ 538 0166 02       		.uleb128 0x2
+ 539 0167 75       		.byte	0x75
+ 540 0168 00       		.sleb128 0
+ 541 0169 00       		.byte	0
+ 542 016a 09       		.uleb128 0x9
+ 543 016b 58000000 		.4byte	.LVL6
+ 544 016f F0030000 		.4byte	0x3f0
+ 545 0173 81010000 		.4byte	0x181
+ 546 0177 0A       		.uleb128 0xa
+ 547 0178 01       		.uleb128 0x1
+ 548 0179 51       		.byte	0x51
+ 549 017a 05       		.uleb128 0x5
+ 550 017b 03       		.byte	0x3
+ 551 017c 0C000000 		.4byte	.LC2
+ 552 0180 00       		.byte	0
+ 553 0181 09       		.uleb128 0x9
+ 554 0182 62000000 		.4byte	.LVL7
+ 555 0186 E5030000 		.4byte	0x3e5
+ 556 018a 95010000 		.4byte	0x195
+ 557 018e 0A       		.uleb128 0xa
+ 558 018f 01       		.uleb128 0x1
+ 559 0190 51       		.byte	0x51
+ 560 0191 02       		.uleb128 0x2
+ 561 0192 75       		.byte	0x75
+ 562 0193 00       		.sleb128 0
+ 563 0194 00       		.byte	0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 13
 
 
- 597 02e6 01       		.byte	0x1
- 598 02e7 14       		.byte	0x14
- 599 02e8 D1020000 		.4byte	0x2d1
- 600 02ec 05       		.uleb128 0x5
- 601 02ed 03       		.byte	0x3
- 602 02ee 00000000 		.4byte	time_str
- 603 02f2 10       		.uleb128 0x10
- 604 02f3 77010000 		.4byte	.LASF23
- 605 02f7 01       		.byte	0x1
- 606 02f8 14       		.byte	0x14
- 607 02f9 D1020000 		.4byte	0x2d1
- 608 02fd 05       		.uleb128 0x5
- 609 02fe 03       		.byte	0x3
- 610 02ff 00000000 		.4byte	date_str
- 611 0303 10       		.uleb128 0x10
- 612 0304 FF010000 		.4byte	.LASF24
- 613 0308 01       		.byte	0x1
- 614 0309 15       		.byte	0x15
- 615 030a 81000000 		.4byte	0x81
- 616 030e 05       		.uleb128 0x5
- 617 030f 03       		.byte	0x3
- 618 0310 00000000 		.4byte	lat_val
- 619 0314 10       		.uleb128 0x10
- 620 0315 9C010000 		.4byte	.LASF25
- 621 0319 01       		.byte	0x1
- 622 031a 15       		.byte	0x15
- 623 031b 81000000 		.4byte	0x81
- 624 031f 05       		.uleb128 0x5
- 625 0320 03       		.byte	0x3
- 626 0321 00000000 		.4byte	lon_val
- 627 0325 11       		.uleb128 0x11
- 628 0326 00000000 		.4byte	.LASF26
- 629 032a 00000000 		.4byte	.LASF26
- 630 032e 05       		.byte	0x5
- 631 032f BF       		.byte	0xbf
- 632 0330 11       		.uleb128 0x11
- 633 0331 97010000 		.4byte	.LASF27
- 634 0335 97010000 		.4byte	.LASF27
- 635 0339 06       		.byte	0x6
- 636 033a 49       		.byte	0x49
- 637 033b 12       		.uleb128 0x12
- 638 033c 45010000 		.4byte	.LASF41
- 639 0340 45010000 		.4byte	.LASF41
- 640 0344 11       		.uleb128 0x11
- 641 0345 A7020000 		.4byte	.LASF28
- 642 0349 A7020000 		.4byte	.LASF28
- 643 034d 05       		.byte	0x5
- 644 034e E7       		.byte	0xe7
- 645 034f 11       		.uleb128 0x11
- 646 0350 07010000 		.4byte	.LASF29
- 647 0354 07010000 		.4byte	.LASF29
- 648 0358 07       		.byte	0x7
- 649 0359 8B       		.byte	0x8b
- 650 035a 11       		.uleb128 0x11
- 651 035b 1A000000 		.4byte	.LASF30
- 652 035f 1A000000 		.4byte	.LASF30
- 653 0363 08       		.byte	0x8
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 14
+ 564 0195 08       		.uleb128 0x8
+ 565 0196 68000000 		.4byte	.LVL8
+ 566 019a 06040000 		.4byte	0x406
+ 567 019e 09       		.uleb128 0x9
+ 568 019f 78000000 		.4byte	.LVL10
+ 569 01a3 E5030000 		.4byte	0x3e5
+ 570 01a7 B7010000 		.4byte	0x1b7
+ 571 01ab 0A       		.uleb128 0xa
+ 572 01ac 01       		.uleb128 0x1
+ 573 01ad 50       		.byte	0x50
+ 574 01ae 01       		.uleb128 0x1
+ 575 01af 30       		.byte	0x30
+ 576 01b0 0A       		.uleb128 0xa
+ 577 01b1 01       		.uleb128 0x1
+ 578 01b2 51       		.byte	0x51
+ 579 01b3 02       		.uleb128 0x2
+ 580 01b4 75       		.byte	0x75
+ 581 01b5 00       		.sleb128 0
+ 582 01b6 00       		.byte	0
+ 583 01b7 09       		.uleb128 0x9
+ 584 01b8 88000000 		.4byte	.LVL11
+ 585 01bc E5030000 		.4byte	0x3e5
+ 586 01c0 D0010000 		.4byte	0x1d0
+ 587 01c4 0A       		.uleb128 0xa
+ 588 01c5 01       		.uleb128 0x1
+ 589 01c6 50       		.byte	0x50
+ 590 01c7 01       		.uleb128 0x1
+ 591 01c8 30       		.byte	0x30
+ 592 01c9 0A       		.uleb128 0xa
+ 593 01ca 01       		.uleb128 0x1
+ 594 01cb 51       		.byte	0x51
+ 595 01cc 02       		.uleb128 0x2
+ 596 01cd 75       		.byte	0x75
+ 597 01ce 00       		.sleb128 0
+ 598 01cf 00       		.byte	0
+ 599 01d0 08       		.uleb128 0x8
+ 600 01d1 8E000000 		.4byte	.LVL12
+ 601 01d5 06040000 		.4byte	0x406
+ 602 01d9 09       		.uleb128 0x9
+ 603 01da 9E000000 		.4byte	.LVL14
+ 604 01de E5030000 		.4byte	0x3e5
+ 605 01e2 F2010000 		.4byte	0x1f2
+ 606 01e6 0A       		.uleb128 0xa
+ 607 01e7 01       		.uleb128 0x1
+ 608 01e8 50       		.byte	0x50
+ 609 01e9 01       		.uleb128 0x1
+ 610 01ea 30       		.byte	0x30
+ 611 01eb 0A       		.uleb128 0xa
+ 612 01ec 01       		.uleb128 0x1
+ 613 01ed 51       		.byte	0x51
+ 614 01ee 02       		.uleb128 0x2
+ 615 01ef 75       		.byte	0x75
+ 616 01f0 00       		.sleb128 0
+ 617 01f1 00       		.byte	0
+ 618 01f2 09       		.uleb128 0x9
+ 619 01f3 AE000000 		.4byte	.LVL15
+ 620 01f7 E5030000 		.4byte	0x3e5
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 14
 
 
- 654 0364 71       		.byte	0x71
- 655 0365 11       		.uleb128 0x11
- 656 0366 53010000 		.4byte	.LASF31
- 657 036a 53010000 		.4byte	.LASF31
- 658 036e 09       		.byte	0x9
- 659 036f 22       		.byte	0x22
- 660 0370 11       		.uleb128 0x11
- 661 0371 4C000000 		.4byte	.LASF32
- 662 0375 4C000000 		.4byte	.LASF32
- 663 0379 0A       		.byte	0xa
- 664 037a 26       		.byte	0x26
- 665 037b 11       		.uleb128 0x11
- 666 037c A4010000 		.4byte	.LASF33
- 667 0380 A4010000 		.4byte	.LASF33
- 668 0384 08       		.byte	0x8
- 669 0385 54       		.byte	0x54
- 670 0386 11       		.uleb128 0x11
- 671 0387 2B000000 		.4byte	.LASF34
- 672 038b 2B000000 		.4byte	.LASF34
- 673 038f 07       		.byte	0x7
- 674 0390 54       		.byte	0x54
- 675 0391 11       		.uleb128 0x11
- 676 0392 0F020000 		.4byte	.LASF35
- 677 0396 0F020000 		.4byte	.LASF35
- 678 039a 08       		.byte	0x8
- 679 039b 8B       		.byte	0x8b
- 680 039c 11       		.uleb128 0x11
- 681 039d BB010000 		.4byte	.LASF36
- 682 03a1 BB010000 		.4byte	.LASF36
- 683 03a5 08       		.byte	0x8
- 684 03a6 73       		.byte	0x73
- 685 03a7 00       		.byte	0
- 686              		.section	.debug_abbrev,"",%progbits
- 687              	.Ldebug_abbrev0:
- 688 0000 01       		.uleb128 0x1
- 689 0001 11       		.uleb128 0x11
- 690 0002 01       		.byte	0x1
- 691 0003 25       		.uleb128 0x25
- 692 0004 0E       		.uleb128 0xe
- 693 0005 13       		.uleb128 0x13
- 694 0006 0B       		.uleb128 0xb
- 695 0007 03       		.uleb128 0x3
- 696 0008 0E       		.uleb128 0xe
- 697 0009 1B       		.uleb128 0x1b
- 698 000a 0E       		.uleb128 0xe
- 699 000b 55       		.uleb128 0x55
- 700 000c 17       		.uleb128 0x17
- 701 000d 11       		.uleb128 0x11
- 702 000e 01       		.uleb128 0x1
- 703 000f 10       		.uleb128 0x10
- 704 0010 17       		.uleb128 0x17
- 705 0011 00       		.byte	0
- 706 0012 00       		.byte	0
- 707 0013 02       		.uleb128 0x2
- 708 0014 24       		.uleb128 0x24
- 709 0015 00       		.byte	0
- 710 0016 0B       		.uleb128 0xb
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 15
+ 621 01fb 0B020000 		.4byte	0x20b
+ 622 01ff 0A       		.uleb128 0xa
+ 623 0200 01       		.uleb128 0x1
+ 624 0201 50       		.byte	0x50
+ 625 0202 01       		.uleb128 0x1
+ 626 0203 30       		.byte	0x30
+ 627 0204 0A       		.uleb128 0xa
+ 628 0205 01       		.uleb128 0x1
+ 629 0206 51       		.byte	0x51
+ 630 0207 02       		.uleb128 0x2
+ 631 0208 75       		.byte	0x75
+ 632 0209 00       		.sleb128 0
+ 633 020a 00       		.byte	0
+ 634 020b 08       		.uleb128 0x8
+ 635 020c B4000000 		.4byte	.LVL16
+ 636 0210 06040000 		.4byte	0x406
+ 637 0214 00       		.byte	0
+ 638 0215 0B       		.uleb128 0xb
+ 639 0216 15020000 		.4byte	.LASF47
+ 640 021a 01       		.byte	0x1
+ 641 021b 47       		.byte	0x47
+ 642 021c 73000000 		.4byte	0x73
+ 643 0220 00000000 		.4byte	.LFB65
+ 644 0224 D4000000 		.4byte	.LFE65-.LFB65
+ 645 0228 01       		.uleb128 0x1
+ 646 0229 9C       		.byte	0x9c
+ 647 022a 10030000 		.4byte	0x310
+ 648 022e 08       		.uleb128 0x8
+ 649 022f 0A000000 		.4byte	.LVL18
+ 650 0233 11040000 		.4byte	0x411
+ 651 0237 09       		.uleb128 0x9
+ 652 0238 10000000 		.4byte	.LVL19
+ 653 023c 1C040000 		.4byte	0x41c
+ 654 0240 4A020000 		.4byte	0x24a
+ 655 0244 0A       		.uleb128 0xa
+ 656 0245 01       		.uleb128 0x1
+ 657 0246 50       		.byte	0x50
+ 658 0247 01       		.uleb128 0x1
+ 659 0248 31       		.byte	0x31
+ 660 0249 00       		.byte	0
+ 661 024a 08       		.uleb128 0x8
+ 662 024b 14000000 		.4byte	.LVL20
+ 663 024f 27040000 		.4byte	0x427
+ 664 0253 08       		.uleb128 0x8
+ 665 0254 18000000 		.4byte	.LVL21
+ 666 0258 32040000 		.4byte	0x432
+ 667 025c 09       		.uleb128 0x9
+ 668 025d 1E000000 		.4byte	.LVL22
+ 669 0261 3D040000 		.4byte	0x43d
+ 670 0265 73020000 		.4byte	0x273
+ 671 0269 0A       		.uleb128 0xa
+ 672 026a 01       		.uleb128 0x1
+ 673 026b 50       		.byte	0x50
+ 674 026c 05       		.uleb128 0x5
+ 675 026d 03       		.byte	0x3
+ 676 026e 00000000 		.4byte	uart1_rx_isr
+ 677 0272 00       		.byte	0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 15
 
 
- 711 0017 0B       		.uleb128 0xb
- 712 0018 3E       		.uleb128 0x3e
- 713 0019 0B       		.uleb128 0xb
- 714 001a 03       		.uleb128 0x3
- 715 001b 0E       		.uleb128 0xe
- 716 001c 00       		.byte	0
- 717 001d 00       		.byte	0
- 718 001e 03       		.uleb128 0x3
- 719 001f 16       		.uleb128 0x16
- 720 0020 00       		.byte	0
- 721 0021 03       		.uleb128 0x3
- 722 0022 0E       		.uleb128 0xe
- 723 0023 3A       		.uleb128 0x3a
- 724 0024 0B       		.uleb128 0xb
- 725 0025 3B       		.uleb128 0x3b
- 726 0026 0B       		.uleb128 0xb
- 727 0027 49       		.uleb128 0x49
- 728 0028 13       		.uleb128 0x13
- 729 0029 00       		.byte	0
- 730 002a 00       		.byte	0
- 731 002b 04       		.uleb128 0x4
- 732 002c 24       		.uleb128 0x24
- 733 002d 00       		.byte	0
- 734 002e 0B       		.uleb128 0xb
- 735 002f 0B       		.uleb128 0xb
- 736 0030 3E       		.uleb128 0x3e
- 737 0031 0B       		.uleb128 0xb
- 738 0032 03       		.uleb128 0x3
- 739 0033 08       		.uleb128 0x8
- 740 0034 00       		.byte	0
- 741 0035 00       		.byte	0
- 742 0036 05       		.uleb128 0x5
- 743 0037 2E       		.uleb128 0x2e
- 744 0038 01       		.byte	0x1
- 745 0039 3F       		.uleb128 0x3f
- 746 003a 19       		.uleb128 0x19
- 747 003b 03       		.uleb128 0x3
- 748 003c 0E       		.uleb128 0xe
- 749 003d 3A       		.uleb128 0x3a
- 750 003e 0B       		.uleb128 0xb
- 751 003f 3B       		.uleb128 0x3b
- 752 0040 0B       		.uleb128 0xb
- 753 0041 27       		.uleb128 0x27
- 754 0042 19       		.uleb128 0x19
- 755 0043 49       		.uleb128 0x49
- 756 0044 13       		.uleb128 0x13
- 757 0045 8701     		.uleb128 0x87
- 758 0047 19       		.uleb128 0x19
- 759 0048 11       		.uleb128 0x11
- 760 0049 01       		.uleb128 0x1
- 761 004a 12       		.uleb128 0x12
- 762 004b 06       		.uleb128 0x6
- 763 004c 40       		.uleb128 0x40
- 764 004d 18       		.uleb128 0x18
- 765 004e 9642     		.uleb128 0x2116
- 766 0050 19       		.uleb128 0x19
- 767 0051 01       		.uleb128 0x1
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 16
+ 678 0273 09       		.uleb128 0x9
+ 679 0274 24000000 		.4byte	.LVL23
+ 680 0278 48040000 		.4byte	0x448
+ 681 027c 8A020000 		.4byte	0x28a
+ 682 0280 0A       		.uleb128 0xa
+ 683 0281 01       		.uleb128 0x1
+ 684 0282 50       		.byte	0x50
+ 685 0283 05       		.uleb128 0x5
+ 686 0284 03       		.byte	0x3
+ 687 0285 10000000 		.4byte	.LC3
+ 688 0289 00       		.byte	0
+ 689 028a 09       		.uleb128 0x9
+ 690 028b 2A000000 		.4byte	.LVL24
+ 691 028f 48040000 		.4byte	0x448
+ 692 0293 A1020000 		.4byte	0x2a1
+ 693 0297 0A       		.uleb128 0xa
+ 694 0298 01       		.uleb128 0x1
+ 695 0299 50       		.byte	0x50
+ 696 029a 05       		.uleb128 0x5
+ 697 029b 03       		.byte	0x3
+ 698 029c 24000000 		.4byte	.LC4
+ 699 02a0 00       		.byte	0
+ 700 02a1 09       		.uleb128 0x9
+ 701 02a2 30000000 		.4byte	.LVL25
+ 702 02a6 53040000 		.4byte	0x453
+ 703 02aa B8020000 		.4byte	0x2b8
+ 704 02ae 0A       		.uleb128 0xa
+ 705 02af 01       		.uleb128 0x1
+ 706 02b0 50       		.byte	0x50
+ 707 02b1 05       		.uleb128 0x5
+ 708 02b2 03       		.byte	0x3
+ 709 02b3 3C000000 		.4byte	.LC5
+ 710 02b7 00       		.byte	0
+ 711 02b8 09       		.uleb128 0x9
+ 712 02b9 36000000 		.4byte	.LVL26
+ 713 02bd 48040000 		.4byte	0x448
+ 714 02c1 CF020000 		.4byte	0x2cf
+ 715 02c5 0A       		.uleb128 0xa
+ 716 02c6 01       		.uleb128 0x1
+ 717 02c7 50       		.byte	0x50
+ 718 02c8 05       		.uleb128 0x5
+ 719 02c9 03       		.byte	0x3
+ 720 02ca 70000000 		.4byte	.LC6
+ 721 02ce 00       		.byte	0
+ 722 02cf 08       		.uleb128 0x8
+ 723 02d0 3A000000 		.4byte	.LVL27
+ 724 02d4 5E040000 		.4byte	0x45e
+ 725 02d8 09       		.uleb128 0x9
+ 726 02d9 8E000000 		.4byte	.LVL31
+ 727 02dd 69040000 		.4byte	0x469
+ 728 02e1 FF020000 		.4byte	0x2ff
+ 729 02e5 0A       		.uleb128 0xa
+ 730 02e6 01       		.uleb128 0x1
+ 731 02e7 50       		.byte	0x50
+ 732 02e8 02       		.uleb128 0x2
+ 733 02e9 74       		.byte	0x74
+ 734 02ea 00       		.sleb128 0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 16
 
 
- 768 0052 13       		.uleb128 0x13
- 769 0053 00       		.byte	0
- 770 0054 00       		.byte	0
- 771 0055 06       		.uleb128 0x6
- 772 0056 0B       		.uleb128 0xb
- 773 0057 01       		.byte	0x1
- 774 0058 11       		.uleb128 0x11
- 775 0059 01       		.uleb128 0x1
- 776 005a 12       		.uleb128 0x12
- 777 005b 06       		.uleb128 0x6
- 778 005c 01       		.uleb128 0x1
- 779 005d 13       		.uleb128 0x13
- 780 005e 00       		.byte	0
- 781 005f 00       		.byte	0
- 782 0060 07       		.uleb128 0x7
- 783 0061 34       		.uleb128 0x34
- 784 0062 00       		.byte	0
- 785 0063 03       		.uleb128 0x3
- 786 0064 0E       		.uleb128 0xe
- 787 0065 3A       		.uleb128 0x3a
- 788 0066 0B       		.uleb128 0xb
- 789 0067 3B       		.uleb128 0x3b
- 790 0068 0B       		.uleb128 0xb
- 791 0069 49       		.uleb128 0x49
- 792 006a 13       		.uleb128 0x13
- 793 006b 02       		.uleb128 0x2
- 794 006c 18       		.uleb128 0x18
- 795 006d 00       		.byte	0
- 796 006e 00       		.byte	0
- 797 006f 08       		.uleb128 0x8
- 798 0070 898201   		.uleb128 0x4109
- 799 0073 01       		.byte	0x1
- 800 0074 11       		.uleb128 0x11
- 801 0075 01       		.uleb128 0x1
- 802 0076 31       		.uleb128 0x31
- 803 0077 13       		.uleb128 0x13
- 804 0078 01       		.uleb128 0x1
- 805 0079 13       		.uleb128 0x13
- 806 007a 00       		.byte	0
- 807 007b 00       		.byte	0
- 808 007c 09       		.uleb128 0x9
- 809 007d 8A8201   		.uleb128 0x410a
- 810 0080 00       		.byte	0
- 811 0081 02       		.uleb128 0x2
- 812 0082 18       		.uleb128 0x18
- 813 0083 9142     		.uleb128 0x2111
- 814 0085 18       		.uleb128 0x18
- 815 0086 00       		.byte	0
- 816 0087 00       		.byte	0
- 817 0088 0A       		.uleb128 0xa
- 818 0089 898201   		.uleb128 0x4109
- 819 008c 01       		.byte	0x1
- 820 008d 11       		.uleb128 0x11
- 821 008e 01       		.uleb128 0x1
- 822 008f 31       		.uleb128 0x31
- 823 0090 13       		.uleb128 0x13
- 824 0091 00       		.byte	0
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 17
+ 735 02eb 0A       		.uleb128 0xa
+ 736 02ec 01       		.uleb128 0x1
+ 737 02ed 51       		.byte	0x51
+ 738 02ee 05       		.uleb128 0x5
+ 739 02ef 03       		.byte	0x3
+ 740 02f0 7C000000 		.4byte	.LC7
+ 741 02f4 0A       		.uleb128 0xa
+ 742 02f5 02       		.uleb128 0x2
+ 743 02f6 7D       		.byte	0x7d
+ 744 02f7 20       		.sleb128 32
+ 745 02f8 05       		.uleb128 0x5
+ 746 02f9 03       		.byte	0x3
+ 747 02fa 00000000 		.4byte	timestamp
+ 748 02fe 00       		.byte	0
+ 749 02ff 0C       		.uleb128 0xc
+ 750 0300 94000000 		.4byte	.LVL32
+ 751 0304 48040000 		.4byte	0x448
+ 752 0308 0A       		.uleb128 0xa
+ 753 0309 01       		.uleb128 0x1
+ 754 030a 50       		.byte	0x50
+ 755 030b 02       		.uleb128 0x2
+ 756 030c 74       		.byte	0x74
+ 757 030d 00       		.sleb128 0
+ 758 030e 00       		.byte	0
+ 759 030f 00       		.byte	0
+ 760 0310 0D       		.uleb128 0xd
+ 761 0311 FA010000 		.4byte	.LASF18
+ 762 0315 04       		.byte	0x4
+ 763 0316 1207     		.2byte	0x712
+ 764 0318 1C030000 		.4byte	0x31c
+ 765 031c 0E       		.uleb128 0xe
+ 766 031d 8C000000 		.4byte	0x8c
+ 767 0321 0F       		.uleb128 0xf
+ 768 0322 A5000000 		.4byte	0xa5
+ 769 0326 31030000 		.4byte	0x331
+ 770 032a 10       		.uleb128 0x10
+ 771 032b B3000000 		.4byte	0xb3
+ 772 032f 3F       		.byte	0x3f
+ 773 0330 00       		.byte	0
+ 774 0331 11       		.uleb128 0x11
+ 775 0332 E1020000 		.4byte	.LASF19
+ 776 0336 01       		.byte	0x1
+ 777 0337 15       		.byte	0x15
+ 778 0338 21030000 		.4byte	0x321
+ 779 033c 05       		.uleb128 0x5
+ 780 033d 03       		.byte	0x3
+ 781 033e 00000000 		.4byte	uart1_rx_buffer
+ 782 0342 11       		.uleb128 0x11
+ 783 0343 D8010000 		.4byte	.LASF20
+ 784 0347 01       		.byte	0x1
+ 785 0348 16       		.byte	0x16
+ 786 0349 21030000 		.4byte	0x321
+ 787 034d 05       		.uleb128 0x5
+ 788 034e 03       		.byte	0x3
+ 789 034f 00000000 		.4byte	uart2_tx_buffer
+ 790 0353 11       		.uleb128 0x11
+ 791 0354 DB020000 		.4byte	.LASF21
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 17
 
 
- 825 0092 00       		.byte	0
- 826 0093 0B       		.uleb128 0xb
- 827 0094 898201   		.uleb128 0x4109
- 828 0097 00       		.byte	0
- 829 0098 11       		.uleb128 0x11
- 830 0099 01       		.uleb128 0x1
- 831 009a 31       		.uleb128 0x31
- 832 009b 13       		.uleb128 0x13
- 833 009c 00       		.byte	0
- 834 009d 00       		.byte	0
- 835 009e 0C       		.uleb128 0xc
- 836 009f 01       		.uleb128 0x1
- 837 00a0 01       		.byte	0x1
- 838 00a1 49       		.uleb128 0x49
- 839 00a2 13       		.uleb128 0x13
- 840 00a3 01       		.uleb128 0x1
- 841 00a4 13       		.uleb128 0x13
- 842 00a5 00       		.byte	0
- 843 00a6 00       		.byte	0
- 844 00a7 0D       		.uleb128 0xd
- 845 00a8 21       		.uleb128 0x21
- 846 00a9 00       		.byte	0
- 847 00aa 49       		.uleb128 0x49
- 848 00ab 13       		.uleb128 0x13
- 849 00ac 2F       		.uleb128 0x2f
- 850 00ad 0B       		.uleb128 0xb
- 851 00ae 00       		.byte	0
- 852 00af 00       		.byte	0
- 853 00b0 0E       		.uleb128 0xe
- 854 00b1 34       		.uleb128 0x34
- 855 00b2 00       		.byte	0
- 856 00b3 03       		.uleb128 0x3
- 857 00b4 0E       		.uleb128 0xe
- 858 00b5 3A       		.uleb128 0x3a
- 859 00b6 0B       		.uleb128 0xb
- 860 00b7 3B       		.uleb128 0x3b
- 861 00b8 05       		.uleb128 0x5
- 862 00b9 49       		.uleb128 0x49
- 863 00ba 13       		.uleb128 0x13
- 864 00bb 3F       		.uleb128 0x3f
- 865 00bc 19       		.uleb128 0x19
- 866 00bd 3C       		.uleb128 0x3c
- 867 00be 19       		.uleb128 0x19
- 868 00bf 00       		.byte	0
- 869 00c0 00       		.byte	0
- 870 00c1 0F       		.uleb128 0xf
- 871 00c2 35       		.uleb128 0x35
- 872 00c3 00       		.byte	0
- 873 00c4 49       		.uleb128 0x49
- 874 00c5 13       		.uleb128 0x13
- 875 00c6 00       		.byte	0
- 876 00c7 00       		.byte	0
- 877 00c8 10       		.uleb128 0x10
- 878 00c9 34       		.uleb128 0x34
- 879 00ca 00       		.byte	0
- 880 00cb 03       		.uleb128 0x3
- 881 00cc 0E       		.uleb128 0xe
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 18
+ 792 0358 01       		.byte	0x1
+ 793 0359 18       		.byte	0x18
+ 794 035a BA000000 		.4byte	0xba
+ 795 035e 05       		.uleb128 0x5
+ 796 035f 03       		.byte	0x3
+ 797 0360 00000000 		.4byte	token
+ 798 0364 11       		.uleb128 0x11
+ 799 0365 7F020000 		.4byte	.LASF22
+ 800 0369 01       		.byte	0x1
+ 801 036a 1A       		.byte	0x1a
+ 802 036b 97000000 		.4byte	0x97
+ 803 036f 05       		.uleb128 0x5
+ 804 0370 03       		.byte	0x3
+ 805 0371 00000000 		.4byte	latitude
+ 806 0375 11       		.uleb128 0x11
+ 807 0376 73000000 		.4byte	.LASF23
+ 808 037a 01       		.byte	0x1
+ 809 037b 1A       		.byte	0x1a
+ 810 037c 97000000 		.4byte	0x97
+ 811 0380 05       		.uleb128 0x5
+ 812 0381 03       		.byte	0x3
+ 813 0382 00000000 		.4byte	longitude
+ 814 0386 11       		.uleb128 0x11
+ 815 0387 88020000 		.4byte	.LASF24
+ 816 038b 01       		.byte	0x1
+ 817 038c 1A       		.byte	0x1a
+ 818 038d 97000000 		.4byte	0x97
+ 819 0391 05       		.uleb128 0x5
+ 820 0392 03       		.byte	0x3
+ 821 0393 00000000 		.4byte	speed
+ 822 0397 11       		.uleb128 0x11
+ 823 0398 27020000 		.4byte	.LASF25
+ 824 039c 01       		.byte	0x1
+ 825 039d 1B       		.byte	0x1b
+ 826 039e A5000000 		.4byte	0xa5
+ 827 03a2 05       		.uleb128 0x5
+ 828 03a3 03       		.byte	0x3
+ 829 03a4 00000000 		.4byte	ns_indicator
+ 830 03a8 11       		.uleb128 0x11
+ 831 03a9 CB010000 		.4byte	.LASF26
+ 832 03ad 01       		.byte	0x1
+ 833 03ae 1B       		.byte	0x1b
+ 834 03af A5000000 		.4byte	0xa5
+ 835 03b3 05       		.uleb128 0x5
+ 836 03b4 03       		.byte	0x3
+ 837 03b5 00000000 		.4byte	ew_indicator
+ 838 03b9 0F       		.uleb128 0xf
+ 839 03ba A5000000 		.4byte	0xa5
+ 840 03be C9030000 		.4byte	0x3c9
+ 841 03c2 10       		.uleb128 0x10
+ 842 03c3 B3000000 		.4byte	0xb3
+ 843 03c7 09       		.byte	0x9
+ 844 03c8 00       		.byte	0
+ 845 03c9 11       		.uleb128 0x11
+ 846 03ca 5A000000 		.4byte	.LASF27
+ 847 03ce 01       		.byte	0x1
+ 848 03cf 1B       		.byte	0x1b
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 18
 
 
- 882 00cd 3A       		.uleb128 0x3a
- 883 00ce 0B       		.uleb128 0xb
- 884 00cf 3B       		.uleb128 0x3b
- 885 00d0 0B       		.uleb128 0xb
- 886 00d1 49       		.uleb128 0x49
- 887 00d2 13       		.uleb128 0x13
- 888 00d3 3F       		.uleb128 0x3f
- 889 00d4 19       		.uleb128 0x19
- 890 00d5 02       		.uleb128 0x2
- 891 00d6 18       		.uleb128 0x18
- 892 00d7 00       		.byte	0
- 893 00d8 00       		.byte	0
- 894 00d9 11       		.uleb128 0x11
- 895 00da 2E       		.uleb128 0x2e
- 896 00db 00       		.byte	0
- 897 00dc 3F       		.uleb128 0x3f
- 898 00dd 19       		.uleb128 0x19
- 899 00de 3C       		.uleb128 0x3c
- 900 00df 19       		.uleb128 0x19
- 901 00e0 6E       		.uleb128 0x6e
- 902 00e1 0E       		.uleb128 0xe
- 903 00e2 03       		.uleb128 0x3
- 904 00e3 0E       		.uleb128 0xe
- 905 00e4 3A       		.uleb128 0x3a
- 906 00e5 0B       		.uleb128 0xb
- 907 00e6 3B       		.uleb128 0x3b
- 908 00e7 0B       		.uleb128 0xb
- 909 00e8 00       		.byte	0
- 910 00e9 00       		.byte	0
- 911 00ea 12       		.uleb128 0x12
- 912 00eb 2E       		.uleb128 0x2e
- 913 00ec 00       		.byte	0
- 914 00ed 3F       		.uleb128 0x3f
- 915 00ee 19       		.uleb128 0x19
- 916 00ef 3C       		.uleb128 0x3c
- 917 00f0 19       		.uleb128 0x19
- 918 00f1 6E       		.uleb128 0x6e
- 919 00f2 0E       		.uleb128 0xe
- 920 00f3 03       		.uleb128 0x3
- 921 00f4 0E       		.uleb128 0xe
- 922 00f5 00       		.byte	0
- 923 00f6 00       		.byte	0
- 924 00f7 00       		.byte	0
- 925              		.section	.debug_aranges,"",%progbits
- 926 0000 1C000000 		.4byte	0x1c
- 927 0004 0200     		.2byte	0x2
- 928 0006 00000000 		.4byte	.Ldebug_info0
- 929 000a 04       		.byte	0x4
- 930 000b 00       		.byte	0
- 931 000c 0000     		.2byte	0
- 932 000e 0000     		.2byte	0
- 933 0010 00000000 		.4byte	.LFB64
- 934 0014 EC000000 		.4byte	.LFE64-.LFB64
- 935 0018 00000000 		.4byte	0
- 936 001c 00000000 		.4byte	0
- 937              		.section	.debug_ranges,"",%progbits
- 938              	.Ldebug_ranges0:
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 19
+ 849 03d0 B9030000 		.4byte	0x3b9
+ 850 03d4 05       		.uleb128 0x5
+ 851 03d5 03       		.byte	0x3
+ 852 03d6 00000000 		.4byte	timestamp
+ 853 03da 12       		.uleb128 0x12
+ 854 03db 5F020000 		.4byte	.LASF28
+ 855 03df 5F020000 		.4byte	.LASF28
+ 856 03e3 05       		.byte	0x5
+ 857 03e4 71       		.byte	0x71
+ 858 03e5 12       		.uleb128 0x12
+ 859 03e6 34020000 		.4byte	.LASF29
+ 860 03ea 34020000 		.4byte	.LASF29
+ 861 03ee 06       		.byte	0x6
+ 862 03ef 2A       		.byte	0x2a
+ 863 03f0 12       		.uleb128 0x12
+ 864 03f1 0E020000 		.4byte	.LASF30
+ 865 03f5 0E020000 		.4byte	.LASF30
+ 866 03f9 06       		.byte	0x6
+ 867 03fa 1C       		.byte	0x1c
+ 868 03fb 12       		.uleb128 0x12
+ 869 03fc 8D010000 		.4byte	.LASF31
+ 870 0400 8D010000 		.4byte	.LASF31
+ 871 0404 06       		.byte	0x6
+ 872 0405 1E       		.byte	0x1e
+ 873 0406 12       		.uleb128 0x12
+ 874 0407 5A020000 		.4byte	.LASF32
+ 875 040b 5A020000 		.4byte	.LASF32
+ 876 040f 07       		.byte	0x7
+ 877 0410 49       		.byte	0x49
+ 878 0411 12       		.uleb128 0x12
+ 879 0412 94010000 		.4byte	.LASF33
+ 880 0416 94010000 		.4byte	.LASF33
+ 881 041a 08       		.byte	0x8
+ 882 041b AE       		.byte	0xae
+ 883 041c 12       		.uleb128 0x12
+ 884 041d E4000000 		.4byte	.LASF34
+ 885 0421 E4000000 		.4byte	.LASF34
+ 886 0425 09       		.byte	0x9
+ 887 0426 26       		.byte	0x26
+ 888 0427 12       		.uleb128 0x12
+ 889 0428 70020000 		.4byte	.LASF35
+ 890 042c 70020000 		.4byte	.LASF35
+ 891 0430 05       		.byte	0x5
+ 892 0431 54       		.byte	0x54
+ 893 0432 12       		.uleb128 0x12
+ 894 0433 48000000 		.4byte	.LASF36
+ 895 0437 48000000 		.4byte	.LASF36
+ 896 043b 0A       		.byte	0xa
+ 897 043c 54       		.byte	0x54
+ 898 043d 12       		.uleb128 0x12
+ 899 043e 00000000 		.4byte	.LASF37
+ 900 0442 00000000 		.4byte	.LASF37
+ 901 0446 0B       		.byte	0xb
+ 902 0447 18       		.byte	0x18
+ 903 0448 12       		.uleb128 0x12
+ 904 0449 B5010000 		.4byte	.LASF38
+ 905 044d B5010000 		.4byte	.LASF38
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 19
 
 
- 939 0000 00000000 		.4byte	.LFB64
- 940 0004 EC000000 		.4byte	.LFE64
- 941 0008 00000000 		.4byte	0
- 942 000c 00000000 		.4byte	0
- 943              		.section	.debug_line,"",%progbits
- 944              	.Ldebug_line0:
- 945 0000 1C020000 		.section	.debug_str,"MS",%progbits,1
- 945      0200F501 
- 945      00000201 
- 945      FB0E0D00 
- 945      01010101 
- 946              	.LASF26:
- 947 0000 73736361 		.ascii	"sscanf\000"
- 947      6E6600
- 948              	.LASF22:
- 949 0007 74696D65 		.ascii	"time_str\000"
- 949      5F737472 
- 949      00
- 950              	.LASF9:
- 951 0010 5F5F696E 		.ascii	"__int32_t\000"
- 951      7433325F 
- 951      7400
- 952              	.LASF30:
- 953 001a 4750535F 		.ascii	"GPS_UART_GetChar\000"
- 953      55415254 
- 953      5F476574 
- 953      43686172 
- 953      00
- 954              	.LASF34:
- 955 002b 4F555450 		.ascii	"OUTPUT_UART_Start\000"
- 955      55545F55 
- 955      4152545F 
- 955      53746172 
- 955      7400
- 956              	.LASF17:
- 957 003d 6770735F 		.ascii	"gps_data\000"
- 957      64617461 
- 957      00
- 958              	.LASF11:
- 959 0046 666C6F61 		.ascii	"float\000"
- 959      7400
- 960              	.LASF32:
- 961 004c 50575F47 		.ascii	"PW_GPS_Write\000"
- 961      50535F57 
- 961      72697465 
- 961      00
- 962              	.LASF1:
- 963 0059 756E7369 		.ascii	"unsigned char\000"
- 963      676E6564 
- 963      20636861 
- 963      7200
- 964              	.LASF37:
- 965 0067 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 965      43313120 
- 965      352E342E 
- 965      31203230 
- 965      31363036 
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 20
+ 906 0451 0A       		.byte	0xa
+ 907 0452 8B       		.byte	0x8b
+ 908 0453 12       		.uleb128 0x12
+ 909 0454 C8020000 		.4byte	.LASF39
+ 910 0458 C8020000 		.4byte	.LASF39
+ 911 045c 05       		.byte	0x5
+ 912 045d 8B       		.byte	0x8b
+ 913 045e 12       		.uleb128 0x12
+ 914 045f E8010000 		.4byte	.LASF40
+ 915 0463 E8010000 		.4byte	.LASF40
+ 916 0467 08       		.byte	0x8
+ 917 0468 B6       		.byte	0xb6
+ 918 0469 12       		.uleb128 0x12
+ 919 046a 09030000 		.4byte	.LASF41
+ 920 046e 09030000 		.4byte	.LASF41
+ 921 0472 0C       		.byte	0xc
+ 922 0473 E7       		.byte	0xe7
+ 923 0474 00       		.byte	0
+ 924              		.section	.debug_abbrev,"",%progbits
+ 925              	.Ldebug_abbrev0:
+ 926 0000 01       		.uleb128 0x1
+ 927 0001 11       		.uleb128 0x11
+ 928 0002 01       		.byte	0x1
+ 929 0003 25       		.uleb128 0x25
+ 930 0004 0E       		.uleb128 0xe
+ 931 0005 13       		.uleb128 0x13
+ 932 0006 0B       		.uleb128 0xb
+ 933 0007 03       		.uleb128 0x3
+ 934 0008 0E       		.uleb128 0xe
+ 935 0009 1B       		.uleb128 0x1b
+ 936 000a 0E       		.uleb128 0xe
+ 937 000b 55       		.uleb128 0x55
+ 938 000c 17       		.uleb128 0x17
+ 939 000d 11       		.uleb128 0x11
+ 940 000e 01       		.uleb128 0x1
+ 941 000f 10       		.uleb128 0x10
+ 942 0010 17       		.uleb128 0x17
+ 943 0011 00       		.byte	0
+ 944 0012 00       		.byte	0
+ 945 0013 02       		.uleb128 0x2
+ 946 0014 24       		.uleb128 0x24
+ 947 0015 00       		.byte	0
+ 948 0016 0B       		.uleb128 0xb
+ 949 0017 0B       		.uleb128 0xb
+ 950 0018 3E       		.uleb128 0x3e
+ 951 0019 0B       		.uleb128 0xb
+ 952 001a 03       		.uleb128 0x3
+ 953 001b 0E       		.uleb128 0xe
+ 954 001c 00       		.byte	0
+ 955 001d 00       		.byte	0
+ 956 001e 03       		.uleb128 0x3
+ 957 001f 16       		.uleb128 0x16
+ 958 0020 00       		.byte	0
+ 959 0021 03       		.uleb128 0x3
+ 960 0022 0E       		.uleb128 0xe
+ 961 0023 3A       		.uleb128 0x3a
+ 962 0024 0B       		.uleb128 0xb
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 20
 
 
- 966 009a 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
- 966      20726576 
- 966      6973696F 
- 966      6E203233 
- 966      37373135 
- 967 00cd 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 967      66756E63 
- 967      74696F6E 
- 967      2D736563 
- 967      74696F6E 
- 968              	.LASF5:
- 969 00f5 6C6F6E67 		.ascii	"long unsigned int\000"
- 969      20756E73 
- 969      69676E65 
- 969      6420696E 
- 969      7400
- 970              	.LASF29:
- 971 0107 4F555450 		.ascii	"OUTPUT_UART_PutString\000"
- 971      55545F55 
- 971      4152545F 
- 971      50757453 
- 971      7472696E 
- 972              	.LASF3:
- 973 011d 73686F72 		.ascii	"short unsigned int\000"
- 973      7420756E 
- 973      7369676E 
- 973      65642069 
- 973      6E7400
- 974              	.LASF16:
- 975 0130 72785F63 		.ascii	"rx_char\000"
- 975      68617200 
- 976              	.LASF18:
- 977 0138 49544D5F 		.ascii	"ITM_RxBuffer\000"
- 977      52784275 
- 977      66666572 
- 977      00
- 978              	.LASF41:
- 979 0145 6D656D73 		.ascii	"memset\000"
- 979      657400
- 980              	.LASF12:
- 981 014c 646F7562 		.ascii	"double\000"
- 981      6C6500
- 982              	.LASF31:
- 983 0153 7374726E 		.ascii	"strncat\000"
- 983      63617400 
- 984              	.LASF2:
- 985 015b 73686F72 		.ascii	"short int\000"
- 985      7420696E 
- 985      7400
- 986              	.LASF40:
- 987 0165 6D61696E 		.ascii	"main\000"
- 987      00
- 988              	.LASF8:
- 989 016a 756E7369 		.ascii	"unsigned int\000"
- 989      676E6564 
- 989      20696E74 
- 989      00
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 21
+ 963 0025 3B       		.uleb128 0x3b
+ 964 0026 0B       		.uleb128 0xb
+ 965 0027 49       		.uleb128 0x49
+ 966 0028 13       		.uleb128 0x13
+ 967 0029 00       		.byte	0
+ 968 002a 00       		.byte	0
+ 969 002b 04       		.uleb128 0x4
+ 970 002c 24       		.uleb128 0x24
+ 971 002d 00       		.byte	0
+ 972 002e 0B       		.uleb128 0xb
+ 973 002f 0B       		.uleb128 0xb
+ 974 0030 3E       		.uleb128 0x3e
+ 975 0031 0B       		.uleb128 0xb
+ 976 0032 03       		.uleb128 0x3
+ 977 0033 08       		.uleb128 0x8
+ 978 0034 00       		.byte	0
+ 979 0035 00       		.byte	0
+ 980 0036 05       		.uleb128 0x5
+ 981 0037 0F       		.uleb128 0xf
+ 982 0038 00       		.byte	0
+ 983 0039 0B       		.uleb128 0xb
+ 984 003a 0B       		.uleb128 0xb
+ 985 003b 49       		.uleb128 0x49
+ 986 003c 13       		.uleb128 0x13
+ 987 003d 00       		.byte	0
+ 988 003e 00       		.byte	0
+ 989 003f 06       		.uleb128 0x6
+ 990 0040 2E       		.uleb128 0x2e
+ 991 0041 01       		.byte	0x1
+ 992 0042 3F       		.uleb128 0x3f
+ 993 0043 19       		.uleb128 0x19
+ 994 0044 03       		.uleb128 0x3
+ 995 0045 0E       		.uleb128 0xe
+ 996 0046 3A       		.uleb128 0x3a
+ 997 0047 0B       		.uleb128 0xb
+ 998 0048 3B       		.uleb128 0x3b
+ 999 0049 0B       		.uleb128 0xb
+ 1000 004a 27       		.uleb128 0x27
+ 1001 004b 19       		.uleb128 0x19
+ 1002 004c 11       		.uleb128 0x11
+ 1003 004d 01       		.uleb128 0x1
+ 1004 004e 12       		.uleb128 0x12
+ 1005 004f 06       		.uleb128 0x6
+ 1006 0050 40       		.uleb128 0x40
+ 1007 0051 18       		.uleb128 0x18
+ 1008 0052 9642     		.uleb128 0x2116
+ 1009 0054 19       		.uleb128 0x19
+ 1010 0055 01       		.uleb128 0x1
+ 1011 0056 13       		.uleb128 0x13
+ 1012 0057 00       		.byte	0
+ 1013 0058 00       		.byte	0
+ 1014 0059 07       		.uleb128 0x7
+ 1015 005a 34       		.uleb128 0x34
+ 1016 005b 00       		.byte	0
+ 1017 005c 03       		.uleb128 0x3
+ 1018 005d 0E       		.uleb128 0xe
+ 1019 005e 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 21
 
 
- 990              	.LASF23:
- 991 0177 64617465 		.ascii	"date_str\000"
- 991      5F737472 
- 991      00
- 992              	.LASF7:
- 993 0180 6C6F6E67 		.ascii	"long long unsigned int\000"
- 993      206C6F6E 
- 993      6720756E 
- 993      7369676E 
- 993      65642069 
- 994              	.LASF27:
- 995 0197 61746F66 		.ascii	"atof\000"
- 995      00
- 996              	.LASF25:
- 997 019c 6C6F6E5F 		.ascii	"lon_val\000"
- 997      76616C00 
- 998              	.LASF33:
- 999 01a4 4750535F 		.ascii	"GPS_UART_Start\000"
- 999      55415254 
- 999      5F537461 
- 999      727400
- 1000              	.LASF21:
- 1001 01b3 6C6F6E5F 		.ascii	"lon_str\000"
- 1001      73747200 
- 1002              	.LASF36:
- 1003 01bb 4750535F 		.ascii	"GPS_UART_GetRxBufferSize\000"
- 1003      55415254 
- 1003      5F476574 
- 1003      52784275 
- 1003      66666572 
- 1004              	.LASF10:
- 1005 01d4 696E7433 		.ascii	"int32_t\000"
- 1005      325F7400 
- 1006              	.LASF15:
- 1007 01dc 73697A65 		.ascii	"sizetype\000"
- 1007      74797065 
- 1007      00
- 1008              	.LASF6:
- 1009 01e5 6C6F6E67 		.ascii	"long long int\000"
- 1009      206C6F6E 
- 1009      6720696E 
- 1009      7400
- 1010              	.LASF38:
- 1011 01f3 6D61696E 		.ascii	"main.c\000"
- 1011      2E6300
- 1012              	.LASF13:
- 1013 01fa 63686172 		.ascii	"char\000"
- 1013      00
- 1014              	.LASF24:
- 1015 01ff 6C61745F 		.ascii	"lat_val\000"
- 1015      76616C00 
- 1016              	.LASF20:
- 1017 0207 6C61745F 		.ascii	"lat_str\000"
- 1017      73747200 
- 1018              	.LASF35:
- 1019 020f 4750535F 		.ascii	"GPS_UART_PutString\000"
- 1019      55415254 
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccB5aNi2.s 			page 22
+ 1020 005f 0B       		.uleb128 0xb
+ 1021 0060 3B       		.uleb128 0x3b
+ 1022 0061 0B       		.uleb128 0xb
+ 1023 0062 49       		.uleb128 0x49
+ 1024 0063 13       		.uleb128 0x13
+ 1025 0064 02       		.uleb128 0x2
+ 1026 0065 18       		.uleb128 0x18
+ 1027 0066 00       		.byte	0
+ 1028 0067 00       		.byte	0
+ 1029 0068 08       		.uleb128 0x8
+ 1030 0069 898201   		.uleb128 0x4109
+ 1031 006c 00       		.byte	0
+ 1032 006d 11       		.uleb128 0x11
+ 1033 006e 01       		.uleb128 0x1
+ 1034 006f 31       		.uleb128 0x31
+ 1035 0070 13       		.uleb128 0x13
+ 1036 0071 00       		.byte	0
+ 1037 0072 00       		.byte	0
+ 1038 0073 09       		.uleb128 0x9
+ 1039 0074 898201   		.uleb128 0x4109
+ 1040 0077 01       		.byte	0x1
+ 1041 0078 11       		.uleb128 0x11
+ 1042 0079 01       		.uleb128 0x1
+ 1043 007a 31       		.uleb128 0x31
+ 1044 007b 13       		.uleb128 0x13
+ 1045 007c 01       		.uleb128 0x1
+ 1046 007d 13       		.uleb128 0x13
+ 1047 007e 00       		.byte	0
+ 1048 007f 00       		.byte	0
+ 1049 0080 0A       		.uleb128 0xa
+ 1050 0081 8A8201   		.uleb128 0x410a
+ 1051 0084 00       		.byte	0
+ 1052 0085 02       		.uleb128 0x2
+ 1053 0086 18       		.uleb128 0x18
+ 1054 0087 9142     		.uleb128 0x2111
+ 1055 0089 18       		.uleb128 0x18
+ 1056 008a 00       		.byte	0
+ 1057 008b 00       		.byte	0
+ 1058 008c 0B       		.uleb128 0xb
+ 1059 008d 2E       		.uleb128 0x2e
+ 1060 008e 01       		.byte	0x1
+ 1061 008f 3F       		.uleb128 0x3f
+ 1062 0090 19       		.uleb128 0x19
+ 1063 0091 03       		.uleb128 0x3
+ 1064 0092 0E       		.uleb128 0xe
+ 1065 0093 3A       		.uleb128 0x3a
+ 1066 0094 0B       		.uleb128 0xb
+ 1067 0095 3B       		.uleb128 0x3b
+ 1068 0096 0B       		.uleb128 0xb
+ 1069 0097 27       		.uleb128 0x27
+ 1070 0098 19       		.uleb128 0x19
+ 1071 0099 49       		.uleb128 0x49
+ 1072 009a 13       		.uleb128 0x13
+ 1073 009b 8701     		.uleb128 0x87
+ 1074 009d 19       		.uleb128 0x19
+ 1075 009e 11       		.uleb128 0x11
+ 1076 009f 01       		.uleb128 0x1
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 22
 
 
- 1019      5F507574 
- 1019      53747269 
- 1019      6E6700
- 1020              	.LASF39:
- 1021 0222 433A5C55 		.ascii	"C:\\Users\\Mark Hughes\\Desktop\\Work\\WORK\\WORK\\"
- 1021      73657273 
- 1021      5C4D6172 
- 1021      6B204875 
- 1021      67686573 
- 1022 024e 53747564 		.ascii	"Study\\Cypress_Study\\Study\\GPS_Enhanced.cydsn\000"
- 1022      795C4379 
- 1022      70726573 
- 1022      735F5374 
- 1022      7564795C 
- 1023              	.LASF4:
- 1024 027b 6C6F6E67 		.ascii	"long int\000"
- 1024      20696E74 
- 1024      00
- 1025              	.LASF19:
- 1026 0284 6770735F 		.ascii	"gps_buffer\000"
- 1026      62756666 
- 1026      657200
- 1027              	.LASF14:
- 1028 028f 6C6F6E67 		.ascii	"long double\000"
- 1028      20646F75 
- 1028      626C6500 
- 1029              	.LASF0:
- 1030 029b 7369676E 		.ascii	"signed char\000"
- 1030      65642063 
- 1030      68617200 
- 1031              	.LASF28:
- 1032 02a7 73707269 		.ascii	"sprintf\000"
- 1032      6E746600 
- 1033              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ 1077 00a0 12       		.uleb128 0x12
+ 1078 00a1 06       		.uleb128 0x6
+ 1079 00a2 40       		.uleb128 0x40
+ 1080 00a3 18       		.uleb128 0x18
+ 1081 00a4 9642     		.uleb128 0x2116
+ 1082 00a6 19       		.uleb128 0x19
+ 1083 00a7 01       		.uleb128 0x1
+ 1084 00a8 13       		.uleb128 0x13
+ 1085 00a9 00       		.byte	0
+ 1086 00aa 00       		.byte	0
+ 1087 00ab 0C       		.uleb128 0xc
+ 1088 00ac 898201   		.uleb128 0x4109
+ 1089 00af 01       		.byte	0x1
+ 1090 00b0 11       		.uleb128 0x11
+ 1091 00b1 01       		.uleb128 0x1
+ 1092 00b2 31       		.uleb128 0x31
+ 1093 00b3 13       		.uleb128 0x13
+ 1094 00b4 00       		.byte	0
+ 1095 00b5 00       		.byte	0
+ 1096 00b6 0D       		.uleb128 0xd
+ 1097 00b7 34       		.uleb128 0x34
+ 1098 00b8 00       		.byte	0
+ 1099 00b9 03       		.uleb128 0x3
+ 1100 00ba 0E       		.uleb128 0xe
+ 1101 00bb 3A       		.uleb128 0x3a
+ 1102 00bc 0B       		.uleb128 0xb
+ 1103 00bd 3B       		.uleb128 0x3b
+ 1104 00be 05       		.uleb128 0x5
+ 1105 00bf 49       		.uleb128 0x49
+ 1106 00c0 13       		.uleb128 0x13
+ 1107 00c1 3F       		.uleb128 0x3f
+ 1108 00c2 19       		.uleb128 0x19
+ 1109 00c3 3C       		.uleb128 0x3c
+ 1110 00c4 19       		.uleb128 0x19
+ 1111 00c5 00       		.byte	0
+ 1112 00c6 00       		.byte	0
+ 1113 00c7 0E       		.uleb128 0xe
+ 1114 00c8 35       		.uleb128 0x35
+ 1115 00c9 00       		.byte	0
+ 1116 00ca 49       		.uleb128 0x49
+ 1117 00cb 13       		.uleb128 0x13
+ 1118 00cc 00       		.byte	0
+ 1119 00cd 00       		.byte	0
+ 1120 00ce 0F       		.uleb128 0xf
+ 1121 00cf 01       		.uleb128 0x1
+ 1122 00d0 01       		.byte	0x1
+ 1123 00d1 49       		.uleb128 0x49
+ 1124 00d2 13       		.uleb128 0x13
+ 1125 00d3 01       		.uleb128 0x1
+ 1126 00d4 13       		.uleb128 0x13
+ 1127 00d5 00       		.byte	0
+ 1128 00d6 00       		.byte	0
+ 1129 00d7 10       		.uleb128 0x10
+ 1130 00d8 21       		.uleb128 0x21
+ 1131 00d9 00       		.byte	0
+ 1132 00da 49       		.uleb128 0x49
+ 1133 00db 13       		.uleb128 0x13
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 23
+
+
+ 1134 00dc 2F       		.uleb128 0x2f
+ 1135 00dd 0B       		.uleb128 0xb
+ 1136 00de 00       		.byte	0
+ 1137 00df 00       		.byte	0
+ 1138 00e0 11       		.uleb128 0x11
+ 1139 00e1 34       		.uleb128 0x34
+ 1140 00e2 00       		.byte	0
+ 1141 00e3 03       		.uleb128 0x3
+ 1142 00e4 0E       		.uleb128 0xe
+ 1143 00e5 3A       		.uleb128 0x3a
+ 1144 00e6 0B       		.uleb128 0xb
+ 1145 00e7 3B       		.uleb128 0x3b
+ 1146 00e8 0B       		.uleb128 0xb
+ 1147 00e9 49       		.uleb128 0x49
+ 1148 00ea 13       		.uleb128 0x13
+ 1149 00eb 3F       		.uleb128 0x3f
+ 1150 00ec 19       		.uleb128 0x19
+ 1151 00ed 02       		.uleb128 0x2
+ 1152 00ee 18       		.uleb128 0x18
+ 1153 00ef 00       		.byte	0
+ 1154 00f0 00       		.byte	0
+ 1155 00f1 12       		.uleb128 0x12
+ 1156 00f2 2E       		.uleb128 0x2e
+ 1157 00f3 00       		.byte	0
+ 1158 00f4 3F       		.uleb128 0x3f
+ 1159 00f5 19       		.uleb128 0x19
+ 1160 00f6 3C       		.uleb128 0x3c
+ 1161 00f7 19       		.uleb128 0x19
+ 1162 00f8 6E       		.uleb128 0x6e
+ 1163 00f9 0E       		.uleb128 0xe
+ 1164 00fa 03       		.uleb128 0x3
+ 1165 00fb 0E       		.uleb128 0xe
+ 1166 00fc 3A       		.uleb128 0x3a
+ 1167 00fd 0B       		.uleb128 0xb
+ 1168 00fe 3B       		.uleb128 0x3b
+ 1169 00ff 0B       		.uleb128 0xb
+ 1170 0100 00       		.byte	0
+ 1171 0101 00       		.byte	0
+ 1172 0102 00       		.byte	0
+ 1173              		.section	.debug_aranges,"",%progbits
+ 1174 0000 24000000 		.4byte	0x24
+ 1175 0004 0200     		.2byte	0x2
+ 1176 0006 00000000 		.4byte	.Ldebug_info0
+ 1177 000a 04       		.byte	0x4
+ 1178 000b 00       		.byte	0
+ 1179 000c 0000     		.2byte	0
+ 1180 000e 0000     		.2byte	0
+ 1181 0010 00000000 		.4byte	.LFB64
+ 1182 0014 F8000000 		.4byte	.LFE64-.LFB64
+ 1183 0018 00000000 		.4byte	.LFB65
+ 1184 001c D4000000 		.4byte	.LFE65-.LFB65
+ 1185 0020 00000000 		.4byte	0
+ 1186 0024 00000000 		.4byte	0
+ 1187              		.section	.debug_ranges,"",%progbits
+ 1188              	.Ldebug_ranges0:
+ 1189 0000 00000000 		.4byte	.LFB64
+ 1190 0004 F8000000 		.4byte	.LFE64
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 24
+
+
+ 1191 0008 00000000 		.4byte	.LFB65
+ 1192 000c D4000000 		.4byte	.LFE65
+ 1193 0010 00000000 		.4byte	0
+ 1194 0014 00000000 		.4byte	0
+ 1195              		.section	.debug_line,"",%progbits
+ 1196              	.Ldebug_line0:
+ 1197 0000 5D020000 		.section	.debug_str,"MS",%progbits,1
+ 1197      02001502 
+ 1197      00000201 
+ 1197      FB0E0D00 
+ 1197      01010101 
+ 1198              	.LASF37:
+ 1199 0000 4750535F 		.ascii	"GPS_UART_RX_ISR_StartEx\000"
+ 1199      55415254 
+ 1199      5F52585F 
+ 1199      4953525F 
+ 1199      53746172 
+ 1200              	.LASF4:
+ 1201 0018 5F5F7569 		.ascii	"__uint8_t\000"
+ 1201      6E74385F 
+ 1201      7400
+ 1202              	.LASF5:
+ 1203 0022 5F5F696E 		.ascii	"__int32_t\000"
+ 1203      7433325F 
+ 1203      7400
+ 1204              	.LASF6:
+ 1205 002c 6C6F6E67 		.ascii	"long int\000"
+ 1205      20696E74 
+ 1205      00
+ 1206              	.LASF3:
+ 1207 0035 73686F72 		.ascii	"short unsigned int\000"
+ 1207      7420756E 
+ 1207      7369676E 
+ 1207      65642069 
+ 1207      6E7400
+ 1208              	.LASF36:
+ 1209 0048 4F555450 		.ascii	"OUTPUT_UART_Start\000"
+ 1209      55545F55 
+ 1209      4152545F 
+ 1209      53746172 
+ 1209      7400
+ 1210              	.LASF27:
+ 1211 005a 74696D65 		.ascii	"timestamp\000"
+ 1211      7374616D 
+ 1211      7000
+ 1212              	.LASF46:
+ 1213 0064 75617274 		.ascii	"uart1_rx_index\000"
+ 1213      315F7278 
+ 1213      5F696E64 
+ 1213      657800
+ 1214              	.LASF23:
+ 1215 0073 6C6F6E67 		.ascii	"longitude\000"
+ 1215      69747564 
+ 1215      6500
+ 1216              	.LASF44:
+ 1217 007d 433A5C55 		.ascii	"C:\\Users\\Mark Hughes\\Desktop\\Work\\WORK\\WORK\\"
+ 1217      73657273 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 25
+
+
+ 1217      5C4D6172 
+ 1217      6B204875 
+ 1217      67686573 
+ 1218 00a9 53747564 		.ascii	"Study\\Cypress_Study\\Study\\GPS_Enhanced.cydsn\000"
+ 1218      795C4379 
+ 1218      70726573 
+ 1218      735F5374 
+ 1218      7564795C 
+ 1219              	.LASF12:
+ 1220 00d6 696E7433 		.ascii	"int32_t\000"
+ 1220      325F7400 
+ 1221              	.LASF13:
+ 1222 00de 666C6F61 		.ascii	"float\000"
+ 1222      7400
+ 1223              	.LASF34:
+ 1224 00e4 50575F47 		.ascii	"PW_GPS_Write\000"
+ 1224      50535F57 
+ 1224      72697465 
+ 1224      00
+ 1225              	.LASF1:
+ 1226 00f1 756E7369 		.ascii	"unsigned char\000"
+ 1226      676E6564 
+ 1226      20636861 
+ 1226      7200
+ 1227              	.LASF42:
+ 1228 00ff 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1228      43313120 
+ 1228      352E342E 
+ 1228      31203230 
+ 1228      31363036 
+ 1229 0132 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1229      20726576 
+ 1229      6973696F 
+ 1229      6E203233 
+ 1229      37373135 
+ 1230 0165 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1230      66756E63 
+ 1230      74696F6E 
+ 1230      2D736563 
+ 1230      74696F6E 
+ 1231              	.LASF31:
+ 1232 018d 73747263 		.ascii	"strcpy\000"
+ 1232      707900
+ 1233              	.LASF33:
+ 1234 0194 43795379 		.ascii	"CySysTickStart\000"
+ 1234      73546963 
+ 1234      6B537461 
+ 1234      727400
+ 1235              	.LASF7:
+ 1236 01a3 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1236      20756E73 
+ 1236      69676E65 
+ 1236      6420696E 
+ 1236      7400
+ 1237              	.LASF38:
+ 1238 01b5 4F555450 		.ascii	"OUTPUT_UART_PutString\000"
+ 1238      55545F55 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 26
+
+
+ 1238      4152545F 
+ 1238      50757453 
+ 1238      7472696E 
+ 1239              	.LASF26:
+ 1240 01cb 65775F69 		.ascii	"ew_indicator\000"
+ 1240      6E646963 
+ 1240      61746F72 
+ 1240      00
+ 1241              	.LASF20:
+ 1242 01d8 75617274 		.ascii	"uart2_tx_buffer\000"
+ 1242      325F7478 
+ 1242      5F627566 
+ 1242      66657200 
+ 1243              	.LASF40:
+ 1244 01e8 43795379 		.ascii	"CySysTickGetValue\000"
+ 1244      73546963 
+ 1244      6B476574 
+ 1244      56616C75 
+ 1244      6500
+ 1245              	.LASF18:
+ 1246 01fa 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1246      52784275 
+ 1246      66666572 
+ 1246      00
+ 1247              	.LASF14:
+ 1248 0207 646F7562 		.ascii	"double\000"
+ 1248      6C6500
+ 1249              	.LASF30:
+ 1250 020e 73747263 		.ascii	"strcmp\000"
+ 1250      6D7000
+ 1251              	.LASF47:
+ 1252 0215 6D61696E 		.ascii	"main\000"
+ 1252      00
+ 1253              	.LASF10:
+ 1254 021a 756E7369 		.ascii	"unsigned int\000"
+ 1254      676E6564 
+ 1254      20696E74 
+ 1254      00
+ 1255              	.LASF25:
+ 1256 0227 6E735F69 		.ascii	"ns_indicator\000"
+ 1256      6E646963 
+ 1256      61746F72 
+ 1256      00
+ 1257              	.LASF29:
+ 1258 0234 73747274 		.ascii	"strtok\000"
+ 1258      6F6B00
+ 1259              	.LASF9:
+ 1260 023b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1260      206C6F6E 
+ 1260      6720756E 
+ 1260      7369676E 
+ 1260      65642069 
+ 1261              	.LASF11:
+ 1262 0252 75696E74 		.ascii	"uint8_t\000"
+ 1262      385F7400 
+ 1263              	.LASF32:
+ 1264 025a 61746F66 		.ascii	"atof\000"
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 27
+
+
+ 1264      00
+ 1265              	.LASF28:
+ 1266 025f 4750535F 		.ascii	"GPS_UART_GetChar\000"
+ 1266      55415254 
+ 1266      5F476574 
+ 1266      43686172 
+ 1266      00
+ 1267              	.LASF35:
+ 1268 0270 4750535F 		.ascii	"GPS_UART_Start\000"
+ 1268      55415254 
+ 1268      5F537461 
+ 1268      727400
+ 1269              	.LASF22:
+ 1270 027f 6C617469 		.ascii	"latitude\000"
+ 1270      74756465 
+ 1270      00
+ 1271              	.LASF24:
+ 1272 0288 73706565 		.ascii	"speed\000"
+ 1272      6400
+ 1273              	.LASF17:
+ 1274 028e 73697A65 		.ascii	"sizetype\000"
+ 1274      74797065 
+ 1274      00
+ 1275              	.LASF8:
+ 1276 0297 6C6F6E67 		.ascii	"long long int\000"
+ 1276      206C6F6E 
+ 1276      6720696E 
+ 1276      7400
+ 1277              	.LASF43:
+ 1278 02a5 6D61696E 		.ascii	"main.c\000"
+ 1278      2E6300
+ 1279              	.LASF15:
+ 1280 02ac 63686172 		.ascii	"char\000"
+ 1280      00
+ 1281              	.LASF45:
+ 1282 02b1 75617274 		.ascii	"uart1_rx_isr\000"
+ 1282      315F7278 
+ 1282      5F697372 
+ 1282      00
+ 1283              	.LASF2:
+ 1284 02be 73686F72 		.ascii	"short int\000"
+ 1284      7420696E 
+ 1284      7400
+ 1285              	.LASF39:
+ 1286 02c8 4750535F 		.ascii	"GPS_UART_PutString\000"
+ 1286      55415254 
+ 1286      5F507574 
+ 1286      53747269 
+ 1286      6E6700
+ 1287              	.LASF21:
+ 1288 02db 746F6B65 		.ascii	"token\000"
+ 1288      6E00
+ 1289              	.LASF19:
+ 1290 02e1 75617274 		.ascii	"uart1_rx_buffer\000"
+ 1290      315F7278 
+ 1290      5F627566 
+ 1290      66657200 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccWIbqit.s 			page 28
+
+
+ 1291              	.LASF16:
+ 1292 02f1 6C6F6E67 		.ascii	"long double\000"
+ 1292      20646F75 
+ 1292      626C6500 
+ 1293              	.LASF0:
+ 1294 02fd 7369676E 		.ascii	"signed char\000"
+ 1294      65642063 
+ 1294      68617200 
+ 1295              	.LASF41:
+ 1296 0309 73707269 		.ascii	"sprintf\000"
+ 1296      6E746600 
+ 1297              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

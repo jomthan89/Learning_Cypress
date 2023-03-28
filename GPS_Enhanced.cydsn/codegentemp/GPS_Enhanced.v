@@ -1,6 +1,6 @@
 // ======================================================================
 // GPS_Enhanced.v generated from TopDesign.cysch
-// 03/28/2023 at 11:07
+// 03/28/2023 at 14:29
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -391,7 +391,6 @@ module top ;
           wire  Net_11;
           wire  Net_10;
           wire  Net_9;
-          wire  Net_8;
           wire  Net_7;
           wire  Net_6;
           wire  Net_5;
@@ -399,6 +398,7 @@ module top ;
           wire  Net_3;
           wire  Net_2;
           wire  Net_1;
+          wire  Net_8;
 
     UART_v2_50_0 GPS_UART (
         .clock(1'b0),
@@ -826,6 +826,13 @@ module top ;
 		  .out_reset({1'b0}));
 
 	assign tmpOE__PW_GPS_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		GPS_UART_RX_ISR
+		 (.int_signal(Net_8));
+
 
 
 

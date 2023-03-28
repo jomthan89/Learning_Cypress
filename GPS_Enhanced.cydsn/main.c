@@ -14,20 +14,76 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define BUFFER_SIZE 80
+#define UART1_BUFFER_SIZE 64
+#define UART2_BUFFER_SIZE 256
+#define MESSAGE_INTERVAL_MS 1000
 
-char gps_buffer[BUFFER_SIZE];
-char lat_str[12], lon_str[12], time_str[10], date_str[10];
-float lat_val, lon_val;
+char uart1_rx_buffer[UART1_BUFFER_SIZE];
+char uart2_tx_buffer[UART2_BUFFER_SIZE];
+
+char* token;
+
+float latitude, longitude, speed;
+char ns_indicator, ew_indicator, timestamp[10];
+
+CY_ISR(uart1_rx_isr)
+{
+    static uint8_t uart1_rx_index = 0;
+    
+    // Read the received data and store it in the buffer
+    uart1_rx_buffer[uart1_rx_index] = GPS_UART_GetChar();
+    
+    // Check if the end of message character has been received
+    if (uart1_rx_buffer[uart1_rx_index] == '\n') {
+        
+        // Null-terminate the buffer to create a C string
+        uart1_rx_buffer[uart1_rx_index+1] = '\0';
+        
+        // Reset the buffer index
+        uart1_rx_index = 0;
+        
+        // Parse the GNRMC message
+        token = strtok(uart1_rx_buffer, ",");
+        
+        if (strcmp(token, "$GNRMC") == 0) {
+            token = strtok(NULL, ",");
+            strcpy(timestamp, token);
+            token = strtok(NULL, ",");
+            if (strcmp(token, "A") == 0) {
+                token = strtok(NULL, ",");
+                latitude = atof(token);
+                token = strtok(NULL, ",");
+                ns_indicator = *token;
+                token = strtok(NULL, ",");
+                longitude = atof(token);
+                token = strtok(NULL, ",");
+                ew_indicator = *token;
+                token = strtok(NULL, ",");
+                speed = atof(token);
+            }
+        }
+    }
+    else {
+        uart1_rx_index++;
+    }
+}
 
 int main(void)
 {
-    CyGlobalIntEnable; /* Enable global interrupts. */
+    
+    // Enable global interrupts
+    CyGlobalIntEnable;
+    
+    // Start the message timer
+    CySysTickStart();
 
     PW_GPS_Write(1);
     GPS_UART_Start(); // Initialize UART1
     OUTPUT_UART_Start(); // Initialize UART2
 
+    // Enable the UART1 RX interrupt
+    GPS_UART_RX_ISR_StartEx(uart1_rx_isr);
+    
     // Send initial message
     OUTPUT_UART_PutString("Initializing...\r\n");
     OUTPUT_UART_PutString("Getting GPS Data...\r\n");
@@ -36,36 +92,17 @@ int main(void)
 
     while(1)
     {
-        if(GPS_UART_GetRxBufferSize() > 0) // Check if there is data in UART1 buffer
-        {
-            char rx_char = GPS_UART_GetChar(); // Read a character from UART1
-
-            if(rx_char == '\n') // End of GPS message
-            {
-                // Extract relevant data from GPS message
-                sscanf(gps_buffer, "$GNRMC,%[^,],%*c,%[^,],%*c,%[^,],%*c,%[^,],%*c,%*c,%*c,%*c,%*c,%*c,%*c,%*c,%*c", &time_str, &lat_str, &lon_str, &date_str);
-
-                // Convert latitude and longitude from string to float
-                lat_val = atof(lat_str);
-                lon_val = atof(lon_str);
-
-                // Clear GPS buffer for next message
-                memset(gps_buffer, 0, BUFFER_SIZE);
-
-                // Send GPS data to UART2
-                char gps_data[50];
-                sprintf(gps_data, "Lat: %.6f, Lon: %.6f\r\n", lat_val, lon_val);
-                OUTPUT_UART_PutString(gps_data);
-            }
-            else // Add character to GPS buffer
-            {
-                strncat(gps_buffer, &rx_char, 1);
-            }
+        // Check if it's time to send a message
+        if (CySysTickGetValue() % (MESSAGE_INTERVAL_MS * 1000) == 0) {
+            
+            // Format the message
+            sprintf(uart2_tx_buffer, "LAT: %f %c, LON: %f %c, SPD: %f, TIME: %s \r\n", latitude, ns_indicator, longitude, ew_indicator, speed, timestamp);
+            
+            // Send the message via UART2
+            OUTPUT_UART_PutString(uart2_tx_buffer);
         }
-        
-        // Delay for one second
-        //CyDelay(1000);
     }
+    return 0;
 }
 
 /* [] END OF FILE */
