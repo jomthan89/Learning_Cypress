@@ -3,7 +3,7 @@
 <!--This file is machine generated and read. It is not intended to be edited by hand.-->
 <!--Due to this, there is no schema for this file.-->
 <CyGuid_2867d519-54d2-4c01-9830-c51cb08bc3dd type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWorkspaceSerialize" version="5" xml_contents_version="3" name="Study" persistent="Study.cywrk" platform="NOT_USED">
-<current_project name=".\GPS_Enhanced.cydsn\GPS_Enhanced.cyprj" />
+<current_project name=".\GPS_Extract.cydsn\GPS_Extract.cyprj" />
 <wrkspc_folders />
 <files />
 <projects>
@@ -14,6 +14,7 @@
 <v>.\LED_Blink\LED_Blinking.cydsn\LED_Blinking.cyprj</v>
 <v>.\LED_Blinking_PWM\LED_BlinkingPWM.cydsn\LED_BlinkingPWM.cyprj</v>
 <v>.\LED_FW\LED_BlinkingFW.cydsn\LED_BlinkingFW.cyprj</v>
+<v>.\GPS_ExtractV2.cydsn\GPS_ExtractV2.cyprj</v>
 </projects>
 <workspace_id v="749a65ee-0e42-4363-8267-66675df30bf3" />
 <WriteAppVersionLastSavedWith v="4.4.0.80" />

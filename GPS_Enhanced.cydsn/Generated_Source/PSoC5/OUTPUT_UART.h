@@ -35,7 +35,7 @@
 #define OUTPUT_UART_TX_INTERRUPT_ENABLED           (0u)
 #define OUTPUT_UART_INTERNAL_CLOCK_USED            (1u)
 #define OUTPUT_UART_RXHW_ADDRESS_ENABLED           (0u)
-#define OUTPUT_UART_OVER_SAMPLE_COUNT              (16u)
+#define OUTPUT_UART_OVER_SAMPLE_COUNT              (8u)
 #define OUTPUT_UART_PARITY_TYPE                    (0u)
 #define OUTPUT_UART_PARITY_TYPE_SW                 (0u)
 #define OUTPUT_UART_BREAK_DETECT                   (0u)

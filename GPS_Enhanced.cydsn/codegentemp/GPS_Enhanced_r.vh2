@@ -1,5 +1,5 @@
 -- Project:   GPS_Enhanced
--- Generated: 03/28/2023 14:29:24
+-- Generated: 03/28/2023 16:46:10
 -- PSoC Creator  4.4
 
 ENTITY GPS_Enhanced IS
@@ -33,98 +33,90 @@ ARCHITECTURE __DEFAULT__ OF GPS_Enhanced IS
     SIGNAL ClockBlock_XTAL : bit;
     SIGNAL ClockBlock_XTAL_32KHZ : bit;
     SIGNAL MODIN1_0 : bit;
-    ATTRIBUTE placement_force OF MODIN1_0 : SIGNAL IS "U(2,0,A)2";
+    ATTRIBUTE placement_force OF MODIN1_0 : SIGNAL IS "U(2,1,A)2";
     SIGNAL MODIN1_1 : bit;
-    ATTRIBUTE placement_force OF MODIN1_1 : SIGNAL IS "U(2,0,A)0";
-    SIGNAL MODIN1_1_split : bit;
-    ATTRIBUTE placement_force OF MODIN1_1_split : SIGNAL IS "U(2,0,B)0";
+    ATTRIBUTE placement_force OF MODIN1_1 : SIGNAL IS "U(2,1,A)0";
+    SIGNAL MODIN4_3 : bit;
     SIGNAL MODIN4_4 : bit;
     SIGNAL MODIN4_5 : bit;
     SIGNAL MODIN4_6 : bit;
     SIGNAL Net_18 : bit;
     SIGNAL Net_22 : bit;
-    ATTRIBUTE placement_force OF Net_22 : SIGNAL IS "U(3,0,B)1";
+    ATTRIBUTE placement_force OF Net_22 : SIGNAL IS "U(2,2,B)3";
     SIGNAL Net_5 : bit;
     SIGNAL Net_8 : bit;
     SIGNAL Net_9 : bit;
-    ATTRIBUTE placement_force OF Net_9 : SIGNAL IS "U(2,2,A)1";
+    ATTRIBUTE placement_force OF Net_9 : SIGNAL IS "U(3,0,A)3";
     SIGNAL PW_GPS(0)__PA : bit;
     SIGNAL Rx_1(0)__PA : bit;
     SIGNAL Rx_2(0)__PA : bit;
     SIGNAL Tx_1(0)__PA : bit;
     SIGNAL Tx_2(0)__PA : bit;
     SIGNAL \GPS_UART:BUART:counter_load_not\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:counter_load_not\ : SIGNAL IS "U(2,3,B)3";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:counter_load_not\ : SIGNAL IS "U(2,2,A)0";
     SIGNAL \GPS_UART:BUART:rx_bitclk_enable\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_bitclk_enable\ : SIGNAL IS "U(2,3,A)1";
-    SIGNAL \GPS_UART:BUART:rx_count7_bit8_wire\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_count7_bit8_wire\ : SIGNAL IS "U(2,4,B)2";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_bitclk_enable\ : SIGNAL IS "U(2,1,A)3";
     SIGNAL \GPS_UART:BUART:rx_count7_tc\ : bit;
     SIGNAL \GPS_UART:BUART:rx_count_0\ : bit;
     SIGNAL \GPS_UART:BUART:rx_count_1\ : bit;
     SIGNAL \GPS_UART:BUART:rx_count_2\ : bit;
-    SIGNAL \GPS_UART:BUART:rx_count_3\ : bit;
     SIGNAL \GPS_UART:BUART:rx_counter_load\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_counter_load\ : SIGNAL IS "U(2,4,A)1";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_counter_load\ : SIGNAL IS "U(2,0,A)1";
     SIGNAL \GPS_UART:BUART:rx_fifofull\ : bit;
     SIGNAL \GPS_UART:BUART:rx_fifonotempty\ : bit;
     SIGNAL \GPS_UART:BUART:rx_last\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_last\ : SIGNAL IS "U(2,1,B)0";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_last\ : SIGNAL IS "U(2,2,A)3";
     SIGNAL \GPS_UART:BUART:rx_load_fifo\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_load_fifo\ : SIGNAL IS "U(2,4,A)3";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_load_fifo\ : SIGNAL IS "U(2,0,A)3";
     SIGNAL \GPS_UART:BUART:rx_postpoll\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_postpoll\ : SIGNAL IS "U(2,3,B)1";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_postpoll\ : SIGNAL IS "U(2,1,A)1";
     SIGNAL \GPS_UART:BUART:rx_state_0\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_0\ : SIGNAL IS "U(2,4,A)0";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_0\ : SIGNAL IS "U(2,0,A)0";
     SIGNAL \GPS_UART:BUART:rx_state_2\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_2\ : SIGNAL IS "U(2,4,B)0";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_2\ : SIGNAL IS "U(2,0,B)0";
     SIGNAL \GPS_UART:BUART:rx_state_3\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_3\ : SIGNAL IS "U(2,4,A)2";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_3\ : SIGNAL IS "U(2,0,A)2";
     SIGNAL \GPS_UART:BUART:rx_state_stop1_reg\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_stop1_reg\ : SIGNAL IS "U(2,4,B)3";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_state_stop1_reg\ : SIGNAL IS "U(2,0,B)3";
     SIGNAL \GPS_UART:BUART:rx_status_3\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_status_3\ : SIGNAL IS "U(2,3,B)0";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_status_3\ : SIGNAL IS "U(2,0,B)2";
     SIGNAL \GPS_UART:BUART:rx_status_4\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_status_4\ : SIGNAL IS "U(2,3,A)3";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_status_4\ : SIGNAL IS "U(2,1,B)3";
     SIGNAL \GPS_UART:BUART:rx_status_5\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_status_5\ : SIGNAL IS "U(2,3,A)2";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:rx_status_5\ : SIGNAL IS "U(3,0,A)0";
     SIGNAL \GPS_UART:BUART:tx_bitclk\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_bitclk\ : SIGNAL IS "U(2,3,B)2";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_bitclk\ : SIGNAL IS "U(2,2,A)1";
     SIGNAL \GPS_UART:BUART:tx_bitclk_enable_pre\ : bit;
     SIGNAL \GPS_UART:BUART:tx_counter_dp\ : bit;
     SIGNAL \GPS_UART:BUART:tx_ctrl_mark_last\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_ctrl_mark_last\ : SIGNAL IS "U(2,4,B)1";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_ctrl_mark_last\ : SIGNAL IS "U(2,0,B)1";
     SIGNAL \GPS_UART:BUART:tx_fifo_empty\ : bit;
     SIGNAL \GPS_UART:BUART:tx_fifo_notfull\ : bit;
     SIGNAL \GPS_UART:BUART:tx_shift_out\ : bit;
     SIGNAL \GPS_UART:BUART:tx_state_0\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_state_0\ : SIGNAL IS "U(3,3,B)2";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_state_0\ : SIGNAL IS "U(2,3,B)1";
     SIGNAL \GPS_UART:BUART:tx_state_1\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_state_1\ : SIGNAL IS "U(3,3,B)1";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_state_1\ : SIGNAL IS "U(2,2,B)0";
     SIGNAL \GPS_UART:BUART:tx_state_2\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_state_2\ : SIGNAL IS "U(3,3,B)0";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_state_2\ : SIGNAL IS "U(2,2,B)1";
     SIGNAL \GPS_UART:BUART:tx_status_0\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_status_0\ : SIGNAL IS "U(2,2,A)2";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_status_0\ : SIGNAL IS "U(2,3,B)2";
     SIGNAL \GPS_UART:BUART:tx_status_2\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_status_2\ : SIGNAL IS "U(2,1,B)1";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:tx_status_2\ : SIGNAL IS "U(2,3,B)0";
     SIGNAL \GPS_UART:BUART:txn\ : bit;
-    ATTRIBUTE placement_force OF \GPS_UART:BUART:txn\ : SIGNAL IS "U(2,2,A)0";
+    ATTRIBUTE placement_force OF \GPS_UART:BUART:txn\ : SIGNAL IS "U(2,3,A)0";
     SIGNAL \GPS_UART:Net_9\ : bit;
     ATTRIBUTE udbclken_assigned OF \GPS_UART:Net_9\ : SIGNAL IS "True";
     ATTRIBUTE global_signal OF \GPS_UART:Net_9\ : SIGNAL IS true;
     SIGNAL \GPS_UART:Net_9_local\ : bit;
     SIGNAL \OUTPUT_UART:BUART:counter_load_not\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:counter_load_not\ : SIGNAL IS "U(3,0,A)3";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:counter_load_not\ : SIGNAL IS "U(3,1,B)0";
     SIGNAL \OUTPUT_UART:BUART:pollcount_0\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:pollcount_0\ : SIGNAL IS "U(3,2,A)1";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:pollcount_0\ : SIGNAL IS "U(3,0,B)1";
     SIGNAL \OUTPUT_UART:BUART:pollcount_1\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:pollcount_1\ : SIGNAL IS "U(3,2,A)0";
-    SIGNAL \OUTPUT_UART:BUART:pollcount_1_split\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:pollcount_1_split\ : SIGNAL IS "U(3,2,B)0";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:pollcount_1\ : SIGNAL IS "U(3,0,B)0";
     SIGNAL \OUTPUT_UART:BUART:rx_bitclk_enable\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_bitclk_enable\ : SIGNAL IS "U(2,2,B)0";
-    SIGNAL \OUTPUT_UART:BUART:rx_count7_bit8_wire\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_count7_bit8_wire\ : SIGNAL IS "U(3,1,B)2";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_bitclk_enable\ : SIGNAL IS "U(3,2,A)0";
     SIGNAL \OUTPUT_UART:BUART:rx_count7_tc\ : bit;
     SIGNAL \OUTPUT_UART:BUART:rx_count_0\ : bit;
     SIGNAL \OUTPUT_UART:BUART:rx_count_1\ : bit;
@@ -134,50 +126,50 @@ ARCHITECTURE __DEFAULT__ OF GPS_Enhanced IS
     SIGNAL \OUTPUT_UART:BUART:rx_count_5\ : bit;
     SIGNAL \OUTPUT_UART:BUART:rx_count_6\ : bit;
     SIGNAL \OUTPUT_UART:BUART:rx_counter_load\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_counter_load\ : SIGNAL IS "U(3,1,B)1";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_counter_load\ : SIGNAL IS "U(3,2,B)3";
     SIGNAL \OUTPUT_UART:BUART:rx_fifofull\ : bit;
     SIGNAL \OUTPUT_UART:BUART:rx_fifonotempty\ : bit;
     SIGNAL \OUTPUT_UART:BUART:rx_last\ : bit;
     ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_last\ : SIGNAL IS "U(3,0,B)3";
     SIGNAL \OUTPUT_UART:BUART:rx_load_fifo\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_load_fifo\ : SIGNAL IS "U(3,1,A)3";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_load_fifo\ : SIGNAL IS "U(3,1,A)2";
     SIGNAL \OUTPUT_UART:BUART:rx_postpoll\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_postpoll\ : SIGNAL IS "U(3,0,A)1";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_postpoll\ : SIGNAL IS "U(3,0,B)2";
     SIGNAL \OUTPUT_UART:BUART:rx_state_0\ : bit;
     ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_state_0\ : SIGNAL IS "U(3,1,A)0";
     SIGNAL \OUTPUT_UART:BUART:rx_state_2\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_state_2\ : SIGNAL IS "U(3,1,B)0";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_state_2\ : SIGNAL IS "U(3,2,B)0";
     SIGNAL \OUTPUT_UART:BUART:rx_state_3\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_state_3\ : SIGNAL IS "U(3,1,B)3";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_state_3\ : SIGNAL IS "U(3,2,B)1";
     SIGNAL \OUTPUT_UART:BUART:rx_state_stop1_reg\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_state_stop1_reg\ : SIGNAL IS "U(3,1,A)2";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_state_stop1_reg\ : SIGNAL IS "U(3,1,A)1";
     SIGNAL \OUTPUT_UART:BUART:rx_status_3\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_status_3\ : SIGNAL IS "U(3,1,A)1";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_status_3\ : SIGNAL IS "U(3,1,A)3";
     SIGNAL \OUTPUT_UART:BUART:rx_status_4\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_status_4\ : SIGNAL IS "U(3,4,A)3";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_status_4\ : SIGNAL IS "U(3,1,B)1";
     SIGNAL \OUTPUT_UART:BUART:rx_status_5\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_status_5\ : SIGNAL IS "U(2,1,A)2";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:rx_status_5\ : SIGNAL IS "U(3,1,B)2";
     SIGNAL \OUTPUT_UART:BUART:tx_bitclk\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_bitclk\ : SIGNAL IS "U(3,0,A)2";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_bitclk\ : SIGNAL IS "U(3,1,B)3";
     SIGNAL \OUTPUT_UART:BUART:tx_bitclk_enable_pre\ : bit;
     SIGNAL \OUTPUT_UART:BUART:tx_counter_dp\ : bit;
     SIGNAL \OUTPUT_UART:BUART:tx_ctrl_mark_last\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_ctrl_mark_last\ : SIGNAL IS "U(3,0,A)0";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_ctrl_mark_last\ : SIGNAL IS "U(3,2,B)2";
     SIGNAL \OUTPUT_UART:BUART:tx_fifo_empty\ : bit;
     SIGNAL \OUTPUT_UART:BUART:tx_fifo_notfull\ : bit;
     SIGNAL \OUTPUT_UART:BUART:tx_shift_out\ : bit;
     SIGNAL \OUTPUT_UART:BUART:tx_state_0\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_state_0\ : SIGNAL IS "U(3,3,A)2";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_state_0\ : SIGNAL IS "U(3,3,A)3";
     SIGNAL \OUTPUT_UART:BUART:tx_state_1\ : bit;
     ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_state_1\ : SIGNAL IS "U(3,3,A)1";
     SIGNAL \OUTPUT_UART:BUART:tx_state_2\ : bit;
     ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_state_2\ : SIGNAL IS "U(3,3,A)0";
     SIGNAL \OUTPUT_UART:BUART:tx_status_0\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_status_0\ : SIGNAL IS "U(3,0,B)2";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_status_0\ : SIGNAL IS "U(3,3,B)0";
     SIGNAL \OUTPUT_UART:BUART:tx_status_2\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_status_2\ : SIGNAL IS "U(2,1,A)3";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:tx_status_2\ : SIGNAL IS "U(3,2,A)1";
     SIGNAL \OUTPUT_UART:BUART:txn\ : bit;
-    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:txn\ : SIGNAL IS "U(3,0,B)0";
+    ATTRIBUTE placement_force OF \OUTPUT_UART:BUART:txn\ : SIGNAL IS "U(3,3,B)3";
     SIGNAL \OUTPUT_UART:Net_9\ : bit;
     ATTRIBUTE udbclken_assigned OF \OUTPUT_UART:Net_9\ : SIGNAL IS "True";
     ATTRIBUTE global_signal OF \OUTPUT_UART:Net_9\ : SIGNAL IS true;
@@ -190,8 +182,6 @@ ARCHITECTURE __DEFAULT__ OF GPS_Enhanced IS
     ATTRIBUTE POWER OF one : SIGNAL IS true;
     SIGNAL zero : bit;
     ATTRIBUTE GROUND OF zero : SIGNAL IS true;
-    ATTRIBUTE lib_model OF MODIN1_1_split : LABEL IS "macrocell1";
-    ATTRIBUTE Location OF MODIN1_1_split : LABEL IS "U(2,0)";
     ATTRIBUTE Location OF ClockBlock : LABEL IS "F(Clock,0)";
     ATTRIBUTE lib_model OF Rx_1(0) : LABEL IS "iocell1";
     ATTRIBUTE Location OF Rx_1(0) : LABEL IS "P3[5]";
@@ -203,130 +193,124 @@ ARCHITECTURE __DEFAULT__ OF GPS_Enhanced IS
     ATTRIBUTE Location OF Tx_2(0) : LABEL IS "P3[1]";
     ATTRIBUTE lib_model OF PW_GPS(0) : LABEL IS "iocell5";
     ATTRIBUTE Location OF PW_GPS(0) : LABEL IS "P3[7]";
-    ATTRIBUTE lib_model OF Net_9 : LABEL IS "macrocell2";
-    ATTRIBUTE Location OF Net_9 : LABEL IS "U(2,2)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:counter_load_not\ : LABEL IS "macrocell3";
-    ATTRIBUTE Location OF \GPS_UART:BUART:counter_load_not\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_status_0\ : LABEL IS "macrocell4";
-    ATTRIBUTE Location OF \GPS_UART:BUART:tx_status_0\ : LABEL IS "U(2,2)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_status_2\ : LABEL IS "macrocell5";
-    ATTRIBUTE Location OF \GPS_UART:BUART:tx_status_2\ : LABEL IS "U(2,1)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_counter_load\ : LABEL IS "macrocell6";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_counter_load\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_postpoll\ : LABEL IS "macrocell7";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_postpoll\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_status_4\ : LABEL IS "macrocell8";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_status_4\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_status_5\ : LABEL IS "macrocell9";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_status_5\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF Net_22 : LABEL IS "macrocell10";
-    ATTRIBUTE Location OF Net_22 : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:counter_load_not\ : LABEL IS "macrocell11";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:counter_load_not\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_status_0\ : LABEL IS "macrocell12";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_status_0\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_status_2\ : LABEL IS "macrocell13";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_status_2\ : LABEL IS "U(2,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_counter_load\ : LABEL IS "macrocell14";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_counter_load\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_postpoll\ : LABEL IS "macrocell15";
+    ATTRIBUTE lib_model OF Net_9 : LABEL IS "macrocell1";
+    ATTRIBUTE Location OF Net_9 : LABEL IS "U(3,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:counter_load_not\ : LABEL IS "macrocell2";
+    ATTRIBUTE Location OF \GPS_UART:BUART:counter_load_not\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_status_0\ : LABEL IS "macrocell3";
+    ATTRIBUTE Location OF \GPS_UART:BUART:tx_status_0\ : LABEL IS "U(2,3)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_status_2\ : LABEL IS "macrocell4";
+    ATTRIBUTE Location OF \GPS_UART:BUART:tx_status_2\ : LABEL IS "U(2,3)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_counter_load\ : LABEL IS "macrocell5";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_counter_load\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_postpoll\ : LABEL IS "macrocell6";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_postpoll\ : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_status_4\ : LABEL IS "macrocell7";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_status_4\ : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_status_5\ : LABEL IS "macrocell8";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_status_5\ : LABEL IS "U(3,0)";
+    ATTRIBUTE lib_model OF Net_22 : LABEL IS "macrocell9";
+    ATTRIBUTE Location OF Net_22 : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:counter_load_not\ : LABEL IS "macrocell10";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:counter_load_not\ : LABEL IS "U(3,1)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_status_0\ : LABEL IS "macrocell11";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_status_0\ : LABEL IS "U(3,3)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_status_2\ : LABEL IS "macrocell12";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_status_2\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_counter_load\ : LABEL IS "macrocell13";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_counter_load\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_postpoll\ : LABEL IS "macrocell14";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_postpoll\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_status_4\ : LABEL IS "macrocell16";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_status_4\ : LABEL IS "U(3,4)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_status_5\ : LABEL IS "macrocell17";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_status_5\ : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_status_4\ : LABEL IS "macrocell15";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_status_4\ : LABEL IS "U(3,1)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_status_5\ : LABEL IS "macrocell16";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_status_5\ : LABEL IS "U(3,1)";
     ATTRIBUTE lib_model OF \GPS_UART:BUART:sTX:TxShifter:u0\ : LABEL IS "datapathcell1";
-    ATTRIBUTE Location OF \GPS_UART:BUART:sTX:TxShifter:u0\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \GPS_UART:BUART:sTX:TxShifter:u0\ : LABEL IS "U(2,3)";
     ATTRIBUTE lib_model OF \GPS_UART:BUART:sTX:sCLOCK:TxBitClkGen\ : LABEL IS "datapathcell2";
-    ATTRIBUTE Location OF \GPS_UART:BUART:sTX:sCLOCK:TxBitClkGen\ : LABEL IS "U(2,3)";
+    ATTRIBUTE Location OF \GPS_UART:BUART:sTX:sCLOCK:TxBitClkGen\ : LABEL IS "U(2,2)";
     ATTRIBUTE lib_model OF \GPS_UART:BUART:sTX:TxSts\ : LABEL IS "statusicell1";
-    ATTRIBUTE Location OF \GPS_UART:BUART:sTX:TxSts\ : LABEL IS "U(2,2)";
+    ATTRIBUTE Location OF \GPS_UART:BUART:sTX:TxSts\ : LABEL IS "U(2,3)";
     ATTRIBUTE lib_model OF \GPS_UART:BUART:sRX:RxShifter:u0\ : LABEL IS "datapathcell3";
-    ATTRIBUTE Location OF \GPS_UART:BUART:sRX:RxShifter:u0\ : LABEL IS "U(2,4)";
-    ATTRIBUTE Location OF \GPS_UART:BUART:sRX:RxBitCounter\ : LABEL IS "U(2,4)";
+    ATTRIBUTE Location OF \GPS_UART:BUART:sRX:RxShifter:u0\ : LABEL IS "U(2,1)";
+    ATTRIBUTE Location OF \GPS_UART:BUART:sRX:RxBitCounter\ : LABEL IS "U(2,0)";
     ATTRIBUTE lib_model OF \GPS_UART:BUART:sRX:RxSts\ : LABEL IS "statusicell2";
-    ATTRIBUTE Location OF \GPS_UART:BUART:sRX:RxSts\ : LABEL IS "U(2,3)";
+    ATTRIBUTE Location OF \GPS_UART:BUART:sRX:RxSts\ : LABEL IS "U(3,0)";
     ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:sTX:TxShifter:u0\ : LABEL IS "datapathcell4";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:sTX:TxShifter:u0\ : LABEL IS "U(3,2)";
     ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:sTX:sCLOCK:TxBitClkGen\ : LABEL IS "datapathcell5";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sTX:sCLOCK:TxBitClkGen\ : LABEL IS "U(3,4)";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sTX:sCLOCK:TxBitClkGen\ : LABEL IS "U(3,3)";
     ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:sTX:TxSts\ : LABEL IS "statusicell3";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sTX:TxSts\ : LABEL IS "U(3,0)";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sTX:TxSts\ : LABEL IS "U(3,3)";
     ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:sRX:RxShifter:u0\ : LABEL IS "datapathcell6";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:sRX:RxShifter:u0\ : LABEL IS "U(3,1)";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sRX:RxBitCounter\ : LABEL IS "U(3,1)";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sRX:RxBitCounter\ : LABEL IS "U(3,2)";
     ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:sRX:RxSts\ : LABEL IS "statusicell4";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sRX:RxSts\ : LABEL IS "U(3,4)";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:sRX:RxSts\ : LABEL IS "U(3,1)";
     ATTRIBUTE Location OF GPS_UART_RX_ISR : LABEL IS "[IntrContainer=(0)][IntrId=(0)]";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:txn\ : LABEL IS "macrocell18";
-    ATTRIBUTE Location OF \GPS_UART:BUART:txn\ : LABEL IS "U(2,2)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_state_1\ : LABEL IS "macrocell19";
-    ATTRIBUTE Location OF \GPS_UART:BUART:tx_state_1\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_state_0\ : LABEL IS "macrocell20";
-    ATTRIBUTE Location OF \GPS_UART:BUART:tx_state_0\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_state_2\ : LABEL IS "macrocell21";
-    ATTRIBUTE Location OF \GPS_UART:BUART:tx_state_2\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_bitclk\ : LABEL IS "macrocell22";
-    ATTRIBUTE Location OF \GPS_UART:BUART:tx_bitclk\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell23";
-    ATTRIBUTE Location OF \GPS_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_0\ : LABEL IS "macrocell24";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_0\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_load_fifo\ : LABEL IS "macrocell25";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_load_fifo\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_3\ : LABEL IS "macrocell26";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_3\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_2\ : LABEL IS "macrocell27";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_2\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_count7_bit8_wire\ : LABEL IS "macrocell28";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_count7_bit8_wire\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_bitclk_enable\ : LABEL IS "macrocell29";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_bitclk_enable\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell30";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_stop1_reg\ : LABEL IS "U(2,4)";
-    ATTRIBUTE lib_model OF MODIN1_1 : LABEL IS "macrocell31";
-    ATTRIBUTE Location OF MODIN1_1 : LABEL IS "U(2,0)";
-    ATTRIBUTE lib_model OF MODIN1_0 : LABEL IS "macrocell32";
-    ATTRIBUTE Location OF MODIN1_0 : LABEL IS "U(2,0)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_status_3\ : LABEL IS "macrocell33";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_status_3\ : LABEL IS "U(2,3)";
-    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_last\ : LABEL IS "macrocell34";
-    ATTRIBUTE Location OF \GPS_UART:BUART:rx_last\ : LABEL IS "U(2,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:txn\ : LABEL IS "macrocell35";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:txn\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_state_1\ : LABEL IS "macrocell36";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:txn\ : LABEL IS "macrocell17";
+    ATTRIBUTE Location OF \GPS_UART:BUART:txn\ : LABEL IS "U(2,3)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_state_1\ : LABEL IS "macrocell18";
+    ATTRIBUTE Location OF \GPS_UART:BUART:tx_state_1\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_state_0\ : LABEL IS "macrocell19";
+    ATTRIBUTE Location OF \GPS_UART:BUART:tx_state_0\ : LABEL IS "U(2,3)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_state_2\ : LABEL IS "macrocell20";
+    ATTRIBUTE Location OF \GPS_UART:BUART:tx_state_2\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_bitclk\ : LABEL IS "macrocell21";
+    ATTRIBUTE Location OF \GPS_UART:BUART:tx_bitclk\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell22";
+    ATTRIBUTE Location OF \GPS_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_0\ : LABEL IS "macrocell23";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_0\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_load_fifo\ : LABEL IS "macrocell24";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_load_fifo\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_3\ : LABEL IS "macrocell25";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_3\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_2\ : LABEL IS "macrocell26";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_2\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_bitclk_enable\ : LABEL IS "macrocell27";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_bitclk_enable\ : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell28";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_state_stop1_reg\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF MODIN1_1 : LABEL IS "macrocell29";
+    ATTRIBUTE Location OF MODIN1_1 : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF MODIN1_0 : LABEL IS "macrocell30";
+    ATTRIBUTE Location OF MODIN1_0 : LABEL IS "U(2,1)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_status_3\ : LABEL IS "macrocell31";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_status_3\ : LABEL IS "U(2,0)";
+    ATTRIBUTE lib_model OF \GPS_UART:BUART:rx_last\ : LABEL IS "macrocell32";
+    ATTRIBUTE Location OF \GPS_UART:BUART:rx_last\ : LABEL IS "U(2,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:txn\ : LABEL IS "macrocell33";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:txn\ : LABEL IS "U(3,3)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_state_1\ : LABEL IS "macrocell34";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_state_1\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_state_0\ : LABEL IS "macrocell37";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_state_0\ : LABEL IS "macrocell35";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_state_0\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_state_2\ : LABEL IS "macrocell38";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_state_2\ : LABEL IS "macrocell36";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_state_2\ : LABEL IS "U(3,3)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_bitclk\ : LABEL IS "macrocell39";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_bitclk\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell40";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "U(3,0)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_0\ : LABEL IS "macrocell41";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_bitclk\ : LABEL IS "macrocell37";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_bitclk\ : LABEL IS "U(3,1)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "macrocell38";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:tx_ctrl_mark_last\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_0\ : LABEL IS "macrocell39";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_state_0\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_load_fifo\ : LABEL IS "macrocell42";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_load_fifo\ : LABEL IS "macrocell40";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_load_fifo\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_3\ : LABEL IS "macrocell43";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_state_3\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_2\ : LABEL IS "macrocell44";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_state_2\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_count7_bit8_wire\ : LABEL IS "macrocell45";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_count7_bit8_wire\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_bitclk_enable\ : LABEL IS "macrocell46";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_bitclk_enable\ : LABEL IS "U(2,2)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell47";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_3\ : LABEL IS "macrocell41";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_state_3\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_2\ : LABEL IS "macrocell42";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_state_2\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_bitclk_enable\ : LABEL IS "macrocell43";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_bitclk_enable\ : LABEL IS "U(3,2)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_state_stop1_reg\ : LABEL IS "macrocell44";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_state_stop1_reg\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:pollcount_1\ : LABEL IS "macrocell48";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:pollcount_1\ : LABEL IS "U(3,2)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:pollcount_0\ : LABEL IS "macrocell49";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:pollcount_0\ : LABEL IS "U(3,2)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:pollcount_1_split\ : LABEL IS "macrocell50";
-    ATTRIBUTE Location OF \OUTPUT_UART:BUART:pollcount_1_split\ : LABEL IS "U(3,2)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_status_3\ : LABEL IS "macrocell51";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:pollcount_1\ : LABEL IS "macrocell45";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:pollcount_1\ : LABEL IS "U(3,0)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:pollcount_0\ : LABEL IS "macrocell46";
+    ATTRIBUTE Location OF \OUTPUT_UART:BUART:pollcount_0\ : LABEL IS "U(3,0)";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_status_3\ : LABEL IS "macrocell47";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_status_3\ : LABEL IS "U(3,1)";
-    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_last\ : LABEL IS "macrocell52";
+    ATTRIBUTE lib_model OF \OUTPUT_UART:BUART:rx_last\ : LABEL IS "macrocell48";
     ATTRIBUTE Location OF \OUTPUT_UART:BUART:rx_last\ : LABEL IS "U(3,0)";
     COMPONENT clockblockcell
         PORT (
@@ -616,22 +600,6 @@ ARCHITECTURE __DEFAULT__ OF GPS_Enhanced IS
             clk_en : IN std_ulogic);
     END COMPONENT;
 BEGIN
-
-    MODIN1_1_split:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_4 * main_5 * !main_6 * main_7) + (!main_0 * !main_1 * !main_2 * !main_4 * main_6 * !main_7) + (!main_0 * main_1 * main_2 * main_3 * main_4 * !main_5 * main_6) + (!main_0 * main_1 * main_2 * main_3 * main_4 * main_5 * !main_6 * main_7) + (!main_0 * main_1 * main_2 * main_3 * main_4 * main_6 * !main_7) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * !main_5 * main_6) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * main_5 * !main_6 * main_7) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * main_6 * !main_7)",
-            regmode => 0,
-            clken_mode => 1)
-        PORT MAP(
-            q => MODIN1_1_split,
-            main_0 => \GPS_UART:BUART:rx_count_3\,
-            main_1 => \GPS_UART:BUART:rx_count_2\,
-            main_2 => \GPS_UART:BUART:rx_count_1\,
-            main_3 => \GPS_UART:BUART:rx_count_0\,
-            main_4 => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            main_5 => Net_5,
-            main_6 => MODIN1_1,
-            main_7 => MODIN1_0);
 
     ClockBlock:clockblockcell
         PORT MAP(
@@ -1331,7 +1299,7 @@ BEGIN
             cl1_sync => 1,
             cmsb_sync => 1,
             co_msb_sync => 1,
-            cy_dpconfig => "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000",
+            cy_dpconfig => "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
             d0_init => "00000000",
             d1_init => "00000000",
             f0_blk_sync => 1,
@@ -1417,7 +1385,7 @@ BEGIN
         GENERIC MAP(
             cy_alt_mode => 0,
             cy_init_value => "0000000",
-            cy_period => "1110110",
+            cy_period => "1110010",
             cy_route_en => 1,
             cy_route_ld => 1,
             clk_inv => '0',
@@ -1430,7 +1398,7 @@ BEGIN
             count_6 => MODIN4_6,
             count_5 => MODIN4_5,
             count_4 => MODIN4_4,
-            count_3 => \GPS_UART:BUART:rx_count_3\,
+            count_3 => MODIN4_3,
             count_2 => \GPS_UART:BUART:rx_count_2\,
             count_1 => \GPS_UART:BUART:rx_count_1\,
             count_0 => \GPS_UART:BUART:rx_count_0\,
@@ -1503,7 +1471,7 @@ BEGIN
             cl1_sync => 1,
             cmsb_sync => 1,
             co_msb_sync => 1,
-            cy_dpconfig => "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000",
+            cy_dpconfig => "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
             d0_init => "00000000",
             d1_init => "00000000",
             f0_blk_sync => 1,
@@ -1589,7 +1557,7 @@ BEGIN
         GENERIC MAP(
             cy_alt_mode => 0,
             cy_init_value => "0000000",
-            cy_period => "1110110",
+            cy_period => "1110010",
             cy_route_en => 1,
             cy_route_ld => 1,
             clk_inv => '0',
@@ -1725,7 +1693,7 @@ BEGIN
 
     \GPS_UART:BUART:rx_state_0\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_6 * !main_7) + (!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_7 * !main_8) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_9) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_10)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_5 * !main_6) + (!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_6 * !main_7) + (!main_0 * main_1 * !main_3 * !main_4 * !main_8 * !main_9) + (!main_0 * main_1 * !main_3 * !main_4 * !main_8 * !main_10)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -1737,16 +1705,16 @@ BEGIN
             main_2 => \GPS_UART:BUART:rx_bitclk_enable\,
             main_3 => \GPS_UART:BUART:rx_state_3\,
             main_4 => \GPS_UART:BUART:rx_state_2\,
-            main_5 => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            main_6 => Net_5,
-            main_7 => MODIN1_1,
-            main_8 => MODIN1_0,
-            main_9 => MODIN4_6,
-            main_10 => MODIN4_5);
+            main_5 => Net_5,
+            main_6 => MODIN1_1,
+            main_7 => MODIN1_0,
+            main_8 => MODIN4_6,
+            main_9 => MODIN4_5,
+            main_10 => MODIN4_4);
 
     \GPS_UART:BUART:rx_load_fifo\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * !main_4) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_7)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * !main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_7)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -1758,13 +1726,13 @@ BEGIN
             main_2 => \GPS_UART:BUART:rx_bitclk_enable\,
             main_3 => \GPS_UART:BUART:rx_state_3\,
             main_4 => \GPS_UART:BUART:rx_state_2\,
-            main_5 => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            main_6 => MODIN4_6,
-            main_7 => MODIN4_5);
+            main_5 => MODIN4_6,
+            main_6 => MODIN4_5,
+            main_7 => MODIN4_4);
 
     \GPS_UART:BUART:rx_state_3\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * main_4) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_7)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_7)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -1776,13 +1744,13 @@ BEGIN
             main_2 => \GPS_UART:BUART:rx_bitclk_enable\,
             main_3 => \GPS_UART:BUART:rx_state_3\,
             main_4 => \GPS_UART:BUART:rx_state_2\,
-            main_5 => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            main_6 => MODIN4_6,
-            main_7 => MODIN4_5);
+            main_5 => MODIN4_6,
+            main_6 => MODIN4_5,
+            main_7 => MODIN4_4);
 
     \GPS_UART:BUART:rx_state_2\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3) + (!main_0 * !main_1 * main_2 * main_4) + (!main_0 * !main_1 * !main_3 * !main_4 * !main_6 * main_7) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_8) + (!main_0 * main_1 * !main_3 * !main_4 * main_5 * !main_9)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * main_3) + (!main_0 * !main_1 * main_2 * main_4) + (!main_0 * !main_1 * !main_3 * !main_4 * !main_5 * main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_7 * !main_8) + (!main_0 * main_1 * !main_3 * !main_4 * !main_7 * !main_9)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -1794,42 +1762,24 @@ BEGIN
             main_2 => \GPS_UART:BUART:rx_bitclk_enable\,
             main_3 => \GPS_UART:BUART:rx_state_3\,
             main_4 => \GPS_UART:BUART:rx_state_2\,
-            main_5 => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            main_6 => Net_5,
-            main_7 => \GPS_UART:BUART:rx_last\,
-            main_8 => MODIN4_6,
-            main_9 => MODIN4_5);
-
-    \GPS_UART:BUART:rx_count7_bit8_wire\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3) + (!main_4 * !main_5)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            clock_0 => \GPS_UART:Net_9\,
-            main_0 => \GPS_UART:BUART:tx_ctrl_mark_last\,
-            main_1 => \GPS_UART:BUART:rx_state_0\,
-            main_2 => \GPS_UART:BUART:rx_state_3\,
-            main_3 => \GPS_UART:BUART:rx_state_2\,
-            main_4 => \GPS_UART:BUART:rx_count7_tc\,
-            main_5 => \GPS_UART:BUART:rx_count7_bit8_wire\);
+            main_5 => Net_5,
+            main_6 => \GPS_UART:BUART:rx_last\,
+            main_7 => MODIN4_6,
+            main_8 => MODIN4_5,
+            main_9 => MODIN4_4);
 
     \GPS_UART:BUART:rx_bitclk_enable\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_4) + (!main_0 * main_1 * main_2 * main_3 * main_4)",
+            eqn_main => "(!main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \GPS_UART:BUART:rx_bitclk_enable\,
             clock_0 => \GPS_UART:Net_9\,
-            main_0 => \GPS_UART:BUART:rx_count_3\,
-            main_1 => \GPS_UART:BUART:rx_count_2\,
-            main_2 => \GPS_UART:BUART:rx_count_1\,
-            main_3 => \GPS_UART:BUART:rx_count_0\,
-            main_4 => \GPS_UART:BUART:rx_count7_bit8_wire\);
+            main_0 => \GPS_UART:BUART:rx_count_2\,
+            main_1 => \GPS_UART:BUART:rx_count_1\,
+            main_2 => \GPS_UART:BUART:rx_count_0\);
 
     \GPS_UART:BUART:rx_state_stop1_reg\:macrocell
         GENERIC MAP(
@@ -1847,37 +1797,32 @@ BEGIN
 
     MODIN1_1:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_4 * main_5) + (main_6)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (!main_0 * !main_1 * main_2 * !main_3 * main_4) + (!main_0 * !main_1 * main_3 * !main_4)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => MODIN1_1,
             clock_0 => \GPS_UART:Net_9\,
-            main_0 => \GPS_UART:BUART:rx_count_3\,
-            main_1 => \GPS_UART:BUART:rx_count_2\,
-            main_2 => \GPS_UART:BUART:rx_count_1\,
-            main_3 => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            main_4 => Net_5,
-            main_5 => MODIN1_1,
-            main_6 => MODIN1_1_split);
+            main_0 => \GPS_UART:BUART:rx_count_2\,
+            main_1 => \GPS_UART:BUART:rx_count_1\,
+            main_2 => Net_5,
+            main_3 => MODIN1_1,
+            main_4 => MODIN1_0);
 
     MODIN1_0:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_4 * !main_5 * main_6) + (!main_0 * !main_1 * !main_2 * !main_4 * main_5 * !main_6) + (!main_0 * main_1 * main_2 * main_3 * main_4 * !main_5 * main_6) + (!main_0 * main_1 * main_2 * main_3 * main_4 * main_5 * !main_6) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * !main_5 * main_6) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * main_5 * !main_6)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (!main_0 * !main_1 * main_2 * !main_3)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => MODIN1_0,
             clock_0 => \GPS_UART:Net_9\,
-            main_0 => \GPS_UART:BUART:rx_count_3\,
-            main_1 => \GPS_UART:BUART:rx_count_2\,
-            main_2 => \GPS_UART:BUART:rx_count_1\,
-            main_3 => \GPS_UART:BUART:rx_count_0\,
-            main_4 => \GPS_UART:BUART:rx_count7_bit8_wire\,
-            main_5 => Net_5,
-            main_6 => MODIN1_0);
+            main_0 => \GPS_UART:BUART:rx_count_2\,
+            main_1 => \GPS_UART:BUART:rx_count_1\,
+            main_2 => Net_5,
+            main_3 => MODIN1_0);
 
     \GPS_UART:BUART:rx_status_3\:macrocell
         GENERIC MAP(
@@ -1999,7 +1944,7 @@ BEGIN
 
     \OUTPUT_UART:BUART:rx_state_0\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_8 * !main_9) + (!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_8 * !main_10) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * main_7) + (!main_0 * main_1 * !main_3 * !main_4 * !main_6 * main_7)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_8 * !main_9) + (!main_0 * !main_1 * main_2 * !main_3 * main_4 * !main_8 * !main_10) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_7)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -2013,14 +1958,14 @@ BEGIN
             main_4 => \OUTPUT_UART:BUART:rx_state_2\,
             main_5 => \OUTPUT_UART:BUART:rx_count_6\,
             main_6 => \OUTPUT_UART:BUART:rx_count_5\,
-            main_7 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\,
+            main_7 => \OUTPUT_UART:BUART:rx_count_4\,
             main_8 => \OUTPUT_UART:BUART:pollcount_1\,
             main_9 => Net_18,
             main_10 => \OUTPUT_UART:BUART:pollcount_0\);
 
     \OUTPUT_UART:BUART:rx_load_fifo\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * !main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * main_7) + (!main_0 * main_1 * !main_3 * !main_4 * !main_6 * main_7)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * !main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_7)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
@@ -2034,11 +1979,11 @@ BEGIN
             main_4 => \OUTPUT_UART:BUART:rx_state_2\,
             main_5 => \OUTPUT_UART:BUART:rx_count_6\,
             main_6 => \OUTPUT_UART:BUART:rx_count_5\,
-            main_7 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\);
+            main_7 => \OUTPUT_UART:BUART:rx_count_4\);
 
     \OUTPUT_UART:BUART:rx_state_3\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * main_7) + (!main_0 * main_1 * !main_3 * !main_4 * !main_6 * main_7)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * main_3 * main_4) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_7)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -2052,11 +1997,11 @@ BEGIN
             main_4 => \OUTPUT_UART:BUART:rx_state_2\,
             main_5 => \OUTPUT_UART:BUART:rx_count_6\,
             main_6 => \OUTPUT_UART:BUART:rx_count_5\,
-            main_7 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\);
+            main_7 => \OUTPUT_UART:BUART:rx_count_4\);
 
     \OUTPUT_UART:BUART:rx_state_2\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * main_2 * main_3) + (!main_0 * !main_1 * main_2 * main_4) + (!main_0 * !main_1 * !main_3 * !main_4 * !main_8 * main_9) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * main_7) + (!main_0 * main_1 * !main_3 * !main_4 * !main_6 * main_7)",
+            eqn_main => "(!main_0 * !main_1 * main_2 * main_3) + (!main_0 * !main_1 * main_2 * main_4) + (!main_0 * !main_1 * !main_3 * !main_4 * !main_8 * main_9) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_6) + (!main_0 * main_1 * !main_3 * !main_4 * !main_5 * !main_7)",
             regmode => 2,
             clk_inv => '0',
             clken_mode => 1)
@@ -2070,40 +2015,22 @@ BEGIN
             main_4 => \OUTPUT_UART:BUART:rx_state_2\,
             main_5 => \OUTPUT_UART:BUART:rx_count_6\,
             main_6 => \OUTPUT_UART:BUART:rx_count_5\,
-            main_7 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\,
+            main_7 => \OUTPUT_UART:BUART:rx_count_4\,
             main_8 => Net_18,
             main_9 => \OUTPUT_UART:BUART:rx_last\);
 
-    \OUTPUT_UART:BUART:rx_count7_bit8_wire\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3) + (!main_4 * !main_5)",
-            regmode => 1,
-            clk_inv => '0',
-            clken_mode => 1)
-        PORT MAP(
-            q => \OUTPUT_UART:BUART:rx_count7_bit8_wire\,
-            clock_0 => \OUTPUT_UART:Net_9\,
-            main_0 => \OUTPUT_UART:BUART:tx_ctrl_mark_last\,
-            main_1 => \OUTPUT_UART:BUART:rx_state_0\,
-            main_2 => \OUTPUT_UART:BUART:rx_state_3\,
-            main_3 => \OUTPUT_UART:BUART:rx_state_2\,
-            main_4 => \OUTPUT_UART:BUART:rx_count7_tc\,
-            main_5 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\);
-
     \OUTPUT_UART:BUART:rx_bitclk_enable\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * !main_4) + (!main_0 * main_1 * main_2 * main_3 * main_4)",
+            eqn_main => "(!main_0 * !main_1 * !main_2)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \OUTPUT_UART:BUART:rx_bitclk_enable\,
             clock_0 => \OUTPUT_UART:Net_9\,
-            main_0 => \OUTPUT_UART:BUART:rx_count_3\,
-            main_1 => \OUTPUT_UART:BUART:rx_count_2\,
-            main_2 => \OUTPUT_UART:BUART:rx_count_1\,
-            main_3 => \OUTPUT_UART:BUART:rx_count_0\,
-            main_4 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\);
+            main_0 => \OUTPUT_UART:BUART:rx_count_2\,
+            main_1 => \OUTPUT_UART:BUART:rx_count_1\,
+            main_2 => \OUTPUT_UART:BUART:rx_count_0\);
 
     \OUTPUT_UART:BUART:rx_state_stop1_reg\:macrocell
         GENERIC MAP(
@@ -2121,53 +2048,32 @@ BEGIN
 
     \OUTPUT_UART:BUART:pollcount_1\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_3 * main_4 * !main_5) + (main_6)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3 * main_4) + (!main_0 * !main_1 * main_2 * !main_3) + (!main_0 * !main_1 * main_2 * !main_4)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \OUTPUT_UART:BUART:pollcount_1\,
             clock_0 => \OUTPUT_UART:Net_9\,
-            main_0 => \OUTPUT_UART:BUART:rx_count_3\,
-            main_1 => \OUTPUT_UART:BUART:rx_count_2\,
-            main_2 => \OUTPUT_UART:BUART:rx_count_1\,
-            main_3 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\,
-            main_4 => \OUTPUT_UART:BUART:pollcount_1\,
-            main_5 => Net_18,
-            main_6 => \OUTPUT_UART:BUART:pollcount_1_split\);
+            main_0 => \OUTPUT_UART:BUART:rx_count_2\,
+            main_1 => \OUTPUT_UART:BUART:rx_count_1\,
+            main_2 => \OUTPUT_UART:BUART:pollcount_1\,
+            main_3 => Net_18,
+            main_4 => \OUTPUT_UART:BUART:pollcount_0\);
 
     \OUTPUT_UART:BUART:pollcount_0\:macrocell
         GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_4 * !main_5 * main_6) + (!main_0 * !main_1 * !main_2 * !main_4 * main_5 * !main_6) + (!main_0 * main_1 * main_2 * main_3 * main_4 * !main_5 * main_6) + (!main_0 * main_1 * main_2 * main_3 * main_4 * main_5 * !main_6) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * !main_5 * main_6) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * main_5 * !main_6)",
+            eqn_main => "(!main_0 * !main_1 * !main_2 * main_3) + (!main_0 * !main_1 * main_2 * !main_3)",
             regmode => 1,
             clk_inv => '0',
             clken_mode => 1)
         PORT MAP(
             q => \OUTPUT_UART:BUART:pollcount_0\,
             clock_0 => \OUTPUT_UART:Net_9\,
-            main_0 => \OUTPUT_UART:BUART:rx_count_3\,
-            main_1 => \OUTPUT_UART:BUART:rx_count_2\,
-            main_2 => \OUTPUT_UART:BUART:rx_count_1\,
-            main_3 => \OUTPUT_UART:BUART:rx_count_0\,
-            main_4 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\,
-            main_5 => Net_18,
-            main_6 => \OUTPUT_UART:BUART:pollcount_0\);
-
-    \OUTPUT_UART:BUART:pollcount_1_split\:macrocell
-        GENERIC MAP(
-            eqn_main => "(!main_0 * !main_1 * !main_2 * !main_4 * !main_5 * main_6 * main_7) + (!main_0 * !main_1 * !main_2 * !main_4 * main_5 * !main_7) + (!main_0 * main_1 * main_2 * main_3 * main_4 * !main_5 * main_6 * main_7) + (!main_0 * main_1 * main_2 * main_3 * main_4 * main_5 * !main_6) + (!main_0 * main_1 * main_2 * main_3 * main_4 * main_5 * !main_7) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * !main_5 * main_6 * main_7) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * main_5 * !main_6) + (main_0 * !main_1 * !main_2 * !main_3 * main_4 * main_5 * !main_7)",
-            regmode => 0,
-            clken_mode => 1)
-        PORT MAP(
-            q => \OUTPUT_UART:BUART:pollcount_1_split\,
-            main_0 => \OUTPUT_UART:BUART:rx_count_3\,
-            main_1 => \OUTPUT_UART:BUART:rx_count_2\,
-            main_2 => \OUTPUT_UART:BUART:rx_count_1\,
-            main_3 => \OUTPUT_UART:BUART:rx_count_0\,
-            main_4 => \OUTPUT_UART:BUART:rx_count7_bit8_wire\,
-            main_5 => \OUTPUT_UART:BUART:pollcount_1\,
-            main_6 => Net_18,
-            main_7 => \OUTPUT_UART:BUART:pollcount_0\);
+            main_0 => \OUTPUT_UART:BUART:rx_count_2\,
+            main_1 => \OUTPUT_UART:BUART:rx_count_1\,
+            main_2 => Net_18,
+            main_3 => \OUTPUT_UART:BUART:pollcount_0\);
 
     \OUTPUT_UART:BUART:rx_status_3\:macrocell
         GENERIC MAP(

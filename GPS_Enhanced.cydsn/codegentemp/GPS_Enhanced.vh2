@@ -2,7 +2,7 @@
 --	Conversion of GPS_Enhanced.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Mar 28 14:29:22 2023
+--	Tue Mar 28 16:46:08 2023
 --
 
 USE cypress.cypress.all;
@@ -190,7 +190,6 @@ SIGNAL \GPS_UART:BUART:rx_counter_load\ : bit;
 SIGNAL \GPS_UART:BUART:rx_state_3\ : bit;
 SIGNAL \GPS_UART:BUART:rx_state_2\ : bit;
 SIGNAL \GPS_UART:BUART:rx_bitclk_pre\ : bit;
-SIGNAL \GPS_UART:BUART:rx_count_3\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count_2\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count_1\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count_0\ : bit;
@@ -198,9 +197,9 @@ SIGNAL \GPS_UART:BUART:rx_bitclk_pre16x\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count_6\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count_5\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count_4\ : bit;
+SIGNAL \GPS_UART:BUART:rx_count_3\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count7_tc\ : bit;
 SIGNAL \GPS_UART:BUART:rx_count7_bit8_wire\ : bit;
-SIGNAL \GPS_UART:BUART:rx_count7_bit8\ : bit;
 SIGNAL \GPS_UART:BUART:rx_bitclk\ : bit;
 SIGNAL \GPS_UART:BUART:rx_state_stop1_reg\ : bit;
 SIGNAL \GPS_UART:BUART:rx_poll_bit1\ : bit;
@@ -276,12 +275,13 @@ SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_6\ : bit;
 SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_5\ : bit;
 SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_4\ : bit;
 SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_3\ : bit;
-SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_2\ : bit;
 SIGNAL MODIN4_6 : bit;
-SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_1\ : bit;
+SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_2\ : bit;
 SIGNAL MODIN4_5 : bit;
-SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_0\ : bit;
+SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_1\ : bit;
 SIGNAL MODIN4_4 : bit;
+SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_0\ : bit;
+SIGNAL MODIN4_3 : bit;
 SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_6\ : bit;
 SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_5\ : bit;
 SIGNAL \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_4\ : bit;
@@ -537,7 +537,6 @@ SIGNAL \OUTPUT_UART:BUART:rx_counter_load\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_state_3\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_state_2\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_bitclk_pre\ : bit;
-SIGNAL \OUTPUT_UART:BUART:rx_count_3\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count_2\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count_1\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count_0\ : bit;
@@ -545,9 +544,9 @@ SIGNAL \OUTPUT_UART:BUART:rx_bitclk_pre16x\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count_6\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count_5\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count_4\ : bit;
+SIGNAL \OUTPUT_UART:BUART:rx_count_3\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count7_tc\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_count7_bit8_wire\ : bit;
-SIGNAL \OUTPUT_UART:BUART:rx_count7_bit8\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_bitclk\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_state_stop1_reg\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_poll_bit1\ : bit;
@@ -623,12 +622,13 @@ SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_6\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_5\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_4\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_3\ : bit;
-SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_2\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODIN8_6\ : bit;
-SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_1\ : bit;
+SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_2\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODIN8_5\ : bit;
-SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_0\ : bit;
+SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_1\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODIN8_4\ : bit;
+SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_0\ : bit;
+SIGNAL \OUTPUT_UART:BUART:sRX:MODIN8_3\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_6\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_5\ : bit;
 SIGNAL \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_4\ : bit;
@@ -728,7 +728,6 @@ SIGNAL \GPS_UART:BUART:rx_state_0\\D\ : bit;
 SIGNAL \GPS_UART:BUART:rx_load_fifo\\D\ : bit;
 SIGNAL \GPS_UART:BUART:rx_state_3\\D\ : bit;
 SIGNAL \GPS_UART:BUART:rx_state_2\\D\ : bit;
-SIGNAL \GPS_UART:BUART:rx_count7_bit8\\D\ : bit;
 SIGNAL \GPS_UART:BUART:rx_bitclk\\D\ : bit;
 SIGNAL \GPS_UART:BUART:rx_state_stop1_reg\\D\ : bit;
 SIGNAL \GPS_UART:BUART:pollcount_1\\D\ : bit;
@@ -758,7 +757,6 @@ SIGNAL \OUTPUT_UART:BUART:rx_state_0\\D\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_load_fifo\\D\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_state_3\\D\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_state_2\\D\ : bit;
-SIGNAL \OUTPUT_UART:BUART:rx_count7_bit8\\D\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_bitclk\\D\ : bit;
 SIGNAL \OUTPUT_UART:BUART:rx_state_stop1_reg\\D\ : bit;
 SIGNAL \OUTPUT_UART:BUART:pollcount_1\\D\ : bit;
@@ -830,30 +828,19 @@ Net_12D <= ((not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:tx_state_2\)
 
 \GPS_UART:BUART:rx_counter_load\ <= ((not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_0\ and not \GPS_UART:BUART:rx_state_3\ and not \GPS_UART:BUART:rx_state_2\));
 
-\GPS_UART:BUART:rx_bitclk\\D\ <= ((not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and not \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\));
+\GPS_UART:BUART:rx_bitclk_pre\ <= ((not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\));
 
 \GPS_UART:BUART:rx_state_stop1_reg\\D\ <= (not \GPS_UART:BUART:rx_state_2\
 	OR not \GPS_UART:BUART:rx_state_3\
 	OR \GPS_UART:BUART:rx_state_0\
 	OR \GPS_UART:BUART:rx_state_1\);
 
-\GPS_UART:BUART:pollcount_1\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not MODIN1_1 and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and Net_5 and MODIN1_0)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and not MODIN1_1 and \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and Net_5 and MODIN1_0)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not MODIN1_0 and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count7_bit8_wire\ and not MODIN1_1 and Net_5 and MODIN1_0)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not Net_5 and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and not MODIN1_0 and \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and not Net_5 and \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and MODIN1_1)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count7_bit8_wire\ and not MODIN1_0 and MODIN1_1)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count7_bit8_wire\ and not Net_5 and MODIN1_1));
+\GPS_UART:BUART:pollcount_1\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not MODIN1_1 and Net_5 and MODIN1_0)
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not MODIN1_0 and MODIN1_1)
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not Net_5 and MODIN1_1));
 
-\GPS_UART:BUART:pollcount_0\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not MODIN1_0 and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and Net_5)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not Net_5 and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and MODIN1_0)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and not MODIN1_0 and \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and Net_5)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and not Net_5 and \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\ and MODIN1_0)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count7_bit8_wire\ and not MODIN1_0 and Net_5)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count7_bit8_wire\ and not Net_5 and MODIN1_0));
+\GPS_UART:BUART:pollcount_0\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not MODIN1_0 and Net_5)
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not Net_5 and MODIN1_0));
 
 \GPS_UART:BUART:rx_postpoll\ <= ((Net_5 and MODIN1_0)
 	OR MODIN1_1);
@@ -866,11 +853,11 @@ Net_12D <= ((not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:tx_state_2\)
 	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_0\ and not Net_5 and not MODIN1_1 and \GPS_UART:BUART:rx_bitclk_enable\ and \GPS_UART:BUART:rx_state_3\ and \GPS_UART:BUART:rx_state_2\));
 
 \GPS_UART:BUART:rx_load_fifo\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_0\ and not \GPS_UART:BUART:rx_state_2\ and \GPS_UART:BUART:rx_bitclk_enable\ and \GPS_UART:BUART:rx_state_3\)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_5 and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_6 and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\));
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_4 and \GPS_UART:BUART:rx_state_0\)
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_5 and \GPS_UART:BUART:rx_state_0\));
 
-\GPS_UART:BUART:rx_state_3\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_5 and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_6 and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
+\GPS_UART:BUART:rx_state_3\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_4 and \GPS_UART:BUART:rx_state_0\)
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_2\ and not MODIN4_6 and not MODIN4_5 and \GPS_UART:BUART:rx_state_0\)
 	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_bitclk_enable\ and \GPS_UART:BUART:rx_state_3\)
 	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_1\ and \GPS_UART:BUART:rx_state_3\)
 	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_2\ and \GPS_UART:BUART:rx_state_3\)
@@ -878,8 +865,8 @@ Net_12D <= ((not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:tx_state_2\)
 
 \GPS_UART:BUART:rx_state_2\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_0\ and not \GPS_UART:BUART:rx_state_3\ and not \GPS_UART:BUART:rx_state_2\ and not Net_5 and \GPS_UART:BUART:rx_last\)
 	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_0\ and not \GPS_UART:BUART:rx_state_2\ and \GPS_UART:BUART:rx_bitclk_enable\ and \GPS_UART:BUART:rx_state_3\)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not MODIN4_5 and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not MODIN4_6 and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not MODIN4_6 and not MODIN4_4 and \GPS_UART:BUART:rx_state_0\)
+	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not MODIN4_6 and not MODIN4_5 and \GPS_UART:BUART:rx_state_0\)
 	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_bitclk_enable\ and \GPS_UART:BUART:rx_state_2\)
 	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_1\ and \GPS_UART:BUART:rx_state_2\)
 	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_state_2\));
@@ -888,8 +875,8 @@ Net_12D <= ((not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:tx_state_2\)
 
 \GPS_UART:BUART:rx_state_0\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not MODIN1_1 and not MODIN1_0 and \GPS_UART:BUART:rx_bitclk_enable\ and \GPS_UART:BUART:rx_state_2\)
 	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_state_1\ and not \GPS_UART:BUART:rx_state_3\ and not Net_5 and not MODIN1_1 and \GPS_UART:BUART:rx_bitclk_enable\ and \GPS_UART:BUART:rx_state_2\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and MODIN4_6 and MODIN4_5)
-	OR (not \GPS_UART:BUART:reset_reg\ and not \GPS_UART:BUART:rx_count7_bit8_wire\ and \GPS_UART:BUART:rx_state_0\)
+	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and MODIN4_5 and MODIN4_4)
+	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and MODIN4_6)
 	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_state_3\)
 	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_1\ and \GPS_UART:BUART:rx_state_0\)
 	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_state_2\));
@@ -897,15 +884,6 @@ Net_12D <= ((not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:tx_state_2\)
 \GPS_UART:BUART:rx_last\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and Net_5));
 
 \GPS_UART:BUART:rx_address_detected\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_address_detected\));
-
-\GPS_UART:BUART:rx_count7_bit8\\D\ <= ((not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_2\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_1\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_2\ and \GPS_UART:BUART:rx_count7_tc\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_3\ and \GPS_UART:BUART:rx_count7_tc\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_0\ and \GPS_UART:BUART:rx_count7_tc\)
-	OR (not \GPS_UART:BUART:reset_reg\ and \GPS_UART:BUART:rx_state_1\ and \GPS_UART:BUART:rx_count7_tc\));
 
 Net_22 <= (not \OUTPUT_UART:BUART:txn\);
 
@@ -958,30 +936,19 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 
 \OUTPUT_UART:BUART:rx_counter_load\ <= ((not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_0\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_state_2\));
 
-\OUTPUT_UART:BUART:rx_bitclk\\D\ <= ((not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\));
+\OUTPUT_UART:BUART:rx_bitclk_pre\ <= ((not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\));
 
 \OUTPUT_UART:BUART:rx_state_stop1_reg\\D\ <= (not \OUTPUT_UART:BUART:rx_state_2\
 	OR not \OUTPUT_UART:BUART:rx_state_3\
 	OR \OUTPUT_UART:BUART:rx_state_0\
 	OR \OUTPUT_UART:BUART:rx_state_1\);
 
-\OUTPUT_UART:BUART:pollcount_1\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:pollcount_1\ and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and Net_18 and \OUTPUT_UART:BUART:pollcount_0\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and not \OUTPUT_UART:BUART:pollcount_1\ and \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and Net_18 and \OUTPUT_UART:BUART:pollcount_0\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:pollcount_1\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and not \OUTPUT_UART:BUART:pollcount_1\ and Net_18 and \OUTPUT_UART:BUART:pollcount_0\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not Net_18 and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:pollcount_1\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:pollcount_1\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and not Net_18 and \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:pollcount_1\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:pollcount_1\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and not Net_18 and \OUTPUT_UART:BUART:pollcount_1\));
+\OUTPUT_UART:BUART:pollcount_1\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:pollcount_1\ and Net_18 and \OUTPUT_UART:BUART:pollcount_0\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:pollcount_1\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not Net_18 and \OUTPUT_UART:BUART:pollcount_1\));
 
-\OUTPUT_UART:BUART:pollcount_0\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and Net_18)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not Net_18 and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:pollcount_0\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and Net_18)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and not Net_18 and \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:pollcount_0\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and not \OUTPUT_UART:BUART:pollcount_0\ and Net_18)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and not Net_18 and \OUTPUT_UART:BUART:pollcount_0\));
+\OUTPUT_UART:BUART:pollcount_0\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:pollcount_0\ and Net_18)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not Net_18 and \OUTPUT_UART:BUART:pollcount_0\));
 
 \OUTPUT_UART:BUART:rx_postpoll\ <= ((Net_18 and \OUTPUT_UART:BUART:pollcount_0\)
 	OR \OUTPUT_UART:BUART:pollcount_1\);
@@ -994,11 +961,11 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_0\ and not \OUTPUT_UART:BUART:pollcount_1\ and not Net_18 and \OUTPUT_UART:BUART:rx_bitclk_enable\ and \OUTPUT_UART:BUART:rx_state_3\ and \OUTPUT_UART:BUART:rx_state_2\));
 
 \OUTPUT_UART:BUART:rx_load_fifo\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_0\ and not \OUTPUT_UART:BUART:rx_state_2\ and \OUTPUT_UART:BUART:rx_bitclk_enable\ and \OUTPUT_UART:BUART:rx_state_3\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_5\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_6\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\));
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_4\ and \OUTPUT_UART:BUART:rx_state_0\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_5\ and \OUTPUT_UART:BUART:rx_state_0\));
 
-\OUTPUT_UART:BUART:rx_state_3\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_5\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_6\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
+\OUTPUT_UART:BUART:rx_state_3\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_4\ and \OUTPUT_UART:BUART:rx_state_0\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_2\ and not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_5\ and \OUTPUT_UART:BUART:rx_state_0\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_bitclk_enable\ and \OUTPUT_UART:BUART:rx_state_3\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_1\ and \OUTPUT_UART:BUART:rx_state_3\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_2\ and \OUTPUT_UART:BUART:rx_state_3\)
@@ -1006,8 +973,8 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 
 \OUTPUT_UART:BUART:rx_state_2\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_0\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_state_2\ and not Net_18 and \OUTPUT_UART:BUART:rx_last\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_0\ and not \OUTPUT_UART:BUART:rx_state_2\ and \OUTPUT_UART:BUART:rx_bitclk_enable\ and \OUTPUT_UART:BUART:rx_state_3\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_count_5\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_count_6\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_4\ and \OUTPUT_UART:BUART:rx_state_0\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_5\ and \OUTPUT_UART:BUART:rx_state_0\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_bitclk_enable\ and \OUTPUT_UART:BUART:rx_state_2\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_1\ and \OUTPUT_UART:BUART:rx_state_2\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_state_2\));
@@ -1016,8 +983,8 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 
 \OUTPUT_UART:BUART:rx_state_0\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:pollcount_1\ and not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:rx_bitclk_enable\ and \OUTPUT_UART:BUART:rx_state_2\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_state_1\ and not \OUTPUT_UART:BUART:rx_state_3\ and not \OUTPUT_UART:BUART:pollcount_1\ and not Net_18 and \OUTPUT_UART:BUART:rx_bitclk_enable\ and \OUTPUT_UART:BUART:rx_state_2\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count_6\ and \OUTPUT_UART:BUART:rx_count_5\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:rx_state_0\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count_5\ and \OUTPUT_UART:BUART:rx_count_4\)
+	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count_6\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_state_3\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_1\ and \OUTPUT_UART:BUART:rx_state_0\)
 	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_state_2\));
@@ -1026,21 +993,12 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 
 \OUTPUT_UART:BUART:rx_address_detected\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_address_detected\));
 
-\OUTPUT_UART:BUART:rx_count7_bit8\\D\ <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_2\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_1\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_2\ and \OUTPUT_UART:BUART:rx_count7_tc\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_3\ and \OUTPUT_UART:BUART:rx_count7_tc\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_0\ and \OUTPUT_UART:BUART:rx_count7_tc\)
-	OR (not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:rx_state_1\ and \OUTPUT_UART:BUART:rx_count7_tc\));
-
 \GPS_UART:IntClock\:cy_clock_v1_0
 	GENERIC MAP(cy_registers=>"",
 		id=>"b0162966-0060-4af5-82d1-fcb491ad7619/be0a0e37-ad17-42ca-b5a1-1a654d736358",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"6510416666.66667",
+		period=>"13020833333.3333",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>\GPS_UART:Net_9\,
@@ -1137,7 +1095,7 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 			zero, zero, zero, zero),
 		po=>open);
 \GPS_UART:BUART:sTX:sCLOCK:TxBitClkGen\:cy_psoc3_dp
-	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000",
+	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
 		d0_init=>"00000000",
 		d1_init=>"00000000",
 		a0_init=>"00000000",
@@ -1319,7 +1277,7 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 			zero, zero, zero, zero),
 		po=>open);
 \GPS_UART:BUART:sRX:RxBitCounter\:cy_psoc3_count7
-	GENERIC MAP(cy_period=>"1110110",
+	GENERIC MAP(cy_period=>"1110010",
 		cy_init_value=>"0000000",
 		cy_route_ld=>'1',
 		cy_route_en=>'1',
@@ -1328,7 +1286,7 @@ Net_25D <= ((not \OUTPUT_UART:BUART:reset_reg\ and \OUTPUT_UART:BUART:tx_state_2
 		reset=>\GPS_UART:BUART:reset_reg\,
 		load=>\GPS_UART:BUART:rx_counter_load\,
 		enable=>one,
-		count=>(MODIN4_6, MODIN4_5, MODIN4_4, \GPS_UART:BUART:rx_count_3\,
+		count=>(MODIN4_6, MODIN4_5, MODIN4_4, MODIN4_3,
 			\GPS_UART:BUART:rx_count_2\, \GPS_UART:BUART:rx_count_1\, \GPS_UART:BUART:rx_count_0\),
 		tc=>\GPS_UART:BUART:rx_count7_tc\);
 \GPS_UART:BUART:sRX:RxSts\:cy_psoc3_statusi
@@ -1485,7 +1443,7 @@ Tx_1:cy_psoc3_pins_v1_10
 		id=>"b964ec5c-a437-4a9e-8f18-60b5934c6ae1/be0a0e37-ad17-42ca-b5a1-1a654d736358",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"6510416666.66667",
+		period=>"13020833333.3333",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>\OUTPUT_UART:Net_9\,
@@ -1582,7 +1540,7 @@ Tx_1:cy_psoc3_pins_v1_10
 			zero, zero, zero, zero),
 		po=>open);
 \OUTPUT_UART:BUART:sTX:sCLOCK:TxBitClkGen\:cy_psoc3_dp
-	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000",
+	GENERIC MAP(cy_dpconfig=>"1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000",
 		d0_init=>"00000000",
 		d1_init=>"00000000",
 		a0_init=>"00000000",
@@ -1764,7 +1722,7 @@ Tx_1:cy_psoc3_pins_v1_10
 			zero, zero, zero, zero),
 		po=>open);
 \OUTPUT_UART:BUART:sRX:RxBitCounter\:cy_psoc3_count7
-	GENERIC MAP(cy_period=>"1110110",
+	GENERIC MAP(cy_period=>"1110010",
 		cy_init_value=>"0000000",
 		cy_route_ld=>'1',
 		cy_route_en=>'1',
@@ -2059,12 +2017,8 @@ Net_12:cy_dff
 	PORT MAP(d=>\GPS_UART:BUART:rx_state_2\\D\,
 		clk=>\GPS_UART:BUART:clock_op\,
 		q=>\GPS_UART:BUART:rx_state_2\);
-\GPS_UART:BUART:rx_count7_bit8\:cy_dff
-	PORT MAP(d=>\GPS_UART:BUART:rx_count7_bit8\\D\,
-		clk=>\GPS_UART:BUART:clock_op\,
-		q=>\GPS_UART:BUART:rx_count7_bit8_wire\);
 \GPS_UART:BUART:rx_bitclk\:cy_dff
-	PORT MAP(d=>\GPS_UART:BUART:rx_bitclk\\D\,
+	PORT MAP(d=>\GPS_UART:BUART:rx_bitclk_pre\,
 		clk=>\GPS_UART:BUART:clock_op\,
 		q=>\GPS_UART:BUART:rx_bitclk_enable\);
 \GPS_UART:BUART:rx_state_stop1_reg\:cy_dff
@@ -2179,12 +2133,8 @@ Net_25:cy_dff
 	PORT MAP(d=>\OUTPUT_UART:BUART:rx_state_2\\D\,
 		clk=>\OUTPUT_UART:BUART:clock_op\,
 		q=>\OUTPUT_UART:BUART:rx_state_2\);
-\OUTPUT_UART:BUART:rx_count7_bit8\:cy_dff
-	PORT MAP(d=>\OUTPUT_UART:BUART:rx_count7_bit8\\D\,
-		clk=>\OUTPUT_UART:BUART:clock_op\,
-		q=>\OUTPUT_UART:BUART:rx_count7_bit8_wire\);
 \OUTPUT_UART:BUART:rx_bitclk\:cy_dff
-	PORT MAP(d=>\OUTPUT_UART:BUART:rx_bitclk\\D\,
+	PORT MAP(d=>\OUTPUT_UART:BUART:rx_bitclk_pre\,
 		clk=>\OUTPUT_UART:BUART:clock_op\,
 		q=>\OUTPUT_UART:BUART:rx_bitclk_enable\);
 \OUTPUT_UART:BUART:rx_state_stop1_reg\:cy_dff

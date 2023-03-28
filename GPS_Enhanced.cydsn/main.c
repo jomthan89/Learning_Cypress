@@ -49,7 +49,7 @@ CY_ISR(uart1_rx_isr)
             token = strtok(NULL, ",");
             strcpy(timestamp, token);
             token = strtok(NULL, ",");
-            if (strcmp(token, "A") == 0) {
+            if (strcmp(token, "A") == 0 || strcmp(token, "V") == 0) {
                 token = strtok(NULL, ",");
                 latitude = atof(token);
                 token = strtok(NULL, ",");
@@ -87,7 +87,8 @@ int main(void)
     // Send initial message
     OUTPUT_UART_PutString("Initializing...\r\n");
     OUTPUT_UART_PutString("Getting GPS Data...\r\n");
-    GPS_UART_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+    //GPS_UART_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+    GPS_UART_PutString("$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
     OUTPUT_UART_PutString("GPS data:\r\n");
 
     while(1)
@@ -96,9 +97,10 @@ int main(void)
         if (CySysTickGetValue() % (MESSAGE_INTERVAL_MS * 1000) == 0) {
             
             // Format the message
-            sprintf(uart2_tx_buffer, "LAT: %f %c, LON: %f %c, SPD: %f, TIME: %s \r\n", latitude, ns_indicator, longitude, ew_indicator, speed, timestamp);
+            //sprintf(uart2_tx_buffer, "LAT: %f %c, LON: %f %c, SPD: %f, TIME: %s \r\n", latitude, ns_indicator, longitude, ew_indicator, speed, timestamp);
             
             // Send the message via UART2
+            sprintf(uart2_tx_buffer, "LAT: %f , LON: %f , TIME: %s \r\n",latitude, longitude, timestamp);
             OUTPUT_UART_PutString(uart2_tx_buffer);
         }
     }

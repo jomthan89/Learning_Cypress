@@ -1,21 +1,21 @@
-Loading plugins phase: Elapsed time ==> 0s.110ms
+Loading plugins phase: Elapsed time ==> 0s.109ms
 <CYPRESSTAG name="CyDsfit arguments...">
 cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\GPS_Enhanced.cyprj -d CY8C5267LTI-LP089 -s C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\Generated_Source\PSoC5 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
-ADD: fit.M0032: warning: Clock Warning: (GPS_UART_IntClock's accuracy range '153.355 kHz +/- 5%, (145.687 kHz - 161.022 kHz)' is not within the specified tolerance range '153.6 kHz +/- 4.595%, (146.542 kHz - 160.658 kHz)'.).
+ADD: fit.M0032: warning: Clock Warning: (GPS_UART_IntClock's accuracy range '76.8 kHz +/- 5%, (72.96 kHz - 80.64 kHz)' is not within the specified tolerance range '76.8 kHz +/- 3.937%, (73.776 kHz - 79.824 kHz)'.).
  * C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\UART_v2_50\UART_v2_50.cysch (Instance:IntClock)
  * C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\GPS_Enhanced.cydwr (GPS_UART_IntClock)
 
-ADD: fit.M0032: warning: Clock Warning: (OUTPUT_UART_IntClock's accuracy range '153.355 kHz +/- 5%, (145.687 kHz - 161.022 kHz)' is not within the specified tolerance range '153.6 kHz +/- 4.595%, (146.542 kHz - 160.658 kHz)'.).
+ADD: fit.M0032: warning: Clock Warning: (OUTPUT_UART_IntClock's accuracy range '76.8 kHz +/- 5%, (72.96 kHz - 80.64 kHz)' is not within the specified tolerance range '76.8 kHz +/- 3.937%, (73.776 kHz - 79.824 kHz)'.).
  * C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\UART_v2_50\UART_v2_50.cysch (Instance:IntClock)
  * C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\GPS_Enhanced.cydwr (OUTPUT_UART_IntClock)
 
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 1s.093ms
+Elaboration phase: Elapsed time ==> 1s.053ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.031ms
+HDL generation phase: Elapsed time ==> 0s.015ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -49,7 +49,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\Mark 
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Tue Mar 28 14:29:22 2023
+Tue Mar 28 16:46:08 2023
 
 
 ======================================================================
@@ -59,7 +59,7 @@ Options  :    -yv2 -q10 GPS_Enhanced.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Tue Mar 28 14:29:22 2023
+Tue Mar 28 16:46:08 2023
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\B_UART_v2_50\B_UART_v2_50.v'
@@ -102,7 +102,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\Mark 
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Tue Mar 28 14:29:22 2023
+Tue Mar 28 16:46:08 2023
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -134,7 +134,7 @@ Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\Mark 
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Tue Mar 28 14:29:22 2023
+Tue Mar 28 16:46:08 2023
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -233,6 +233,7 @@ Aliasing zero to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:tx_status_6\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:tx_status_5\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:tx_status_4\ to \GPS_UART:BUART:tx_hd_send_break\
+Aliasing \GPS_UART:BUART:rx_count7_bit8_wire\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\ to one
 Aliasing MODIN2_1 to MODIN1_1
 Aliasing MODIN2_0 to MODIN1_0
@@ -246,7 +247,6 @@ Aliasing \GPS_UART:BUART:rx_status_1\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_6\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_5\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_4\ to \GPS_UART:BUART:tx_hd_send_break\
-Aliasing \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_3\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_6\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_5\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_4\ to \GPS_UART:BUART:tx_hd_send_break\
@@ -268,6 +268,7 @@ Aliasing \OUTPUT_UART:BUART:tx_ctrl_mark\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:tx_status_6\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:tx_status_5\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:tx_status_4\ to \GPS_UART:BUART:tx_hd_send_break\
+Aliasing \OUTPUT_UART:BUART:rx_count7_bit8_wire\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:b_0\ to one
 Aliasing \OUTPUT_UART:BUART:sRX:s23Poll:MODIN6_1\ to \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_1\
 Aliasing \OUTPUT_UART:BUART:sRX:s23Poll:MODIN6_0\ to \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_0\
@@ -281,7 +282,6 @@ Aliasing \OUTPUT_UART:BUART:rx_status_1\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_6\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_5\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_4\ to \GPS_UART:BUART:tx_hd_send_break\
-Aliasing \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_3\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_6\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_5\ to \GPS_UART:BUART:tx_hd_send_break\
 Aliasing \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_4\ to \GPS_UART:BUART:tx_hd_send_break\
@@ -314,52 +314,53 @@ Removing Lhs of wire \GPS_UART:BUART:tx_status_5\[75] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:tx_status_4\[76] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:tx_status_1\[78] = \GPS_UART:BUART:tx_fifo_empty\[41]
 Removing Lhs of wire \GPS_UART:BUART:tx_status_3\[80] = \GPS_UART:BUART:tx_fifo_notfull\[40]
-Removing Rhs of wire \GPS_UART:BUART:rx_count7_bit8_wire\[140] = \GPS_UART:BUART:rx_count7_bit8\[141]
-Removing Rhs of wire add_vv_vv_MODGEN_1_1[149] = \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_1\[160]
-Removing Rhs of wire add_vv_vv_MODGEN_1_0[151] = \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_0\[161]
-Removing Lhs of wire cmp_vv_vv_MODGEN_2[152] = \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_0\[177]
-Removing Lhs of wire cmp_vv_vv_MODGEN_3[153] = \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\[191]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_1\[154] = MODIN1_1[155]
-Removing Rhs of wire MODIN1_1[155] = \GPS_UART:BUART:pollcount_1\[147]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_0\[156] = MODIN1_0[157]
-Removing Rhs of wire MODIN1_0[157] = \GPS_UART:BUART:pollcount_0\[150]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_0\[163] = one[4]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\[164] = one[4]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_1\[165] = MODIN1_1[155]
-Removing Lhs of wire MODIN2_1[166] = MODIN1_1[155]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_0\[167] = MODIN1_0[157]
-Removing Lhs of wire MODIN2_0[168] = MODIN1_0[157]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_1\[169] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_0\[170] = one[4]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_1\[171] = MODIN1_1[155]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_0\[172] = MODIN1_0[157]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_1\[173] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_0\[174] = one[4]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_1\[179] = MODIN1_1[155]
-Removing Lhs of wire MODIN3_1[180] = MODIN1_1[155]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_0\[181] = MODIN1_0[157]
-Removing Lhs of wire MODIN3_0[182] = MODIN1_0[157]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_1\[183] = one[4]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_0\[184] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_1\[185] = MODIN1_1[155]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_0\[186] = MODIN1_0[157]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_1\[187] = one[4]
-Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_0\[188] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:rx_status_1\[195] = zero[27]
-Removing Rhs of wire \GPS_UART:BUART:rx_status_2\[196] = \GPS_UART:BUART:rx_parity_error_status\[197]
-Removing Rhs of wire \GPS_UART:BUART:rx_status_3\[198] = \GPS_UART:BUART:rx_stop_bit_error\[199]
-Removing Lhs of wire cmp_vv_vv_MODGEN_4[209] = \GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\[257]
-Removing Lhs of wire cmp_vv_vv_MODGEN_5[213] = \GPS_UART:BUART:sRX:MODULE_5:g1:a0:xneq\[279]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_6\[214] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_5\[215] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_4\[216] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_3\[217] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_2\[218] = MODIN4_6[219]
-Removing Rhs of wire MODIN4_6[219] = \GPS_UART:BUART:rx_count_6\[136]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_1\[220] = MODIN4_5[221]
-Removing Rhs of wire MODIN4_5[221] = \GPS_UART:BUART:rx_count_5\[137]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_0\[222] = MODIN4_4[223]
-Removing Rhs of wire MODIN4_4[223] = \GPS_UART:BUART:rx_count_4\[138]
+Removing Lhs of wire \GPS_UART:BUART:rx_count7_bit8_wire\[140] = zero[27]
+Removing Rhs of wire add_vv_vv_MODGEN_1_1[148] = \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_1\[159]
+Removing Rhs of wire add_vv_vv_MODGEN_1_0[150] = \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:s_0\[160]
+Removing Lhs of wire cmp_vv_vv_MODGEN_2[151] = \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:lta_0\[176]
+Removing Lhs of wire cmp_vv_vv_MODGEN_3[152] = \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\[190]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_1\[153] = MODIN1_1[154]
+Removing Rhs of wire MODIN1_1[154] = \GPS_UART:BUART:pollcount_1\[146]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:a_0\[155] = MODIN1_0[156]
+Removing Rhs of wire MODIN1_0[156] = \GPS_UART:BUART:pollcount_0\[149]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_0\[162] = one[4]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:b_0\[163] = one[4]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_1\[164] = MODIN1_1[154]
+Removing Lhs of wire MODIN2_1[165] = MODIN1_1[154]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newa_0\[166] = MODIN1_0[156]
+Removing Lhs of wire MODIN2_0[167] = MODIN1_0[156]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_1\[168] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:newb_0\[169] = one[4]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_1\[170] = MODIN1_1[154]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:dataa_0\[171] = MODIN1_0[156]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_1\[172] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a0:datab_0\[173] = one[4]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_1\[178] = MODIN1_1[154]
+Removing Lhs of wire MODIN3_1[179] = MODIN1_1[154]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newa_0\[180] = MODIN1_0[156]
+Removing Lhs of wire MODIN3_0[181] = MODIN1_0[156]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_1\[182] = one[4]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:newb_0\[183] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_1\[184] = MODIN1_1[154]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:dataa_0\[185] = MODIN1_0[156]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_1\[186] = one[4]
+Removing Lhs of wire \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:datab_0\[187] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:rx_status_1\[194] = zero[27]
+Removing Rhs of wire \GPS_UART:BUART:rx_status_2\[195] = \GPS_UART:BUART:rx_parity_error_status\[196]
+Removing Rhs of wire \GPS_UART:BUART:rx_status_3\[197] = \GPS_UART:BUART:rx_stop_bit_error\[198]
+Removing Lhs of wire cmp_vv_vv_MODGEN_4[208] = \GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\[257]
+Removing Lhs of wire cmp_vv_vv_MODGEN_5[212] = \GPS_UART:BUART:sRX:MODULE_5:g1:a0:xneq\[279]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_6\[213] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_5\[214] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_4\[215] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_3\[216] = MODIN4_6[217]
+Removing Rhs of wire MODIN4_6[217] = \GPS_UART:BUART:rx_count_6\[135]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_2\[218] = MODIN4_5[219]
+Removing Rhs of wire MODIN4_5[219] = \GPS_UART:BUART:rx_count_5\[136]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_1\[220] = MODIN4_4[221]
+Removing Rhs of wire MODIN4_4[221] = \GPS_UART:BUART:rx_count_4\[137]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newa_0\[222] = MODIN4_3[223]
+Removing Rhs of wire MODIN4_3[223] = \GPS_UART:BUART:rx_count_3\[138]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_6\[224] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_5\[225] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_4\[226] = zero[27]
@@ -370,10 +371,10 @@ Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:newb_0\[230] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_6\[231] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_5\[232] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_4\[233] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_3\[234] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_2\[235] = MODIN4_6[219]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_1\[236] = MODIN4_5[221]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_0\[237] = MODIN4_4[223]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_3\[234] = MODIN4_6[217]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_2\[235] = MODIN4_5[219]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_1\[236] = MODIN4_4[221]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:dataa_0\[237] = MODIN4_3[223]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:datab_6\[238] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:datab_5\[239] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:datab_4\[240] = zero[27]
@@ -382,11 +383,11 @@ Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:datab_2\[242] = one[4]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:datab_1\[243] = one[4]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_4:g2:a0:datab_0\[244] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:newa_0\[259] = \GPS_UART:BUART:rx_postpoll\[94]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:newb_0\[260] = \GPS_UART:BUART:rx_parity_bit\[212]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:newb_0\[260] = \GPS_UART:BUART:rx_parity_bit\[211]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:dataa_0\[261] = \GPS_UART:BUART:rx_postpoll\[94]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:datab_0\[262] = \GPS_UART:BUART:rx_parity_bit\[212]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:datab_0\[262] = \GPS_UART:BUART:rx_parity_bit\[211]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:a_0\[263] = \GPS_UART:BUART:rx_postpoll\[94]
-Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:b_0\[264] = \GPS_UART:BUART:rx_parity_bit\[212]
+Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:b_0\[264] = \GPS_UART:BUART:rx_parity_bit\[211]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:aeqb_0\[266] = one[4]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:eq_0\[267] = \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\[265]
 Removing Lhs of wire \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:eqi_0\[268] = \GPS_UART:BUART:sRX:MODULE_5:g1:a0:gx:u0:xnor_array_0\[265]
@@ -408,52 +409,53 @@ Removing Lhs of wire \OUTPUT_UART:BUART:tx_status_5\[373] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:tx_status_4\[374] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:tx_status_1\[376] = \OUTPUT_UART:BUART:tx_fifo_empty\[339]
 Removing Lhs of wire \OUTPUT_UART:BUART:tx_status_3\[378] = \OUTPUT_UART:BUART:tx_fifo_notfull\[338]
-Removing Rhs of wire \OUTPUT_UART:BUART:rx_count7_bit8_wire\[438] = \OUTPUT_UART:BUART:rx_count7_bit8\[439]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_6_1\[447] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_1\[458]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_6_0\[449] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_0\[459]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_7\[450] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:lta_0\[475]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_8\[451] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:lta_0\[489]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:a_1\[452] = \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_1\[453]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_1\[453] = \OUTPUT_UART:BUART:pollcount_1\[445]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:a_0\[454] = \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_0\[455]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_0\[455] = \OUTPUT_UART:BUART:pollcount_0\[448]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:c_0\[461] = one[4]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:b_0\[462] = one[4]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newa_1\[463] = \OUTPUT_UART:BUART:pollcount_1\[445]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN6_1\[464] = \OUTPUT_UART:BUART:pollcount_1\[445]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newa_0\[465] = \OUTPUT_UART:BUART:pollcount_0\[448]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN6_0\[466] = \OUTPUT_UART:BUART:pollcount_0\[448]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newb_1\[467] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newb_0\[468] = one[4]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:dataa_1\[469] = \OUTPUT_UART:BUART:pollcount_1\[445]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:dataa_0\[470] = \OUTPUT_UART:BUART:pollcount_0\[448]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:datab_1\[471] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:datab_0\[472] = one[4]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newa_1\[477] = \OUTPUT_UART:BUART:pollcount_1\[445]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN7_1\[478] = \OUTPUT_UART:BUART:pollcount_1\[445]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newa_0\[479] = \OUTPUT_UART:BUART:pollcount_0\[448]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN7_0\[480] = \OUTPUT_UART:BUART:pollcount_0\[448]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newb_1\[481] = one[4]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newb_0\[482] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:dataa_1\[483] = \OUTPUT_UART:BUART:pollcount_1\[445]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:dataa_0\[484] = \OUTPUT_UART:BUART:pollcount_0\[448]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:datab_1\[485] = one[4]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:datab_0\[486] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_status_1\[493] = zero[27]
-Removing Rhs of wire \OUTPUT_UART:BUART:rx_status_2\[494] = \OUTPUT_UART:BUART:rx_parity_error_status\[495]
-Removing Rhs of wire \OUTPUT_UART:BUART:rx_status_3\[496] = \OUTPUT_UART:BUART:rx_stop_bit_error\[497]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:cmp_vv_vv_MODGEN_9\[507] = \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_0\[555]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:cmp_vv_vv_MODGEN_10\[511] = \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:xneq\[577]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_6\[512] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_5\[513] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_4\[514] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_3\[515] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_2\[516] = \OUTPUT_UART:BUART:sRX:MODIN8_6\[517]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODIN8_6\[517] = \OUTPUT_UART:BUART:rx_count_6\[434]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_1\[518] = \OUTPUT_UART:BUART:sRX:MODIN8_5\[519]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODIN8_5\[519] = \OUTPUT_UART:BUART:rx_count_5\[435]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_0\[520] = \OUTPUT_UART:BUART:sRX:MODIN8_4\[521]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODIN8_4\[521] = \OUTPUT_UART:BUART:rx_count_4\[436]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_count7_bit8_wire\[438] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_6_1\[446] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_1\[457]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:add_vv_vv_MODGEN_6_0\[448] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_0\[458]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_7\[449] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:lta_0\[474]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:cmp_vv_vv_MODGEN_8\[450] = \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:lta_0\[488]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:a_1\[451] = \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_1\[452]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_1\[452] = \OUTPUT_UART:BUART:pollcount_1\[444]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:a_0\[453] = \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_0\[454]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN5_0\[454] = \OUTPUT_UART:BUART:pollcount_0\[447]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:c_0\[460] = one[4]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:b_0\[461] = one[4]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newa_1\[462] = \OUTPUT_UART:BUART:pollcount_1\[444]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN6_1\[463] = \OUTPUT_UART:BUART:pollcount_1\[444]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newa_0\[464] = \OUTPUT_UART:BUART:pollcount_0\[447]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN6_0\[465] = \OUTPUT_UART:BUART:pollcount_0\[447]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newb_1\[466] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:newb_0\[467] = one[4]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:dataa_1\[468] = \OUTPUT_UART:BUART:pollcount_1\[444]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:dataa_0\[469] = \OUTPUT_UART:BUART:pollcount_0\[447]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:datab_1\[470] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g2:a0:datab_0\[471] = one[4]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newa_1\[476] = \OUTPUT_UART:BUART:pollcount_1\[444]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN7_1\[477] = \OUTPUT_UART:BUART:pollcount_1\[444]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newa_0\[478] = \OUTPUT_UART:BUART:pollcount_0\[447]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODIN7_0\[479] = \OUTPUT_UART:BUART:pollcount_0\[447]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newb_1\[480] = one[4]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:newb_0\[481] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:dataa_1\[482] = \OUTPUT_UART:BUART:pollcount_1\[444]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:dataa_0\[483] = \OUTPUT_UART:BUART:pollcount_0\[447]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:datab_1\[484] = one[4]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:datab_0\[485] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_status_1\[492] = zero[27]
+Removing Rhs of wire \OUTPUT_UART:BUART:rx_status_2\[493] = \OUTPUT_UART:BUART:rx_parity_error_status\[494]
+Removing Rhs of wire \OUTPUT_UART:BUART:rx_status_3\[495] = \OUTPUT_UART:BUART:rx_stop_bit_error\[496]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:cmp_vv_vv_MODGEN_9\[506] = \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_0\[555]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:cmp_vv_vv_MODGEN_10\[510] = \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:xneq\[577]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_6\[511] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_5\[512] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_4\[513] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_3\[514] = \OUTPUT_UART:BUART:sRX:MODIN8_6\[515]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODIN8_6\[515] = \OUTPUT_UART:BUART:rx_count_6\[433]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_2\[516] = \OUTPUT_UART:BUART:sRX:MODIN8_5\[517]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODIN8_5\[517] = \OUTPUT_UART:BUART:rx_count_5\[434]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_1\[518] = \OUTPUT_UART:BUART:sRX:MODIN8_4\[519]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODIN8_4\[519] = \OUTPUT_UART:BUART:rx_count_4\[435]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newa_0\[520] = \OUTPUT_UART:BUART:sRX:MODIN8_3\[521]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODIN8_3\[521] = \OUTPUT_UART:BUART:rx_count_3\[436]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_6\[522] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_5\[523] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_4\[524] = zero[27]
@@ -464,10 +466,10 @@ Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:newb_0\[528] = zero[2
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_6\[529] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_5\[530] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_4\[531] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_3\[532] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_2\[533] = \OUTPUT_UART:BUART:rx_count_6\[434]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_1\[534] = \OUTPUT_UART:BUART:rx_count_5\[435]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_0\[535] = \OUTPUT_UART:BUART:rx_count_4\[436]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_3\[532] = \OUTPUT_UART:BUART:rx_count_6\[433]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_2\[533] = \OUTPUT_UART:BUART:rx_count_5\[434]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_1\[534] = \OUTPUT_UART:BUART:rx_count_4\[435]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:dataa_0\[535] = \OUTPUT_UART:BUART:rx_count_3\[436]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:datab_6\[536] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:datab_5\[537] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:datab_4\[538] = zero[27]
@@ -476,11 +478,11 @@ Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:datab_2\[540] = one[4
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:datab_1\[541] = one[4]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:datab_0\[542] = zero[27]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:newa_0\[557] = \OUTPUT_UART:BUART:rx_postpoll\[392]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:newb_0\[558] = \OUTPUT_UART:BUART:rx_parity_bit\[510]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:newb_0\[558] = \OUTPUT_UART:BUART:rx_parity_bit\[509]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:dataa_0\[559] = \OUTPUT_UART:BUART:rx_postpoll\[392]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:datab_0\[560] = \OUTPUT_UART:BUART:rx_parity_bit\[510]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:datab_0\[560] = \OUTPUT_UART:BUART:rx_parity_bit\[509]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:a_0\[561] = \OUTPUT_UART:BUART:rx_postpoll\[392]
-Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:b_0\[562] = \OUTPUT_UART:BUART:rx_parity_bit\[510]
+Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:b_0\[562] = \OUTPUT_UART:BUART:rx_parity_bit\[509]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:aeqb_0\[564] = one[4]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:eq_0\[565] = \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:xnor_array_0\[563]
 Removing Lhs of wire \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:eqi_0\[566] = \OUTPUT_UART:BUART:sRX:MODULE_10:g1:a0:gx:u0:xnor_array_0\[563]
@@ -488,14 +490,16 @@ Removing Lhs of wire tmpOE__Rx_2_net_0[588] = one[4]
 Removing Lhs of wire tmpOE__Tx_2_net_0[593] = one[4]
 Removing Lhs of wire tmpOE__PW_GPS_net_0[599] = one[4]
 Removing Lhs of wire \GPS_UART:BUART:reset_reg\\D\[605] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:rx_parity_error_pre\\D\[630] = \GPS_UART:BUART:rx_parity_error_pre\[207]
-Removing Lhs of wire \GPS_UART:BUART:rx_break_status\\D\[631] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:reset_reg\\D\[635] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_parity_error_pre\\D\[660] = \OUTPUT_UART:BUART:rx_parity_error_pre\[505]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_break_status\\D\[661] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:rx_bitclk\\D\[620] = \GPS_UART:BUART:rx_bitclk_pre\[129]
+Removing Lhs of wire \GPS_UART:BUART:rx_parity_error_pre\\D\[629] = \GPS_UART:BUART:rx_parity_error_pre\[206]
+Removing Lhs of wire \GPS_UART:BUART:rx_break_status\\D\[630] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:reset_reg\\D\[634] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_bitclk\\D\[649] = \OUTPUT_UART:BUART:rx_bitclk_pre\[427]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_parity_error_pre\\D\[658] = \OUTPUT_UART:BUART:rx_parity_error_pre\[504]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_break_status\\D\[659] = zero[27]
 
 ------------------------------------------------------
-Aliased 0 equations, 196 wires.
+Aliased 0 equations, 200 wires.
 ------------------------------------------------------
 
 ----------------------------------------------------------
@@ -514,24 +518,20 @@ Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_addressmatch\' (cost =
 \GPS_UART:BUART:rx_addressmatch\ <= (\GPS_UART:BUART:rx_addressmatch2\
 	OR \GPS_UART:BUART:rx_addressmatch1\);
 
-Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_bitclk_pre\' (cost = 2):
-\GPS_UART:BUART:rx_bitclk_pre\ <= ((not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\));
+Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_bitclk_pre\' (cost = 1):
+\GPS_UART:BUART:rx_bitclk_pre\ <= ((not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_bitclk_pre16x\' (cost = 2):
-\GPS_UART:BUART:rx_bitclk_pre16x\ <= ((not \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\));
+Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_bitclk_pre16x\' (cost = 0):
+\GPS_UART:BUART:rx_bitclk_pre16x\ <= ((not \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_poll_bit1\' (cost = 2):
-\GPS_UART:BUART:rx_poll_bit1\ <= ((not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count7_bit8_wire\ and \GPS_UART:BUART:rx_count_0\)
-	OR (not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\));
+Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_poll_bit1\' (cost = 1):
+\GPS_UART:BUART:rx_poll_bit1\ <= ((not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_poll_bit2\' (cost = 2):
-\GPS_UART:BUART:rx_poll_bit2\ <= ((not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and not \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\));
+Note:  Expanding virtual equation for '\GPS_UART:BUART:rx_poll_bit2\' (cost = 1):
+\GPS_UART:BUART:rx_poll_bit2\ <= ((not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\GPS_UART:BUART:pollingrange\' (cost = 24):
-\GPS_UART:BUART:pollingrange\ <= ((not \GPS_UART:BUART:rx_count_3\ and not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count_2\ and \GPS_UART:BUART:rx_count_1\ and \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\ and not \GPS_UART:BUART:rx_count_0\ and \GPS_UART:BUART:rx_count_3\ and \GPS_UART:BUART:rx_count7_bit8_wire\));
+Note:  Expanding virtual equation for '\GPS_UART:BUART:pollingrange\' (cost = 4):
+\GPS_UART:BUART:pollingrange\ <= ((not \GPS_UART:BUART:rx_count_2\ and not \GPS_UART:BUART:rx_count_1\));
 
 Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_1\' (cost = 0):
 \GPS_UART:BUART:sRX:s23Poll:MODULE_1:g2:a0:g1:z1:s0:g1:u0:c_1\ <= (MODIN1_0);
@@ -573,47 +573,43 @@ Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_3\
 \GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_3\ <=  ('0') ;
 
 Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_3\' (cost = 0):
-\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_3\ <=  ('0') ;
+\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_3\ <= (MODIN4_6);
 
-Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_2\' (cost = 0):
-\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_2\ <= (not MODIN4_6);
+Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_2\' (cost = 1):
+\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_2\ <= ((not MODIN4_6 and not MODIN4_5));
 
 Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_2\' (cost = 0):
-\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_2\ <=  ('0') ;
+\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_2\ <= (MODIN4_6);
 
 Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_1\' (cost = 2):
-\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_1\ <= (not MODIN4_5
-	OR not MODIN4_6);
+\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_1\ <= ((not MODIN4_6 and not MODIN4_4)
+	OR (not MODIN4_6 and not MODIN4_5));
 
 Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_1\' (cost = 0):
-\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_1\ <=  ('0') ;
+\GPS_UART:BUART:sRX:MODULE_4:g2:a0:gta_1\ <= (MODIN4_6);
 
-Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\' (cost = 7):
-\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\ <= (not MODIN4_5
-	OR not MODIN4_6);
+Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\' (cost = 8):
+\GPS_UART:BUART:sRX:MODULE_4:g2:a0:lta_0\ <= ((not MODIN4_6 and not MODIN4_4)
+	OR (not MODIN4_6 and not MODIN4_5));
 
 Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_addressmatch\' (cost = 0):
 \OUTPUT_UART:BUART:rx_addressmatch\ <= (\OUTPUT_UART:BUART:rx_addressmatch2\
 	OR \OUTPUT_UART:BUART:rx_addressmatch1\);
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_bitclk_pre\' (cost = 2):
-\OUTPUT_UART:BUART:rx_bitclk_pre\ <= ((not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\));
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_bitclk_pre\' (cost = 1):
+\OUTPUT_UART:BUART:rx_bitclk_pre\ <= ((not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_bitclk_pre16x\' (cost = 2):
-\OUTPUT_UART:BUART:rx_bitclk_pre16x\ <= ((not \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\));
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_bitclk_pre16x\' (cost = 0):
+\OUTPUT_UART:BUART:rx_bitclk_pre16x\ <= ((not \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_poll_bit1\' (cost = 2):
-\OUTPUT_UART:BUART:rx_poll_bit1\ <= ((not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\ and \OUTPUT_UART:BUART:rx_count_0\)
-	OR (not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\));
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_poll_bit1\' (cost = 1):
+\OUTPUT_UART:BUART:rx_poll_bit1\ <= ((not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_poll_bit2\' (cost = 2):
-\OUTPUT_UART:BUART:rx_poll_bit2\ <= ((not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\));
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:rx_poll_bit2\' (cost = 1):
+\OUTPUT_UART:BUART:rx_poll_bit2\ <= ((not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\));
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:pollingrange\' (cost = 24):
-\OUTPUT_UART:BUART:pollingrange\ <= ((not \OUTPUT_UART:BUART:rx_count_3\ and not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count_2\ and \OUTPUT_UART:BUART:rx_count_1\ and \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\)
-	OR (not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\ and not \OUTPUT_UART:BUART:rx_count_0\ and \OUTPUT_UART:BUART:rx_count_3\ and \OUTPUT_UART:BUART:rx_count7_bit8_wire\));
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:pollingrange\' (cost = 4):
+\OUTPUT_UART:BUART:pollingrange\ <= ((not \OUTPUT_UART:BUART:rx_count_2\ and not \OUTPUT_UART:BUART:rx_count_1\));
 
 Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:c_1\' (cost = 0):
 \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:g1:z1:s0:g1:u0:c_1\ <= (\OUTPUT_UART:BUART:pollcount_0\);
@@ -655,24 +651,24 @@ Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta
 \OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_3\ <=  ('0') ;
 
 Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_3\' (cost = 0):
-\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_3\ <=  ('0') ;
+\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_3\ <= (\OUTPUT_UART:BUART:rx_count_6\);
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_2\' (cost = 0):
-\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_2\ <= (not \OUTPUT_UART:BUART:rx_count_6\);
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_2\' (cost = 1):
+\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_2\ <= ((not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_5\));
 
 Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_2\' (cost = 0):
-\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_2\ <=  ('0') ;
+\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_2\ <= (\OUTPUT_UART:BUART:rx_count_6\);
 
 Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_1\' (cost = 2):
-\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_1\ <= (not \OUTPUT_UART:BUART:rx_count_5\
-	OR not \OUTPUT_UART:BUART:rx_count_6\);
+\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_1\ <= ((not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_4\)
+	OR (not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_5\));
 
 Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_1\' (cost = 0):
-\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_1\ <=  ('0') ;
+\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:gta_1\ <= (\OUTPUT_UART:BUART:rx_count_6\);
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_0\' (cost = 7):
-\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_0\ <= (not \OUTPUT_UART:BUART:rx_count_5\
-	OR not \OUTPUT_UART:BUART:rx_count_6\);
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_0\' (cost = 8):
+\OUTPUT_UART:BUART:sRX:MODULE_9:g2:a0:lta_0\ <= ((not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_4\)
+	OR (not \OUTPUT_UART:BUART:rx_count_6\ and not \OUTPUT_UART:BUART:rx_count_5\));
 
 
 Substituting virtuals - pass 2:
@@ -683,7 +679,7 @@ Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:s23Poll:MODULE_2:g2:a
 Note:  Expanding virtual equation for '\GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\' (cost = 0):
 \GPS_UART:BUART:sRX:s23Poll:MODULE_3:g2:a0:lta_0\ <= (not MODIN1_1);
 
-Note:  Expanding virtual equation for 'add_vv_vv_MODGEN_1_1' (cost = 6):
+Note:  Expanding virtual equation for 'add_vv_vv_MODGEN_1_1' (cost = 2):
 add_vv_vv_MODGEN_1_1 <= ((not MODIN1_0 and MODIN1_1)
 	OR (not MODIN1_1 and MODIN1_0));
 
@@ -693,7 +689,7 @@ Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:s23Poll:MODULE_7:g
 Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:lta_0\' (cost = 0):
 \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_8:g2:a0:lta_0\ <= (not \OUTPUT_UART:BUART:pollcount_1\);
 
-Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_1\' (cost = 6):
+Note:  Expanding virtual equation for '\OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_1\' (cost = 2):
 \OUTPUT_UART:BUART:sRX:s23Poll:MODULE_6:g2:a0:s_1\ <= ((not \OUTPUT_UART:BUART:pollcount_0\ and \OUTPUT_UART:BUART:pollcount_1\)
 	OR (not \OUTPUT_UART:BUART:pollcount_1\ and \OUTPUT_UART:BUART:pollcount_0\));
 
@@ -757,24 +753,24 @@ Aliasing \GPS_UART:BUART:rx_addr_match_status\\D\ to zero
 Aliasing \OUTPUT_UART:BUART:rx_markspace_status\\D\ to zero
 Aliasing \OUTPUT_UART:BUART:rx_parity_error_status\\D\ to zero
 Aliasing \OUTPUT_UART:BUART:rx_addr_match_status\\D\ to zero
-Removing Rhs of wire \GPS_UART:BUART:rx_bitclk_enable\[93] = \GPS_UART:BUART:rx_bitclk\[142]
-Removing Lhs of wire \GPS_UART:BUART:rx_status_0\[193] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:rx_status_6\[202] = zero[27]
-Removing Rhs of wire \OUTPUT_UART:BUART:rx_bitclk_enable\[391] = \OUTPUT_UART:BUART:rx_bitclk\[440]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_status_0\[491] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_status_6\[500] = zero[27]
+Removing Rhs of wire \GPS_UART:BUART:rx_bitclk_enable\[93] = \GPS_UART:BUART:rx_bitclk\[141]
+Removing Lhs of wire \GPS_UART:BUART:rx_status_0\[192] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:rx_status_6\[201] = zero[27]
+Removing Rhs of wire \OUTPUT_UART:BUART:rx_bitclk_enable\[391] = \OUTPUT_UART:BUART:rx_bitclk\[439]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_status_0\[490] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_status_6\[499] = zero[27]
 Removing Lhs of wire \GPS_UART:BUART:tx_ctrl_mark_last\\D\[612] = \GPS_UART:BUART:tx_ctrl_mark_last\[84]
-Removing Lhs of wire \GPS_UART:BUART:rx_markspace_status\\D\[625] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:rx_parity_error_status\\D\[626] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:rx_addr_match_status\\D\[628] = zero[27]
-Removing Lhs of wire \GPS_UART:BUART:rx_markspace_pre\\D\[629] = \GPS_UART:BUART:rx_markspace_pre\[206]
-Removing Lhs of wire \GPS_UART:BUART:rx_parity_bit\\D\[634] = \GPS_UART:BUART:rx_parity_bit\[212]
-Removing Lhs of wire \OUTPUT_UART:BUART:tx_ctrl_mark_last\\D\[642] = \OUTPUT_UART:BUART:tx_ctrl_mark_last\[382]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_markspace_status\\D\[655] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_parity_error_status\\D\[656] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_addr_match_status\\D\[658] = zero[27]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_markspace_pre\\D\[659] = \OUTPUT_UART:BUART:rx_markspace_pre\[504]
-Removing Lhs of wire \OUTPUT_UART:BUART:rx_parity_bit\\D\[664] = \OUTPUT_UART:BUART:rx_parity_bit\[510]
+Removing Lhs of wire \GPS_UART:BUART:rx_markspace_status\\D\[624] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:rx_parity_error_status\\D\[625] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:rx_addr_match_status\\D\[627] = zero[27]
+Removing Lhs of wire \GPS_UART:BUART:rx_markspace_pre\\D\[628] = \GPS_UART:BUART:rx_markspace_pre\[205]
+Removing Lhs of wire \GPS_UART:BUART:rx_parity_bit\\D\[633] = \GPS_UART:BUART:rx_parity_bit\[211]
+Removing Lhs of wire \OUTPUT_UART:BUART:tx_ctrl_mark_last\\D\[641] = \OUTPUT_UART:BUART:tx_ctrl_mark_last\[382]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_markspace_status\\D\[653] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_parity_error_status\\D\[654] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_addr_match_status\\D\[656] = zero[27]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_markspace_pre\\D\[657] = \OUTPUT_UART:BUART:rx_markspace_pre\[503]
+Removing Lhs of wire \OUTPUT_UART:BUART:rx_parity_bit\\D\[662] = \OUTPUT_UART:BUART:rx_parity_bit\[509]
 
 ------------------------------------------------------
 Aliased 0 equations, 18 wires.
@@ -819,14 +815,14 @@ CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\wa
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\warp\bin\warp.exe
 Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya "-.fftprj=C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\GPS_Enhanced.cyprj" -dcpsoc3 GPS_Enhanced.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 0s.585ms
+Warp synthesis phase: Elapsed time ==> 0s.653ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Tuesday, 28 March 2023 14:29:22
+cyp3fit: V4.4.0.80, Family: PSoC3, Started at: Tuesday, 28 March 2023 16:46:08
 Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\GPS_Enhanced.cyprj -d CY8C5267LTI-LP089 GPS_Enhanced.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.014ms
+Design parsing phase: Elapsed time ==> 0s.010ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -929,7 +925,7 @@ Removing duplicate macrocells
         (
             0
         );
-        Output = \OUTPUT_UART:BUART:rx_state_1\ (fanout=9)
+        Output = \OUTPUT_UART:BUART:rx_state_1\ (fanout=8)
 
     Removing \OUTPUT_UART:BUART:tx_parity_bit\, Duplicate of \OUTPUT_UART:BUART:tx_ctrl_mark_last\ 
     MacroCell: Name=\OUTPUT_UART:BUART:tx_parity_bit\, Mode=(T-Register)
@@ -1020,7 +1016,7 @@ Removing duplicate macrocells
         (
             0
         );
-        Output = \GPS_UART:BUART:rx_state_1\ (fanout=9)
+        Output = \GPS_UART:BUART:rx_state_1\ (fanout=8)
 
     Removing \GPS_UART:BUART:tx_parity_bit\, Duplicate of \GPS_UART:BUART:tx_ctrl_mark_last\ 
     MacroCell: Name=\GPS_UART:BUART:tx_parity_bit\, Mode=(T-Register)
@@ -1265,42 +1261,6 @@ Design Equations
     ------------------------------------------------------------
     Macrocell listing
     ------------------------------------------------------------
-
-    MacroCell: Name=MODIN1_1_split, Mode=(Combinatorial)
-        Total # of inputs        : 8
-        Total # of product terms : 8
-            Clock Enable: True
-        Main Equation            : 8 pterms
-        (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_1 * 
-              MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * MODIN1_1 * !MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_1
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_1 * 
-              MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * MODIN1_1 * !MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_1
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_1 * 
-              MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * MODIN1_1 * !MODIN1_0
-        );
-        Output = MODIN1_1_split (fanout=1)
 
     MacroCell: Name=Net_9, Mode=(Combinatorial)
         Total # of inputs        : 1
@@ -1591,7 +1551,7 @@ Design Equations
         (
             0
         );
-        Output = \GPS_UART:BUART:tx_ctrl_mark_last\ (fanout=9)
+        Output = \GPS_UART:BUART:tx_ctrl_mark_last\ (fanout=8)
 
     MacroCell: Name=\GPS_UART:BUART:rx_state_0\, Mode=(T-Register)
         Total # of inputs        : 11
@@ -1613,14 +1573,12 @@ Design Equations
               !MODIN1_1 * !MODIN1_0
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
         );
-        Output = \GPS_UART:BUART:rx_state_0\ (fanout=9)
+        Output = \GPS_UART:BUART:rx_state_0\ (fanout=8)
 
     MacroCell: Name=\GPS_UART:BUART:rx_load_fifo\, Mode=(D-Register)
         Total # of inputs        : 8
@@ -1636,12 +1594,10 @@ Design Equations
               !\GPS_UART:BUART:rx_state_2\
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
         );
         Output = \GPS_UART:BUART:rx_load_fifo\ (fanout=2)
 
@@ -1659,14 +1615,12 @@ Design Equations
               \GPS_UART:BUART:rx_state_2\
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
         );
-        Output = \GPS_UART:BUART:rx_state_3\ (fanout=8)
+        Output = \GPS_UART:BUART:rx_state_3\ (fanout=7)
 
     MacroCell: Name=\GPS_UART:BUART:rx_state_2\, Mode=(T-Register)
         Total # of inputs        : 10
@@ -1688,45 +1642,23 @@ Design Equations
               \GPS_UART:BUART:rx_last\
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
             + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
               \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
         );
-        Output = \GPS_UART:BUART:rx_state_2\ (fanout=8)
-
-    MacroCell: Name=\GPS_UART:BUART:rx_count7_bit8_wire\, Mode=(D-Register)
-        Total # of inputs        : 6
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        !(
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\
-            + !\GPS_UART:BUART:rx_count7_tc\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\
-        );
-        Output = \GPS_UART:BUART:rx_count7_bit8_wire\ (fanout=9)
+        Output = \GPS_UART:BUART:rx_state_2\ (fanout=7)
 
     MacroCell: Name=\GPS_UART:BUART:rx_bitclk_enable\, Mode=(D-Register)
-        Total # of inputs        : 5
-        Total # of product terms : 2
+        Total # of inputs        : 3
+        Total # of product terms : 1
         List of special equations: 
             Clock  = (\GPS_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 2 pterms
+        Main Equation            : 1 pterm
         (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\
+              !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              !\GPS_UART:BUART:rx_count_0\
         );
         Output = \GPS_UART:BUART:rx_bitclk_enable\ (fanout=6)
 
@@ -1745,46 +1677,34 @@ Design Equations
         Output = \GPS_UART:BUART:rx_state_stop1_reg\ (fanout=1)
 
     MacroCell: Name=MODIN1_1, Mode=(D-Register)
-        Total # of inputs        : 7
+        Total # of inputs        : 5
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 3 pterms
+        (
+              !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              !Net_5 * MODIN1_1
+            + !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              Net_5 * !MODIN1_1 * MODIN1_0
+            + !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              MODIN1_1 * !MODIN1_0
+        );
+        Output = MODIN1_1 (fanout=4)
+
+    MacroCell: Name=MODIN1_0, Mode=(D-Register)
+        Total # of inputs        : 4
         Total # of product terms : 2
         List of special equations: 
             Clock  = (\GPS_UART:Net_9\) => Global
             Clock Enable: True
         Main Equation            : 2 pterms
         (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_1
-            + MODIN1_1_split
-        );
-        Output = MODIN1_1 (fanout=5)
-
-    MacroCell: Name=MODIN1_0, Mode=(D-Register)
-        Total # of inputs        : 7
-        Total # of product terms : 6
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 6 pterms
-        (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_0
+              !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              !Net_5 * MODIN1_0
+            + !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              Net_5 * !MODIN1_0
         );
         Output = MODIN1_0 (fanout=5)
 
@@ -1941,7 +1861,7 @@ Design Equations
         (
             0
         );
-        Output = \OUTPUT_UART:BUART:tx_ctrl_mark_last\ (fanout=9)
+        Output = \OUTPUT_UART:BUART:tx_ctrl_mark_last\ (fanout=8)
 
     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_0\, Mode=(T-Register)
         Total # of inputs        : 11
@@ -1969,15 +1889,15 @@ Design Equations
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
               !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_5\
             + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
               \OUTPUT_UART:BUART:rx_state_0\ * 
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
         );
-        Output = \OUTPUT_UART:BUART:rx_state_0\ (fanout=9)
+        Output = \OUTPUT_UART:BUART:rx_state_0\ (fanout=8)
 
     MacroCell: Name=\OUTPUT_UART:BUART:rx_load_fifo\, Mode=(D-Register)
         Total # of inputs        : 8
@@ -1997,13 +1917,13 @@ Design Equations
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
               !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_5\
             + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
               \OUTPUT_UART:BUART:rx_state_0\ * 
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
         );
         Output = \OUTPUT_UART:BUART:rx_load_fifo\ (fanout=2)
 
@@ -2024,15 +1944,15 @@ Design Equations
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
               !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_5\
             + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
               \OUTPUT_UART:BUART:rx_state_0\ * 
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
         );
-        Output = \OUTPUT_UART:BUART:rx_state_3\ (fanout=8)
+        Output = \OUTPUT_UART:BUART:rx_state_3\ (fanout=7)
 
     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_2\, Mode=(T-Register)
         Total # of inputs        : 10
@@ -2060,50 +1980,27 @@ Design Equations
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
               !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_5\
             + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
               \OUTPUT_UART:BUART:rx_state_0\ * 
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
         );
-        Output = \OUTPUT_UART:BUART:rx_state_2\ (fanout=8)
-
-    MacroCell: Name=\OUTPUT_UART:BUART:rx_count7_bit8_wire\, Mode=(D-Register)
-        Total # of inputs        : 6
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        !(
-              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\
-            + !\OUTPUT_UART:BUART:rx_count7_tc\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\
-        );
-        Output = \OUTPUT_UART:BUART:rx_count7_bit8_wire\ (fanout=9)
+        Output = \OUTPUT_UART:BUART:rx_state_2\ (fanout=7)
 
     MacroCell: Name=\OUTPUT_UART:BUART:rx_bitclk_enable\, Mode=(D-Register)
-        Total # of inputs        : 5
-        Total # of product terms : 2
+        Total # of inputs        : 3
+        Total # of product terms : 1
         List of special equations: 
             Clock  = (\OUTPUT_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 2 pterms
+        Main Equation            : 1 pterm
         (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
               !\OUTPUT_UART:BUART:rx_count_2\ * 
               !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_0\
         );
         Output = \OUTPUT_UART:BUART:rx_bitclk_enable\ (fanout=6)
 
@@ -2122,122 +2019,43 @@ Design Equations
         Output = \OUTPUT_UART:BUART:rx_state_stop1_reg\ (fanout=1)
 
     MacroCell: Name=\OUTPUT_UART:BUART:pollcount_1\, Mode=(D-Register)
-        Total # of inputs        : 7
+        Total # of inputs        : 5
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 3 pterms
+        (
+              !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * 
+              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
+              \OUTPUT_UART:BUART:pollcount_0\
+            + !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * 
+              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
+            + !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * 
+              \OUTPUT_UART:BUART:pollcount_1\ * 
+              !\OUTPUT_UART:BUART:pollcount_0\
+        );
+        Output = \OUTPUT_UART:BUART:pollcount_1\ (fanout=4)
+
+    MacroCell: Name=\OUTPUT_UART:BUART:pollcount_0\, Mode=(D-Register)
+        Total # of inputs        : 4
         Total # of product terms : 2
         List of special equations: 
             Clock  = (\OUTPUT_UART:Net_9\) => Global
             Clock Enable: True
         Main Equation            : 2 pterms
         (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
               !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
-            + \OUTPUT_UART:BUART:pollcount_1_split\
-        );
-        Output = \OUTPUT_UART:BUART:pollcount_1\ (fanout=5)
-
-    MacroCell: Name=\OUTPUT_UART:BUART:pollcount_0\, Mode=(D-Register)
-        Total # of inputs        : 7
-        Total # of product terms : 6
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 6 pterms
-        (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * !Net_18 * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * !Net_18 * 
               \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * Net_18 * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * !Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * Net_18 * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * !Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * Net_18 * 
+            + !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * Net_18 * 
               !\OUTPUT_UART:BUART:pollcount_0\
         );
         Output = \OUTPUT_UART:BUART:pollcount_0\ (fanout=5)
-
-    MacroCell: Name=\OUTPUT_UART:BUART:pollcount_1_split\, Mode=(Combinatorial)
-        Total # of inputs        : 8
-        Total # of product terms : 8
-            Clock Enable: True
-        Main Equation            : 8 pterms
-        (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-        );
-        Output = \OUTPUT_UART:BUART:pollcount_1_split\ (fanout=1)
 
     MacroCell: Name=\OUTPUT_UART:BUART:rx_status_3\, Mode=(D-Register)
         Total # of inputs        : 8
@@ -2331,7 +2149,7 @@ Design Equations
             cl1_sync = 1
             cmsb_sync = 1
             co_msb_sync = 1
-            cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000"
+            cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000"
             d0_init = "00000000"
             d1_init = "00000000"
             f0_blk_sync = 1
@@ -2437,7 +2255,7 @@ Design Equations
             cl1_sync = 1
             cmsb_sync = 1
             co_msb_sync = 1
-            cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000"
+            cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000"
             d0_init = "00000000"
             d1_init = "00000000"
             f0_blk_sync = 1
@@ -2579,7 +2397,7 @@ Design Equations
             count_6 => MODIN4_6 ,
             count_5 => MODIN4_5 ,
             count_4 => MODIN4_4 ,
-            count_3 => \GPS_UART:BUART:rx_count_3\ ,
+            count_3 => MODIN4_3 ,
             count_2 => \GPS_UART:BUART:rx_count_2\ ,
             count_1 => \GPS_UART:BUART:rx_count_1\ ,
             count_0 => \GPS_UART:BUART:rx_count_0\ ,
@@ -2588,7 +2406,7 @@ Design Equations
         {
             cy_alt_mode = 0
             cy_init_value = "0000000"
-            cy_period = "1110110"
+            cy_period = "1110010"
             cy_route_en = 1
             cy_route_ld = 1
         }
@@ -2611,7 +2429,7 @@ Design Equations
         {
             cy_alt_mode = 0
             cy_init_value = "0000000"
-            cy_period = "1110110"
+            cy_period = "1110010"
             cy_route_en = 1
             cy_route_ld = 1
         }
@@ -2655,9 +2473,9 @@ USB                           :    0 :    1 :    1 :  0.00 %
 DMA Channels                  :    0 :   24 :   24 :  0.00 %
 Timer                         :    0 :    4 :    4 :  0.00 %
 UDB                           :      :      :      :        
-  Macrocells                  :   52 :  140 :  192 : 27.08 %
-  Unique P-terms              :  114 :  270 :  384 : 29.69 %
-  Total P-terms               :  134 :      :      :        
+  Macrocells                  :   48 :  144 :  192 : 25.00 %
+  Unique P-terms              :   88 :  296 :  384 : 22.92 %
+  Total P-terms               :  106 :      :      :        
   Datapath Cells              :    6 :   18 :   24 : 25.00 %
   Status Cells                :    6 :   18 :   24 : 25.00 %
     StatusI Registers         :    4 :      :      :        
@@ -2671,8 +2489,8 @@ SAR ADC                       :    0 :    1 :    1 :  0.00 %
 DAC                           :      :      :      :        
   VIDAC                       :    0 :    1 :    1 :  0.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.094ms
-Tech Mapping phase: Elapsed time ==> 0s.141ms
+Technology Mapping: Elapsed time ==> 0s.099ms
+Tech Mapping phase: Elapsed time ==> 0s.146ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 Initial Analog Placement Results:
@@ -2681,7 +2499,7 @@ IO_5@[IOP=(3)][IoId=(5)] : Rx_1(0) (fixed)
 IO_0@[IOP=(3)][IoId=(0)] : Rx_2(0) (fixed)
 IO_4@[IOP=(3)][IoId=(4)] : Tx_1(0) (fixed)
 IO_1@[IOP=(3)][IoId=(1)] : Tx_2(0) (fixed)
-Analog Placement phase: Elapsed time ==> 0s.015ms
+Analog Placement phase: Elapsed time ==> 0s.026ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
 Analog Routing phase: Elapsed time ==> 0s.000ms
@@ -2699,11 +2517,11 @@ Dump of CyP35AnalogRoutingResultsDB
 IsVddaHalfUsedForComp = False
 IsVddaHalfUsedForSar0 = False
 IsVddaHalfUsedForSar1 = False
-Analog Code Generation phase: Elapsed time ==> 0s.188ms
+Analog Code Generation phase: Elapsed time ==> 0s.220ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
-I2076: Total run-time: 0.8 sec.
+I2076: Total run-time: 0.7 sec.
 
 </CYPRESSTAG>
 <CYPRESSTAG name="PLD Packing">
@@ -2714,15 +2532,15 @@ PLD Packing Summary
 ------------------------------------------------------------
             Resource Type : Used : Free :  Max :  % Used
     ====================================================
-                     PLDs :   19 :   29 :   48 :  39.58%
+                     PLDs :   16 :   32 :   48 :  33.33%
 
 <CYPRESSTAG name="PLD Statistics">
 
         PLD Resource Type :     Average/LAB
     =======================================
-                   Inputs :            7.95
-                   Pterms :            6.26
-               Macrocells :            2.74
+                   Inputs :            7.13
+                   Pterms :            5.81
+               Macrocells :            3.00
 </CYPRESSTAG>
 <CYPRESSTAG name="Packed PLD Contents">
 Packed PLD Contents not displayed at this verbose level.</CYPRESSTAG>
@@ -2734,7 +2552,7 @@ PLD Packing: Elapsed time ==> 0s.000ms
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.031ms
+Partitioning: Elapsed time ==> 0s.016ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -2744,7 +2562,7 @@ Final Placement Summary
 
        Resource Type :      Count : Avg Inputs : Avg Outputs
     ========================================================
-                 UDB :         10 :      11.20 :       5.20
+                 UDB :          8 :      11.00 :       6.00
 <CYPRESSTAG name="Final Placement Details">
 <CYPRESSTAG name="Component Details">
 
@@ -2764,144 +2582,378 @@ UDB [UDB=(1,3)] is empty.
 UDB [UDB=(1,4)] is empty.
 UDB [UDB=(1,5)] is empty.
 UDB [UDB=(2,0)] contents:
-LAB@[UDB=(2,0)][LB=0] #macrocells=2, #inputs=9, #pterms=8
+LAB@[UDB=(2,0)][LB=0] #macrocells=4, #inputs=11, #pterms=7
 {
-    [McSlotId=0]:     MacroCell: Name=MODIN1_1, Mode=(D-Register) @ [UDB=(2,0)][LB=0][MC=0]
-        Total # of inputs        : 7
+    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:rx_state_0\, Mode=(T-Register) @ [UDB=(2,0)][LB=0][MC=0]
+        Total # of inputs        : 11
+        Total # of product terms : 4
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 4 pterms
+        (
+              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * 
+              !\GPS_UART:BUART:rx_state_3\ * \GPS_UART:BUART:rx_state_2\ * 
+              !Net_5 * !MODIN1_1
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * 
+              !\GPS_UART:BUART:rx_state_3\ * \GPS_UART:BUART:rx_state_2\ * 
+              !MODIN1_1 * !MODIN1_0
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
+        );
+        Output = \GPS_UART:BUART:rx_state_0\ (fanout=8)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:rx_counter_load\, Mode=(Combinatorial) @ [UDB=(2,0)][LB=0][MC=1]
+        Total # of inputs        : 4
+        Total # of product terms : 1
+            Clock Enable: True
+        Main Equation            : 1 pterm
+        (
+              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\
+        );
+        Output = \GPS_UART:BUART:rx_counter_load\ (fanout=2)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:rx_state_3\, Mode=(T-Register) @ [UDB=(2,0)][LB=0][MC=2]
+        Total # of inputs        : 8
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 3 pterms
+        (
+              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
+              \GPS_UART:BUART:rx_state_2\
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
+        );
+        Output = \GPS_UART:BUART:rx_state_3\ (fanout=7)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_load_fifo\, Mode=(D-Register) @ [UDB=(2,0)][LB=0][MC=3]
+        Total # of inputs        : 8
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 3 pterms
+        (
+              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
+        );
+        Output = \GPS_UART:BUART:rx_load_fifo\ (fanout=2)
+        Properties               : 
+        {
+        }
+}
+
+LAB@[UDB=(2,0)][LB=1] #macrocells=4, #inputs=12, #pterms=8
+{
+    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:rx_state_2\, Mode=(T-Register) @ [UDB=(2,0)][LB=1][MC=0]
+        Total # of inputs        : 10
+        Total # of product terms : 5
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 5 pterms
+        (
+              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_2\
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !Net_5 * 
+              \GPS_UART:BUART:rx_last\
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_5
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
+              !\GPS_UART:BUART:rx_state_2\ * !MODIN4_6 * !MODIN4_4
+        );
+        Output = \GPS_UART:BUART:rx_state_2\ (fanout=7)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:tx_ctrl_mark_last\, Mode=(T-Register) @ [UDB=(2,0)][LB=1][MC=1]
+        Total # of inputs        : 0
+        Total # of product terms : 0
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 0 pterms
+        (
+            0
+        );
+        Output = \GPS_UART:BUART:tx_ctrl_mark_last\ (fanout=8)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:rx_status_3\, Mode=(D-Register) @ [UDB=(2,0)][LB=1][MC=2]
+        Total # of inputs        : 8
         Total # of product terms : 2
         List of special equations: 
             Clock  = (\GPS_UART:Net_9\) => Global
             Clock Enable: True
         Main Equation            : 2 pterms
         (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_1
-            + MODIN1_1_split
+              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
+              \GPS_UART:BUART:rx_state_2\ * !Net_5 * !MODIN1_1
+            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * 
+              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
+              \GPS_UART:BUART:rx_state_2\ * !MODIN1_1 * !MODIN1_0
         );
-        Output = MODIN1_1 (fanout=5)
+        Output = \GPS_UART:BUART:rx_status_3\ (fanout=1)
         Properties               : 
         {
         }
 
-    [McSlotId=1]: (empty)
-    [McSlotId=2]:     MacroCell: Name=MODIN1_0, Mode=(D-Register) @ [UDB=(2,0)][LB=0][MC=2]
-        Total # of inputs        : 7
-        Total # of product terms : 6
+    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_state_stop1_reg\, Mode=(D-Register) @ [UDB=(2,0)][LB=1][MC=3]
+        Total # of inputs        : 4
+        Total # of product terms : 1
         List of special equations: 
             Clock  = (\GPS_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 6 pterms
+        Main Equation            : 1 pterm
+        !(
+              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
+              !\GPS_UART:BUART:rx_state_0\ * \GPS_UART:BUART:rx_state_3\ * 
+              \GPS_UART:BUART:rx_state_2\
+        );
+        Output = \GPS_UART:BUART:rx_state_stop1_reg\ (fanout=1)
+        Properties               : 
+        {
+        }
+}
+
+count7cell: Name =\GPS_UART:BUART:sRX:RxBitCounter\
+    PORT MAP (
+        clock => \GPS_UART:Net_9\ ,
+        load => \GPS_UART:BUART:rx_counter_load\ ,
+        count_6 => MODIN4_6 ,
+        count_5 => MODIN4_5 ,
+        count_4 => MODIN4_4 ,
+        count_3 => MODIN4_3 ,
+        count_2 => \GPS_UART:BUART:rx_count_2\ ,
+        count_1 => \GPS_UART:BUART:rx_count_1\ ,
+        count_0 => \GPS_UART:BUART:rx_count_0\ ,
+        tc => \GPS_UART:BUART:rx_count7_tc\ );
+    Properties:
+    {
+        cy_alt_mode = 0
+        cy_init_value = "0000000"
+        cy_period = "1110010"
+        cy_route_en = 1
+        cy_route_ld = 1
+    }
+    Clock Polarity: Active High
+    Clock Enable: True
+
+UDB [UDB=(2,1)] contents:
+LAB@[UDB=(2,1)][LB=0] #macrocells=4, #inputs=6, #pterms=8
+{
+    [McSlotId=0]:     MacroCell: Name=MODIN1_1, Mode=(D-Register) @ [UDB=(2,1)][LB=0][MC=0]
+        Total # of inputs        : 5
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 3 pterms
         (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_0
+              !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              !Net_5 * MODIN1_1
+            + !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              Net_5 * !MODIN1_1 * MODIN1_0
+            + !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              MODIN1_1 * !MODIN1_0
+        );
+        Output = MODIN1_1 (fanout=4)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:rx_postpoll\, Mode=(Combinatorial) @ [UDB=(2,1)][LB=0][MC=1]
+        Total # of inputs        : 3
+        Total # of product terms : 2
+            Clock Enable: True
+        Main Equation            : 2 pterms
+        (
+              Net_5 * MODIN1_0
+            + MODIN1_1
+        );
+        Output = \GPS_UART:BUART:rx_postpoll\ (fanout=1)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]:     MacroCell: Name=MODIN1_0, Mode=(D-Register) @ [UDB=(2,1)][LB=0][MC=2]
+        Total # of inputs        : 4
+        Total # of product terms : 2
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 2 pterms
+        (
+              !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              !Net_5 * MODIN1_0
+            + !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              Net_5 * !MODIN1_0
         );
         Output = MODIN1_0 (fanout=5)
         Properties               : 
         {
         }
 
-    [McSlotId=3]: (empty)
-}
-
-LAB@[UDB=(2,0)][LB=1] #macrocells=1, #inputs=8, #pterms=8
-{
-    [McSlotId=0]:     MacroCell: Name=MODIN1_1_split, Mode=(Combinatorial) @ [UDB=(2,0)][LB=1][MC=0]
-        Total # of inputs        : 8
-        Total # of product terms : 8
+    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_bitclk_enable\, Mode=(D-Register) @ [UDB=(2,1)][LB=0][MC=3]
+        Total # of inputs        : 3
+        Total # of product terms : 1
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 8 pterms
+        Main Equation            : 1 pterm
         (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_1 * 
-              MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\ * MODIN1_1 * !MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_1
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_1 * 
-              MODIN1_0
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * MODIN1_1 * !MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !Net_5 * MODIN1_1
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * Net_5 * !MODIN1_1 * 
-              MODIN1_0
-            + \GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * MODIN1_1 * !MODIN1_0
+              !\GPS_UART:BUART:rx_count_2\ * !\GPS_UART:BUART:rx_count_1\ * 
+              !\GPS_UART:BUART:rx_count_0\
         );
-        Output = MODIN1_1_split (fanout=1)
+        Output = \GPS_UART:BUART:rx_bitclk_enable\ (fanout=6)
         Properties               : 
         {
         }
-
-    [McSlotId=1]: (empty)
-    [McSlotId=2]: (empty)
-    [McSlotId=3]: (empty)
 }
 
-UDB [UDB=(2,1)] contents:
-LAB@[UDB=(2,1)][LB=0] #macrocells=2, #inputs=3, #pterms=2
+LAB@[UDB=(2,1)][LB=1] #macrocells=1, #inputs=2, #pterms=1
 {
     [McSlotId=0]: (empty)
     [McSlotId=1]: (empty)
-    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_status_5\, Mode=(Combinatorial) @ [UDB=(2,1)][LB=0][MC=2]
+    [McSlotId=2]: (empty)
+    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_status_4\, Mode=(Combinatorial) @ [UDB=(2,1)][LB=1][MC=3]
         Total # of inputs        : 2
         Total # of product terms : 1
             Clock Enable: True
         Main Equation            : 1 pterm
         (
-              \OUTPUT_UART:BUART:rx_fifonotempty\ * 
-              \OUTPUT_UART:BUART:rx_state_stop1_reg\
+              \GPS_UART:BUART:rx_load_fifo\ * \GPS_UART:BUART:rx_fifofull\
         );
-        Output = \OUTPUT_UART:BUART:rx_status_5\ (fanout=1)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_status_2\, Mode=(Combinatorial) @ [UDB=(2,1)][LB=0][MC=3]
-        Total # of inputs        : 1
-        Total # of product terms : 1
-            Clock Enable: True
-        Main Equation            : 1 pterm
-        (
-              !\OUTPUT_UART:BUART:tx_fifo_notfull\
-        );
-        Output = \OUTPUT_UART:BUART:tx_status_2\ (fanout=1)
+        Output = \GPS_UART:BUART:rx_status_4\ (fanout=1)
         Properties               : 
         {
         }
 }
 
-LAB@[UDB=(2,1)][LB=1] #macrocells=2, #inputs=2, #pterms=2
+datapathcell: Name =\GPS_UART:BUART:sRX:RxShifter:u0\
+    PORT MAP (
+        clock => \GPS_UART:Net_9\ ,
+        cs_addr_2 => \GPS_UART:BUART:tx_ctrl_mark_last\ ,
+        cs_addr_1 => \GPS_UART:BUART:rx_state_0\ ,
+        cs_addr_0 => \GPS_UART:BUART:rx_bitclk_enable\ ,
+        route_si => \GPS_UART:BUART:rx_postpoll\ ,
+        f0_load => \GPS_UART:BUART:rx_load_fifo\ ,
+        f0_bus_stat_comb => \GPS_UART:BUART:rx_fifonotempty\ ,
+        f0_blk_stat_comb => \GPS_UART:BUART:rx_fifofull\ );
+    Properties:
+    {
+        a0_init = "00000000"
+        a1_init = "00000000"
+        ce0_sync = 1
+        ce1_sync = 1
+        cl0_sync = 1
+        cl1_sync = 1
+        cmsb_sync = 1
+        co_msb_sync = 1
+        cy_dpconfig = "0000000000000000000000000000000000000000000000000000001001000000000100000000000000010000001100000001000000000000000100100001000011111111000000001111111111111111101000000110001001000001111100000000000000001100"
+        d0_init = "00000000"
+        d1_init = "00000000"
+        f0_blk_sync = 1
+        f0_bus_sync = 1
+        f1_blk_sync = 1
+        f1_bus_sync = 1
+        ff0_sync = 1
+        ff1_sync = 1
+        ov_msb_sync = 1
+        so_sync = 1
+        z0_sync = 1
+        z1_sync = 1
+    }
+    Clock Polarity: Active High
+    Clock Enable: True
+
+UDB [UDB=(2,2)] contents:
+LAB@[UDB=(2,2)][LB=0] #macrocells=3, #inputs=5, #pterms=5
 {
-    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:rx_last\, Mode=(D-Register) @ [UDB=(2,1)][LB=1][MC=0]
+    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:counter_load_not\, Mode=(Combinatorial) @ [UDB=(2,2)][LB=0][MC=0]
+        Total # of inputs        : 4
+        Total # of product terms : 2
+            Clock Enable: True
+        Main Equation            : 2 pterms
+        !(
+              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
+              \GPS_UART:BUART:tx_bitclk_enable_pre\
+            + !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
+              !\GPS_UART:BUART:tx_state_2\
+        );
+        Output = \GPS_UART:BUART:counter_load_not\ (fanout=1)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:tx_bitclk\, Mode=(D-Register) @ [UDB=(2,2)][LB=0][MC=1]
+        Total # of inputs        : 4
+        Total # of product terms : 2
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 2 pterms
+        !(
+              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
+              \GPS_UART:BUART:tx_state_2\
+            + !\GPS_UART:BUART:tx_bitclk_enable_pre\
+        );
+        Output = \GPS_UART:BUART:tx_bitclk\ (fanout=4)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]: (empty)
+    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_last\, Mode=(D-Register) @ [UDB=(2,2)][LB=0][MC=3]
         Total # of inputs        : 1
         Total # of product terms : 1
         List of special equations: 
@@ -2915,28 +2967,107 @@ LAB@[UDB=(2,1)][LB=1] #macrocells=2, #inputs=2, #pterms=2
         Properties               : 
         {
         }
+}
 
-    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:tx_status_2\, Mode=(Combinatorial) @ [UDB=(2,1)][LB=1][MC=1]
-        Total # of inputs        : 1
-        Total # of product terms : 1
+LAB@[UDB=(2,2)][LB=1] #macrocells=3, #inputs=7, #pterms=6
+{
+    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:tx_state_1\, Mode=(T-Register) @ [UDB=(2,2)][LB=1][MC=0]
+        Total # of inputs        : 6
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 1 pterm
+        Main Equation            : 3 pterms
         (
-              !\GPS_UART:BUART:tx_fifo_notfull\
+              \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
+              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
+              \GPS_UART:BUART:tx_state_2\
+            + \GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_2\ * 
+              \GPS_UART:BUART:tx_counter_dp\ * \GPS_UART:BUART:tx_bitclk\
+            + \GPS_UART:BUART:tx_state_0\ * !\GPS_UART:BUART:tx_state_2\ * 
+              \GPS_UART:BUART:tx_bitclk\
         );
-        Output = \GPS_UART:BUART:tx_status_2\ (fanout=1)
+        Output = \GPS_UART:BUART:tx_state_1\ (fanout=8)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:tx_state_2\, Mode=(T-Register) @ [UDB=(2,2)][LB=1][MC=1]
+        Total # of inputs        : 6
+        Total # of product terms : 4
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 4 pterms
+        (
+              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
+              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
+              \GPS_UART:BUART:tx_state_2\
+            + \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
+              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
+              \GPS_UART:BUART:tx_state_2\
+            + \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
+              !\GPS_UART:BUART:tx_state_2\ * \GPS_UART:BUART:tx_bitclk\
+            + \GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_2\ * 
+              \GPS_UART:BUART:tx_counter_dp\ * \GPS_UART:BUART:tx_bitclk\
+        );
+        Output = \GPS_UART:BUART:tx_state_2\ (fanout=7)
         Properties               : 
         {
         }
 
     [McSlotId=2]: (empty)
-    [McSlotId=3]: (empty)
+    [McSlotId=3]:     MacroCell: Name=Net_22, Mode=(Combinatorial) @ [UDB=(2,2)][LB=1][MC=3]
+        Total # of inputs        : 1
+        Total # of product terms : 1
+            Clock Enable: True
+        Main Equation            : 1 pterm
+        (
+              !\OUTPUT_UART:BUART:txn\
+        );
+        Output = Net_22 (fanout=1)
+        Properties               : 
+        {
+        }
 }
 
-UDB [UDB=(2,2)] contents:
-LAB@[UDB=(2,2)][LB=0] #macrocells=3, #inputs=9, #pterms=7
+datapathcell: Name =\GPS_UART:BUART:sTX:sCLOCK:TxBitClkGen\
+    PORT MAP (
+        clock => \GPS_UART:Net_9\ ,
+        cs_addr_0 => \GPS_UART:BUART:counter_load_not\ ,
+        ce0_reg => \GPS_UART:BUART:tx_bitclk_enable_pre\ ,
+        ce1_reg => \GPS_UART:BUART:tx_counter_dp\ );
+    Properties:
+    {
+        a0_init = "00000000"
+        a1_init = "00000000"
+        ce0_sync = 1
+        ce1_sync = 1
+        cl0_sync = 1
+        cl1_sync = 1
+        cmsb_sync = 1
+        co_msb_sync = 1
+        cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000"
+        d0_init = "00000000"
+        d1_init = "00000000"
+        f0_blk_sync = 1
+        f0_bus_sync = 1
+        f1_blk_sync = 1
+        f1_bus_sync = 1
+        ff0_sync = 1
+        ff1_sync = 1
+        ov_msb_sync = 1
+        so_sync = 1
+        z0_sync = 1
+        z1_sync = 1
+    }
+    Clock Polarity: Active High
+    Clock Enable: True
+
+UDB [UDB=(2,3)] contents:
+LAB@[UDB=(2,3)][LB=0] #macrocells=1, #inputs=7, #pterms=5
 {
-    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:txn\, Mode=(D-Register) @ [UDB=(2,2)][LB=0][MC=0]
+    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:txn\, Mode=(D-Register) @ [UDB=(2,3)][LB=0][MC=0]
         Total # of inputs        : 7
         Total # of product terms : 5
         List of special equations: 
@@ -2960,20 +3091,51 @@ LAB@[UDB=(2,2)][LB=0] #macrocells=3, #inputs=9, #pterms=7
         {
         }
 
-    [McSlotId=1]:     MacroCell: Name=Net_9, Mode=(Combinatorial) @ [UDB=(2,2)][LB=0][MC=1]
+    [McSlotId=1]: (empty)
+    [McSlotId=2]: (empty)
+    [McSlotId=3]: (empty)
+}
+
+LAB@[UDB=(2,3)][LB=1] #macrocells=3, #inputs=7, #pterms=6
+{
+    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:tx_status_2\, Mode=(Combinatorial) @ [UDB=(2,3)][LB=1][MC=0]
         Total # of inputs        : 1
         Total # of product terms : 1
             Clock Enable: True
         Main Equation            : 1 pterm
         (
-              !\GPS_UART:BUART:txn\
+              !\GPS_UART:BUART:tx_fifo_notfull\
         );
-        Output = Net_9 (fanout=1)
+        Output = \GPS_UART:BUART:tx_status_2\ (fanout=1)
         Properties               : 
         {
         }
 
-    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:tx_status_0\, Mode=(Combinatorial) @ [UDB=(2,2)][LB=0][MC=2]
+    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:tx_state_0\, Mode=(T-Register) @ [UDB=(2,3)][LB=1][MC=1]
+        Total # of inputs        : 6
+        Total # of product terms : 4
+        List of special equations: 
+            Clock  = (\GPS_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 4 pterms
+        (
+              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
+              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
+              !\GPS_UART:BUART:tx_fifo_empty\
+            + !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
+              !\GPS_UART:BUART:tx_fifo_empty\ * !\GPS_UART:BUART:tx_state_2\
+            + \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
+              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
+              \GPS_UART:BUART:tx_fifo_empty\ * \GPS_UART:BUART:tx_state_2\
+            + \GPS_UART:BUART:tx_state_0\ * !\GPS_UART:BUART:tx_state_2\ * 
+              \GPS_UART:BUART:tx_bitclk\
+        );
+        Output = \GPS_UART:BUART:tx_state_0\ (fanout=8)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:tx_status_0\, Mode=(Combinatorial) @ [UDB=(2,3)][LB=1][MC=2]
         Total # of inputs        : 5
         Total # of product terms : 1
             Clock Enable: True
@@ -2988,36 +3150,6 @@ LAB@[UDB=(2,2)][LB=0] #macrocells=3, #inputs=9, #pterms=7
         {
         }
 
-    [McSlotId=3]: (empty)
-}
-
-LAB@[UDB=(2,2)][LB=1] #macrocells=1, #inputs=5, #pterms=2
-{
-    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_bitclk_enable\, Mode=(D-Register) @ [UDB=(2,2)][LB=1][MC=0]
-        Total # of inputs        : 5
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
-        );
-        Output = \OUTPUT_UART:BUART:rx_bitclk_enable\ (fanout=6)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=1]: (empty)
-    [McSlotId=2]: (empty)
     [McSlotId=3]: (empty)
 }
 
@@ -3073,31 +3205,12 @@ statusicell: Name =\GPS_UART:BUART:sTX:TxSts\
     Clock Polarity: Active High
     Clock Enable: True
 
-UDB [UDB=(2,3)] contents:
-LAB@[UDB=(2,3)][LB=0] #macrocells=3, #inputs=9, #pterms=4
+UDB [UDB=(2,4)] is empty.
+UDB [UDB=(2,5)] is empty.
+UDB [UDB=(3,0)] contents:
+LAB@[UDB=(3,0)][LB=0] #macrocells=2, #inputs=3, #pterms=2
 {
-    [McSlotId=0]: (empty)
-    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:rx_bitclk_enable\, Mode=(D-Register) @ [UDB=(2,3)][LB=0][MC=1]
-        Total # of inputs        : 5
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        (
-              !\GPS_UART:BUART:rx_count_3\ * !\GPS_UART:BUART:rx_count_2\ * 
-              !\GPS_UART:BUART:rx_count_1\ * !\GPS_UART:BUART:rx_count_0\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\
-            + !\GPS_UART:BUART:rx_count_3\ * \GPS_UART:BUART:rx_count_2\ * 
-              \GPS_UART:BUART:rx_count_1\ * \GPS_UART:BUART:rx_count_0\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\
-        );
-        Output = \GPS_UART:BUART:rx_bitclk_enable\ (fanout=6)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:rx_status_5\, Mode=(Combinatorial) @ [UDB=(2,3)][LB=0][MC=2]
+    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:rx_status_5\, Mode=(Combinatorial) @ [UDB=(3,0)][LB=0][MC=0]
         Total # of inputs        : 2
         Total # of product terms : 1
             Clock Enable: True
@@ -3111,410 +3224,70 @@ LAB@[UDB=(2,3)][LB=0] #macrocells=3, #inputs=9, #pterms=4
         {
         }
 
-    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_status_4\, Mode=(Combinatorial) @ [UDB=(2,3)][LB=0][MC=3]
-        Total # of inputs        : 2
+    [McSlotId=1]: (empty)
+    [McSlotId=2]: (empty)
+    [McSlotId=3]:     MacroCell: Name=Net_9, Mode=(Combinatorial) @ [UDB=(3,0)][LB=0][MC=3]
+        Total # of inputs        : 1
         Total # of product terms : 1
             Clock Enable: True
         Main Equation            : 1 pterm
         (
-              \GPS_UART:BUART:rx_load_fifo\ * \GPS_UART:BUART:rx_fifofull\
+              !\GPS_UART:BUART:txn\
         );
-        Output = \GPS_UART:BUART:rx_status_4\ (fanout=1)
+        Output = Net_9 (fanout=1)
         Properties               : 
         {
         }
 }
 
-LAB@[UDB=(2,3)][LB=1] #macrocells=4, #inputs=12, #pterms=8
+LAB@[UDB=(3,0)][LB=1] #macrocells=4, #inputs=5, #pterms=8
 {
-    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:rx_status_3\, Mode=(D-Register) @ [UDB=(2,3)][LB=1][MC=0]
-        Total # of inputs        : 8
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        (
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
-              \GPS_UART:BUART:rx_state_2\ * !Net_5 * !MODIN1_1
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
-              \GPS_UART:BUART:rx_state_2\ * !MODIN1_1 * !MODIN1_0
-        );
-        Output = \GPS_UART:BUART:rx_status_3\ (fanout=1)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:rx_postpoll\, Mode=(Combinatorial) @ [UDB=(2,3)][LB=1][MC=1]
-        Total # of inputs        : 3
-        Total # of product terms : 2
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        (
-              Net_5 * MODIN1_0
-            + MODIN1_1
-        );
-        Output = \GPS_UART:BUART:rx_postpoll\ (fanout=1)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:tx_bitclk\, Mode=(D-Register) @ [UDB=(2,3)][LB=1][MC=2]
-        Total # of inputs        : 4
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        !(
-              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
-              \GPS_UART:BUART:tx_state_2\
-            + !\GPS_UART:BUART:tx_bitclk_enable_pre\
-        );
-        Output = \GPS_UART:BUART:tx_bitclk\ (fanout=4)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:counter_load_not\, Mode=(Combinatorial) @ [UDB=(2,3)][LB=1][MC=3]
-        Total # of inputs        : 4
-        Total # of product terms : 2
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        !(
-              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
-              \GPS_UART:BUART:tx_bitclk_enable_pre\
-            + !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
-              !\GPS_UART:BUART:tx_state_2\
-        );
-        Output = \GPS_UART:BUART:counter_load_not\ (fanout=1)
-        Properties               : 
-        {
-        }
-}
-
-datapathcell: Name =\GPS_UART:BUART:sTX:sCLOCK:TxBitClkGen\
-    PORT MAP (
-        clock => \GPS_UART:Net_9\ ,
-        cs_addr_0 => \GPS_UART:BUART:counter_load_not\ ,
-        ce0_reg => \GPS_UART:BUART:tx_bitclk_enable_pre\ ,
-        ce1_reg => \GPS_UART:BUART:tx_counter_dp\ );
-    Properties:
-    {
-        a0_init = "00000000"
-        a1_init = "00000000"
-        ce0_sync = 1
-        ce1_sync = 1
-        cl0_sync = 1
-        cl1_sync = 1
-        cmsb_sync = 1
-        co_msb_sync = 1
-        cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000"
-        d0_init = "00000000"
-        d1_init = "00000000"
-        f0_blk_sync = 1
-        f0_bus_sync = 1
-        f1_blk_sync = 1
-        f1_bus_sync = 1
-        ff0_sync = 1
-        ff1_sync = 1
-        ov_msb_sync = 1
-        so_sync = 1
-        z0_sync = 1
-        z1_sync = 1
-    }
-    Clock Polarity: Active High
-    Clock Enable: True
-
-statusicell: Name =\GPS_UART:BUART:sRX:RxSts\
-    PORT MAP (
-        clock => \GPS_UART:Net_9\ ,
-        status_5 => \GPS_UART:BUART:rx_status_5\ ,
-        status_4 => \GPS_UART:BUART:rx_status_4\ ,
-        status_3 => \GPS_UART:BUART:rx_status_3\ ,
-        interrupt => Net_8 );
-    Properties:
-    {
-        cy_force_order = 1
-        cy_int_mask = "1111111"
-        cy_md_select = "1011111"
-    }
-    Clock Polarity: Active High
-    Clock Enable: True
-
-UDB [UDB=(2,4)] contents:
-LAB@[UDB=(2,4)][LB=0] #macrocells=4, #inputs=11, #pterms=7
-{
-    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:rx_state_0\, Mode=(T-Register) @ [UDB=(2,4)][LB=0][MC=0]
-        Total # of inputs        : 11
-        Total # of product terms : 4
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 4 pterms
-        (
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * 
-              !\GPS_UART:BUART:rx_state_3\ * \GPS_UART:BUART:rx_state_2\ * 
-              !Net_5 * !MODIN1_1
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * 
-              !\GPS_UART:BUART:rx_state_3\ * \GPS_UART:BUART:rx_state_2\ * 
-              !MODIN1_1 * !MODIN1_0
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
-        );
-        Output = \GPS_UART:BUART:rx_state_0\ (fanout=9)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:rx_counter_load\, Mode=(Combinatorial) @ [UDB=(2,4)][LB=0][MC=1]
-        Total # of inputs        : 4
-        Total # of product terms : 1
-            Clock Enable: True
-        Main Equation            : 1 pterm
-        (
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\
-        );
-        Output = \GPS_UART:BUART:rx_counter_load\ (fanout=2)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:rx_state_3\, Mode=(T-Register) @ [UDB=(2,4)][LB=0][MC=2]
-        Total # of inputs        : 8
+    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:pollcount_1\, Mode=(D-Register) @ [UDB=(3,0)][LB=1][MC=0]
+        Total # of inputs        : 5
         Total # of product terms : 3
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 3 pterms
-        (
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
-              \GPS_UART:BUART:rx_state_2\
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
-        );
-        Output = \GPS_UART:BUART:rx_state_3\ (fanout=8)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_load_fifo\, Mode=(D-Register) @ [UDB=(2,4)][LB=0][MC=3]
-        Total # of inputs        : 8
-        Total # of product terms : 3
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 3 pterms
-        (
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
-        );
-        Output = \GPS_UART:BUART:rx_load_fifo\ (fanout=2)
-        Properties               : 
-        {
-        }
-}
-
-LAB@[UDB=(2,4)][LB=1] #macrocells=4, #inputs=11, #pterms=8
-{
-    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:rx_state_2\, Mode=(T-Register) @ [UDB=(2,4)][LB=1][MC=0]
-        Total # of inputs        : 10
-        Total # of product terms : 5
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 5 pterms
-        (
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_3\
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * 
-              \GPS_UART:BUART:rx_bitclk_enable\ * \GPS_UART:BUART:rx_state_2\
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * !Net_5 * 
-              \GPS_UART:BUART:rx_last\
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_6
-            + !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              \GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\ * 
-              \GPS_UART:BUART:rx_count7_bit8_wire\ * !MODIN4_5
-        );
-        Output = \GPS_UART:BUART:rx_state_2\ (fanout=8)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:tx_ctrl_mark_last\, Mode=(T-Register) @ [UDB=(2,4)][LB=1][MC=1]
-        Total # of inputs        : 0
-        Total # of product terms : 0
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 0 pterms
-        (
-            0
-        );
-        Output = \GPS_UART:BUART:tx_ctrl_mark_last\ (fanout=9)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:rx_count7_bit8_wire\, Mode=(D-Register) @ [UDB=(2,4)][LB=1][MC=2]
-        Total # of inputs        : 6
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        !(
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * !\GPS_UART:BUART:rx_state_3\ * 
-              !\GPS_UART:BUART:rx_state_2\
-            + !\GPS_UART:BUART:rx_count7_tc\ * 
-              !\GPS_UART:BUART:rx_count7_bit8_wire\
-        );
-        Output = \GPS_UART:BUART:rx_count7_bit8_wire\ (fanout=9)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]:     MacroCell: Name=\GPS_UART:BUART:rx_state_stop1_reg\, Mode=(D-Register) @ [UDB=(2,4)][LB=1][MC=3]
-        Total # of inputs        : 4
-        Total # of product terms : 1
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 1 pterm
-        !(
-              !\GPS_UART:BUART:tx_ctrl_mark_last\ * 
-              !\GPS_UART:BUART:rx_state_0\ * \GPS_UART:BUART:rx_state_3\ * 
-              \GPS_UART:BUART:rx_state_2\
-        );
-        Output = \GPS_UART:BUART:rx_state_stop1_reg\ (fanout=1)
-        Properties               : 
-        {
-        }
-}
-
-datapathcell: Name =\GPS_UART:BUART:sRX:RxShifter:u0\
-    PORT MAP (
-        clock => \GPS_UART:Net_9\ ,
-        cs_addr_2 => \GPS_UART:BUART:tx_ctrl_mark_last\ ,
-        cs_addr_1 => \GPS_UART:BUART:rx_state_0\ ,
-        cs_addr_0 => \GPS_UART:BUART:rx_bitclk_enable\ ,
-        route_si => \GPS_UART:BUART:rx_postpoll\ ,
-        f0_load => \GPS_UART:BUART:rx_load_fifo\ ,
-        f0_bus_stat_comb => \GPS_UART:BUART:rx_fifonotempty\ ,
-        f0_blk_stat_comb => \GPS_UART:BUART:rx_fifofull\ );
-    Properties:
-    {
-        a0_init = "00000000"
-        a1_init = "00000000"
-        ce0_sync = 1
-        ce1_sync = 1
-        cl0_sync = 1
-        cl1_sync = 1
-        cmsb_sync = 1
-        co_msb_sync = 1
-        cy_dpconfig = "0000000000000000000000000000000000000000000000000000001001000000000100000000000000010000001100000001000000000000000100100001000011111111000000001111111111111111101000000110001001000001111100000000000000001100"
-        d0_init = "00000000"
-        d1_init = "00000000"
-        f0_blk_sync = 1
-        f0_bus_sync = 1
-        f1_blk_sync = 1
-        f1_bus_sync = 1
-        ff0_sync = 1
-        ff1_sync = 1
-        ov_msb_sync = 1
-        so_sync = 1
-        z0_sync = 1
-        z1_sync = 1
-    }
-    Clock Polarity: Active High
-    Clock Enable: True
-
-count7cell: Name =\GPS_UART:BUART:sRX:RxBitCounter\
-    PORT MAP (
-        clock => \GPS_UART:Net_9\ ,
-        load => \GPS_UART:BUART:rx_counter_load\ ,
-        count_6 => MODIN4_6 ,
-        count_5 => MODIN4_5 ,
-        count_4 => MODIN4_4 ,
-        count_3 => \GPS_UART:BUART:rx_count_3\ ,
-        count_2 => \GPS_UART:BUART:rx_count_2\ ,
-        count_1 => \GPS_UART:BUART:rx_count_1\ ,
-        count_0 => \GPS_UART:BUART:rx_count_0\ ,
-        tc => \GPS_UART:BUART:rx_count7_tc\ );
-    Properties:
-    {
-        cy_alt_mode = 0
-        cy_init_value = "0000000"
-        cy_period = "1110110"
-        cy_route_en = 1
-        cy_route_ld = 1
-    }
-    Clock Polarity: Active High
-    Clock Enable: True
-
-UDB [UDB=(2,5)] is empty.
-UDB [UDB=(3,0)] contents:
-LAB@[UDB=(3,0)][LB=0] #macrocells=4, #inputs=7, #pterms=6
-{
-    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_ctrl_mark_last\, Mode=(T-Register) @ [UDB=(3,0)][LB=0][MC=0]
-        Total # of inputs        : 0
-        Total # of product terms : 0
         List of special equations: 
             Clock  = (\OUTPUT_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 0 pterms
+        Main Equation            : 3 pterms
         (
-            0
+              !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * 
+              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
+              \OUTPUT_UART:BUART:pollcount_0\
+            + !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * 
+              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
+            + !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * 
+              \OUTPUT_UART:BUART:pollcount_1\ * 
+              !\OUTPUT_UART:BUART:pollcount_0\
         );
-        Output = \OUTPUT_UART:BUART:tx_ctrl_mark_last\ (fanout=9)
+        Output = \OUTPUT_UART:BUART:pollcount_1\ (fanout=4)
         Properties               : 
         {
         }
 
-    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_postpoll\, Mode=(Combinatorial) @ [UDB=(3,0)][LB=0][MC=1]
+    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:pollcount_0\, Mode=(D-Register) @ [UDB=(3,0)][LB=1][MC=1]
+        Total # of inputs        : 4
+        Total # of product terms : 2
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 2 pterms
+        (
+              !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * !Net_18 * 
+              \OUTPUT_UART:BUART:pollcount_0\
+            + !\OUTPUT_UART:BUART:rx_count_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_1\ * Net_18 * 
+              !\OUTPUT_UART:BUART:pollcount_0\
+        );
+        Output = \OUTPUT_UART:BUART:pollcount_0\ (fanout=5)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_postpoll\, Mode=(Combinatorial) @ [UDB=(3,0)][LB=1][MC=2]
         Total # of inputs        : 3
         Total # of product terms : 2
             Clock Enable: True
@@ -3524,106 +3297,6 @@ LAB@[UDB=(3,0)][LB=0] #macrocells=4, #inputs=7, #pterms=6
             + Net_18 * \OUTPUT_UART:BUART:pollcount_0\
         );
         Output = \OUTPUT_UART:BUART:rx_postpoll\ (fanout=1)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_bitclk\, Mode=(D-Register) @ [UDB=(3,0)][LB=0][MC=2]
-        Total # of inputs        : 4
-        Total # of product terms : 2
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        !(
-              !\OUTPUT_UART:BUART:tx_state_1\ * 
-              !\OUTPUT_UART:BUART:tx_state_0\ * 
-              \OUTPUT_UART:BUART:tx_state_2\
-            + !\OUTPUT_UART:BUART:tx_bitclk_enable_pre\
-        );
-        Output = \OUTPUT_UART:BUART:tx_bitclk\ (fanout=4)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:counter_load_not\, Mode=(Combinatorial) @ [UDB=(3,0)][LB=0][MC=3]
-        Total # of inputs        : 4
-        Total # of product terms : 2
-            Clock Enable: True
-        Main Equation            : 2 pterms
-        !(
-              !\OUTPUT_UART:BUART:tx_state_1\ * 
-              !\OUTPUT_UART:BUART:tx_state_0\ * 
-              \OUTPUT_UART:BUART:tx_bitclk_enable_pre\
-            + !\OUTPUT_UART:BUART:tx_state_1\ * 
-              !\OUTPUT_UART:BUART:tx_state_0\ * 
-              !\OUTPUT_UART:BUART:tx_state_2\
-        );
-        Output = \OUTPUT_UART:BUART:counter_load_not\ (fanout=1)
-        Properties               : 
-        {
-        }
-}
-
-LAB@[UDB=(3,0)][LB=1] #macrocells=4, #inputs=10, #pterms=8
-{
-    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:txn\, Mode=(D-Register) @ [UDB=(3,0)][LB=1][MC=0]
-        Total # of inputs        : 7
-        Total # of product terms : 5
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 5 pterms
-        (
-              \OUTPUT_UART:BUART:txn\ * \OUTPUT_UART:BUART:tx_state_1\ * 
-              !\OUTPUT_UART:BUART:tx_bitclk\
-            + \OUTPUT_UART:BUART:txn\ * \OUTPUT_UART:BUART:tx_state_2\
-            + !\OUTPUT_UART:BUART:tx_state_1\ * 
-              \OUTPUT_UART:BUART:tx_state_0\ * 
-              !\OUTPUT_UART:BUART:tx_shift_out\ * 
-              !\OUTPUT_UART:BUART:tx_state_2\
-            + !\OUTPUT_UART:BUART:tx_state_1\ * 
-              \OUTPUT_UART:BUART:tx_state_0\ * 
-              !\OUTPUT_UART:BUART:tx_state_2\ * 
-              !\OUTPUT_UART:BUART:tx_bitclk\
-            + \OUTPUT_UART:BUART:tx_state_1\ * 
-              !\OUTPUT_UART:BUART:tx_state_0\ * 
-              !\OUTPUT_UART:BUART:tx_shift_out\ * 
-              !\OUTPUT_UART:BUART:tx_state_2\ * 
-              !\OUTPUT_UART:BUART:tx_counter_dp\ * 
-              \OUTPUT_UART:BUART:tx_bitclk\
-        );
-        Output = \OUTPUT_UART:BUART:txn\ (fanout=2)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=1]:     MacroCell: Name=Net_22, Mode=(Combinatorial) @ [UDB=(3,0)][LB=1][MC=1]
-        Total # of inputs        : 1
-        Total # of product terms : 1
-            Clock Enable: True
-        Main Equation            : 1 pterm
-        (
-              !\OUTPUT_UART:BUART:txn\
-        );
-        Output = Net_22 (fanout=1)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_status_0\, Mode=(Combinatorial) @ [UDB=(3,0)][LB=1][MC=2]
-        Total # of inputs        : 5
-        Total # of product terms : 1
-            Clock Enable: True
-        Main Equation            : 1 pterm
-        (
-              !\OUTPUT_UART:BUART:tx_state_1\ * 
-              !\OUTPUT_UART:BUART:tx_state_0\ * 
-              \OUTPUT_UART:BUART:tx_bitclk_enable_pre\ * 
-              \OUTPUT_UART:BUART:tx_fifo_empty\ * 
-              \OUTPUT_UART:BUART:tx_state_2\
-        );
-        Output = \OUTPUT_UART:BUART:tx_status_0\ (fanout=1)
         Properties               : 
         {
         }
@@ -3644,18 +3317,18 @@ LAB@[UDB=(3,0)][LB=1] #macrocells=4, #inputs=10, #pterms=8
         }
 }
 
-statusicell: Name =\OUTPUT_UART:BUART:sTX:TxSts\
+statusicell: Name =\GPS_UART:BUART:sRX:RxSts\
     PORT MAP (
-        clock => \OUTPUT_UART:Net_9\ ,
-        status_3 => \OUTPUT_UART:BUART:tx_fifo_notfull\ ,
-        status_2 => \OUTPUT_UART:BUART:tx_status_2\ ,
-        status_1 => \OUTPUT_UART:BUART:tx_fifo_empty\ ,
-        status_0 => \OUTPUT_UART:BUART:tx_status_0\ );
+        clock => \GPS_UART:Net_9\ ,
+        status_5 => \GPS_UART:BUART:rx_status_5\ ,
+        status_4 => \GPS_UART:BUART:rx_status_4\ ,
+        status_3 => \GPS_UART:BUART:rx_status_3\ ,
+        interrupt => Net_8 );
     Properties:
     {
         cy_force_order = 1
         cy_int_mask = "1111111"
-        cy_md_select = "0000001"
+        cy_md_select = "1011111"
     }
     Clock Polarity: Active High
     Clock Enable: True
@@ -3689,20 +3362,68 @@ LAB@[UDB=(3,1)][LB=0] #macrocells=4, #inputs=11, #pterms=8
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
               !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_5\
             + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
               \OUTPUT_UART:BUART:rx_state_0\ * 
               !\OUTPUT_UART:BUART:rx_state_3\ * 
               !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
         );
-        Output = \OUTPUT_UART:BUART:rx_state_0\ (fanout=9)
+        Output = \OUTPUT_UART:BUART:rx_state_0\ (fanout=8)
         Properties               : 
         {
         }
 
-    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_status_3\, Mode=(D-Register) @ [UDB=(3,1)][LB=0][MC=1]
+    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_stop1_reg\, Mode=(D-Register) @ [UDB=(3,1)][LB=0][MC=1]
+        Total # of inputs        : 4
+        Total # of product terms : 1
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 1 pterm
+        !(
+              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              !\OUTPUT_UART:BUART:rx_state_0\ * 
+              \OUTPUT_UART:BUART:rx_state_3\ * \OUTPUT_UART:BUART:rx_state_2\
+        );
+        Output = \OUTPUT_UART:BUART:rx_state_stop1_reg\ (fanout=1)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_load_fifo\, Mode=(D-Register) @ [UDB=(3,1)][LB=0][MC=2]
+        Total # of inputs        : 8
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 3 pterms
+        (
+              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              !\OUTPUT_UART:BUART:rx_state_0\ * 
+              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
+              \OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              \OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_5\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              \OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
+        );
+        Output = \OUTPUT_UART:BUART:rx_load_fifo\ (fanout=2)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_status_3\, Mode=(D-Register) @ [UDB=(3,1)][LB=0][MC=3]
         Total # of inputs        : 8
         Total # of product terms : 2
         List of special equations: 
@@ -3726,159 +3447,70 @@ LAB@[UDB=(3,1)][LB=0] #macrocells=4, #inputs=11, #pterms=8
         Properties               : 
         {
         }
-
-    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_stop1_reg\, Mode=(D-Register) @ [UDB=(3,1)][LB=0][MC=2]
-        Total # of inputs        : 4
-        Total # of product terms : 1
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 1 pterm
-        !(
-              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              \OUTPUT_UART:BUART:rx_state_3\ * \OUTPUT_UART:BUART:rx_state_2\
-        );
-        Output = \OUTPUT_UART:BUART:rx_state_stop1_reg\ (fanout=1)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_load_fifo\, Mode=(D-Register) @ [UDB=(3,1)][LB=0][MC=3]
-        Total # of inputs        : 8
-        Total # of product terms : 3
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 3 pterms
-        (
-              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
-              \OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              \OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              \OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
-        );
-        Output = \OUTPUT_UART:BUART:rx_load_fifo\ (fanout=2)
-        Properties               : 
-        {
-        }
 }
 
-LAB@[UDB=(3,1)][LB=1] #macrocells=4, #inputs=11, #pterms=8
+LAB@[UDB=(3,1)][LB=1] #macrocells=4, #inputs=8, #pterms=6
 {
-    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_2\, Mode=(T-Register) @ [UDB=(3,1)][LB=1][MC=0]
-        Total # of inputs        : 10
-        Total # of product terms : 5
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
+    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:counter_load_not\, Mode=(Combinatorial) @ [UDB=(3,1)][LB=1][MC=0]
+        Total # of inputs        : 4
+        Total # of product terms : 2
             Clock Enable: True
-        Main Equation            : 5 pterms
-        (
-              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
-              \OUTPUT_UART:BUART:rx_state_3\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
-              \OUTPUT_UART:BUART:rx_state_2\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\ * !Net_18 * 
-              \OUTPUT_UART:BUART:rx_last\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              \OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              \OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
+        Main Equation            : 2 pterms
+        !(
+              !\OUTPUT_UART:BUART:tx_state_1\ * 
+              !\OUTPUT_UART:BUART:tx_state_0\ * 
+              \OUTPUT_UART:BUART:tx_bitclk_enable_pre\
+            + !\OUTPUT_UART:BUART:tx_state_1\ * 
+              !\OUTPUT_UART:BUART:tx_state_0\ * 
+              !\OUTPUT_UART:BUART:tx_state_2\
         );
-        Output = \OUTPUT_UART:BUART:rx_state_2\ (fanout=8)
+        Output = \OUTPUT_UART:BUART:counter_load_not\ (fanout=1)
         Properties               : 
         {
         }
 
-    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_counter_load\, Mode=(Combinatorial) @ [UDB=(3,1)][LB=1][MC=1]
-        Total # of inputs        : 4
+    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_status_4\, Mode=(Combinatorial) @ [UDB=(3,1)][LB=1][MC=1]
+        Total # of inputs        : 2
         Total # of product terms : 1
             Clock Enable: True
         Main Equation            : 1 pterm
         (
-              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\
+              \OUTPUT_UART:BUART:rx_load_fifo\ * 
+              \OUTPUT_UART:BUART:rx_fifofull\
         );
-        Output = \OUTPUT_UART:BUART:rx_counter_load\ (fanout=2)
+        Output = \OUTPUT_UART:BUART:rx_status_4\ (fanout=1)
         Properties               : 
         {
         }
 
-    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_count7_bit8_wire\, Mode=(D-Register) @ [UDB=(3,1)][LB=1][MC=2]
-        Total # of inputs        : 6
+    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_status_5\, Mode=(Combinatorial) @ [UDB=(3,1)][LB=1][MC=2]
+        Total # of inputs        : 2
+        Total # of product terms : 1
+            Clock Enable: True
+        Main Equation            : 1 pterm
+        (
+              \OUTPUT_UART:BUART:rx_fifonotempty\ * 
+              \OUTPUT_UART:BUART:rx_state_stop1_reg\
+        );
+        Output = \OUTPUT_UART:BUART:rx_status_5\ (fanout=1)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_bitclk\, Mode=(D-Register) @ [UDB=(3,1)][LB=1][MC=3]
+        Total # of inputs        : 4
         Total # of product terms : 2
         List of special equations: 
             Clock  = (\OUTPUT_UART:Net_9\) => Global
             Clock Enable: True
         Main Equation            : 2 pterms
         !(
-              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\
-            + !\OUTPUT_UART:BUART:rx_count7_tc\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\
+              !\OUTPUT_UART:BUART:tx_state_1\ * 
+              !\OUTPUT_UART:BUART:tx_state_0\ * 
+              \OUTPUT_UART:BUART:tx_state_2\
+            + !\OUTPUT_UART:BUART:tx_bitclk_enable_pre\
         );
-        Output = \OUTPUT_UART:BUART:rx_count7_bit8_wire\ (fanout=9)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_3\, Mode=(T-Register) @ [UDB=(3,1)][LB=1][MC=3]
-        Total # of inputs        : 8
-        Total # of product terms : 3
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 3 pterms
-        (
-              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              !\OUTPUT_UART:BUART:rx_state_0\ * 
-              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
-              \OUTPUT_UART:BUART:rx_state_3\ * \OUTPUT_UART:BUART:rx_state_2\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              \OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_6\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
-            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
-              \OUTPUT_UART:BUART:rx_state_0\ * 
-              !\OUTPUT_UART:BUART:rx_state_3\ * 
-              !\OUTPUT_UART:BUART:rx_state_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_5\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\
-        );
-        Output = \OUTPUT_UART:BUART:rx_state_3\ (fanout=8)
+        Output = \OUTPUT_UART:BUART:tx_bitclk\ (fanout=4)
         Properties               : 
         {
         }
@@ -3921,94 +3553,50 @@ datapathcell: Name =\OUTPUT_UART:BUART:sRX:RxShifter:u0\
     Clock Polarity: Active High
     Clock Enable: True
 
-count7cell: Name =\OUTPUT_UART:BUART:sRX:RxBitCounter\
+statusicell: Name =\OUTPUT_UART:BUART:sRX:RxSts\
     PORT MAP (
         clock => \OUTPUT_UART:Net_9\ ,
-        load => \OUTPUT_UART:BUART:rx_counter_load\ ,
-        count_6 => \OUTPUT_UART:BUART:rx_count_6\ ,
-        count_5 => \OUTPUT_UART:BUART:rx_count_5\ ,
-        count_4 => \OUTPUT_UART:BUART:rx_count_4\ ,
-        count_3 => \OUTPUT_UART:BUART:rx_count_3\ ,
-        count_2 => \OUTPUT_UART:BUART:rx_count_2\ ,
-        count_1 => \OUTPUT_UART:BUART:rx_count_1\ ,
-        count_0 => \OUTPUT_UART:BUART:rx_count_0\ ,
-        tc => \OUTPUT_UART:BUART:rx_count7_tc\ );
+        status_5 => \OUTPUT_UART:BUART:rx_status_5\ ,
+        status_4 => \OUTPUT_UART:BUART:rx_status_4\ ,
+        status_3 => \OUTPUT_UART:BUART:rx_status_3\ );
     Properties:
     {
-        cy_alt_mode = 0
-        cy_init_value = "0000000"
-        cy_period = "1110110"
-        cy_route_en = 1
-        cy_route_ld = 1
+        cy_force_order = 1
+        cy_int_mask = "1111111"
+        cy_md_select = "1011111"
     }
     Clock Polarity: Active High
     Clock Enable: True
 
 UDB [UDB=(3,2)] contents:
-LAB@[UDB=(3,2)][LB=0] #macrocells=2, #inputs=9, #pterms=8
+LAB@[UDB=(3,2)][LB=0] #macrocells=2, #inputs=4, #pterms=2
 {
-    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:pollcount_1\, Mode=(D-Register) @ [UDB=(3,2)][LB=0][MC=0]
-        Total # of inputs        : 7
-        Total # of product terms : 2
+    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_bitclk_enable\, Mode=(D-Register) @ [UDB=(3,2)][LB=0][MC=0]
+        Total # of inputs        : 3
+        Total # of product terms : 1
         List of special equations: 
             Clock  = (\OUTPUT_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 2 pterms
+        Main Equation            : 1 pterm
         (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
               !\OUTPUT_UART:BUART:rx_count_2\ * 
               !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
-            + \OUTPUT_UART:BUART:pollcount_1_split\
+              !\OUTPUT_UART:BUART:rx_count_0\
         );
-        Output = \OUTPUT_UART:BUART:pollcount_1\ (fanout=5)
+        Output = \OUTPUT_UART:BUART:rx_bitclk_enable\ (fanout=6)
         Properties               : 
         {
         }
 
-    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:pollcount_0\, Mode=(D-Register) @ [UDB=(3,2)][LB=0][MC=1]
-        Total # of inputs        : 7
-        Total # of product terms : 6
-        List of special equations: 
-            Clock  = (\OUTPUT_UART:Net_9\) => Global
+    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_status_2\, Mode=(Combinatorial) @ [UDB=(3,2)][LB=0][MC=1]
+        Total # of inputs        : 1
+        Total # of product terms : 1
             Clock Enable: True
-        Main Equation            : 6 pterms
+        Main Equation            : 1 pterm
         (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * !Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * Net_18 * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * !Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * Net_18 * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * !Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * Net_18 * 
-              !\OUTPUT_UART:BUART:pollcount_0\
+              !\OUTPUT_UART:BUART:tx_fifo_notfull\
         );
-        Output = \OUTPUT_UART:BUART:pollcount_0\ (fanout=5)
+        Output = \OUTPUT_UART:BUART:tx_status_2\ (fanout=1)
         Properties               : 
         {
         }
@@ -4017,72 +3605,107 @@ LAB@[UDB=(3,2)][LB=0] #macrocells=2, #inputs=9, #pterms=8
     [McSlotId=3]: (empty)
 }
 
-LAB@[UDB=(3,2)][LB=1] #macrocells=1, #inputs=8, #pterms=8
+LAB@[UDB=(3,2)][LB=1] #macrocells=4, #inputs=10, #pterms=7
 {
-    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:pollcount_1_split\, Mode=(Combinatorial) @ [UDB=(3,2)][LB=1][MC=0]
-        Total # of inputs        : 8
-        Total # of product terms : 8
+    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_2\, Mode=(T-Register) @ [UDB=(3,2)][LB=1][MC=0]
+        Total # of inputs        : 10
+        Total # of product terms : 5
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
             Clock Enable: True
-        Main Equation            : 8 pterms
+        Main Equation            : 5 pterms
         (
-              !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
-            + !\OUTPUT_UART:BUART:rx_count_3\ * 
-              \OUTPUT_UART:BUART:rx_count_2\ * \OUTPUT_UART:BUART:rx_count_1\ * 
-              \OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * 
-              !\OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              !\OUTPUT_UART:BUART:pollcount_1\ * Net_18 * 
-              \OUTPUT_UART:BUART:pollcount_0\
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * !Net_18
-            + \OUTPUT_UART:BUART:rx_count_3\ * 
-              !\OUTPUT_UART:BUART:rx_count_2\ * 
-              !\OUTPUT_UART:BUART:rx_count_1\ * 
-              !\OUTPUT_UART:BUART:rx_count_0\ * 
-              \OUTPUT_UART:BUART:rx_count7_bit8_wire\ * 
-              \OUTPUT_UART:BUART:pollcount_1\ * 
-              !\OUTPUT_UART:BUART:pollcount_0\
+              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              !\OUTPUT_UART:BUART:rx_state_0\ * 
+              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
+              \OUTPUT_UART:BUART:rx_state_3\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              !\OUTPUT_UART:BUART:rx_state_0\ * 
+              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
+              \OUTPUT_UART:BUART:rx_state_2\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              !\OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\ * !Net_18 * 
+              \OUTPUT_UART:BUART:rx_last\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              \OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_5\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              \OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
         );
-        Output = \OUTPUT_UART:BUART:pollcount_1_split\ (fanout=1)
+        Output = \OUTPUT_UART:BUART:rx_state_2\ (fanout=7)
         Properties               : 
         {
         }
 
-    [McSlotId=1]: (empty)
-    [McSlotId=2]: (empty)
-    [McSlotId=3]: (empty)
+    [McSlotId=1]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_state_3\, Mode=(T-Register) @ [UDB=(3,2)][LB=1][MC=1]
+        Total # of inputs        : 8
+        Total # of product terms : 3
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 3 pterms
+        (
+              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              !\OUTPUT_UART:BUART:rx_state_0\ * 
+              \OUTPUT_UART:BUART:rx_bitclk_enable\ * 
+              \OUTPUT_UART:BUART:rx_state_3\ * \OUTPUT_UART:BUART:rx_state_2\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              \OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_5\
+            + !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              \OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\ * 
+              !\OUTPUT_UART:BUART:rx_count_6\ * 
+              !\OUTPUT_UART:BUART:rx_count_4\
+        );
+        Output = \OUTPUT_UART:BUART:rx_state_3\ (fanout=7)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_ctrl_mark_last\, Mode=(T-Register) @ [UDB=(3,2)][LB=1][MC=2]
+        Total # of inputs        : 0
+        Total # of product terms : 0
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 0 pterms
+        (
+            0
+        );
+        Output = \OUTPUT_UART:BUART:tx_ctrl_mark_last\ (fanout=8)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_counter_load\, Mode=(Combinatorial) @ [UDB=(3,2)][LB=1][MC=3]
+        Total # of inputs        : 4
+        Total # of product terms : 1
+            Clock Enable: True
+        Main Equation            : 1 pterm
+        (
+              !\OUTPUT_UART:BUART:tx_ctrl_mark_last\ * 
+              !\OUTPUT_UART:BUART:rx_state_0\ * 
+              !\OUTPUT_UART:BUART:rx_state_3\ * 
+              !\OUTPUT_UART:BUART:rx_state_2\
+        );
+        Output = \OUTPUT_UART:BUART:rx_counter_load\ (fanout=2)
+        Properties               : 
+        {
+        }
 }
 
 datapathcell: Name =\OUTPUT_UART:BUART:sTX:TxShifter:u0\
@@ -4117,6 +3740,29 @@ datapathcell: Name =\OUTPUT_UART:BUART:sTX:TxShifter:u0\
         so_sync = 1
         z0_sync = 1
         z1_sync = 1
+    }
+    Clock Polarity: Active High
+    Clock Enable: True
+
+count7cell: Name =\OUTPUT_UART:BUART:sRX:RxBitCounter\
+    PORT MAP (
+        clock => \OUTPUT_UART:Net_9\ ,
+        load => \OUTPUT_UART:BUART:rx_counter_load\ ,
+        count_6 => \OUTPUT_UART:BUART:rx_count_6\ ,
+        count_5 => \OUTPUT_UART:BUART:rx_count_5\ ,
+        count_4 => \OUTPUT_UART:BUART:rx_count_4\ ,
+        count_3 => \OUTPUT_UART:BUART:rx_count_3\ ,
+        count_2 => \OUTPUT_UART:BUART:rx_count_2\ ,
+        count_1 => \OUTPUT_UART:BUART:rx_count_1\ ,
+        count_0 => \OUTPUT_UART:BUART:rx_count_0\ ,
+        tc => \OUTPUT_UART:BUART:rx_count7_tc\ );
+    Properties:
+    {
+        cy_alt_mode = 0
+        cy_init_value = "0000000"
+        cy_period = "1110010"
+        cy_route_en = 1
+        cy_route_ld = 1
     }
     Clock Polarity: Active High
     Clock Enable: True
@@ -4174,7 +3820,8 @@ LAB@[UDB=(3,3)][LB=0] #macrocells=3, #inputs=7, #pterms=8
         {
         }
 
-    [McSlotId=2]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_state_0\, Mode=(T-Register) @ [UDB=(3,3)][LB=0][MC=2]
+    [McSlotId=2]: (empty)
+    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_state_0\, Mode=(T-Register) @ [UDB=(3,3)][LB=0][MC=3]
         Total # of inputs        : 6
         Total # of product terms : 4
         List of special equations: 
@@ -4201,100 +3848,56 @@ LAB@[UDB=(3,3)][LB=0] #macrocells=3, #inputs=7, #pterms=8
         Properties               : 
         {
         }
-
-    [McSlotId=3]: (empty)
 }
 
-LAB@[UDB=(3,3)][LB=1] #macrocells=3, #inputs=7, #pterms=8
+LAB@[UDB=(3,3)][LB=1] #macrocells=2, #inputs=9, #pterms=6
 {
-    [McSlotId=0]:     MacroCell: Name=\GPS_UART:BUART:tx_state_2\, Mode=(T-Register) @ [UDB=(3,3)][LB=1][MC=0]
-        Total # of inputs        : 6
-        Total # of product terms : 4
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 4 pterms
-        (
-              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
-              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
-              \GPS_UART:BUART:tx_state_2\
-            + \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
-              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
-              \GPS_UART:BUART:tx_state_2\
-            + \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
-              !\GPS_UART:BUART:tx_state_2\ * \GPS_UART:BUART:tx_bitclk\
-            + \GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_2\ * 
-              \GPS_UART:BUART:tx_counter_dp\ * \GPS_UART:BUART:tx_bitclk\
-        );
-        Output = \GPS_UART:BUART:tx_state_2\ (fanout=7)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=1]:     MacroCell: Name=\GPS_UART:BUART:tx_state_1\, Mode=(T-Register) @ [UDB=(3,3)][LB=1][MC=1]
-        Total # of inputs        : 6
-        Total # of product terms : 3
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 3 pterms
-        (
-              \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
-              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
-              \GPS_UART:BUART:tx_state_2\
-            + \GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_2\ * 
-              \GPS_UART:BUART:tx_counter_dp\ * \GPS_UART:BUART:tx_bitclk\
-            + \GPS_UART:BUART:tx_state_0\ * !\GPS_UART:BUART:tx_state_2\ * 
-              \GPS_UART:BUART:tx_bitclk\
-        );
-        Output = \GPS_UART:BUART:tx_state_1\ (fanout=8)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=2]:     MacroCell: Name=\GPS_UART:BUART:tx_state_0\, Mode=(T-Register) @ [UDB=(3,3)][LB=1][MC=2]
-        Total # of inputs        : 6
-        Total # of product terms : 4
-        List of special equations: 
-            Clock  = (\GPS_UART:Net_9\) => Global
-            Clock Enable: True
-        Main Equation            : 4 pterms
-        (
-              !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
-              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
-              !\GPS_UART:BUART:tx_fifo_empty\
-            + !\GPS_UART:BUART:tx_state_1\ * !\GPS_UART:BUART:tx_state_0\ * 
-              !\GPS_UART:BUART:tx_fifo_empty\ * !\GPS_UART:BUART:tx_state_2\
-            + \GPS_UART:BUART:tx_state_1\ * \GPS_UART:BUART:tx_state_0\ * 
-              \GPS_UART:BUART:tx_bitclk_enable_pre\ * 
-              \GPS_UART:BUART:tx_fifo_empty\ * \GPS_UART:BUART:tx_state_2\
-            + \GPS_UART:BUART:tx_state_0\ * !\GPS_UART:BUART:tx_state_2\ * 
-              \GPS_UART:BUART:tx_bitclk\
-        );
-        Output = \GPS_UART:BUART:tx_state_0\ (fanout=8)
-        Properties               : 
-        {
-        }
-
-    [McSlotId=3]: (empty)
-}
-
-UDB [UDB=(3,4)] contents:
-LAB@[UDB=(3,4)][LB=0] #macrocells=1, #inputs=2, #pterms=1
-{
-    [McSlotId=0]: (empty)
-    [McSlotId=1]: (empty)
-    [McSlotId=2]: (empty)
-    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:rx_status_4\, Mode=(Combinatorial) @ [UDB=(3,4)][LB=0][MC=3]
-        Total # of inputs        : 2
+    [McSlotId=0]:     MacroCell: Name=\OUTPUT_UART:BUART:tx_status_0\, Mode=(Combinatorial) @ [UDB=(3,3)][LB=1][MC=0]
+        Total # of inputs        : 5
         Total # of product terms : 1
             Clock Enable: True
         Main Equation            : 1 pterm
         (
-              \OUTPUT_UART:BUART:rx_load_fifo\ * 
-              \OUTPUT_UART:BUART:rx_fifofull\
+              !\OUTPUT_UART:BUART:tx_state_1\ * 
+              !\OUTPUT_UART:BUART:tx_state_0\ * 
+              \OUTPUT_UART:BUART:tx_bitclk_enable_pre\ * 
+              \OUTPUT_UART:BUART:tx_fifo_empty\ * 
+              \OUTPUT_UART:BUART:tx_state_2\
         );
-        Output = \OUTPUT_UART:BUART:rx_status_4\ (fanout=1)
+        Output = \OUTPUT_UART:BUART:tx_status_0\ (fanout=1)
+        Properties               : 
+        {
+        }
+
+    [McSlotId=1]: (empty)
+    [McSlotId=2]: (empty)
+    [McSlotId=3]:     MacroCell: Name=\OUTPUT_UART:BUART:txn\, Mode=(D-Register) @ [UDB=(3,3)][LB=1][MC=3]
+        Total # of inputs        : 7
+        Total # of product terms : 5
+        List of special equations: 
+            Clock  = (\OUTPUT_UART:Net_9\) => Global
+            Clock Enable: True
+        Main Equation            : 5 pterms
+        (
+              \OUTPUT_UART:BUART:txn\ * \OUTPUT_UART:BUART:tx_state_1\ * 
+              !\OUTPUT_UART:BUART:tx_bitclk\
+            + \OUTPUT_UART:BUART:txn\ * \OUTPUT_UART:BUART:tx_state_2\
+            + !\OUTPUT_UART:BUART:tx_state_1\ * 
+              \OUTPUT_UART:BUART:tx_state_0\ * 
+              !\OUTPUT_UART:BUART:tx_shift_out\ * 
+              !\OUTPUT_UART:BUART:tx_state_2\
+            + !\OUTPUT_UART:BUART:tx_state_1\ * 
+              \OUTPUT_UART:BUART:tx_state_0\ * 
+              !\OUTPUT_UART:BUART:tx_state_2\ * 
+              !\OUTPUT_UART:BUART:tx_bitclk\
+            + \OUTPUT_UART:BUART:tx_state_1\ * 
+              !\OUTPUT_UART:BUART:tx_state_0\ * 
+              !\OUTPUT_UART:BUART:tx_shift_out\ * 
+              !\OUTPUT_UART:BUART:tx_state_2\ * 
+              !\OUTPUT_UART:BUART:tx_counter_dp\ * 
+              \OUTPUT_UART:BUART:tx_bitclk\
+        );
+        Output = \OUTPUT_UART:BUART:txn\ (fanout=2)
         Properties               : 
         {
         }
@@ -4316,7 +3919,7 @@ datapathcell: Name =\OUTPUT_UART:BUART:sTX:sCLOCK:TxBitClkGen\
         cl1_sync = 1
         cmsb_sync = 1
         co_msb_sync = 1
-        cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100001111001000000100000000000101111100000000000000001000"
+        cy_dpconfig = "1010100001000000001000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000011111111000000001111111100000111001000000100000000000101111100000000000000001000"
         d0_init = "00000000"
         d1_init = "00000000"
         f0_blk_sync = 1
@@ -4333,21 +3936,23 @@ datapathcell: Name =\OUTPUT_UART:BUART:sTX:sCLOCK:TxBitClkGen\
     Clock Polarity: Active High
     Clock Enable: True
 
-statusicell: Name =\OUTPUT_UART:BUART:sRX:RxSts\
+statusicell: Name =\OUTPUT_UART:BUART:sTX:TxSts\
     PORT MAP (
         clock => \OUTPUT_UART:Net_9\ ,
-        status_5 => \OUTPUT_UART:BUART:rx_status_5\ ,
-        status_4 => \OUTPUT_UART:BUART:rx_status_4\ ,
-        status_3 => \OUTPUT_UART:BUART:rx_status_3\ );
+        status_3 => \OUTPUT_UART:BUART:tx_fifo_notfull\ ,
+        status_2 => \OUTPUT_UART:BUART:tx_status_2\ ,
+        status_1 => \OUTPUT_UART:BUART:tx_fifo_empty\ ,
+        status_0 => \OUTPUT_UART:BUART:tx_status_0\ );
     Properties:
     {
         cy_force_order = 1
         cy_int_mask = "1111111"
-        cy_md_select = "1011111"
+        cy_md_select = "0000001"
     }
     Clock Polarity: Active High
     Clock Enable: True
 
+UDB [UDB=(3,4)] is empty.
 UDB [UDB=(3,5)] is empty.
 Intr container @ [IntrContainer=(0)]: 
   Intr@ [IntrContainer=(0)][IntrId=(0)] 
@@ -4633,12 +4238,12 @@ Port | Pin | Fixed |      Type |       Drive Mode |      Name | Connections
 </CYPRESSTAG>
 </CYPRESSTAG>
 Digital component placer commit/Report: Elapsed time ==> 0s.031ms
-Digital Placement phase: Elapsed time ==> 0s.991ms
+Digital Placement phase: Elapsed time ==> 0s.959ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\dev\psoc5/psoc5lp/route_arch-rrg.cydata" --vh2-path "GPS_Enhanced_r.vh2" --pcf-path "GPS_Enhanced.pco" --des-name "GPS_Enhanced" --dsf-path "GPS_Enhanced.dsf" --sdc-path "GPS_Enhanced.sdc" --lib-path "GPS_Enhanced_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 1s.509ms
+Digital Routing phase: Elapsed time ==> 1s.303ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
 Bitstream Generation phase: Elapsed time ==> 0s.110ms
@@ -4654,11 +4259,11 @@ Static timing analysis phase: Elapsed time ==> 0s.268ms
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.158ms
+Design database save phase: Elapsed time ==> 0s.142ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 3s.476ms
+cydsfit: Elapsed time ==> 3s.249ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 3s.476ms
-API generation phase: Elapsed time ==> 0s.665ms
-Dependency generation phase: Elapsed time ==> 0s.020ms
+Fitter phase: Elapsed time ==> 3s.249ms
+API generation phase: Elapsed time ==> 0s.679ms
+Dependency generation phase: Elapsed time ==> 0s.015ms
 Cleanup phase: Elapsed time ==> 0s.000ms

@@ -35,7 +35,7 @@
 #define GPS_UART_TX_INTERRUPT_ENABLED           (0u)
 #define GPS_UART_INTERNAL_CLOCK_USED            (1u)
 #define GPS_UART_RXHW_ADDRESS_ENABLED           (0u)
-#define GPS_UART_OVER_SAMPLE_COUNT              (16u)
+#define GPS_UART_OVER_SAMPLE_COUNT              (8u)
 #define GPS_UART_PARITY_TYPE                    (0u)
 #define GPS_UART_PARITY_TYPE_SW                 (0u)
 #define GPS_UART_BREAK_DETECT                   (0u)

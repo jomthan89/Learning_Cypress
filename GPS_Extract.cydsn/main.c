@@ -78,7 +78,8 @@ int main(void)
     CyDelay(500); // Wait for GPS module to initialize
     
     UART_PutString("Getting GPS Data...\r\n");
-    GPS_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+    //GPS_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+    GPS_PutString("$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
     char uart1_rx_buffer[UART1_BUFFER_SIZE];
     uint32_t uart1_rx_buffer_pos = 0;
@@ -92,7 +93,7 @@ int main(void)
         if (GPS_GetRxBufferSize() > 0)
         {
             char rx_byte = GPS_GetChar();
-            
+            //UART_PutChar(rx_byte);
             // Check if we have received a complete message
             if (rx_byte == '\n' || uart1_rx_buffer_pos == UART1_BUFFER_SIZE - 1)
             {
