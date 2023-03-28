@@ -108,6 +108,8 @@
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PW_GPS_aliases.h</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PW_GPS.c</File>
           <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\PW_GPS.h</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\GPS_ISR.c</File>
+          <File BuildType="BUILD" Toolchain="">Generated_Source\PSoC5\GPS_ISR.h</File>
         </Files>
       </Folder>
       <Folder BuildType="STRICT" Path="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\Export\ARM_GCC_Generic">

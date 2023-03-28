@@ -1,6 +1,6 @@
 // ======================================================================
 // GPS_Extract.v generated from TopDesign.cysch
-// 03/28/2023 at 11:38
+// 03/28/2023 at 17:26
 // This file is auto generated. ANY EDITS YOU MAKE MAY BE LOST WHEN THIS FILE IS REGENERATED!!!
 // ======================================================================
 
@@ -388,13 +388,13 @@ module top ;
           wire  Net_47;
           wire  Net_46;
           wire  Net_45;
-          wire  Net_44;
           wire  Net_43;
           wire  Net_42;
           wire  Net_41;
           wire  Net_40;
           wire  Net_39;
           wire  Net_38;
+          wire  Net_44;
           wire  Net_9;
           wire  Net_50;
           wire  Net_49;
@@ -826,6 +826,13 @@ module top ;
 		  .out_reset({1'b0}));
 
 	assign tmpOE__PW_GPS_net = (`CYDEV_CHIP_MEMBER_USED == `CYDEV_CHIP_MEMBER_3A && `CYDEV_CHIP_REVISION_USED < `CYDEV_CHIP_REVISION_3A_ES3) ? ~{1'b1} : {1'b1};
+
+
+	cy_isr_v1_0
+		#(.int_type(2'b10))
+		GPS_ISR
+		 (.int_signal(Net_44));
+
 
 
 

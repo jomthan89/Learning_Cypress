@@ -14,54 +14,114 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE 128
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-// Variables to store the GNRMC message fields
-char time[BUFFER_SIZE];
-char status[BUFFER_SIZE];
-char latitude[BUFFER_SIZE];
-char latitude_dir[BUFFER_SIZE];
-char longitude[BUFFER_SIZE];
-char longitude_dir[BUFFER_SIZE];
-char speed[BUFFER_SIZE];
-char course[BUFFER_SIZE];
-char date[BUFFER_SIZE];
-char magnetic_variation[BUFFER_SIZE];
+#define UART1_BUFFER_SIZE 128
+#define UART2_BUFFER_SIZE 128
+#define MESSAGE_INTERVAL_MS 1000
 
-// Function to parse the GNRMC message and store the fields in the variables
-void parse_gnrmc_message(char* message) {
-    char* token;
-    int count = 0;
-    token = strtok(message, ",");
-    while (token != NULL) {
-        switch (count) {
-            case 1: strcpy(time, token); break;
-            case 2: strcpy(status, token); break;
-            case 3: strcpy(latitude, token); break;
-            case 4: strcpy(latitude_dir, token); break;
-            case 5: strcpy(longitude, token); break;
-            case 6: strcpy(longitude_dir, token); break;
-            case 7: strcpy(speed, token); break;
-            case 8: strcpy(course, token); break;
-            case 9: strcpy(date, token); break;
-            case 10: strcpy(magnetic_variation, token); break;
+// Global variables to store the GPS data
+char utc_time[10];
+char latitude[11];
+char longitude[12];
+char speed_over_ground[6];
+char date[7];
+
+char uart1_rx_buffer[UART1_BUFFER_SIZE];
+uint32_t uart1_rx_buffer_pos = 0;
+char uart2_tx_buffer[UART2_BUFFER_SIZE];
+
+void parse_gnrmc_message(char* message)
+{
+    // Split the message into individual fields
+    char* field;
+    int field_count = 0;
+    field = strtok(message, ",");
+    while (field != NULL)
+    {
+        if (field_count == 1)
+        {
+            // Extract the UTC time
+            strncpy(utc_time, field, 10);
         }
-        token = strtok(NULL, ",");
-        count++;
+        else if (field_count == 3)
+        {
+            // Extract the latitude
+            strncpy(latitude, field, 11);
+        }
+        else if (field_count == 5)
+        {
+            // Extract the longitude
+            strncpy(longitude, field, 12);
+        }
+        else if (field_count == 7)
+        {
+            // Extract the speed over ground
+            strncpy(speed_over_ground, field, 6);
+        }
+        else if (field_count == 9)
+        {
+            // Extract the date
+            strncpy(date, field, 7);
+        }
+        
+        field = strtok(NULL, ",");
+        field_count++;
     }
+}
+
+CY_ISR(uart1_rx_isr)
+{
+    if (UART1_GetRxBufferSize() > 0)
+        {
+            char rx_byte = UART1_GetChar();
+            //UART_PutChar(rx_byte);
+            // Check if we have received a complete message
+            if (rx_byte == '\n' || uart1_rx_buffer_pos == UART1_BUFFER_SIZE - 1)
+            {
+                uart1_rx_buffer[uart1_rx_buffer_pos] = '\0';
+                
+                // Check if the message is a GNRMC message
+                if (strncmp(uart1_rx_buffer, "$GNRMC", 6) == 0)
+                {
+                    // Parse the message and extract the required data
+                    parse_gnrmc_message(uart1_rx_buffer);
+                    
+                    // Transmit the data over UART2
+                    //snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Time: %s, Lat: %s, Long: %s, Speed: %s, Date: %s\n",
+                             //utc_time, latitude, longitude, speed_over_ground, date);
+                   //UART_PutString(uart2_tx_buffer);
+                    //UART_PutString(latitude);
+                    //UART_PutString("\r\n");
+                    //UART_PutString(longitude);
+                    //UART_PutString("\r\n");
+                    //snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,Time: %s \r\n",latitude,longitude,utc_time);
+                    //UART2_PutString(uart2_tx_buffer);
+                }
+                
+                uart1_rx_buffer_pos = 0;
+            }
+            else
+            {
+                uart1_rx_buffer[uart1_rx_buffer_pos] = rx_byte;
+                uart1_rx_buffer_pos++;
+            }
+        }
 }
 
 int main(void)
 {
     CyGlobalIntEnable; /* Enable global interrupts. */
-
+    
+    PW_GPS_Write(1);
+    
     // Initialize UART1 and UART2
     UART1_Start();
     UART2_Start();
     
-    // Buffer to store incoming characters
-    char buffer[BUFFER_SIZE];
-    int buffer_index = 0;
+    UART1_RX_ISR_StartEx(uart1_rx_isr);
     
     UART2_PutString("Initializing...\r\n");
     UART2_PutString("Getting GPS Data...\r\n");
@@ -69,48 +129,55 @@ int main(void)
     UART1_PutString("$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
     UART2_PutString("GPS data:\r\n");
     
+    CySysTickStart();
+    
     // Main loop
-    for(;;)
+    while(1)
     {
-        // Read character from UART1
-        if(UART1_GetRxBufferSize() != 0) {
-            char ch = UART1_GetChar();
-            UART2_PutChar(ch);
-            buffer[buffer_index] = ch;
-            buffer_index++;
-            // Check for end of message
-            if(ch == '\n') {
-                // Null terminate the string
-                buffer[buffer_index] = '\0';
-                // Parse the GNRMC message
-                UART2_PutString(buffer);
-                parse_gnrmc_message(buffer);
-                // Reset the buffer index
-                buffer_index = 0;
-                // Transmit each variable over UART2
-                UART2_PutString(time);
-                UART2_PutString(",");
-                UART2_PutString(status);
-                UART2_PutString(",");
-                UART2_PutString(latitude);
-                UART2_PutString(",");
-                UART2_PutString(latitude_dir);
-                UART2_PutString(",");
-                UART2_PutString(longitude);
-                UART2_PutString(",");
-                UART2_PutString(longitude_dir);
-                UART2_PutString(",");
-                UART2_PutString(speed);
-                UART2_PutString(",");
-                UART2_PutString(course);
-                UART2_PutString(",");
-                UART2_PutString(date);
-                UART2_PutString(",");
-                UART2_PutString(magnetic_variation);
-                UART2_PutString("\r\n");
-            }
+        if (CySysTickGetValue() % (MESSAGE_INTERVAL_MS * 1000) == 0) {
+            
+            snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,Time: %s \r\n",latitude,longitude,utc_time);
+            UART2_PutString(uart2_tx_buffer);
+            
         }
+        // Read data from UART1 (GPS)
+        /*if (UART1_GetRxBufferSize() > 0)
+        {
+            char rx_byte = UART1_GetChar();
+            //UART_PutChar(rx_byte);
+            // Check if we have received a complete message
+            if (rx_byte == '\n' || uart1_rx_buffer_pos == UART1_BUFFER_SIZE - 1)
+            {
+                uart1_rx_buffer[uart1_rx_buffer_pos] = '\0';
+                
+                // Check if the message is a GNRMC message
+                if (strncmp(uart1_rx_buffer, "$GNRMC", 6) == 0)
+                {
+                    // Parse the message and extract the required data
+                    parse_gnrmc_message(uart1_rx_buffer);
+                    
+                    // Transmit the data over UART2
+                    /snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Time: %s, Lat: %s, Long: %s, Speed: %s, Date: %s\n",
+                             utc_time, latitude, longitude, speed_over_ground, date);
+                   //UART_PutString(uart2_tx_buffer);
+                    //UART_PutString(latitude);
+                    //UART_PutString("\r\n");
+                    //UART_PutString(longitude);
+                    //UART_PutString("\r\n");
+                    snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,Time: %s \r\n",latitude,longitude,utc_time);
+                    UART2_PutString(uart2_tx_buffer);
+                }
+                
+                uart1_rx_buffer_pos = 0;
+            }
+            else
+            {
+                uart1_rx_buffer[uart1_rx_buffer_pos] = rx_byte;
+                uart1_rx_buffer_pos++;
+            }
+        }*/
     }
+    return 0;
 }
 
 

@@ -31,6 +31,8 @@
   <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\PW_GPS_aliases.h" value="HEADER;;;;;PW_GPS" />
   <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\PW_GPS.c" value="SOURCE_C;CortexM3;;;;PW_GPS" />
   <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\PW_GPS.h" value="HEADER;;;;;PW_GPS" />
+  <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\GPS_ISR.c" value="SOURCE_C;CortexM3;;;;GPS_ISR" />
+  <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\GPS_ISR.h" value="HEADER;;;;;GPS_ISR" />
   <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\GPS_IntClock.c" value="SOURCE_C;CortexM3;;;;GPS_IntClock" />
   <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\GPS_IntClock.h" value="HEADER;;;;;GPS_IntClock" />
   <file name="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\codegentemp\UART_IntClock.c" value="SOURCE_C;CortexM3;;;;UART_IntClock" />
