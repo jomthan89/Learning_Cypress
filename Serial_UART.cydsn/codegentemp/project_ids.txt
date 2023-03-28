@@ -1,0 +1,10 @@
+D:\WORK\Study\Cypress_Study\LED_Blink\LED_Blinking.cydsn\LED_Blinking.cyprj|bfbb9ba0-4cff-4f62-9d5a-59f4d70848f2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|7130bee7-e2ee-4665-a6a2-be6a29d07663
+C:\Users\tonkl\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|5f922224-1392-47a0-b97b-24a3b90ad0ba
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|3b58297d-318f-42a7-a2be-a844d176ed0b
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|dab9052f-d14e-4b0d-9681-20b0b3e97463
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|7da2da25-867f-4626-8c51-4bd5880345a0
+D:\WORK\Study\Cypress_Study\LED_Blinking_PWM\LED_BlinkingPWM.cydsn\LED_BlinkingPWM.cyprj|588372a2-0aef-4ca8-a6e3-5eb5215227eb
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|ce174cb8-f858-4f95-ab6e-850a34e2d422
+D:\WORK\Study\Cypress_Study\LED_FW\LED_BlinkingFW.cydsn\LED_BlinkingFW.cyprj|82100c2e-0414-4f52-a5dd-9c511ceb8b46
+D:\WORK\Study\Cypress_Study\Study\Serial_UART.cydsn\Serial_UART.cyprj|c30bc000-3869-46d3-ad76-558571db2096

@@ -1,0 +1,1517 @@
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"cymetadata.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	cy_metadata
+  20              		.global	cy_meta_flashprotect
+  21              		.global	cy_meta_wonvl
+  22              		.global	cy_meta_custnvl
+  23              		.global	cy_meta_configecc
+  24              		.section	.cyconfigecc,"a",%progbits
+  25              		.align	2
+  26              		.type	cy_meta_configecc, %object
+  27              		.size	cy_meta_configecc, 980
+  28              	cy_meta_configecc:
+  29 0000 01       		.byte	1
+  30 0001 52       		.byte	82
+  31 0002 00       		.byte	0
+  32 0003 40       		.byte	64
+  33 0004 01       		.byte	1
+  34 0005 64       		.byte	100
+  35 0006 00       		.byte	0
+  36 0007 40       		.byte	64
+  37 0008 02       		.byte	2
+  38 0009 65       		.byte	101
+  39 000a 00       		.byte	0
+  40 000b 40       		.byte	64
+  41 000c 01       		.byte	1
+  42 000d 03       		.byte	3
+  43 000e 01       		.byte	1
+  44 000f 40       		.byte	64
+  45 0010 01       		.byte	1
+  46 0011 05       		.byte	5
+  47 0012 01       		.byte	1
+  48 0013 40       		.byte	64
+  49 0014 51       		.byte	81
+  50 0015 06       		.byte	6
+  51 0016 01       		.byte	1
+  52 0017 40       		.byte	64
+  53 0018 31       		.byte	49
+  54 0019 07       		.byte	7
+  55 001a 01       		.byte	1
+  56 001b 40       		.byte	64
+  57 001c 4E       		.byte	78
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 2
+
+
+  58 001d 14       		.byte	20
+  59 001e 01       		.byte	1
+  60 001f 40       		.byte	64
+  61 0020 4F       		.byte	79
+  62 0021 15       		.byte	21
+  63 0022 01       		.byte	1
+  64 0023 40       		.byte	64
+  65 0024 46       		.byte	70
+  66 0025 16       		.byte	22
+  67 0026 01       		.byte	1
+  68 0027 40       		.byte	64
+  69 0028 43       		.byte	67
+  70 0029 17       		.byte	23
+  71 002a 01       		.byte	1
+  72 002b 40       		.byte	64
+  73 002c 02       		.byte	2
+  74 002d 40       		.byte	64
+  75 002e 01       		.byte	1
+  76 002f 40       		.byte	64
+  77 0030 03       		.byte	3
+  78 0031 41       		.byte	65
+  79 0032 01       		.byte	1
+  80 0033 40       		.byte	64
+  81 0034 07       		.byte	7
+  82 0035 49       		.byte	73
+  83 0036 01       		.byte	1
+  84 0037 40       		.byte	64
+  85 0038 04       		.byte	4
+  86 0039 50       		.byte	80
+  87 003a 01       		.byte	1
+  88 003b 40       		.byte	64
+  89 003c 01       		.byte	1
+  90 003d 51       		.byte	81
+  91 003e 01       		.byte	1
+  92 003f 40       		.byte	64
+  93 0040 1C       		.byte	28
+  94 0041 01       		.byte	1
+  95 0042 87       		.byte	-121
+  96 0043 38       		.byte	56
+  97 0044 85       		.byte	-123
+  98 0045 0F       		.byte	15
+  99 0046 87       		.byte	-121
+ 100 0047 72       		.byte	114
+ 101 0048 83       		.byte	-125
+ 102 0049 40       		.byte	64
+ 103 004a A7       		.byte	-89
+ 104 004b 40       		.byte	64
+ 105 004c 07       		.byte	7
+ 106 004d 01       		.byte	1
+ 107 004e 08       		.byte	8
+ 108 004f 03       		.byte	3
+ 109 0050 0A       		.byte	10
+ 110 0051 34       		.byte	52
+ 111 0052 0C       		.byte	12
+ 112 0053 2A       		.byte	42
+ 113 0054 0E       		.byte	14
+ 114 0055 14       		.byte	20
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 3
+
+
+ 115 0056 16       		.byte	22
+ 116 0057 20       		.byte	32
+ 117 0058 18       		.byte	24
+ 118 0059 03       		.byte	3
+ 119 005a 1A       		.byte	26
+ 120 005b 04       		.byte	4
+ 121 005c 22       		.byte	34
+ 122 005d 28       		.byte	40
+ 123 005e 24       		.byte	36
+ 124 005f 03       		.byte	3
+ 125 0060 25       		.byte	37
+ 126 0061 03       		.byte	3
+ 127 0062 26       		.byte	38
+ 128 0063 1C       		.byte	28
+ 129 0064 29       		.byte	41
+ 130 0065 03       		.byte	3
+ 131 0066 2A       		.byte	42
+ 132 0067 15       		.byte	21
+ 133 0068 2D       		.byte	45
+ 134 0069 02       		.byte	2
+ 135 006a 31       		.byte	49
+ 136 006b 03       		.byte	3
+ 137 006c 32       		.byte	50
+ 138 006d 38       		.byte	56
+ 139 006e 34       		.byte	52
+ 140 006f 0F       		.byte	15
+ 141 0070 39       		.byte	57
+ 142 0071 02       		.byte	2
+ 143 0072 3A       		.byte	58
+ 144 0073 28       		.byte	40
+ 145 0074 3F       		.byte	63
+ 146 0075 01       		.byte	1
+ 147 0076 40       		.byte	64
+ 148 0077 01       		.byte	1
+ 149 0078 46       		.byte	70
+ 150 0079 40       		.byte	64
+ 151 007a 49       		.byte	73
+ 152 007b FF       		.byte	-1
+ 153 007c 4A       		.byte	74
+ 154 007d 07       		.byte	7
+ 155 007e 4B       		.byte	75
+ 156 007f FF       		.byte	-1
+ 157 0080 4C       		.byte	76
+ 158 0081 40       		.byte	64
+ 159 0082 4D       		.byte	77
+ 160 0083 20       		.byte	32
+ 161 0084 4E       		.byte	78
+ 162 0085 F0       		.byte	-16
+ 163 0086 4F       		.byte	79
+ 164 0087 05       		.byte	5
+ 165 0088 50       		.byte	80
+ 166 0089 08       		.byte	8
+ 167 008a 58       		.byte	88
+ 168 008b 04       		.byte	4
+ 169 008c 59       		.byte	89
+ 170 008d 04       		.byte	4
+ 171 008e 5A       		.byte	90
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 4
+
+
+ 172 008f 04       		.byte	4
+ 173 0090 5F       		.byte	95
+ 174 0091 01       		.byte	1
+ 175 0092 60       		.byte	96
+ 176 0093 40       		.byte	64
+ 177 0094 61       		.byte	97
+ 178 0095 A8       		.byte	-88
+ 179 0096 62       		.byte	98
+ 180 0097 40       		.byte	64
+ 181 0098 63       		.byte	99
+ 182 0099 20       		.byte	32
+ 183 009a 80       		.byte	-128
+ 184 009b 01       		.byte	1
+ 185 009c 81       		.byte	-127
+ 186 009d 03       		.byte	3
+ 187 009e 84       		.byte	-124
+ 188 009f 04       		.byte	4
+ 189 00a0 85       		.byte	-123
+ 190 00a1 1C       		.byte	28
+ 191 00a2 86       		.byte	-122
+ 192 00a3 18       		.byte	24
+ 193 00a4 8A       		.byte	-118
+ 194 00a5 02       		.byte	2
+ 195 00a6 8C       		.byte	-116
+ 196 00a7 30       		.byte	48
+ 197 00a8 8E       		.byte	-114
+ 198 00a9 0C       		.byte	12
+ 199 00aa 8F       		.byte	-113
+ 200 00ab 03       		.byte	3
+ 201 00ac 92       		.byte	-110
+ 202 00ad 01       		.byte	1
+ 203 00ae 95       		.byte	-107
+ 204 00af 07       		.byte	7
+ 205 00b0 96       		.byte	-106
+ 206 00b1 02       		.byte	2
+ 207 00b2 97       		.byte	-105
+ 208 00b3 18       		.byte	24
+ 209 00b4 98       		.byte	-104
+ 210 00b5 04       		.byte	4
+ 211 00b6 99       		.byte	-103
+ 212 00b7 1C       		.byte	28
+ 213 00b8 9A       		.byte	-102
+ 214 00b9 38       		.byte	56
+ 215 00ba 9D       		.byte	-99
+ 216 00bb 12       		.byte	18
+ 217 00bc 9E       		.byte	-98
+ 218 00bd 30       		.byte	48
+ 219 00be 9F       		.byte	-97
+ 220 00bf 04       		.byte	4
+ 221 00c0 A1       		.byte	-95
+ 222 00c1 09       		.byte	9
+ 223 00c2 A2       		.byte	-94
+ 224 00c3 20       		.byte	32
+ 225 00c4 A3       		.byte	-93
+ 226 00c5 04       		.byte	4
+ 227 00c6 A6       		.byte	-90
+ 228 00c7 0C       		.byte	12
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 5
+
+
+ 229 00c8 A7       		.byte	-89
+ 230 00c9 03       		.byte	3
+ 231 00ca A8       		.byte	-88
+ 232 00cb 01       		.byte	1
+ 233 00cc A9       		.byte	-87
+ 234 00cd 03       		.byte	3
+ 235 00ce AE       		.byte	-82
+ 236 00cf 01       		.byte	1
+ 237 00d0 AF       		.byte	-81
+ 238 00d1 03       		.byte	3
+ 239 00d2 B1       		.byte	-79
+ 240 00d3 03       		.byte	3
+ 241 00d4 B2       		.byte	-78
+ 242 00d5 01       		.byte	1
+ 243 00d6 B3       		.byte	-77
+ 244 00d7 1C       		.byte	28
+ 245 00d8 B4       		.byte	-76
+ 246 00d9 02       		.byte	2
+ 247 00da B6       		.byte	-74
+ 248 00db 3C       		.byte	60
+ 249 00dc B8       		.byte	-72
+ 250 00dd 08       		.byte	8
+ 251 00de BA       		.byte	-70
+ 252 00df 80       		.byte	-128
+ 253 00e0 BE       		.byte	-66
+ 254 00e1 10       		.byte	16
+ 255 00e2 D4       		.byte	-44
+ 256 00e3 18       		.byte	24
+ 257 00e4 D6       		.byte	-42
+ 258 00e5 04       		.byte	4
+ 259 00e6 D8       		.byte	-40
+ 260 00e7 04       		.byte	4
+ 261 00e8 D9       		.byte	-39
+ 262 00e9 04       		.byte	4
+ 263 00ea DB       		.byte	-37
+ 264 00eb 04       		.byte	4
+ 265 00ec DF       		.byte	-33
+ 266 00ed 01       		.byte	1
+ 267 00ee 00       		.byte	0
+ 268 00ef 10       		.byte	16
+ 269 00f0 01       		.byte	1
+ 270 00f1 81       		.byte	-127
+ 271 00f2 03       		.byte	3
+ 272 00f3 20       		.byte	32
+ 273 00f4 05       		.byte	5
+ 274 00f5 A0       		.byte	-96
+ 275 00f6 08       		.byte	8
+ 276 00f7 42       		.byte	66
+ 277 00f8 0A       		.byte	10
+ 278 00f9 01       		.byte	1
+ 279 00fa 0B       		.byte	11
+ 280 00fb 28       		.byte	40
+ 281 00fc 0F       		.byte	15
+ 282 00fd 24       		.byte	36
+ 283 00fe 10       		.byte	16
+ 284 00ff 05       		.byte	5
+ 285 0100 11       		.byte	17
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 6
+
+
+ 286 0101 08       		.byte	8
+ 287 0102 12       		.byte	18
+ 288 0103 01       		.byte	1
+ 289 0104 13       		.byte	19
+ 290 0105 02       		.byte	2
+ 291 0106 14       		.byte	20
+ 292 0107 58       		.byte	88
+ 293 0108 16       		.byte	22
+ 294 0109 08       		.byte	8
+ 295 010a 18       		.byte	24
+ 296 010b 14       		.byte	20
+ 297 010c 19       		.byte	25
+ 298 010d 80       		.byte	-128
+ 299 010e 1F       		.byte	31
+ 300 010f 2C       		.byte	44
+ 301 0110 20       		.byte	32
+ 302 0111 20       		.byte	32
+ 303 0112 21       		.byte	33
+ 304 0113 08       		.byte	8
+ 305 0114 22       		.byte	34
+ 306 0115 01       		.byte	1
+ 307 0116 27       		.byte	39
+ 308 0117 80       		.byte	-128
+ 309 0118 28       		.byte	40
+ 310 0119 A5       		.byte	-91
+ 311 011a 29       		.byte	41
+ 312 011b 04       		.byte	4
+ 313 011c 2C       		.byte	44
+ 314 011d 10       		.byte	16
+ 315 011e 2D       		.byte	45
+ 316 011f A0       		.byte	-96
+ 317 0120 2F       		.byte	47
+ 318 0121 28       		.byte	40
+ 319 0122 31       		.byte	49
+ 320 0123 18       		.byte	24
+ 321 0124 33       		.byte	51
+ 322 0125 80       		.byte	-128
+ 323 0126 38       		.byte	56
+ 324 0127 40       		.byte	64
+ 325 0128 39       		.byte	57
+ 326 0129 0B       		.byte	11
+ 327 012a 3E       		.byte	62
+ 328 012b 08       		.byte	8
+ 329 012c 47       		.byte	71
+ 330 012d 80       		.byte	-128
+ 331 012e 55       		.byte	85
+ 332 012f 04       		.byte	4
+ 333 0130 56       		.byte	86
+ 334 0131 08       		.byte	8
+ 335 0132 57       		.byte	87
+ 336 0133 10       		.byte	16
+ 337 0134 5A       		.byte	90
+ 338 0135 02       		.byte	2
+ 339 0136 60       		.byte	96
+ 340 0137 04       		.byte	4
+ 341 0138 63       		.byte	99
+ 342 0139 82       		.byte	-126
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 7
+
+
+ 343 013a 83       		.byte	-125
+ 344 013b 12       		.byte	18
+ 345 013c A7       		.byte	-89
+ 346 013d 40       		.byte	64
+ 347 013e C0       		.byte	-64
+ 348 013f CF       		.byte	-49
+ 349 0140 C2       		.byte	-62
+ 350 0141 6F       		.byte	111
+ 351 0142 C4       		.byte	-60
+ 352 0143 7F       		.byte	127
+ 353 0144 CA       		.byte	-54
+ 354 0145 7F       		.byte	127
+ 355 0146 CC       		.byte	-52
+ 356 0147 0E       		.byte	14
+ 357 0148 CE       		.byte	-50
+ 358 0149 4B       		.byte	75
+ 359 014a D0       		.byte	-48
+ 360 014b 10       		.byte	16
+ 361 014c D6       		.byte	-42
+ 362 014d 01       		.byte	1
+ 363 014e D8       		.byte	-40
+ 364 014f 0D       		.byte	13
+ 365 0150 02       		.byte	2
+ 366 0151 02       		.byte	2
+ 367 0152 04       		.byte	4
+ 368 0153 1C       		.byte	28
+ 369 0154 05       		.byte	5
+ 370 0155 0C       		.byte	12
+ 371 0156 06       		.byte	6
+ 372 0157 60       		.byte	96
+ 373 0158 09       		.byte	9
+ 374 0159 04       		.byte	4
+ 375 015a 0A       		.byte	10
+ 376 015b 01       		.byte	1
+ 377 015c 0E       		.byte	14
+ 378 015d 0C       		.byte	12
+ 379 015e 0F       		.byte	15
+ 380 015f 13       		.byte	19
+ 381 0160 10       		.byte	16
+ 382 0161 70       		.byte	112
+ 383 0162 11       		.byte	17
+ 384 0163 0C       		.byte	12
+ 385 0164 12       		.byte	18
+ 386 0165 08       		.byte	8
+ 387 0166 13       		.byte	19
+ 388 0167 13       		.byte	19
+ 389 0168 14       		.byte	20
+ 390 0169 70       		.byte	112
+ 391 016a 15       		.byte	21
+ 392 016b 0F       		.byte	15
+ 393 016c 16       		.byte	22
+ 394 016d 04       		.byte	4
+ 395 016e 17       		.byte	23
+ 396 016f 10       		.byte	16
+ 397 0170 18       		.byte	24
+ 398 0171 20       		.byte	32
+ 399 0172 19       		.byte	25
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 8
+
+
+ 400 0173 02       		.byte	2
+ 401 0174 1C       		.byte	28
+ 402 0175 10       		.byte	16
+ 403 0176 1D       		.byte	29
+ 404 0177 08       		.byte	8
+ 405 0178 1E       		.byte	30
+ 406 0179 02       		.byte	2
+ 407 017a 20       		.byte	32
+ 408 017b 40       		.byte	64
+ 409 017c 21       		.byte	33
+ 410 017d 01       		.byte	1
+ 411 017e 25       		.byte	37
+ 412 017f 03       		.byte	3
+ 413 0180 26       		.byte	38
+ 414 0181 10       		.byte	16
+ 415 0182 28       		.byte	40
+ 416 0183 60       		.byte	96
+ 417 0184 29       		.byte	41
+ 418 0185 13       		.byte	19
+ 419 0186 2B       		.byte	43
+ 420 0187 0C       		.byte	12
+ 421 0188 2C       		.byte	44
+ 422 0189 7C       		.byte	124
+ 423 018a 2D       		.byte	45
+ 424 018b 1F       		.byte	31
+ 425 018c 30       		.byte	48
+ 426 018d 7C       		.byte	124
+ 427 018e 33       		.byte	51
+ 428 018f 0F       		.byte	15
+ 429 0190 35       		.byte	53
+ 430 0191 1C       		.byte	28
+ 431 0192 36       		.byte	54
+ 432 0193 03       		.byte	3
+ 433 0194 3A       		.byte	58
+ 434 0195 02       		.byte	2
+ 435 0196 3B       		.byte	59
+ 436 0197 2A       		.byte	42
+ 437 0198 3E       		.byte	62
+ 438 0199 40       		.byte	64
+ 439 019a 40       		.byte	64
+ 440 019b 34       		.byte	52
+ 441 019c 41       		.byte	65
+ 442 019d 05       		.byte	5
+ 443 019e 42       		.byte	66
+ 444 019f 02       		.byte	2
+ 445 01a0 44       		.byte	68
+ 446 01a1 01       		.byte	1
+ 447 01a2 46       		.byte	70
+ 448 01a3 EC       		.byte	-20
+ 449 01a4 48       		.byte	72
+ 450 01a5 0C       		.byte	12
+ 451 01a6 49       		.byte	73
+ 452 01a7 FF       		.byte	-1
+ 453 01a8 4A       		.byte	74
+ 454 01a9 FF       		.byte	-1
+ 455 01aa 4B       		.byte	75
+ 456 01ab FF       		.byte	-1
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 9
+
+
+ 457 01ac 4C       		.byte	76
+ 458 01ad 62       		.byte	98
+ 459 01ae 4D       		.byte	77
+ 460 01af A0       		.byte	-96
+ 461 01b0 4E       		.byte	78
+ 462 01b1 F0       		.byte	-16
+ 463 01b2 4F       		.byte	79
+ 464 01b3 41       		.byte	65
+ 465 01b4 50       		.byte	80
+ 466 01b5 0C       		.byte	12
+ 467 01b6 58       		.byte	88
+ 468 01b7 04       		.byte	4
+ 469 01b8 59       		.byte	89
+ 470 01b9 04       		.byte	4
+ 471 01ba 5A       		.byte	90
+ 472 01bb 04       		.byte	4
+ 473 01bc 5F       		.byte	95
+ 474 01bd 01       		.byte	1
+ 475 01be 66       		.byte	102
+ 476 01bf 40       		.byte	64
+ 477 01c0 67       		.byte	103
+ 478 01c1 02       		.byte	2
+ 479 01c2 69       		.byte	105
+ 480 01c3 10       		.byte	16
+ 481 01c4 6A       		.byte	106
+ 482 01c5 30       		.byte	48
+ 483 01c6 6B       		.byte	107
+ 484 01c7 10       		.byte	16
+ 485 01c8 6D       		.byte	109
+ 486 01c9 10       		.byte	16
+ 487 01ca 6E       		.byte	110
+ 488 01cb 10       		.byte	16
+ 489 01cc 6F       		.byte	111
+ 490 01cd 12       		.byte	18
+ 491 01ce 87       		.byte	-121
+ 492 01cf 01       		.byte	1
+ 493 01d0 91       		.byte	-111
+ 494 01d1 02       		.byte	2
+ 495 01d2 97       		.byte	-105
+ 496 01d3 01       		.byte	1
+ 497 01d4 9D       		.byte	-99
+ 498 01d5 04       		.byte	4
+ 499 01d6 A5       		.byte	-91
+ 500 01d7 01       		.byte	1
+ 501 01d8 A9       		.byte	-87
+ 502 01d9 01       		.byte	1
+ 503 01da AF       		.byte	-81
+ 504 01db 01       		.byte	1
+ 505 01dc B1       		.byte	-79
+ 506 01dd 01       		.byte	1
+ 507 01de B5       		.byte	-75
+ 508 01df 04       		.byte	4
+ 509 01e0 B7       		.byte	-73
+ 510 01e1 02       		.byte	2
+ 511 01e2 BF       		.byte	-65
+ 512 01e3 51       		.byte	81
+ 513 01e4 D4       		.byte	-44
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 10
+
+
+ 514 01e5 01       		.byte	1
+ 515 01e6 D9       		.byte	-39
+ 516 01e7 04       		.byte	4
+ 517 01e8 DB       		.byte	-37
+ 518 01e9 04       		.byte	4
+ 519 01ea DF       		.byte	-33
+ 520 01eb 01       		.byte	1
+ 521 01ec 00       		.byte	0
+ 522 01ed 60       		.byte	96
+ 523 01ee 02       		.byte	2
+ 524 01ef 10       		.byte	16
+ 525 01f0 03       		.byte	3
+ 526 01f1 80       		.byte	-128
+ 527 01f2 08       		.byte	8
+ 528 01f3 84       		.byte	-124
+ 529 01f4 0A       		.byte	10
+ 530 01f5 44       		.byte	68
+ 531 01f6 10       		.byte	16
+ 532 01f7 80       		.byte	-128
+ 533 01f8 11       		.byte	17
+ 534 01f9 08       		.byte	8
+ 535 01fa 12       		.byte	18
+ 536 01fb 06       		.byte	6
+ 537 01fc 13       		.byte	19
+ 538 01fd 10       		.byte	16
+ 539 01fe 14       		.byte	20
+ 540 01ff 04       		.byte	4
+ 541 0200 15       		.byte	21
+ 542 0201 20       		.byte	32
+ 543 0202 18       		.byte	24
+ 544 0203 01       		.byte	1
+ 545 0204 19       		.byte	25
+ 546 0205 01       		.byte	1
+ 547 0206 1A       		.byte	26
+ 548 0207 40       		.byte	64
+ 549 0208 21       		.byte	33
+ 550 0209 19       		.byte	25
+ 551 020a 22       		.byte	34
+ 552 020b 02       		.byte	2
+ 553 020c 25       		.byte	37
+ 554 020d 80       		.byte	-128
+ 555 020e 27       		.byte	39
+ 556 020f 88       		.byte	-120
+ 557 0210 28       		.byte	40
+ 558 0211 80       		.byte	-128
+ 559 0212 29       		.byte	41
+ 560 0213 40       		.byte	64
+ 561 0214 2A       		.byte	42
+ 562 0215 30       		.byte	48
+ 563 0216 2B       		.byte	43
+ 564 0217 10       		.byte	16
+ 565 0218 2C       		.byte	44
+ 566 0219 10       		.byte	16
+ 567 021a 2D       		.byte	45
+ 568 021b 80       		.byte	-128
+ 569 021c 2F       		.byte	47
+ 570 021d 08       		.byte	8
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 11
+
+
+ 571 021e 30       		.byte	48
+ 572 021f 84       		.byte	-124
+ 573 0220 31       		.byte	49
+ 574 0221 01       		.byte	1
+ 575 0222 32       		.byte	50
+ 576 0223 10       		.byte	16
+ 577 0224 34       		.byte	52
+ 578 0225 08       		.byte	8
+ 579 0226 36       		.byte	54
+ 580 0227 81       		.byte	-127
+ 581 0228 38       		.byte	56
+ 582 0229 60       		.byte	96
+ 583 022a 3A       		.byte	58
+ 584 022b 04       		.byte	4
+ 585 022c 3C       		.byte	60
+ 586 022d 20       		.byte	32
+ 587 022e 3F       		.byte	63
+ 588 022f 24       		.byte	36
+ 589 0230 40       		.byte	64
+ 590 0231 45       		.byte	69
+ 591 0232 41       		.byte	65
+ 592 0233 08       		.byte	8
+ 593 0234 42       		.byte	66
+ 594 0235 20       		.byte	32
+ 595 0236 49       		.byte	73
+ 596 0237 40       		.byte	64
+ 597 0238 4A       		.byte	74
+ 598 0239 02       		.byte	2
+ 599 023a 52       		.byte	82
+ 600 023b 40       		.byte	64
+ 601 023c 53       		.byte	83
+ 602 023d 10       		.byte	16
+ 603 023e 5D       		.byte	93
+ 604 023f 20       		.byte	32
+ 605 0240 5F       		.byte	95
+ 606 0241 89       		.byte	-119
+ 607 0242 65       		.byte	101
+ 608 0243 20       		.byte	32
+ 609 0244 67       		.byte	103
+ 610 0245 04       		.byte	4
+ 611 0246 78       		.byte	120
+ 612 0247 20       		.byte	32
+ 613 0248 79       		.byte	121
+ 614 0249 20       		.byte	32
+ 615 024a 80       		.byte	-128
+ 616 024b 80       		.byte	-128
+ 617 024c 82       		.byte	-126
+ 618 024d 10       		.byte	16
+ 619 024e 83       		.byte	-125
+ 620 024f 80       		.byte	-128
+ 621 0250 89       		.byte	-119
+ 622 0251 80       		.byte	-128
+ 623 0252 90       		.byte	-112
+ 624 0253 64       		.byte	100
+ 625 0254 92       		.byte	-110
+ 626 0255 04       		.byte	4
+ 627 0256 93       		.byte	-109
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 12
+
+
+ 628 0257 15       		.byte	21
+ 629 0258 95       		.byte	-107
+ 630 0259 02       		.byte	2
+ 631 025a 97       		.byte	-105
+ 632 025b 20       		.byte	32
+ 633 025c 98       		.byte	-104
+ 634 025d 18       		.byte	24
+ 635 025e 99       		.byte	-103
+ 636 025f 80       		.byte	-128
+ 637 0260 9C       		.byte	-100
+ 638 0261 A0       		.byte	-96
+ 639 0262 9D       		.byte	-99
+ 640 0263 01       		.byte	1
+ 641 0264 9E       		.byte	-98
+ 642 0265 40       		.byte	64
+ 643 0266 A0       		.byte	-96
+ 644 0267 90       		.byte	-112
+ 645 0268 A1       		.byte	-95
+ 646 0269 04       		.byte	4
+ 647 026a A2       		.byte	-94
+ 648 026b 81       		.byte	-127
+ 649 026c A3       		.byte	-93
+ 650 026d 88       		.byte	-120
+ 651 026e A5       		.byte	-91
+ 652 026f 08       		.byte	8
+ 653 0270 AD       		.byte	-83
+ 654 0271 08       		.byte	8
+ 655 0272 AE       		.byte	-82
+ 656 0273 10       		.byte	16
+ 657 0274 AF       		.byte	-81
+ 658 0275 80       		.byte	-128
+ 659 0276 C0       		.byte	-64
+ 660 0277 0F       		.byte	15
+ 661 0278 C2       		.byte	-62
+ 662 0279 0F       		.byte	15
+ 663 027a C4       		.byte	-60
+ 664 027b 0F       		.byte	15
+ 665 027c CA       		.byte	-54
+ 666 027d 7F       		.byte	127
+ 667 027e CC       		.byte	-52
+ 668 027f DF       		.byte	-33
+ 669 0280 CE       		.byte	-50
+ 670 0281 4E       		.byte	78
+ 671 0282 D0       		.byte	-48
+ 672 0283 0F       		.byte	15
+ 673 0284 D2       		.byte	-46
+ 674 0285 08       		.byte	8
+ 675 0286 D6       		.byte	-42
+ 676 0287 F0       		.byte	-16
+ 677 0288 E2       		.byte	-30
+ 678 0289 20       		.byte	32
+ 679 028a 01       		.byte	1
+ 680 028b A0       		.byte	-96
+ 681 028c 05       		.byte	5
+ 682 028d 06       		.byte	6
+ 683 028e 09       		.byte	9
+ 684 028f 80       		.byte	-128
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 13
+
+
+ 685 0290 13       		.byte	19
+ 686 0291 18       		.byte	24
+ 687 0292 15       		.byte	21
+ 688 0293 06       		.byte	6
+ 689 0294 19       		.byte	25
+ 690 0295 80       		.byte	-128
+ 691 0296 1B       		.byte	27
+ 692 0297 60       		.byte	96
+ 693 0298 1D       		.byte	29
+ 694 0299 02       		.byte	2
+ 695 029a 1F       		.byte	31
+ 696 029b 05       		.byte	5
+ 697 029c 21       		.byte	33
+ 698 029d 48       		.byte	72
+ 699 029e 23       		.byte	35
+ 700 029f 80       		.byte	-128
+ 701 02a0 25       		.byte	37
+ 702 02a1 04       		.byte	4
+ 703 02a2 27       		.byte	39
+ 704 02a3 02       		.byte	2
+ 705 02a4 29       		.byte	41
+ 706 02a5 60       		.byte	96
+ 707 02a6 2B       		.byte	43
+ 708 02a7 88       		.byte	-120
+ 709 02a8 2D       		.byte	45
+ 710 02a9 E0       		.byte	-32
+ 711 02aa 2F       		.byte	47
+ 712 02ab 10       		.byte	16
+ 713 02ac 31       		.byte	49
+ 714 02ad F8       		.byte	-8
+ 715 02ae 33       		.byte	51
+ 716 02af 01       		.byte	1
+ 717 02b0 35       		.byte	53
+ 718 02b1 06       		.byte	6
+ 719 02b2 40       		.byte	64
+ 720 02b3 32       		.byte	50
+ 721 02b4 41       		.byte	65
+ 722 02b5 06       		.byte	6
+ 723 02b6 45       		.byte	69
+ 724 02b7 EC       		.byte	-20
+ 725 02b8 47       		.byte	71
+ 726 02b9 B0       		.byte	-80
+ 727 02ba 48       		.byte	72
+ 728 02bb 23       		.byte	35
+ 729 02bc 49       		.byte	73
+ 730 02bd FF       		.byte	-1
+ 731 02be 4A       		.byte	74
+ 732 02bf FF       		.byte	-1
+ 733 02c0 4B       		.byte	75
+ 734 02c1 FF       		.byte	-1
+ 735 02c2 4E       		.byte	78
+ 736 02c3 F0       		.byte	-16
+ 737 02c4 4F       		.byte	79
+ 738 02c5 44       		.byte	68
+ 739 02c6 50       		.byte	80
+ 740 02c7 0C       		.byte	12
+ 741 02c8 59       		.byte	89
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 14
+
+
+ 742 02c9 04       		.byte	4
+ 743 02ca 5A       		.byte	90
+ 744 02cb 04       		.byte	4
+ 745 02cc 5F       		.byte	95
+ 746 02cd 01       		.byte	1
+ 747 02ce 66       		.byte	102
+ 748 02cf C0       		.byte	-64
+ 749 02d0 6A       		.byte	106
+ 750 02d1 40       		.byte	64
+ 751 02d2 6B       		.byte	107
+ 752 02d3 02       		.byte	2
+ 753 02d4 81       		.byte	-127
+ 754 02d5 1E       		.byte	30
+ 755 02d6 82       		.byte	-126
+ 756 02d7 04       		.byte	4
+ 757 02d8 85       		.byte	-123
+ 758 02d9 0C       		.byte	12
+ 759 02da 88       		.byte	-120
+ 760 02db 01       		.byte	1
+ 761 02dc 89       		.byte	-119
+ 762 02dd 04       		.byte	4
+ 763 02de 8D       		.byte	-115
+ 764 02df 01       		.byte	1
+ 765 02e0 8E       		.byte	-114
+ 766 02e1 01       		.byte	1
+ 767 02e2 94       		.byte	-108
+ 768 02e3 02       		.byte	2
+ 769 02e4 95       		.byte	-107
+ 770 02e5 12       		.byte	18
+ 771 02e6 97       		.byte	-105
+ 772 02e7 0C       		.byte	12
+ 773 02e8 98       		.byte	-104
+ 774 02e9 01       		.byte	1
+ 775 02ea 99       		.byte	-103
+ 776 02eb 01       		.byte	1
+ 777 02ec 9D       		.byte	-99
+ 778 02ed 08       		.byte	8
+ 779 02ee A1       		.byte	-95
+ 780 02ef 1E       		.byte	30
+ 781 02f0 A5       		.byte	-91
+ 782 02f1 1C       		.byte	28
+ 783 02f2 A6       		.byte	-90
+ 784 02f3 04       		.byte	4
+ 785 02f4 A7       		.byte	-89
+ 786 02f5 02       		.byte	2
+ 787 02f6 A9       		.byte	-87
+ 788 02f7 01       		.byte	1
+ 789 02f8 AF       		.byte	-81
+ 790 02f9 02       		.byte	2
+ 791 02fa B0       		.byte	-80
+ 792 02fb 04       		.byte	4
+ 793 02fc B1       		.byte	-79
+ 794 02fd 01       		.byte	1
+ 795 02fe B3       		.byte	-77
+ 796 02ff 10       		.byte	16
+ 797 0300 B5       		.byte	-75
+ 798 0301 0E       		.byte	14
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 15
+
+
+ 799 0302 B6       		.byte	-74
+ 800 0303 03       		.byte	3
+ 801 0304 B8       		.byte	-72
+ 802 0305 80       		.byte	-128
+ 803 0306 BE       		.byte	-66
+ 804 0307 01       		.byte	1
+ 805 0308 BF       		.byte	-65
+ 806 0309 04       		.byte	4
+ 807 030a D6       		.byte	-42
+ 808 030b 02       		.byte	2
+ 809 030c D7       		.byte	-41
+ 810 030d 12       		.byte	18
+ 811 030e D8       		.byte	-40
+ 812 030f 04       		.byte	4
+ 813 0310 D9       		.byte	-39
+ 814 0311 04       		.byte	4
+ 815 0312 DB       		.byte	-37
+ 816 0313 04       		.byte	4
+ 817 0314 DF       		.byte	-33
+ 818 0315 01       		.byte	1
+ 819 0316 01       		.byte	1
+ 820 0317 80       		.byte	-128
+ 821 0318 02       		.byte	2
+ 822 0319 40       		.byte	64
+ 823 031a 03       		.byte	3
+ 824 031b 08       		.byte	8
+ 825 031c 08       		.byte	8
+ 826 031d 18       		.byte	24
+ 827 031e 12       		.byte	18
+ 828 031f 20       		.byte	32
+ 829 0320 1A       		.byte	26
+ 830 0321 01       		.byte	1
+ 831 0322 1B       		.byte	27
+ 832 0323 01       		.byte	1
+ 833 0324 20       		.byte	32
+ 834 0325 44       		.byte	68
+ 835 0326 22       		.byte	34
+ 836 0327 24       		.byte	36
+ 837 0328 25       		.byte	37
+ 838 0329 04       		.byte	4
+ 839 032a 26       		.byte	38
+ 840 032b 11       		.byte	17
+ 841 032c 28       		.byte	40
+ 842 032d 20       		.byte	32
+ 843 032e 29       		.byte	41
+ 844 032f 11       		.byte	17
+ 845 0330 2A       		.byte	42
+ 846 0331 81       		.byte	-127
+ 847 0332 2D       		.byte	45
+ 848 0333 88       		.byte	-120
+ 849 0334 2E       		.byte	46
+ 850 0335 01       		.byte	1
+ 851 0336 2F       		.byte	47
+ 852 0337 08       		.byte	8
+ 853 0338 30       		.byte	48
+ 854 0339 84       		.byte	-124
+ 855 033a 31       		.byte	49
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 16
+
+
+ 856 033b 08       		.byte	8
+ 857 033c 33       		.byte	51
+ 858 033d 10       		.byte	16
+ 859 033e 34       		.byte	52
+ 860 033f 90       		.byte	-112
+ 861 0340 36       		.byte	54
+ 862 0341 01       		.byte	1
+ 863 0342 37       		.byte	55
+ 864 0343 08       		.byte	8
+ 865 0344 38       		.byte	56
+ 866 0345 28       		.byte	40
+ 867 0346 39       		.byte	57
+ 868 0347 42       		.byte	66
+ 869 0348 3D       		.byte	61
+ 870 0349 04       		.byte	4
+ 871 034a 3E       		.byte	62
+ 872 034b 02       		.byte	2
+ 873 034c 3F       		.byte	63
+ 874 034d 20       		.byte	32
+ 875 034e 40       		.byte	64
+ 876 034f 40       		.byte	64
+ 877 0350 42       		.byte	66
+ 878 0351 80       		.byte	-128
+ 879 0352 44       		.byte	68
+ 880 0353 18       		.byte	24
+ 881 0354 48       		.byte	72
+ 882 0355 04       		.byte	4
+ 883 0356 49       		.byte	73
+ 884 0357 10       		.byte	16
+ 885 0358 4D       		.byte	77
+ 886 0359 20       		.byte	32
+ 887 035a 4E       		.byte	78
+ 888 035b 80       		.byte	-128
+ 889 035c 4F       		.byte	79
+ 890 035d 05       		.byte	5
+ 891 035e 56       		.byte	86
+ 892 035f 02       		.byte	2
+ 893 0360 5A       		.byte	90
+ 894 0361 08       		.byte	8
+ 895 0362 68       		.byte	104
+ 896 0363 04       		.byte	4
+ 897 0364 69       		.byte	105
+ 898 0365 4C       		.byte	76
+ 899 0366 6B       		.byte	107
+ 900 0367 18       		.byte	24
+ 901 0368 70       		.byte	112
+ 902 0369 94       		.byte	-108
+ 903 036a 72       		.byte	114
+ 904 036b 04       		.byte	4
+ 905 036c 73       		.byte	115
+ 906 036d 10       		.byte	16
+ 907 036e 94       		.byte	-108
+ 908 036f 40       		.byte	64
+ 909 0370 95       		.byte	-107
+ 910 0371 0A       		.byte	10
+ 911 0372 96       		.byte	-106
+ 912 0373 01       		.byte	1
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 17
+
+
+ 913 0374 97       		.byte	-105
+ 914 0375 24       		.byte	36
+ 915 0376 98       		.byte	-104
+ 916 0377 18       		.byte	24
+ 917 0378 99       		.byte	-103
+ 918 0379 A0       		.byte	-96
+ 919 037a 9C       		.byte	-100
+ 920 037b A4       		.byte	-92
+ 921 037c 9D       		.byte	-99
+ 922 037d 10       		.byte	16
+ 923 037e 9E       		.byte	-98
+ 924 037f 01       		.byte	1
+ 925 0380 A0       		.byte	-96
+ 926 0381 10       		.byte	16
+ 927 0382 A3       		.byte	-93
+ 928 0383 18       		.byte	24
+ 929 0384 A7       		.byte	-89
+ 930 0385 81       		.byte	-127
+ 931 0386 A8       		.byte	-88
+ 932 0387 02       		.byte	2
+ 933 0388 A9       		.byte	-87
+ 934 0389 04       		.byte	4
+ 935 038a C0       		.byte	-64
+ 936 038b 0B       		.byte	11
+ 937 038c C2       		.byte	-62
+ 938 038d 06       		.byte	6
+ 939 038e C4       		.byte	-60
+ 940 038f 04       		.byte	4
+ 941 0390 CA       		.byte	-54
+ 942 0391 FF       		.byte	-1
+ 943 0392 CC       		.byte	-52
+ 944 0393 FE       		.byte	-2
+ 945 0394 CE       		.byte	-50
+ 946 0395 EF       		.byte	-17
+ 947 0396 D0       		.byte	-48
+ 948 0397 60       		.byte	96
+ 949 0398 D2       		.byte	-46
+ 950 0399 20       		.byte	32
+ 951 039a D6       		.byte	-42
+ 952 039b 02       		.byte	2
+ 953 039c 33       		.byte	51
+ 954 039d 10       		.byte	16
+ 955 039e CC       		.byte	-52
+ 956 039f 10       		.byte	16
+ 957 03a0 83       		.byte	-125
+ 958 03a1 10       		.byte	16
+ 959 03a2 9F       		.byte	-97
+ 960 03a3 10       		.byte	16
+ 961 03a4 E2       		.byte	-30
+ 962 03a5 20       		.byte	32
+ 963 03a6 03       		.byte	3
+ 964 03a7 40       		.byte	64
+ 965 03a8 53       		.byte	83
+ 966 03a9 10       		.byte	16
+ 967 03aa 83       		.byte	-125
+ 968 03ab 40       		.byte	64
+ 969 03ac 8B       		.byte	-117
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 18
+
+
+ 970 03ad 10       		.byte	16
+ 971 03ae C0       		.byte	-64
+ 972 03af 10       		.byte	16
+ 973 03b0 D4       		.byte	-44
+ 974 03b1 20       		.byte	32
+ 975 03b2 E4       		.byte	-28
+ 976 03b3 80       		.byte	-128
+ 977 03b4 00       		.byte	0
+ 978 03b5 01       		.byte	1
+ 979 03b6 0A       		.byte	10
+ 980 03b7 01       		.byte	1
+ 981 03b8 10       		.byte	16
+ 982 03b9 01       		.byte	1
+ 983 03ba 1A       		.byte	26
+ 984 03bb 01       		.byte	1
+ 985 03bc 00       		.byte	0
+ 986 03bd 03       		.byte	3
+ 987 03be 00       		.byte	0
+ 988 03bf 00       		.byte	0
+ 989 03c0 00       		.byte	0
+ 990 03c1 0B       		.byte	11
+ 991 03c2 0B       		.byte	11
+ 992 03c3 00       		.byte	0
+ 993 03c4 00       		.byte	0
+ 994 03c5 00       		.byte	0
+ 995 03c6 00       		.byte	0
+ 996 03c7 00       		.byte	0
+ 997 03c8 02       		.byte	2
+ 998 03c9 00       		.byte	0
+ 999 03ca 01       		.byte	1
+ 1000 03cb 02       		.byte	2
+ 1001 03cc 02       		.byte	2
+ 1002 03cd 00       		.byte	0
+ 1003 03ce 02       		.byte	2
+ 1004 03cf 00       		.byte	0
+ 1005 03d0 00       		.byte	0
+ 1006 03d1 00       		.byte	0
+ 1007 03d2 00       		.byte	0
+ 1008 03d3 00       		.byte	0
+ 1009              		.section	.cywolatch,"a",%progbits
+ 1010              		.align	2
+ 1011              		.type	cy_meta_wonvl, %object
+ 1012              		.size	cy_meta_wonvl, 4
+ 1013              	cy_meta_wonvl:
+ 1014 0000 BC       		.byte	-68
+ 1015 0001 90       		.byte	-112
+ 1016 0002 AC       		.byte	-84
+ 1017 0003 AF       		.byte	-81
+ 1018              		.section	.cycustnvl,"a",%progbits
+ 1019              		.align	2
+ 1020              		.type	cy_meta_custnvl, %object
+ 1021              		.size	cy_meta_custnvl, 4
+ 1022              	cy_meta_custnvl:
+ 1023 0000 00       		.byte	0
+ 1024 0001 00       		.byte	0
+ 1025 0002 40       		.byte	64
+ 1026 0003 05       		.byte	5
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 19
+
+
+ 1027              		.section	.cymeta,"a",%progbits
+ 1028              		.align	2
+ 1029              		.type	cy_metadata, %object
+ 1030              		.size	cy_metadata, 12
+ 1031              	cy_metadata:
+ 1032 0000 00       		.byte	0
+ 1033 0001 01       		.byte	1
+ 1034 0002 2E       		.byte	46
+ 1035 0003 15       		.byte	21
+ 1036 0004 90       		.byte	-112
+ 1037 0005 69       		.byte	105
+ 1038 0006 00       		.byte	0
+ 1039 0007 01       		.byte	1
+ 1040 0008 00       		.byte	0
+ 1041 0009 00       		.byte	0
+ 1042 000a 00       		.byte	0
+ 1043 000b 00       		.byte	0
+ 1044              		.section	.cyflashprotect,"a",%progbits
+ 1045              		.align	2
+ 1046              		.type	cy_meta_flashprotect, %object
+ 1047              		.size	cy_meta_flashprotect, 128
+ 1048              	cy_meta_flashprotect:
+ 1049 0000 00000000 		.space	128
+ 1049      00000000 
+ 1049      00000000 
+ 1049      00000000 
+ 1049      00000000 
+ 1050              		.text
+ 1051              	.Letext0:
+ 1052              		.file 1 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1053              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1054              		.file 3 "Generated_Source\\PSoC5\\cymetadata.c"
+ 1055              		.section	.debug_info,"",%progbits
+ 1056              	.Ldebug_info0:
+ 1057 0000 31010000 		.4byte	0x131
+ 1058 0004 0400     		.2byte	0x4
+ 1059 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1060 000a 04       		.byte	0x4
+ 1061 000b 01       		.uleb128 0x1
+ 1062 000c 58000000 		.4byte	.LASF17
+ 1063 0010 0C       		.byte	0xc
+ 1064 0011 B2010000 		.4byte	.LASF18
+ 1065 0015 0A000000 		.4byte	.LASF19
+ 1066 0019 00000000 		.4byte	.Ldebug_line0
+ 1067 001d 02       		.uleb128 0x2
+ 1068 001e 01       		.byte	0x1
+ 1069 001f 06       		.byte	0x6
+ 1070 0020 A6010000 		.4byte	.LASF0
+ 1071 0024 03       		.uleb128 0x3
+ 1072 0025 00000000 		.4byte	.LASF9
+ 1073 0029 01       		.byte	0x1
+ 1074 002a 1D       		.byte	0x1d
+ 1075 002b 2F000000 		.4byte	0x2f
+ 1076 002f 02       		.uleb128 0x2
+ 1077 0030 01       		.byte	0x1
+ 1078 0031 08       		.byte	0x8
+ 1079 0032 4A000000 		.4byte	.LASF1
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 20
+
+
+ 1080 0036 02       		.uleb128 0x2
+ 1081 0037 02       		.byte	0x2
+ 1082 0038 05       		.byte	0x5
+ 1083 0039 93010000 		.4byte	.LASF2
+ 1084 003d 02       		.uleb128 0x2
+ 1085 003e 02       		.byte	0x2
+ 1086 003f 07       		.byte	0x7
+ 1087 0040 F8000000 		.4byte	.LASF3
+ 1088 0044 02       		.uleb128 0x2
+ 1089 0045 04       		.byte	0x4
+ 1090 0046 05       		.byte	0x5
+ 1091 0047 9D010000 		.4byte	.LASF4
+ 1092 004b 02       		.uleb128 0x2
+ 1093 004c 04       		.byte	0x4
+ 1094 004d 07       		.byte	0x7
+ 1095 004e E6000000 		.4byte	.LASF5
+ 1096 0052 02       		.uleb128 0x2
+ 1097 0053 08       		.byte	0x8
+ 1098 0054 05       		.byte	0x5
+ 1099 0055 85010000 		.4byte	.LASF6
+ 1100 0059 02       		.uleb128 0x2
+ 1101 005a 08       		.byte	0x8
+ 1102 005b 07       		.byte	0x7
+ 1103 005c 3A010000 		.4byte	.LASF7
+ 1104 0060 04       		.uleb128 0x4
+ 1105 0061 04       		.byte	0x4
+ 1106 0062 05       		.byte	0x5
+ 1107 0063 696E7400 		.ascii	"int\000"
+ 1108 0067 02       		.uleb128 0x2
+ 1109 0068 04       		.byte	0x4
+ 1110 0069 07       		.byte	0x7
+ 1111 006a 2D010000 		.4byte	.LASF8
+ 1112 006e 03       		.uleb128 0x3
+ 1113 006f 51010000 		.4byte	.LASF10
+ 1114 0073 02       		.byte	0x2
+ 1115 0074 18       		.byte	0x18
+ 1116 0075 24000000 		.4byte	0x24
+ 1117 0079 05       		.uleb128 0x5
+ 1118 007a 91000000 		.4byte	0x91
+ 1119 007e 8A000000 		.4byte	0x8a
+ 1120 0082 06       		.uleb128 0x6
+ 1121 0083 8A000000 		.4byte	0x8a
+ 1122 0087 D303     		.2byte	0x3d3
+ 1123 0089 00       		.byte	0
+ 1124 008a 02       		.uleb128 0x2
+ 1125 008b 04       		.byte	0x4
+ 1126 008c 07       		.byte	0x7
+ 1127 008d 7C010000 		.4byte	.LASF11
+ 1128 0091 07       		.uleb128 0x7
+ 1129 0092 6E000000 		.4byte	0x6e
+ 1130 0096 08       		.uleb128 0x8
+ 1131 0097 1B010000 		.4byte	.LASF12
+ 1132 009b 03       		.byte	0x3
+ 1133 009c 1F       		.byte	0x1f
+ 1134 009d A7000000 		.4byte	0xa7
+ 1135 00a1 05       		.uleb128 0x5
+ 1136 00a2 03       		.byte	0x3
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 21
+
+
+ 1137 00a3 00000000 		.4byte	cy_meta_configecc
+ 1138 00a7 07       		.uleb128 0x7
+ 1139 00a8 79000000 		.4byte	0x79
+ 1140 00ac 05       		.uleb128 0x5
+ 1141 00ad 91000000 		.4byte	0x91
+ 1142 00b1 BC000000 		.4byte	0xbc
+ 1143 00b5 09       		.uleb128 0x9
+ 1144 00b6 8A000000 		.4byte	0x8a
+ 1145 00ba 03       		.byte	0x3
+ 1146 00bb 00       		.byte	0
+ 1147 00bc 08       		.uleb128 0x8
+ 1148 00bd 0B010000 		.4byte	.LASF13
+ 1149 00c1 03       		.byte	0x3
+ 1150 00c2 A7       		.byte	0xa7
+ 1151 00c3 CD000000 		.4byte	0xcd
+ 1152 00c7 05       		.uleb128 0x5
+ 1153 00c8 03       		.byte	0x3
+ 1154 00c9 00000000 		.4byte	cy_meta_custnvl
+ 1155 00cd 07       		.uleb128 0x7
+ 1156 00ce AC000000 		.4byte	0xac
+ 1157 00d2 08       		.uleb128 0x8
+ 1158 00d3 6E010000 		.4byte	.LASF14
+ 1159 00d7 03       		.byte	0x3
+ 1160 00d8 B5       		.byte	0xb5
+ 1161 00d9 E3000000 		.4byte	0xe3
+ 1162 00dd 05       		.uleb128 0x5
+ 1163 00de 03       		.byte	0x3
+ 1164 00df 00000000 		.4byte	cy_meta_wonvl
+ 1165 00e3 07       		.uleb128 0x7
+ 1166 00e4 AC000000 		.4byte	0xac
+ 1167 00e8 05       		.uleb128 0x5
+ 1168 00e9 91000000 		.4byte	0x91
+ 1169 00ed F8000000 		.4byte	0xf8
+ 1170 00f1 09       		.uleb128 0x9
+ 1171 00f2 8A000000 		.4byte	0x8a
+ 1172 00f6 7F       		.byte	0x7f
+ 1173 00f7 00       		.byte	0
+ 1174 00f8 08       		.uleb128 0x8
+ 1175 00f9 59010000 		.4byte	.LASF15
+ 1176 00fd 03       		.byte	0x3
+ 1177 00fe C3       		.byte	0xc3
+ 1178 00ff 09010000 		.4byte	0x109
+ 1179 0103 05       		.uleb128 0x5
+ 1180 0104 03       		.byte	0x3
+ 1181 0105 00000000 		.4byte	cy_meta_flashprotect
+ 1182 0109 07       		.uleb128 0x7
+ 1183 010a E8000000 		.4byte	0xe8
+ 1184 010e 05       		.uleb128 0x5
+ 1185 010f 91000000 		.4byte	0x91
+ 1186 0113 1E010000 		.4byte	0x11e
+ 1187 0117 09       		.uleb128 0x9
+ 1188 0118 8A000000 		.4byte	0x8a
+ 1189 011c 0B       		.byte	0xb
+ 1190 011d 00       		.byte	0
+ 1191 011e 08       		.uleb128 0x8
+ 1192 011f 3E000000 		.4byte	.LASF16
+ 1193 0123 03       		.byte	0x3
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 22
+
+
+ 1194 0124 E0       		.byte	0xe0
+ 1195 0125 2F010000 		.4byte	0x12f
+ 1196 0129 05       		.uleb128 0x5
+ 1197 012a 03       		.byte	0x3
+ 1198 012b 00000000 		.4byte	cy_metadata
+ 1199 012f 07       		.uleb128 0x7
+ 1200 0130 0E010000 		.4byte	0x10e
+ 1201 0134 00       		.byte	0
+ 1202              		.section	.debug_abbrev,"",%progbits
+ 1203              	.Ldebug_abbrev0:
+ 1204 0000 01       		.uleb128 0x1
+ 1205 0001 11       		.uleb128 0x11
+ 1206 0002 01       		.byte	0x1
+ 1207 0003 25       		.uleb128 0x25
+ 1208 0004 0E       		.uleb128 0xe
+ 1209 0005 13       		.uleb128 0x13
+ 1210 0006 0B       		.uleb128 0xb
+ 1211 0007 03       		.uleb128 0x3
+ 1212 0008 0E       		.uleb128 0xe
+ 1213 0009 1B       		.uleb128 0x1b
+ 1214 000a 0E       		.uleb128 0xe
+ 1215 000b 10       		.uleb128 0x10
+ 1216 000c 17       		.uleb128 0x17
+ 1217 000d 00       		.byte	0
+ 1218 000e 00       		.byte	0
+ 1219 000f 02       		.uleb128 0x2
+ 1220 0010 24       		.uleb128 0x24
+ 1221 0011 00       		.byte	0
+ 1222 0012 0B       		.uleb128 0xb
+ 1223 0013 0B       		.uleb128 0xb
+ 1224 0014 3E       		.uleb128 0x3e
+ 1225 0015 0B       		.uleb128 0xb
+ 1226 0016 03       		.uleb128 0x3
+ 1227 0017 0E       		.uleb128 0xe
+ 1228 0018 00       		.byte	0
+ 1229 0019 00       		.byte	0
+ 1230 001a 03       		.uleb128 0x3
+ 1231 001b 16       		.uleb128 0x16
+ 1232 001c 00       		.byte	0
+ 1233 001d 03       		.uleb128 0x3
+ 1234 001e 0E       		.uleb128 0xe
+ 1235 001f 3A       		.uleb128 0x3a
+ 1236 0020 0B       		.uleb128 0xb
+ 1237 0021 3B       		.uleb128 0x3b
+ 1238 0022 0B       		.uleb128 0xb
+ 1239 0023 49       		.uleb128 0x49
+ 1240 0024 13       		.uleb128 0x13
+ 1241 0025 00       		.byte	0
+ 1242 0026 00       		.byte	0
+ 1243 0027 04       		.uleb128 0x4
+ 1244 0028 24       		.uleb128 0x24
+ 1245 0029 00       		.byte	0
+ 1246 002a 0B       		.uleb128 0xb
+ 1247 002b 0B       		.uleb128 0xb
+ 1248 002c 3E       		.uleb128 0x3e
+ 1249 002d 0B       		.uleb128 0xb
+ 1250 002e 03       		.uleb128 0x3
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 23
+
+
+ 1251 002f 08       		.uleb128 0x8
+ 1252 0030 00       		.byte	0
+ 1253 0031 00       		.byte	0
+ 1254 0032 05       		.uleb128 0x5
+ 1255 0033 01       		.uleb128 0x1
+ 1256 0034 01       		.byte	0x1
+ 1257 0035 49       		.uleb128 0x49
+ 1258 0036 13       		.uleb128 0x13
+ 1259 0037 01       		.uleb128 0x1
+ 1260 0038 13       		.uleb128 0x13
+ 1261 0039 00       		.byte	0
+ 1262 003a 00       		.byte	0
+ 1263 003b 06       		.uleb128 0x6
+ 1264 003c 21       		.uleb128 0x21
+ 1265 003d 00       		.byte	0
+ 1266 003e 49       		.uleb128 0x49
+ 1267 003f 13       		.uleb128 0x13
+ 1268 0040 2F       		.uleb128 0x2f
+ 1269 0041 05       		.uleb128 0x5
+ 1270 0042 00       		.byte	0
+ 1271 0043 00       		.byte	0
+ 1272 0044 07       		.uleb128 0x7
+ 1273 0045 26       		.uleb128 0x26
+ 1274 0046 00       		.byte	0
+ 1275 0047 49       		.uleb128 0x49
+ 1276 0048 13       		.uleb128 0x13
+ 1277 0049 00       		.byte	0
+ 1278 004a 00       		.byte	0
+ 1279 004b 08       		.uleb128 0x8
+ 1280 004c 34       		.uleb128 0x34
+ 1281 004d 00       		.byte	0
+ 1282 004e 03       		.uleb128 0x3
+ 1283 004f 0E       		.uleb128 0xe
+ 1284 0050 3A       		.uleb128 0x3a
+ 1285 0051 0B       		.uleb128 0xb
+ 1286 0052 3B       		.uleb128 0x3b
+ 1287 0053 0B       		.uleb128 0xb
+ 1288 0054 49       		.uleb128 0x49
+ 1289 0055 13       		.uleb128 0x13
+ 1290 0056 3F       		.uleb128 0x3f
+ 1291 0057 19       		.uleb128 0x19
+ 1292 0058 02       		.uleb128 0x2
+ 1293 0059 18       		.uleb128 0x18
+ 1294 005a 00       		.byte	0
+ 1295 005b 00       		.byte	0
+ 1296 005c 09       		.uleb128 0x9
+ 1297 005d 21       		.uleb128 0x21
+ 1298 005e 00       		.byte	0
+ 1299 005f 49       		.uleb128 0x49
+ 1300 0060 13       		.uleb128 0x13
+ 1301 0061 2F       		.uleb128 0x2f
+ 1302 0062 0B       		.uleb128 0xb
+ 1303 0063 00       		.byte	0
+ 1304 0064 00       		.byte	0
+ 1305 0065 00       		.byte	0
+ 1306              		.section	.debug_aranges,"",%progbits
+ 1307 0000 14000000 		.4byte	0x14
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 24
+
+
+ 1308 0004 0200     		.2byte	0x2
+ 1309 0006 00000000 		.4byte	.Ldebug_info0
+ 1310 000a 04       		.byte	0x4
+ 1311 000b 00       		.byte	0
+ 1312 000c 0000     		.2byte	0
+ 1313 000e 0000     		.2byte	0
+ 1314 0010 00000000 		.4byte	0
+ 1315 0014 00000000 		.4byte	0
+ 1316              		.section	.debug_line,"",%progbits
+ 1317              	.Ldebug_line0:
+ 1318 0000 3D010000 		.section	.debug_str,"MS",%progbits,1
+ 1318      02003701 
+ 1318      00000201 
+ 1318      FB0E0D00 
+ 1318      01010101 
+ 1319              	.LASF9:
+ 1320 0000 5F5F7569 		.ascii	"__uint8_t\000"
+ 1320      6E74385F 
+ 1320      7400
+ 1321              	.LASF19:
+ 1322 000a 443A5C57 		.ascii	"D:\\WORK\\Study\\Cypress_Study\\Study\\UART_Serial."
+ 1322      4F524B5C 
+ 1322      53747564 
+ 1322      795C4379 
+ 1322      70726573 
+ 1323 0038 63796473 		.ascii	"cydsn\000"
+ 1323      6E00
+ 1324              	.LASF16:
+ 1325 003e 63795F6D 		.ascii	"cy_metadata\000"
+ 1325      65746164 
+ 1325      61746100 
+ 1326              	.LASF1:
+ 1327 004a 756E7369 		.ascii	"unsigned char\000"
+ 1327      676E6564 
+ 1327      20636861 
+ 1327      7200
+ 1328              	.LASF17:
+ 1329 0058 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1329      43313120 
+ 1329      352E342E 
+ 1329      31203230 
+ 1329      31363036 
+ 1330 008b 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 1330      20726576 
+ 1330      6973696F 
+ 1330      6E203233 
+ 1330      37373135 
+ 1331 00be 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1331      66756E63 
+ 1331      74696F6E 
+ 1331      2D736563 
+ 1331      74696F6E 
+ 1332              	.LASF5:
+ 1333 00e6 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1333      20756E73 
+ 1333      69676E65 
+ 1333      6420696E 
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 25
+
+
+ 1333      7400
+ 1334              	.LASF3:
+ 1335 00f8 73686F72 		.ascii	"short unsigned int\000"
+ 1335      7420756E 
+ 1335      7369676E 
+ 1335      65642069 
+ 1335      6E7400
+ 1336              	.LASF13:
+ 1337 010b 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 1337      6574615F 
+ 1337      63757374 
+ 1337      6E766C00 
+ 1338              	.LASF12:
+ 1339 011b 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 1339      6574615F 
+ 1339      636F6E66 
+ 1339      69676563 
+ 1339      6300
+ 1340              	.LASF8:
+ 1341 012d 756E7369 		.ascii	"unsigned int\000"
+ 1341      676E6564 
+ 1341      20696E74 
+ 1341      00
+ 1342              	.LASF7:
+ 1343 013a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1343      206C6F6E 
+ 1343      6720756E 
+ 1343      7369676E 
+ 1343      65642069 
+ 1344              	.LASF10:
+ 1345 0151 75696E74 		.ascii	"uint8_t\000"
+ 1345      385F7400 
+ 1346              	.LASF15:
+ 1347 0159 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 1347      6574615F 
+ 1347      666C6173 
+ 1347      6870726F 
+ 1347      74656374 
+ 1348              	.LASF14:
+ 1349 016e 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 1349      6574615F 
+ 1349      776F6E76 
+ 1349      6C00
+ 1350              	.LASF11:
+ 1351 017c 73697A65 		.ascii	"sizetype\000"
+ 1351      74797065 
+ 1351      00
+ 1352              	.LASF6:
+ 1353 0185 6C6F6E67 		.ascii	"long long int\000"
+ 1353      206C6F6E 
+ 1353      6720696E 
+ 1353      7400
+ 1354              	.LASF2:
+ 1355 0193 73686F72 		.ascii	"short int\000"
+ 1355      7420696E 
+ 1355      7400
+ 1356              	.LASF4:
+ARM GAS  C:\Users\tonkl\AppData\Local\Temp\ccuQDyly.s 			page 26
+
+
+ 1357 019d 6C6F6E67 		.ascii	"long int\000"
+ 1357      20696E74 
+ 1357      00
+ 1358              	.LASF0:
+ 1359 01a6 7369676E 		.ascii	"signed char\000"
+ 1359      65642063 
+ 1359      68617200 
+ 1360              	.LASF18:
+ 1361 01b2 47656E65 		.ascii	"Generated_Source\\PSoC5\\cymetadata.c\000"
+ 1361      72617465 
+ 1361      645F536F 
+ 1361      75726365 
+ 1361      5C50536F 
+ 1362              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

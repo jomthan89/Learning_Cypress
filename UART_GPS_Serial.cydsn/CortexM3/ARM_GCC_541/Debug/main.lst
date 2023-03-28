@@ -1,0 +1,3192 @@
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	__aeabi_ddiv
+  20              		.global	__aeabi_d2iz
+  21              		.global	__aeabi_i2d
+  22              		.global	__aeabi_dmul
+  23              		.global	__aeabi_dsub
+  24              		.global	__aeabi_dadd
+  25              		.section	.text.NEO_GPS_Location,"ax",%progbits
+  26              		.align	2
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	NEO_GPS_Location, %function
+  30              	NEO_GPS_Location:
+  31              	.LFB66:
+  32              		.file 1 "main.c"
+   1:main.c        **** /* ========================================
+   2:main.c        ****  *
+   3:main.c        ****  * Copyright YOUR COMPANY, THE YEAR
+   4:main.c        ****  * All Rights Reserved
+   5:main.c        ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:main.c        ****  *
+   7:main.c        ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:main.c        ****  * WHICH IS THE PROPERTY OF your company.
+   9:main.c        ****  *
+  10:main.c        ****  * ========================================
+  11:main.c        **** */
+  12:main.c        **** #include "project.h"
+  13:main.c        **** #include <stdio.h>
+  14:main.c        **** #include <stdlib.h>
+  15:main.c        **** #include <string.h>
+  16:main.c        **** #include <math.h>
+  17:main.c        **** //#include <PutHex.h>
+  18:main.c        **** #include <float.h>
+  19:main.c        **** //#include <OneWire.h>
+  20:main.c        **** #include <stdbool.h>
+  21:main.c        **** 
+  22:main.c        **** #define BUFFER_SIZE 128
+  23:main.c        **** #define GPRMC_HEADER                "$GPRMC"
+  24:main.c        **** #define GNRMC_HEADER                "$GNRMC"
+  25:main.c        **** #define GPS_MODULE_ACTIVE           0x41
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 2
+
+
+  26:main.c        **** 
+  27:main.c        **** #define GPS_UART_RX_BUFFER_SIZE 256
+  28:main.c        **** 
+  29:main.c        **** #define Min_To_Degree  0.01666666667
+  30:main.c        **** #define Sec_To_Degree	 0.000277777778
+  31:main.c        **** 
+  32:main.c        **** uint8_t GPS_UART_RX_Buffer[GPS_UART_RX_BUFFER_SIZE];
+  33:main.c        **** uint32_t GPS_UART_RX_Wr_Index = 0;
+  34:main.c        **** uint32_t GPS_UART_RX_Rd_Index = 0;
+  35:main.c        **** uint32_t GPS_UART_RX_Full = 0;
+  36:main.c        **** 
+  37:main.c        **** 
+  38:main.c        **** /*char gps_buffer[BUFFER_SIZE],
+  39:main.c        ****      UBLOX_9600[]              = { 0xb5, 0x62, 0x06, 0x00, 0x14, 0x00, 0x01, 0x00, 0x00, 0x00, 0xd0
+  40:main.c        ****      DISABLE_UBLOX_GPGSV[]           = { 0xb5, 0x62, 0x06, 0x01, 0x03, 0x00, 0xf0, 0x03, 0x00, 0xfd
+  41:main.c        ****      DISABLE_UBLOX_GNGSA[]           = { 0xb5, 0x62, 0x06, 0x01, 0x03, 0x00, 0xf0, 0x02, 0x00, 0xfc
+  42:main.c        ****      DISABLE_UBLOX_GNGLL[]           = { 0xb5, 0x62, 0x06, 0x01, 0x03, 0x00, 0xf0, 0x01, 0x00, 0xfb
+  43:main.c        ****      DISABLE_UBLOX_GNVTG[]           = { 0xb5, 0x62, 0x06, 0x01, 0x03, 0x00, 0xf0, 0x05, 0x00, 0xff
+  44:main.c        ****     ;
+  45:main.c        **** uint8_t gps_buffer_index = 0;
+  46:main.c        **** int flag_jamming = 0,
+  47:main.c        ****     count_data_jamming = 0
+  48:main.c        **** ;*/
+  49:main.c        **** 
+  50:main.c        **** void NewLine (void);
+  51:main.c        **** void DTC_DEBUG( char * debugstr );
+  52:main.c        **** 
+  53:main.c        **** int DTC_DEBUG_TIMER = 0;
+  54:main.c        **** 
+  55:main.c        **** /*const char config_commands[] = 
+  56:main.c        ****     "$PUBX,40,GLL,0,0,0,0*5C\r\n" // disable GLL output
+  57:main.c        ****     "$PUBX,40,GGA,0,1,0,0*5A\r\n" // enable GGA output
+  58:main.c        ****     "$PUBX,40,VTG,0,1,0,0*5E\r\n" // enable VTG output
+  59:main.c        ****     "$PUBX,40,GSA,0,1,0,0*4E\r\n" // enable GSA output
+  60:main.c        ****     "$PUBX,40,RMC,0,1,0,0*47\r\n" // enable RMC output
+  61:main.c        ****     "$PUBX,41,1,0007,0003,9600,0*25\r\n" // set the uart to the binary packet protocol 9600
+  62:main.c        **** ;*/
+  63:main.c        **** 
+  64:main.c        **** /*char ublock_config1[] =
+  65:main.c        ****     "$PUBX,41,1,0007,0003,9600,0*5C\r\n"
+  66:main.c        ****     "$PUBX,40,GLL,0,0,0,0*5C\r\n";*/
+  67:main.c        **** 
+  68:main.c        **** typedef struct GPS_GPSData
+  69:main.c        **** {
+  70:main.c        ****     double time;
+  71:main.c        **** 	double latitude;
+  72:main.c        **** 	double longitude;
+  73:main.c        **** 	double Knots;
+  74:main.c        **** 	double Date;
+  75:main.c        **** 	char N_OR_S;
+  76:main.c        **** 	char E_OR_W;
+  77:main.c        **** 	char Data[750];
+  78:main.c        **** 	char buffer[100];
+  79:main.c        **** 	char location[100];
+  80:main.c        **** 
+  81:main.c        **** }GPS_GPSData;
+  82:main.c        **** 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 3
+
+
+  83:main.c        **** GPS_GPSData GPS_Data;
+  84:main.c        **** 
+  85:main.c        **** void Get_GpsData(GPS_GPSData* GpsData);
+  86:main.c        **** static void NEO_GPS_Location(GPS_GPSData* GpsData);
+  87:main.c        **** 
+  88:main.c        **** int main(void)
+  89:main.c        **** {
+  90:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  91:main.c        ****     
+  92:main.c        ****     uint8_t c;
+  93:main.c        ****     
+  94:main.c        ****     UART_Start();
+  95:main.c        ****     GPS_Start();
+  96:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+  97:main.c        ****     DTC_DEBUG_TIMER = 1;
+  98:main.c        ****     PW_GPS_Write(1);
+  99:main.c        ****         
+ 100:main.c        ****     UART_PutString("Initializing \r\n");
+ 101:main.c        ****     CyDelay(500);
+ 102:main.c        ****     UART_PutString("Start Serial to UART!! \r\n"); //Print String to Serial
+ 103:main.c        ****     UART_PutString("PSoC 5LP UART Communicate Test \r\n");
+ 104:main.c        ****     UART_PutString(
+ 105:main.c        ****         "Hello World! \r\n"
+ 106:main.c        ****         "1&s is send ublox command \r\n"
+ 107:main.c        ****         "3 is DISABLE_TELIT_GSV_GSA_GLL_VTG\r\n"
+ 108:main.c        ****         "4 is ENABLE_TELIT_GSV_GSA_GLL_VTG \r\n"
+ 109:main.c        ****         "5 is UART First Method\r\n"
+ 110:main.c        ****         "6 is UART Second Method\r\n"
+ 111:main.c        ****     );
+ 112:main.c        ****     
+ 113:main.c        ****     UART_PutChar('>');
+ 114:main.c        ****     //UART_PutString("Sending UBlock Config Command \r\n");
+ 115:main.c        ****     //GPS_PutString("$PUBX,41,1,0007,0003,9600,0*5C\r\n"); //set the uart to the binary packet prot
+ 116:main.c        ****     //GPS_PutString("$PUBX,40,GLL,0,0,0,0*5C\r\n"); // request GPS Fix Data
+ 117:main.c        ****     //UART_PutChar('>');
+ 118:main.c        ****     //GPS_PutString(config_commands); //Set parameter
+ 119:main.c        ****     //GPS_PutString("$PUBX,41,1,0007,0003,9600,0*16"); //set the uart to the binary packet protocol
+ 120:main.c        ****     //GPS_PutString("\r\n");
+ 121:main.c        ****     //GPS_PutString("$PMTK253,1,9600*08\r\n"); // set the uart to the binary packet protocol 9600 f
+ 122:main.c        ****     
+ 123:main.c        ****     for(;;)
+ 124:main.c        ****     {
+ 125:main.c        ****         c = UART_GetChar();
+ 126:main.c        ****         if(c) {
+ 127:main.c        ****             UART_PutChar(c);
+ 128:main.c        ****             GPS_PutChar(c);
+ 129:main.c        ****         } //Echo
+ 130:main.c        ****         
+ 131:main.c        ****         /*switch(c){
+ 132:main.c        ****         case '1':
+ 133:main.c        ****             UART_PutString("Sending GPS Config GLL 0 ...\r\n"); //UBLOX
+ 134:main.c        ****             GPS_PutString("$PUBX,41,1,0007,0003,9600,0*5C\r\n"); //set the uart to the binary packe
+ 135:main.c        ****             GPS_PutString("$PUBX,40,GLL,0,0,0,0*5C\r\n"); // request GPS Fix Data
+ 136:main.c        ****             break;
+ 137:main.c        ****         case '2':
+ 138:main.c        ****             UART_PutString("Sending GPS Config GLL 1 ...\r\n"); //UBLOX
+ 139:main.c        ****             GPS_PutString("$PUBX,41,1,0007,0003,9600,0*5C\r\n"); //set the uart to the binary packe
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 4
+
+
+ 140:main.c        ****             GPS_PutString("$PUBX,40,GLL,1,1,0,0*5C\r\n"); // request GPS Fix Data
+ 141:main.c        ****             break;
+ 142:main.c        ****         case '3':
+ 143:main.c        ****             //$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n
+ 144:main.c        ****             UART_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+ 145:main.c        ****             UART_PutString("DISABLE_TELIT_GSV_GSA_GLL_VTG");
+ 146:main.c        ****             GPS_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n"); //DISABLE_TELIT
+ 147:main.c        ****             break;
+ 148:main.c        ****         case '4':
+ 149:main.c        ****             //$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n
+ 150:main.c        ****             UART_PutString("$PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+ 151:main.c        ****             UART_PutString("ENABLE_TELIT_GSV_GSA_GLL_VTG");
+ 152:main.c        ****             GPS_PutString("$PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n"); //ENABLE_TELIT_
+ 153:main.c        ****             break;
+ 154:main.c        ****         }*/
+ 155:main.c        ****         
+ 156:main.c        ****         if (c == '1')
+ 157:main.c        ****         {
+ 158:main.c        ****             UART_PutString("Sending GPS Config GLL 0 ...\r\n"); //UBLOX
+ 159:main.c        ****             GPS_PutString("$PUBX,41,1,0007,0003,9600,0*5C\r\n"); //set the uart to the binary packe
+ 160:main.c        ****             GPS_PutString("$PUBX,40,GLL,0,0,0,0*5C\r\n"); // request GPS Fix Data
+ 161:main.c        ****         }
+ 162:main.c        ****         if(c == '2')
+ 163:main.c        ****         {
+ 164:main.c        ****             UART_PutString("Sending GPS Config GLL 1 ...\r\n"); //UBLOX
+ 165:main.c        ****             GPS_PutString("$PUBX,41,1,0007,0003,9600,0*5C\r\n"); //set the uart to the binary packe
+ 166:main.c        ****             GPS_PutString("$PUBX,40,GLL,1,1,0,0*5C\r\n"); // request GPS Fix Data
+ 167:main.c        ****         }
+ 168:main.c        ****         if(c == '3')
+ 169:main.c        ****         {
+ 170:main.c        ****            //$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n
+ 171:main.c        ****             UART_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+ 172:main.c        ****             UART_PutString("DISABLE_TELIT_GSV_GSA_GLL_VTG");
+ 173:main.c        ****             GPS_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n"); //DISABLE_TELIT
+ 174:main.c        ****         }
+ 175:main.c        ****         if(c == '4')
+ 176:main.c        ****         {
+ 177:main.c        ****             //$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n
+ 178:main.c        ****             UART_PutString("$PMTK314,1,1,1,1,1,5,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+ 179:main.c        ****             UART_PutString("ENABLE_TELIT_GSV_GSA_GLL_VTG\r\n");
+ 180:main.c        ****             GPS_PutString("$PMTK314,1,1,1,1,1,5,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n"); //ENABLE_TELIT_
+ 181:main.c        ****         }
+ 182:main.c        ****         //UART_PutString("Second Method\r\n");
+ 183:main.c        ****         if (GPS_GetRxBufferSize() > 0) // First Method
+ 184:main.c        ****         {
+ 185:main.c        ****             while (GPS_GetRxBufferSize() > 0 && !GPS_UART_RX_Full)
+ 186:main.c        ****             {
+ 187:main.c        ****                 GPS_UART_RX_Buffer[GPS_UART_RX_Wr_Index] = GPS_GetChar();
+ 188:main.c        ****                 GPS_UART_RX_Wr_Index++;
+ 189:main.c        ****                 if (GPS_UART_RX_Wr_Index == GPS_UART_RX_BUFFER_SIZE)
+ 190:main.c        ****                 {
+ 191:main.c        ****                     GPS_UART_RX_Wr_Index = 0;
+ 192:main.c        ****                     GPS_UART_RX_Full = 1;
+ 193:main.c        ****                 }
+ 194:main.c        ****             }
+ 195:main.c        ****         }
+ 196:main.c        ****         
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 5
+
+
+ 197:main.c        ****         if (UART_GetTxBufferSize() == 0 && GPS_UART_RX_Rd_Index != GPS_UART_RX_Wr_Index)
+ 198:main.c        ****         {
+ 199:main.c        ****             UART_PutChar(GPS_UART_RX_Buffer[GPS_UART_RX_Rd_Index]);
+ 200:main.c        ****             GPS_UART_RX_Rd_Index++;
+ 201:main.c        ****             if (GPS_UART_RX_Rd_Index == GPS_UART_RX_BUFFER_SIZE)
+ 202:main.c        ****             {
+ 203:main.c        ****                 GPS_UART_RX_Rd_Index = 0;
+ 204:main.c        ****                 GPS_UART_RX_Full = 0;
+ 205:main.c        ****             }
+ 206:main.c        ****         }
+ 207:main.c        ****         
+ 208:main.c        ****         if (c == '6')
+ 209:main.c        ****         {
+ 210:main.c        ****             UART_PutString("Second Method\r\n");
+ 211:main.c        ****             Get_GpsData(&GPS_Data);
+ 212:main.c        ****         }
+ 213:main.c        ****          /*Place your application code here. */
+ 214:main.c        ****         /*while( 0 != GPS_GetRxBufferSize() ) {
+ 215:main.c        ****             char buff = GPS_GetChar();
+ 216:main.c        ****             UART_PutChar(buff);
+ 217:main.c        ****             //DTC_DEBUG(buff);
+ 218:main.c        ****             //UART_PutString(buff);
+ 219:main.c        ****             //c = UART_GetChar();
+ 220:main.c        ****             //UART_PutChar(c);
+ 221:main.c        ****             if(buff == 0xB5) flag_jamming = 1;
+ 222:main.c        ****             if(flag_jamming == 1)
+ 223:main.c        ****             {
+ 224:main.c        ****                 UART_PutString("FUCK IT JAMMING DAM!!\r\n");
+ 225:main.c        ****                 flag_jamming = 0;
+ 226:main.c        ****                 break;
+ 227:main.c        ****             }
+ 228:main.c        ****         }*/
+ 229:main.c        ****         //if(flag_jamming == 0) UART_PutString("Not JAMMING\r\n");
+ 230:main.c        ****         /*if(c != NULL)
+ 231:main.c        ****         {
+ 232:main.c        ****             c = UART_GetChar(); //Get character from terminal
+ 233:main.c        ****             UART_PutChar(c); //Echo to terminal 
+ 234:main.c        ****             GPS_PutChar(c); //Send to GPS
+ 235:main.c        ****         }*/
+ 236:main.c        ****         
+ 237:main.c        ****         //char buff = GPS_GetChar();
+ 238:main.c        ****         //UART_PutChar(buff); //Print NULL
+ 239:main.c        ****         
+ 240:main.c        ****     }
+ 241:main.c        ****     return 0;
+ 242:main.c        **** }
+ 243:main.c        **** 
+ 244:main.c        **** void Get_GpsData(GPS_GPSData* GpsData)
+ 245:main.c        **** {
+ 246:main.c        ****     char *P;
+ 247:main.c        **** 	int n;
+ 248:main.c        ****     if (GPS_GetRxBufferSize() > 0)
+ 249:main.c        ****         {
+ 250:main.c        ****             while (GPS_GetRxBufferSize() > 0 && !GPS_UART_RX_Full)
+ 251:main.c        ****             {
+ 252:main.c        ****                 GpsData->Data[GPS_UART_RX_Wr_Index] = GPS_GetChar();
+ 253:main.c        ****                 GPS_UART_RX_Wr_Index++;
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 6
+
+
+ 254:main.c        ****                 if (GPS_UART_RX_Wr_Index == GPS_UART_RX_BUFFER_SIZE)
+ 255:main.c        ****                 {
+ 256:main.c        ****                     GPS_UART_RX_Wr_Index = 0;
+ 257:main.c        ****                     GPS_UART_RX_Full = 1;
+ 258:main.c        ****                 }
+ 259:main.c        ****             }
+ 260:main.c        ****         }
+ 261:main.c        ****     P=strstr(GpsData->Data,"&GPRMC");
+ 262:main.c        ****     if(*P=='G')
+ 263:main.c        **** 			{
+ 264:main.c        **** 				n=0;
+ 265:main.c        **** 				while(*(P+n)!='\n'){
+ 266:main.c        **** 
+ 267:main.c        **** 					GpsData->location[n]=*(P+n);
+ 268:main.c        **** 					n++;}
+ 269:main.c        **** 					sprintf(GpsData->buffer,"%s\r\n\n",GpsData->location);
+ 270:main.c        **** 					sscanf(GpsData->buffer,"GPRMC,%lf,A,%lf,%c,%lf,%c,%lf,,%lf,,,A*64",&GpsData->time,&GpsData->la
+ 271:main.c        **** 					NEO_GPS_Location(GpsData);
+ 272:main.c        **** 			}
+ 273:main.c        **** }
+ 274:main.c        **** 
+ 275:main.c        **** static void NEO_GPS_Location(GPS_GPSData* GpsData)
+ 276:main.c        **** {
+  33              		.loc 1 276 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 8
+  36              		@ frame_needed = 0, uses_anonymous_args = 0
+  37              	.LVL0:
+  38 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  39              		.cfi_def_cfa_offset 32
+  40              		.cfi_offset 4, -32
+  41              		.cfi_offset 5, -28
+  42              		.cfi_offset 6, -24
+  43              		.cfi_offset 7, -20
+  44              		.cfi_offset 8, -16
+  45              		.cfi_offset 9, -12
+  46              		.cfi_offset 10, -8
+  47              		.cfi_offset 14, -4
+  48 0004 82B0     		sub	sp, sp, #8
+  49              		.cfi_def_cfa_offset 40
+  50              	.LVL1:
+ 277:main.c        **** 	double Deg_Val=0.0,Min_Val=0.0,Sec_Val=0.0,lon=0.0,lat=0.0;
+ 278:main.c        **** 
+ 279:main.c        **** 	lon=GpsData->longitude;
+  51              		.loc 1 279 0
+  52 0006 D0E90467 		ldrd	r6, [r0, #16]
+  53              	.LVL2:
+ 280:main.c        **** 	lat=GpsData->latitude;
+  54              		.loc 1 280 0
+  55 000a D0E90245 		ldrd	r4, [r0, #8]
+  56              	.LVL3:
+ 281:main.c        **** 	if(GpsData->E_OR_W=='E' && GpsData->N_OR_S=='S')
+  57              		.loc 1 281 0
+  58 000e 028D     		ldrh	r2, [r0, #40]
+  59 0010 44F25353 		movw	r3, #17747
+  60 0014 9A42     		cmp	r2, r3
+  61 0016 40F09480 		bne	.L1
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 7
+
+
+  62 001a 8246     		mov	r10, r0
+ 282:main.c        **** 	{
+ 283:main.c        **** 		Deg_Val=(int)(lon/100);
+  63              		.loc 1 283 0
+  64 001c 0022     		movs	r2, #0
+  65 001e 4E4B     		ldr	r3, .L4+16
+  66 0020 3046     		mov	r0, r6
+  67              	.LVL4:
+  68 0022 3946     		mov	r1, r7
+  69 0024 FFF7FEFF 		bl	__aeabi_ddiv
+  70              	.LVL5:
+  71 0028 FFF7FEFF 		bl	__aeabi_d2iz
+  72              	.LVL6:
+  73 002c FFF7FEFF 		bl	__aeabi_i2d
+  74              	.LVL7:
+  75 0030 CDE90001 		strd	r0, [sp]
+  76              	.LVL8:
+ 284:main.c        **** 		Min_Val=(int)(lon-(Deg_Val*100));
+  77              		.loc 1 284 0
+  78 0034 0022     		movs	r2, #0
+  79 0036 484B     		ldr	r3, .L4+16
+  80 0038 FFF7FEFF 		bl	__aeabi_dmul
+  81              	.LVL9:
+  82 003c 0246     		mov	r2, r0
+  83 003e 0B46     		mov	r3, r1
+  84 0040 3046     		mov	r0, r6
+  85 0042 3946     		mov	r1, r7
+  86 0044 FFF7FEFF 		bl	__aeabi_dsub
+  87              	.LVL10:
+  88 0048 8046     		mov	r8, r0
+  89 004a 8946     		mov	r9, r1
+  90 004c FFF7FEFF 		bl	__aeabi_d2iz
+  91              	.LVL11:
+  92 0050 FFF7FEFF 		bl	__aeabi_i2d
+  93              	.LVL12:
+  94 0054 0646     		mov	r6, r0
+  95              	.LVL13:
+  96 0056 0F46     		mov	r7, r1
+  97              	.LVL14:
+ 285:main.c        **** 		Sec_Val=((lon-(Deg_Val*100))-Min_Val)*100;
+  98              		.loc 1 285 0
+  99 0058 0246     		mov	r2, r0
+ 100 005a 0B46     		mov	r3, r1
+ 101 005c 4046     		mov	r0, r8
+ 102 005e 4946     		mov	r1, r9
+ 103 0060 FFF7FEFF 		bl	__aeabi_dsub
+ 104              	.LVL15:
+ 105 0064 0022     		movs	r2, #0
+ 106 0066 3C4B     		ldr	r3, .L4+16
+ 107 0068 FFF7FEFF 		bl	__aeabi_dmul
+ 108              	.LVL16:
+ 109 006c 8046     		mov	r8, r0
+ 110 006e 8946     		mov	r9, r1
+ 111              	.LVL17:
+ 286:main.c        **** 		GpsData->longitude=Deg_Val+(Min_Val*Min_To_Degree)+(Sec_Val*Sec_To_Degree);
+ 112              		.loc 1 286 0
+ 113 0070 35A3     		adr	r3, .L4
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 8
+
+
+ 114 0072 D3E90023 		ldrd	r2, [r3]
+ 115 0076 3046     		mov	r0, r6
+ 116 0078 3946     		mov	r1, r7
+ 117 007a FFF7FEFF 		bl	__aeabi_dmul
+ 118              	.LVL18:
+ 119 007e 0246     		mov	r2, r0
+ 120 0080 0B46     		mov	r3, r1
+ 121 0082 DDE90001 		ldrd	r0, [sp]
+ 122 0086 FFF7FEFF 		bl	__aeabi_dadd
+ 123              	.LVL19:
+ 124 008a 0646     		mov	r6, r0
+ 125              	.LVL20:
+ 126 008c 0F46     		mov	r7, r1
+ 127 008e 30A3     		adr	r3, .L4+8
+ 128 0090 D3E90023 		ldrd	r2, [r3]
+ 129 0094 4046     		mov	r0, r8
+ 130 0096 4946     		mov	r1, r9
+ 131 0098 FFF7FEFF 		bl	__aeabi_dmul
+ 132              	.LVL21:
+ 133 009c 0246     		mov	r2, r0
+ 134 009e 0B46     		mov	r3, r1
+ 135 00a0 3046     		mov	r0, r6
+ 136 00a2 3946     		mov	r1, r7
+ 137 00a4 FFF7FEFF 		bl	__aeabi_dadd
+ 138              	.LVL22:
+ 139 00a8 CAE90401 		strd	r0, [r10, #16]
+ 287:main.c        **** 
+ 288:main.c        **** 		Deg_Val=(int)((lat/100));
+ 140              		.loc 1 288 0
+ 141 00ac 0022     		movs	r2, #0
+ 142 00ae 2A4B     		ldr	r3, .L4+16
+ 143 00b0 2046     		mov	r0, r4
+ 144 00b2 2946     		mov	r1, r5
+ 145 00b4 FFF7FEFF 		bl	__aeabi_ddiv
+ 146              	.LVL23:
+ 147 00b8 FFF7FEFF 		bl	__aeabi_d2iz
+ 148              	.LVL24:
+ 149 00bc FFF7FEFF 		bl	__aeabi_i2d
+ 150              	.LVL25:
+ 151 00c0 8046     		mov	r8, r0
+ 152              	.LVL26:
+ 153 00c2 8946     		mov	r9, r1
+ 154              	.LVL27:
+ 289:main.c        **** 		Min_Val=(int)(lat-(Deg_Val*100));
+ 155              		.loc 1 289 0
+ 156 00c4 0022     		movs	r2, #0
+ 157 00c6 244B     		ldr	r3, .L4+16
+ 158 00c8 FFF7FEFF 		bl	__aeabi_dmul
+ 159              	.LVL28:
+ 160 00cc 0246     		mov	r2, r0
+ 161 00ce 0B46     		mov	r3, r1
+ 162 00d0 2046     		mov	r0, r4
+ 163 00d2 2946     		mov	r1, r5
+ 164 00d4 FFF7FEFF 		bl	__aeabi_dsub
+ 165              	.LVL29:
+ 166 00d8 0646     		mov	r6, r0
+ 167 00da 0F46     		mov	r7, r1
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 9
+
+
+ 168 00dc FFF7FEFF 		bl	__aeabi_d2iz
+ 169              	.LVL30:
+ 170 00e0 FFF7FEFF 		bl	__aeabi_i2d
+ 171              	.LVL31:
+ 172 00e4 0446     		mov	r4, r0
+ 173              	.LVL32:
+ 174 00e6 0D46     		mov	r5, r1
+ 175              	.LVL33:
+ 290:main.c        **** 		Sec_Val=((lat-(Deg_Val*100))-Min_Val)*10;
+ 176              		.loc 1 290 0
+ 177 00e8 0246     		mov	r2, r0
+ 178 00ea 0B46     		mov	r3, r1
+ 179 00ec 3046     		mov	r0, r6
+ 180 00ee 3946     		mov	r1, r7
+ 181 00f0 FFF7FEFF 		bl	__aeabi_dsub
+ 182              	.LVL34:
+ 183 00f4 0022     		movs	r2, #0
+ 184 00f6 194B     		ldr	r3, .L4+20
+ 185 00f8 FFF7FEFF 		bl	__aeabi_dmul
+ 186              	.LVL35:
+ 187 00fc 0646     		mov	r6, r0
+ 188 00fe 0F46     		mov	r7, r1
+ 189              	.LVL36:
+ 291:main.c        **** 		GpsData->latitude=(Deg_Val+(Min_Val*Min_To_Degree)+(Sec_Val*Sec_To_Degree))*-1;
+ 190              		.loc 1 291 0
+ 191 0100 11A3     		adr	r3, .L4
+ 192 0102 D3E90023 		ldrd	r2, [r3]
+ 193 0106 2046     		mov	r0, r4
+ 194 0108 2946     		mov	r1, r5
+ 195 010a FFF7FEFF 		bl	__aeabi_dmul
+ 196              	.LVL37:
+ 197 010e 0246     		mov	r2, r0
+ 198 0110 0B46     		mov	r3, r1
+ 199 0112 4046     		mov	r0, r8
+ 200 0114 4946     		mov	r1, r9
+ 201 0116 FFF7FEFF 		bl	__aeabi_dadd
+ 202              	.LVL38:
+ 203 011a 0446     		mov	r4, r0
+ 204              	.LVL39:
+ 205 011c 0D46     		mov	r5, r1
+ 206 011e 0CA3     		adr	r3, .L4+8
+ 207 0120 D3E90023 		ldrd	r2, [r3]
+ 208 0124 3046     		mov	r0, r6
+ 209 0126 3946     		mov	r1, r7
+ 210 0128 FFF7FEFF 		bl	__aeabi_dmul
+ 211              	.LVL40:
+ 212 012c 0246     		mov	r2, r0
+ 213 012e 0B46     		mov	r3, r1
+ 214 0130 2046     		mov	r0, r4
+ 215 0132 2946     		mov	r1, r5
+ 216 0134 FFF7FEFF 		bl	__aeabi_dadd
+ 217              	.LVL41:
+ 218 0138 0246     		mov	r2, r0
+ 219 013a 01F10043 		add	r3, r1, #-2147483648
+ 220 013e CAE90223 		strd	r2, [r10, #8]
+ 221              	.LVL42:
+ 222              	.L1:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 10
+
+
+ 292:main.c        **** 	}
+ 293:main.c        **** }
+ 223              		.loc 1 293 0
+ 224 0142 02B0     		add	sp, sp, #8
+ 225              		.cfi_def_cfa_offset 32
+ 226              		@ sp needed
+ 227 0144 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 228              	.L5:
+ 229              		.align	3
+ 230              	.L4:
+ 231 0148 11BA1F11 		.word	287291921
+ 232 014c 1111913F 		.word	1066471697
+ 233 0150 AB49D978 		.word	2027506091
+ 234 0154 5634323F 		.word	1060254806
+ 235 0158 00005940 		.word	1079574528
+ 236 015c 00002440 		.word	1076101120
+ 237              		.cfi_endproc
+ 238              	.LFE66:
+ 239              		.size	NEO_GPS_Location, .-NEO_GPS_Location
+ 240              		.section	.text.Get_GpsData,"ax",%progbits
+ 241              		.align	2
+ 242              		.global	Get_GpsData
+ 243              		.thumb
+ 244              		.thumb_func
+ 245              		.type	Get_GpsData, %function
+ 246              	Get_GpsData:
+ 247              	.LFB65:
+ 245:main.c        ****     char *P;
+ 248              		.loc 1 245 0
+ 249              		.cfi_startproc
+ 250              		@ args = 0, pretend = 0, frame = 0
+ 251              		@ frame_needed = 0, uses_anonymous_args = 0
+ 252              	.LVL43:
+ 253 0000 70B5     		push	{r4, r5, r6, lr}
+ 254              		.cfi_def_cfa_offset 16
+ 255              		.cfi_offset 4, -16
+ 256              		.cfi_offset 5, -12
+ 257              		.cfi_offset 6, -8
+ 258              		.cfi_offset 14, -4
+ 259 0002 86B0     		sub	sp, sp, #24
+ 260              		.cfi_def_cfa_offset 40
+ 261 0004 0446     		mov	r4, r0
+ 248:main.c        ****         {
+ 262              		.loc 1 248 0
+ 263 0006 FFF7FEFF 		bl	GPS_GetRxBufferSize
+ 264              	.LVL44:
+ 265 000a 88B9     		cbnz	r0, .L9
+ 266 000c 17E0     		b	.L8
+ 267              	.L10:
+ 252:main.c        ****                 GPS_UART_RX_Wr_Index++;
+ 268              		.loc 1 252 0
+ 269 000e 264D     		ldr	r5, .L16
+ 270 0010 2E68     		ldr	r6, [r5]
+ 271 0012 FFF7FEFF 		bl	GPS_GetChar
+ 272              	.LVL45:
+ 273 0016 2644     		add	r6, r6, r4
+ 274 0018 86F82A00 		strb	r0, [r6, #42]
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 11
+
+
+ 253:main.c        ****                 if (GPS_UART_RX_Wr_Index == GPS_UART_RX_BUFFER_SIZE)
+ 275              		.loc 1 253 0
+ 276 001c 2B68     		ldr	r3, [r5]
+ 277 001e 0133     		adds	r3, r3, #1
+ 278 0020 2B60     		str	r3, [r5]
+ 254:main.c        ****                 {
+ 279              		.loc 1 254 0
+ 280 0022 B3F5807F 		cmp	r3, #256
+ 281 0026 03D1     		bne	.L9
+ 256:main.c        ****                     GPS_UART_RX_Full = 1;
+ 282              		.loc 1 256 0
+ 283 0028 0022     		movs	r2, #0
+ 284 002a 2A60     		str	r2, [r5]
+ 257:main.c        ****                 }
+ 285              		.loc 1 257 0
+ 286 002c 0122     		movs	r2, #1
+ 287 002e 6A60     		str	r2, [r5, #4]
+ 288              	.L9:
+ 250:main.c        ****             {
+ 289              		.loc 1 250 0
+ 290 0030 FFF7FEFF 		bl	GPS_GetRxBufferSize
+ 291              	.LVL46:
+ 292 0034 18B1     		cbz	r0, .L8
+ 250:main.c        ****             {
+ 293              		.loc 1 250 0 is_stmt 0 discriminator 1
+ 294 0036 1C4B     		ldr	r3, .L16
+ 295 0038 5B68     		ldr	r3, [r3, #4]
+ 296 003a 002B     		cmp	r3, #0
+ 297 003c E7D0     		beq	.L10
+ 298              	.L8:
+ 261:main.c        ****     if(*P=='G')
+ 299              		.loc 1 261 0 is_stmt 1
+ 300 003e 1B49     		ldr	r1, .L16+4
+ 301 0040 04F12A00 		add	r0, r4, #42
+ 302 0044 FFF7FEFF 		bl	strstr
+ 303              	.LVL47:
+ 262:main.c        **** 			{
+ 304              		.loc 1 262 0
+ 305 0048 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 306 004a 472B     		cmp	r3, #71
+ 307 004c 2AD1     		bne	.L6
+ 308 004e 04E0     		b	.L14
+ 309              	.LVL48:
+ 310              	.L13:
+ 267:main.c        **** 					n++;}
+ 311              		.loc 1 267 0
+ 312 0050 E118     		adds	r1, r4, r3
+ 313 0052 81F87C23 		strb	r2, [r1, #892]
+ 268:main.c        **** 					sprintf(GpsData->buffer,"%s\r\n\n",GpsData->location);
+ 314              		.loc 1 268 0
+ 315 0056 0133     		adds	r3, r3, #1
+ 316              	.LVL49:
+ 317 0058 00E0     		b	.L11
+ 318              	.LVL50:
+ 319              	.L14:
+ 320 005a 0023     		movs	r3, #0
+ 321              	.L11:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 12
+
+
+ 322              	.LVL51:
+ 265:main.c        **** 
+ 323              		.loc 1 265 0
+ 324 005c C25C     		ldrb	r2, [r0, r3]	@ zero_extendqisi2
+ 325 005e 0A2A     		cmp	r2, #10
+ 326 0060 F6D1     		bne	.L13
+ 269:main.c        **** 					sscanf(GpsData->buffer,"GPRMC,%lf,A,%lf,%c,%lf,%c,%lf,,%lf,,,A*64",&GpsData->time,&GpsData->la
+ 327              		.loc 1 269 0
+ 328 0062 04F54675 		add	r5, r4, #792
+ 329 0066 04F55F72 		add	r2, r4, #892
+ 330 006a 1149     		ldr	r1, .L16+8
+ 331 006c 2846     		mov	r0, r5
+ 332              	.LVL52:
+ 333 006e FFF7FEFF 		bl	sprintf
+ 334              	.LVL53:
+ 270:main.c        **** 					NEO_GPS_Location(GpsData);
+ 335              		.loc 1 270 0
+ 336 0072 04F12003 		add	r3, r4, #32
+ 337 0076 0493     		str	r3, [sp, #16]
+ 338 0078 04F11803 		add	r3, r4, #24
+ 339 007c 0393     		str	r3, [sp, #12]
+ 340 007e 04F12903 		add	r3, r4, #41
+ 341 0082 0293     		str	r3, [sp, #8]
+ 342 0084 04F11003 		add	r3, r4, #16
+ 343 0088 0193     		str	r3, [sp, #4]
+ 344 008a 04F12803 		add	r3, r4, #40
+ 345 008e 0093     		str	r3, [sp]
+ 346 0090 04F10803 		add	r3, r4, #8
+ 347 0094 2246     		mov	r2, r4
+ 348 0096 0749     		ldr	r1, .L16+12
+ 349 0098 2846     		mov	r0, r5
+ 350 009a FFF7FEFF 		bl	sscanf
+ 351              	.LVL54:
+ 271:main.c        **** 			}
+ 352              		.loc 1 271 0
+ 353 009e 2046     		mov	r0, r4
+ 354 00a0 FFF7FEFF 		bl	NEO_GPS_Location
+ 355              	.LVL55:
+ 356              	.L6:
+ 273:main.c        **** 
+ 357              		.loc 1 273 0
+ 358 00a4 06B0     		add	sp, sp, #24
+ 359              		.cfi_def_cfa_offset 16
+ 360              		@ sp needed
+ 361 00a6 70BD     		pop	{r4, r5, r6, pc}
+ 362              	.LVL56:
+ 363              	.L17:
+ 364              		.align	2
+ 365              	.L16:
+ 366 00a8 00000000 		.word	.LANCHOR0
+ 367 00ac 00000000 		.word	.LC0
+ 368 00b0 08000000 		.word	.LC1
+ 369 00b4 10000000 		.word	.LC2
+ 370              		.cfi_endproc
+ 371              	.LFE65:
+ 372              		.size	Get_GpsData, .-Get_GpsData
+ 373              		.section	.text.main,"ax",%progbits
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 13
+
+
+ 374              		.align	2
+ 375              		.global	main
+ 376              		.thumb
+ 377              		.thumb_func
+ 378              		.type	main, %function
+ 379              	main:
+ 380              	.LFB64:
+  89:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 381              		.loc 1 89 0
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 0
+ 384              		@ frame_needed = 0, uses_anonymous_args = 0
+ 385 0000 70B5     		push	{r4, r5, r6, lr}
+ 386              		.cfi_def_cfa_offset 16
+ 387              		.cfi_offset 4, -16
+ 388              		.cfi_offset 5, -12
+ 389              		.cfi_offset 6, -8
+ 390              		.cfi_offset 14, -4
+  90:main.c        ****     
+ 391              		.loc 1 90 0
+ 392              		.syntax unified
+ 393              	@ 90 "main.c" 1
+ 394 0002 62B6     		CPSIE   i
+ 395              	@ 0 "" 2
+  94:main.c        ****     GPS_Start();
+ 396              		.loc 1 94 0
+ 397              		.thumb
+ 398              		.syntax unified
+ 399 0004 FFF7FEFF 		bl	UART_Start
+ 400              	.LVL57:
+  95:main.c        ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+ 401              		.loc 1 95 0
+ 402 0008 FFF7FEFF 		bl	GPS_Start
+ 403              	.LVL58:
+  97:main.c        ****     PW_GPS_Write(1);
+ 404              		.loc 1 97 0
+ 405 000c 0120     		movs	r0, #1
+ 406 000e 444B     		ldr	r3, .L32
+ 407 0010 9860     		str	r0, [r3, #8]
+  98:main.c        ****         
+ 408              		.loc 1 98 0
+ 409 0012 FFF7FEFF 		bl	PW_GPS_Write
+ 410              	.LVL59:
+ 100:main.c        ****     CyDelay(500);
+ 411              		.loc 1 100 0
+ 412 0016 4348     		ldr	r0, .L32+4
+ 413 0018 FFF7FEFF 		bl	UART_PutString
+ 414              	.LVL60:
+ 101:main.c        ****     UART_PutString("Start Serial to UART!! \r\n"); //Print String to Serial
+ 415              		.loc 1 101 0
+ 416 001c 4FF4FA70 		mov	r0, #500
+ 417 0020 FFF7FEFF 		bl	CyDelay
+ 418              	.LVL61:
+ 102:main.c        ****     UART_PutString("PSoC 5LP UART Communicate Test \r\n");
+ 419              		.loc 1 102 0
+ 420 0024 4048     		ldr	r0, .L32+8
+ 421 0026 FFF7FEFF 		bl	UART_PutString
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 14
+
+
+ 422              	.LVL62:
+ 103:main.c        ****     UART_PutString(
+ 423              		.loc 1 103 0
+ 424 002a 4048     		ldr	r0, .L32+12
+ 425 002c FFF7FEFF 		bl	UART_PutString
+ 426              	.LVL63:
+ 104:main.c        ****         "Hello World! \r\n"
+ 427              		.loc 1 104 0
+ 428 0030 3F48     		ldr	r0, .L32+16
+ 429 0032 FFF7FEFF 		bl	UART_PutString
+ 430              	.LVL64:
+ 113:main.c        ****     //UART_PutString("Sending UBlock Config Command \r\n");
+ 431              		.loc 1 113 0
+ 432 0036 3E20     		movs	r0, #62
+ 433 0038 FFF7FEFF 		bl	UART_PutChar
+ 434              	.LVL65:
+ 435              	.L29:
+ 125:main.c        ****         if(c) {
+ 436              		.loc 1 125 0
+ 437 003c FFF7FEFF 		bl	UART_GetChar
+ 438              	.LVL66:
+ 126:main.c        ****             UART_PutChar(c);
+ 439              		.loc 1 126 0
+ 440 0040 0646     		mov	r6, r0
+ 441 0042 20B1     		cbz	r0, .L19
+ 127:main.c        ****             GPS_PutChar(c);
+ 442              		.loc 1 127 0
+ 443 0044 FFF7FEFF 		bl	UART_PutChar
+ 444              	.LVL67:
+ 128:main.c        ****         } //Echo
+ 445              		.loc 1 128 0
+ 446 0048 3046     		mov	r0, r6
+ 447 004a FFF7FEFF 		bl	GPS_PutChar
+ 448              	.LVL68:
+ 449              	.L19:
+ 156:main.c        ****         {
+ 450              		.loc 1 156 0
+ 451 004e 312E     		cmp	r6, #49
+ 452 0050 08D1     		bne	.L20
+ 158:main.c        ****             GPS_PutString("$PUBX,41,1,0007,0003,9600,0*5C\r\n"); //set the uart to the binary packe
+ 453              		.loc 1 158 0
+ 454 0052 3848     		ldr	r0, .L32+20
+ 455 0054 FFF7FEFF 		bl	UART_PutString
+ 456              	.LVL69:
+ 159:main.c        ****             GPS_PutString("$PUBX,40,GLL,0,0,0,0*5C\r\n"); // request GPS Fix Data
+ 457              		.loc 1 159 0
+ 458 0058 3748     		ldr	r0, .L32+24
+ 459 005a FFF7FEFF 		bl	GPS_PutString
+ 460              	.LVL70:
+ 160:main.c        ****         }
+ 461              		.loc 1 160 0
+ 462 005e 3748     		ldr	r0, .L32+28
+ 463 0060 FFF7FEFF 		bl	GPS_PutString
+ 464              	.LVL71:
+ 465              	.L20:
+ 162:main.c        ****         {
+ 466              		.loc 1 162 0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 15
+
+
+ 467 0064 322E     		cmp	r6, #50
+ 468 0066 08D1     		bne	.L21
+ 164:main.c        ****             GPS_PutString("$PUBX,41,1,0007,0003,9600,0*5C\r\n"); //set the uart to the binary packe
+ 469              		.loc 1 164 0
+ 470 0068 3548     		ldr	r0, .L32+32
+ 471 006a FFF7FEFF 		bl	UART_PutString
+ 472              	.LVL72:
+ 165:main.c        ****             GPS_PutString("$PUBX,40,GLL,1,1,0,0*5C\r\n"); // request GPS Fix Data
+ 473              		.loc 1 165 0
+ 474 006e 3248     		ldr	r0, .L32+24
+ 475 0070 FFF7FEFF 		bl	GPS_PutString
+ 476              	.LVL73:
+ 166:main.c        ****         }
+ 477              		.loc 1 166 0
+ 478 0074 3348     		ldr	r0, .L32+36
+ 479 0076 FFF7FEFF 		bl	GPS_PutString
+ 480              	.LVL74:
+ 481              	.L21:
+ 168:main.c        ****         {
+ 482              		.loc 1 168 0
+ 483 007a 332E     		cmp	r6, #51
+ 484 007c 09D1     		bne	.L22
+ 171:main.c        ****             UART_PutString("DISABLE_TELIT_GSV_GSA_GLL_VTG");
+ 485              		.loc 1 171 0
+ 486 007e 324C     		ldr	r4, .L32+40
+ 487 0080 2046     		mov	r0, r4
+ 488 0082 FFF7FEFF 		bl	UART_PutString
+ 489              	.LVL75:
+ 172:main.c        ****             GPS_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n"); //DISABLE_TELIT
+ 490              		.loc 1 172 0
+ 491 0086 3148     		ldr	r0, .L32+44
+ 492 0088 FFF7FEFF 		bl	UART_PutString
+ 493              	.LVL76:
+ 173:main.c        ****         }
+ 494              		.loc 1 173 0
+ 495 008c 2046     		mov	r0, r4
+ 496 008e FFF7FEFF 		bl	GPS_PutString
+ 497              	.LVL77:
+ 498              	.L22:
+ 175:main.c        ****         {
+ 499              		.loc 1 175 0
+ 500 0092 342E     		cmp	r6, #52
+ 501 0094 09D1     		bne	.L23
+ 178:main.c        ****             UART_PutString("ENABLE_TELIT_GSV_GSA_GLL_VTG\r\n");
+ 502              		.loc 1 178 0
+ 503 0096 2E4C     		ldr	r4, .L32+48
+ 504 0098 2046     		mov	r0, r4
+ 505 009a FFF7FEFF 		bl	UART_PutString
+ 506              	.LVL78:
+ 179:main.c        ****             GPS_PutString("$PMTK314,1,1,1,1,1,5,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n"); //ENABLE_TELIT_
+ 507              		.loc 1 179 0
+ 508 009e 2D48     		ldr	r0, .L32+52
+ 509 00a0 FFF7FEFF 		bl	UART_PutString
+ 510              	.LVL79:
+ 180:main.c        ****         }
+ 511              		.loc 1 180 0
+ 512 00a4 2046     		mov	r0, r4
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 16
+
+
+ 513 00a6 FFF7FEFF 		bl	GPS_PutString
+ 514              	.LVL80:
+ 515              	.L23:
+ 183:main.c        ****         {
+ 516              		.loc 1 183 0
+ 517 00aa FFF7FEFF 		bl	GPS_GetRxBufferSize
+ 518              	.LVL81:
+ 519 00ae 80B9     		cbnz	r0, .L26
+ 520 00b0 16E0     		b	.L25
+ 521              	.L27:
+ 187:main.c        ****                 GPS_UART_RX_Wr_Index++;
+ 522              		.loc 1 187 0
+ 523 00b2 1B4C     		ldr	r4, .L32
+ 524 00b4 2568     		ldr	r5, [r4]
+ 525 00b6 FFF7FEFF 		bl	GPS_GetChar
+ 526              	.LVL82:
+ 527 00ba 274B     		ldr	r3, .L32+56
+ 528 00bc 5855     		strb	r0, [r3, r5]
+ 188:main.c        ****                 if (GPS_UART_RX_Wr_Index == GPS_UART_RX_BUFFER_SIZE)
+ 529              		.loc 1 188 0
+ 530 00be 2368     		ldr	r3, [r4]
+ 531 00c0 0133     		adds	r3, r3, #1
+ 532 00c2 2360     		str	r3, [r4]
+ 189:main.c        ****                 {
+ 533              		.loc 1 189 0
+ 534 00c4 B3F5807F 		cmp	r3, #256
+ 535 00c8 03D1     		bne	.L26
+ 191:main.c        ****                     GPS_UART_RX_Full = 1;
+ 536              		.loc 1 191 0
+ 537 00ca 0022     		movs	r2, #0
+ 538 00cc 2260     		str	r2, [r4]
+ 192:main.c        ****                 }
+ 539              		.loc 1 192 0
+ 540 00ce 0122     		movs	r2, #1
+ 541 00d0 6260     		str	r2, [r4, #4]
+ 542              	.L26:
+ 185:main.c        ****             {
+ 543              		.loc 1 185 0
+ 544 00d2 FFF7FEFF 		bl	GPS_GetRxBufferSize
+ 545              	.LVL83:
+ 546 00d6 18B1     		cbz	r0, .L25
+ 185:main.c        ****             {
+ 547              		.loc 1 185 0 is_stmt 0 discriminator 1
+ 548 00d8 114B     		ldr	r3, .L32
+ 549 00da 5B68     		ldr	r3, [r3, #4]
+ 550 00dc 002B     		cmp	r3, #0
+ 551 00de E8D0     		beq	.L27
+ 552              	.L25:
+ 197:main.c        ****         {
+ 553              		.loc 1 197 0 is_stmt 1
+ 554 00e0 FFF7FEFF 		bl	UART_GetTxBufferSize
+ 555              	.LVL84:
+ 556 00e4 98B9     		cbnz	r0, .L28
+ 197:main.c        ****         {
+ 557              		.loc 1 197 0 is_stmt 0 discriminator 1
+ 558 00e6 0E4B     		ldr	r3, .L32
+ 559 00e8 DA68     		ldr	r2, [r3, #12]
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 17
+
+
+ 560 00ea 1B68     		ldr	r3, [r3]
+ 561 00ec 9A42     		cmp	r2, r3
+ 562 00ee 0ED0     		beq	.L28
+ 199:main.c        ****             GPS_UART_RX_Rd_Index++;
+ 563              		.loc 1 199 0 is_stmt 1
+ 564 00f0 194B     		ldr	r3, .L32+56
+ 565 00f2 985C     		ldrb	r0, [r3, r2]	@ zero_extendqisi2
+ 566 00f4 FFF7FEFF 		bl	UART_PutChar
+ 567              	.LVL85:
+ 200:main.c        ****             if (GPS_UART_RX_Rd_Index == GPS_UART_RX_BUFFER_SIZE)
+ 568              		.loc 1 200 0
+ 569 00f8 094A     		ldr	r2, .L32
+ 570 00fa D368     		ldr	r3, [r2, #12]
+ 571 00fc 0133     		adds	r3, r3, #1
+ 572 00fe D360     		str	r3, [r2, #12]
+ 201:main.c        ****             {
+ 573              		.loc 1 201 0
+ 574 0100 B3F5807F 		cmp	r3, #256
+ 575 0104 03D1     		bne	.L28
+ 203:main.c        ****                 GPS_UART_RX_Full = 0;
+ 576              		.loc 1 203 0
+ 577 0106 1346     		mov	r3, r2
+ 578 0108 0022     		movs	r2, #0
+ 579 010a DA60     		str	r2, [r3, #12]
+ 204:main.c        ****             }
+ 580              		.loc 1 204 0
+ 581 010c 5A60     		str	r2, [r3, #4]
+ 582              	.L28:
+ 208:main.c        ****         {
+ 583              		.loc 1 208 0
+ 584 010e 362E     		cmp	r6, #54
+ 585 0110 94D1     		bne	.L29
+ 210:main.c        ****             Get_GpsData(&GPS_Data);
+ 586              		.loc 1 210 0
+ 587 0112 1248     		ldr	r0, .L32+60
+ 588 0114 FFF7FEFF 		bl	UART_PutString
+ 589              	.LVL86:
+ 211:main.c        ****         }
+ 590              		.loc 1 211 0
+ 591 0118 1148     		ldr	r0, .L32+64
+ 592 011a FFF7FEFF 		bl	Get_GpsData
+ 593              	.LVL87:
+ 594 011e 8DE7     		b	.L29
+ 595              	.L33:
+ 596              		.align	2
+ 597              	.L32:
+ 598 0120 00000000 		.word	.LANCHOR0
+ 599 0124 3C000000 		.word	.LC3
+ 600 0128 4C000000 		.word	.LC4
+ 601 012c 68000000 		.word	.LC5
+ 602 0130 8C000000 		.word	.LC6
+ 603 0134 34010000 		.word	.LC7
+ 604 0138 54010000 		.word	.LC8
+ 605 013c 78010000 		.word	.LC9
+ 606 0140 94010000 		.word	.LC10
+ 607 0144 B4010000 		.word	.LC11
+ 608 0148 D0010000 		.word	.LC12
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 18
+
+
+ 609 014c 04020000 		.word	.LC13
+ 610 0150 24020000 		.word	.LC14
+ 611 0154 58020000 		.word	.LC15
+ 612 0158 00000000 		.word	GPS_UART_RX_Buffer
+ 613 015c 78020000 		.word	.LC16
+ 614 0160 00000000 		.word	GPS_Data
+ 615              		.cfi_endproc
+ 616              	.LFE64:
+ 617              		.size	main, .-main
+ 618              		.section	.text.DTC_DEBUG,"ax",%progbits
+ 619              		.align	2
+ 620              		.global	DTC_DEBUG
+ 621              		.thumb
+ 622              		.thumb_func
+ 623              		.type	DTC_DEBUG, %function
+ 624              	DTC_DEBUG:
+ 625              	.LFB67:
+ 294:main.c        **** void DTC_DEBUG( char * debugstr ) {
+ 626              		.loc 1 294 0
+ 627              		.cfi_startproc
+ 628              		@ args = 0, pretend = 0, frame = 0
+ 629              		@ frame_needed = 0, uses_anonymous_args = 0
+ 630              	.LVL88:
+ 631 0000 08B5     		push	{r3, lr}
+ 632              		.cfi_def_cfa_offset 8
+ 633              		.cfi_offset 3, -8
+ 634              		.cfi_offset 14, -4
+ 295:main.c        ****     if( DTC_DEBUG_TIMER > 0 ) {
+ 635              		.loc 1 295 0
+ 636 0002 034B     		ldr	r3, .L37
+ 637 0004 9B68     		ldr	r3, [r3, #8]
+ 638 0006 002B     		cmp	r3, #0
+ 639 0008 01DD     		ble	.L34
+ 296:main.c        ****         UART_PutString( debugstr );
+ 640              		.loc 1 296 0
+ 641 000a FFF7FEFF 		bl	UART_PutString
+ 642              	.LVL89:
+ 643              	.L34:
+ 644 000e 08BD     		pop	{r3, pc}
+ 645              	.L38:
+ 646              		.align	2
+ 647              	.L37:
+ 648 0010 00000000 		.word	.LANCHOR0
+ 649              		.cfi_endproc
+ 650              	.LFE67:
+ 651              		.size	DTC_DEBUG, .-DTC_DEBUG
+ 652              		.section	.text.NewLine,"ax",%progbits
+ 653              		.align	2
+ 654              		.global	NewLine
+ 655              		.thumb
+ 656              		.thumb_func
+ 657              		.type	NewLine, %function
+ 658              	NewLine:
+ 659              	.LFB68:
+ 297:main.c        ****     }
+ 298:main.c        **** }
+ 299:main.c        **** 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 19
+
+
+ 300:main.c        **** void NewLine (void)
+ 301:main.c        **** {
+ 660              		.loc 1 301 0
+ 661              		.cfi_startproc
+ 662              		@ args = 0, pretend = 0, frame = 0
+ 663              		@ frame_needed = 0, uses_anonymous_args = 0
+ 664 0000 08B5     		push	{r3, lr}
+ 665              		.cfi_def_cfa_offset 8
+ 666              		.cfi_offset 3, -8
+ 667              		.cfi_offset 14, -4
+ 302:main.c        ****     UART_PutString("\r\n");
+ 668              		.loc 1 302 0
+ 669 0002 0248     		ldr	r0, .L41
+ 670 0004 FFF7FEFF 		bl	UART_PutString
+ 671              	.LVL90:
+ 672 0008 08BD     		pop	{r3, pc}
+ 673              	.L42:
+ 674 000a 00BF     		.align	2
+ 675              	.L41:
+ 676 000c 88020000 		.word	.LC17
+ 677              		.cfi_endproc
+ 678              	.LFE68:
+ 679              		.size	NewLine, .-NewLine
+ 680              		.comm	GPS_Data,992,8
+ 681              		.global	DTC_DEBUG_TIMER
+ 682              		.global	GPS_UART_RX_Full
+ 683              		.global	GPS_UART_RX_Rd_Index
+ 684              		.global	GPS_UART_RX_Wr_Index
+ 685              		.comm	GPS_UART_RX_Buffer,256,4
+ 686              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 687              		.align	2
+ 688              	.LC0:
+ 689 0000 26475052 		.ascii	"&GPRMC\000"
+ 689      4D4300
+ 690 0007 00       		.space	1
+ 691              	.LC1:
+ 692 0008 25730D0A 		.ascii	"%s\015\012\012\000"
+ 692      0A00
+ 693 000e 0000     		.space	2
+ 694              	.LC2:
+ 695 0010 4750524D 		.ascii	"GPRMC,%lf,A,%lf,%c,%lf,%c,%lf,,%lf,,,A*64\000"
+ 695      432C256C 
+ 695      662C412C 
+ 695      256C662C 
+ 695      25632C25 
+ 696 003a 0000     		.space	2
+ 697              	.LC3:
+ 698 003c 496E6974 		.ascii	"Initializing \015\012\000"
+ 698      69616C69 
+ 698      7A696E67 
+ 698      200D0A00 
+ 699              	.LC4:
+ 700 004c 53746172 		.ascii	"Start Serial to UART!! \015\012\000"
+ 700      74205365 
+ 700      7269616C 
+ 700      20746F20 
+ 700      55415254 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 20
+
+
+ 701 0066 0000     		.space	2
+ 702              	.LC5:
+ 703 0068 50536F43 		.ascii	"PSoC 5LP UART Communicate Test \015\012\000"
+ 703      20354C50 
+ 703      20554152 
+ 703      5420436F 
+ 703      6D6D756E 
+ 704 008a 0000     		.space	2
+ 705              	.LC6:
+ 706 008c 48656C6C 		.ascii	"Hello World! \015\0121&s is send ublox command \015"
+ 706      6F20576F 
+ 706      726C6421 
+ 706      200D0A31 
+ 706      26732069 
+ 707 00b6 0A332069 		.ascii	"\0123 is DISABLE_TELIT_GSV_GSA_GLL_VTG\015\0124 is "
+ 707      73204449 
+ 707      5341424C 
+ 707      455F5445 
+ 707      4C49545F 
+ 708 00e0 454E4142 		.ascii	"ENABLE_TELIT_GSV_GSA_GLL_VTG \015\0125 is UART Firs"
+ 708      4C455F54 
+ 708      454C4954 
+ 708      5F475356 
+ 708      5F475341 
+ 709 010d 74204D65 		.ascii	"t Method\015\0126 is UART Second Method\015\012\000"
+ 709      74686F64 
+ 709      0D0A3620 
+ 709      69732055 
+ 709      41525420 
+ 710 0131 000000   		.space	3
+ 711              	.LC7:
+ 712 0134 53656E64 		.ascii	"Sending GPS Config GLL 0 ...\015\012\000"
+ 712      696E6720 
+ 712      47505320 
+ 712      436F6E66 
+ 712      69672047 
+ 713 0153 00       		.space	1
+ 714              	.LC8:
+ 715 0154 24505542 		.ascii	"$PUBX,41,1,0007,0003,9600,0*5C\015\012\000"
+ 715      582C3431 
+ 715      2C312C30 
+ 715      3030372C 
+ 715      30303033 
+ 716 0175 000000   		.space	3
+ 717              	.LC9:
+ 718 0178 24505542 		.ascii	"$PUBX,40,GLL,0,0,0,0*5C\015\012\000"
+ 718      582C3430 
+ 718      2C474C4C 
+ 718      2C302C30 
+ 718      2C302C30 
+ 719 0192 0000     		.space	2
+ 720              	.LC10:
+ 721 0194 53656E64 		.ascii	"Sending GPS Config GLL 1 ...\015\012\000"
+ 721      696E6720 
+ 721      47505320 
+ 721      436F6E66 
+ 721      69672047 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 21
+
+
+ 722 01b3 00       		.space	1
+ 723              	.LC11:
+ 724 01b4 24505542 		.ascii	"$PUBX,40,GLL,1,1,0,0*5C\015\012\000"
+ 724      582C3430 
+ 724      2C474C4C 
+ 724      2C312C31 
+ 724      2C302C30 
+ 725 01ce 0000     		.space	2
+ 726              	.LC12:
+ 727 01d0 24504D54 		.ascii	"$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\015"
+ 727      4B333134 
+ 727      2C302C31 
+ 727      2C302C31 
+ 727      2C302C30 
+ 728 0202 0A00     		.ascii	"\012\000"
+ 729              	.LC13:
+ 730 0204 44495341 		.ascii	"DISABLE_TELIT_GSV_GSA_GLL_VTG\000"
+ 730      424C455F 
+ 730      54454C49 
+ 730      545F4753 
+ 730      565F4753 
+ 731 0222 0000     		.space	2
+ 732              	.LC14:
+ 733 0224 24504D54 		.ascii	"$PMTK314,1,1,1,1,1,5,0,0,0,0,0,0,0,0,0,0,0,0,0*28\015"
+ 733      4B333134 
+ 733      2C312C31 
+ 733      2C312C31 
+ 733      2C312C35 
+ 734 0256 0A00     		.ascii	"\012\000"
+ 735              	.LC15:
+ 736 0258 454E4142 		.ascii	"ENABLE_TELIT_GSV_GSA_GLL_VTG\015\012\000"
+ 736      4C455F54 
+ 736      454C4954 
+ 736      5F475356 
+ 736      5F475341 
+ 737 0277 00       		.space	1
+ 738              	.LC16:
+ 739 0278 5365636F 		.ascii	"Second Method\015\012\000"
+ 739      6E64204D 
+ 739      6574686F 
+ 739      640D0A00 
+ 740              	.LC17:
+ 741 0288 0D0A00   		.ascii	"\015\012\000"
+ 742              		.bss
+ 743              		.align	2
+ 744              		.set	.LANCHOR0,. + 0
+ 745              		.type	GPS_UART_RX_Wr_Index, %object
+ 746              		.size	GPS_UART_RX_Wr_Index, 4
+ 747              	GPS_UART_RX_Wr_Index:
+ 748 0000 00000000 		.space	4
+ 749              		.type	GPS_UART_RX_Full, %object
+ 750              		.size	GPS_UART_RX_Full, 4
+ 751              	GPS_UART_RX_Full:
+ 752 0004 00000000 		.space	4
+ 753              		.type	DTC_DEBUG_TIMER, %object
+ 754              		.size	DTC_DEBUG_TIMER, 4
+ 755              	DTC_DEBUG_TIMER:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 22
+
+
+ 756 0008 00000000 		.space	4
+ 757              		.type	GPS_UART_RX_Rd_Index, %object
+ 758              		.size	GPS_UART_RX_Rd_Index, 4
+ 759              	GPS_UART_RX_Rd_Index:
+ 760 000c 00000000 		.space	4
+ 761              		.text
+ 762              	.Letext0:
+ 763              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 764              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 765              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 766              		.file 5 "Generated_Source\\PSoC5/GPS.h"
+ 767              		.file 6 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 768              		.file 7 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
+ 769              		.file 8 "Generated_Source\\PSoC5/UART.h"
+ 770              		.file 9 "Generated_Source\\PSoC5/PW_GPS.h"
+ 771              		.file 10 "Generated_Source\\PSoC5/CyLib.h"
+ 772              		.section	.debug_info,"",%progbits
+ 773              	.Ldebug_info0:
+ 774 0000 EA060000 		.4byte	0x6ea
+ 775 0004 0400     		.2byte	0x4
+ 776 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 777 000a 04       		.byte	0x4
+ 778 000b 01       		.uleb128 0x1
+ 779 000c E5020000 		.4byte	.LASF61
+ 780 0010 0C       		.byte	0xc
+ 781 0011 8B020000 		.4byte	.LASF62
+ 782 0015 2B000000 		.4byte	.LASF63
+ 783 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 784 001d 00000000 		.4byte	0
+ 785 0021 00000000 		.4byte	.Ldebug_line0
+ 786 0025 02       		.uleb128 0x2
+ 787 0026 01       		.byte	0x1
+ 788 0027 06       		.byte	0x6
+ 789 0028 CA010000 		.4byte	.LASF0
+ 790 002c 03       		.uleb128 0x3
+ 791 002d 75010000 		.4byte	.LASF4
+ 792 0031 02       		.byte	0x2
+ 793 0032 1D       		.byte	0x1d
+ 794 0033 37000000 		.4byte	0x37
+ 795 0037 02       		.uleb128 0x2
+ 796 0038 01       		.byte	0x1
+ 797 0039 08       		.byte	0x8
+ 798 003a 9B010000 		.4byte	.LASF1
+ 799 003e 02       		.uleb128 0x2
+ 800 003f 02       		.byte	0x2
+ 801 0040 05       		.byte	0x5
+ 802 0041 18000000 		.4byte	.LASF2
+ 803 0045 02       		.uleb128 0x2
+ 804 0046 02       		.byte	0x2
+ 805 0047 07       		.byte	0x7
+ 806 0048 38020000 		.4byte	.LASF3
+ 807 004c 03       		.uleb128 0x3
+ 808 004d AB020000 		.4byte	.LASF5
+ 809 0051 02       		.byte	0x2
+ 810 0052 3F       		.byte	0x3f
+ 811 0053 57000000 		.4byte	0x57
+ 812 0057 02       		.uleb128 0x2
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 23
+
+
+ 813 0058 04       		.byte	0x4
+ 814 0059 05       		.byte	0x5
+ 815 005a 4D010000 		.4byte	.LASF6
+ 816 005e 03       		.uleb128 0x3
+ 817 005f B0000000 		.4byte	.LASF7
+ 818 0063 02       		.byte	0x2
+ 819 0064 41       		.byte	0x41
+ 820 0065 69000000 		.4byte	0x69
+ 821 0069 02       		.uleb128 0x2
+ 822 006a 04       		.byte	0x4
+ 823 006b 07       		.byte	0x7
+ 824 006c 92020000 		.4byte	.LASF8
+ 825 0070 02       		.uleb128 0x2
+ 826 0071 08       		.byte	0x8
+ 827 0072 05       		.byte	0x5
+ 828 0073 A2000000 		.4byte	.LASF9
+ 829 0077 02       		.uleb128 0x2
+ 830 0078 08       		.byte	0x8
+ 831 0079 07       		.byte	0x7
+ 832 007a D6010000 		.4byte	.LASF10
+ 833 007e 04       		.uleb128 0x4
+ 834 007f 04       		.byte	0x4
+ 835 0080 05       		.byte	0x5
+ 836 0081 696E7400 		.ascii	"int\000"
+ 837 0085 02       		.uleb128 0x2
+ 838 0086 04       		.byte	0x4
+ 839 0087 07       		.byte	0x7
+ 840 0088 F6010000 		.4byte	.LASF11
+ 841 008c 03       		.uleb128 0x3
+ 842 008d FD000000 		.4byte	.LASF12
+ 843 0091 03       		.byte	0x3
+ 844 0092 18       		.byte	0x18
+ 845 0093 2C000000 		.4byte	0x2c
+ 846 0097 03       		.uleb128 0x3
+ 847 0098 74020000 		.4byte	.LASF13
+ 848 009c 03       		.byte	0x3
+ 849 009d 2C       		.byte	0x2c
+ 850 009e 4C000000 		.4byte	0x4c
+ 851 00a2 03       		.uleb128 0x3
+ 852 00a3 ED010000 		.4byte	.LASF14
+ 853 00a7 03       		.byte	0x3
+ 854 00a8 30       		.byte	0x30
+ 855 00a9 5E000000 		.4byte	0x5e
+ 856 00ad 02       		.uleb128 0x2
+ 857 00ae 04       		.byte	0x4
+ 858 00af 04       		.byte	0x4
+ 859 00b0 30010000 		.4byte	.LASF15
+ 860 00b4 02       		.uleb128 0x2
+ 861 00b5 08       		.byte	0x8
+ 862 00b6 04       		.byte	0x4
+ 863 00b7 A4020000 		.4byte	.LASF16
+ 864 00bb 02       		.uleb128 0x2
+ 865 00bc 01       		.byte	0x1
+ 866 00bd 08       		.byte	0x8
+ 867 00be 4B020000 		.4byte	.LASF17
+ 868 00c2 02       		.uleb128 0x2
+ 869 00c3 08       		.byte	0x8
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 24
+
+
+ 870 00c4 04       		.byte	0x4
+ 871 00c5 8F010000 		.4byte	.LASF18
+ 872 00c9 02       		.uleb128 0x2
+ 873 00ca 04       		.byte	0x4
+ 874 00cb 07       		.byte	0x7
+ 875 00cc 22000000 		.4byte	.LASF19
+ 876 00d0 05       		.uleb128 0x5
+ 877 00d1 04       		.byte	0x4
+ 878 00d2 BB000000 		.4byte	0xbb
+ 879 00d6 06       		.uleb128 0x6
+ 880 00d7 CC020000 		.4byte	.LASF30
+ 881 00db E003     		.2byte	0x3e0
+ 882 00dd 01       		.byte	0x1
+ 883 00de 44       		.byte	0x44
+ 884 00df 5E010000 		.4byte	0x15e
+ 885 00e3 07       		.uleb128 0x7
+ 886 00e4 1E020000 		.4byte	.LASF20
+ 887 00e8 01       		.byte	0x1
+ 888 00e9 46       		.byte	0x46
+ 889 00ea B4000000 		.4byte	0xb4
+ 890 00ee 00       		.byte	0
+ 891 00ef 07       		.uleb128 0x7
+ 892 00f0 0D020000 		.4byte	.LASF21
+ 893 00f4 01       		.byte	0x1
+ 894 00f5 47       		.byte	0x47
+ 895 00f6 B4000000 		.4byte	0xb4
+ 896 00fa 08       		.byte	0x8
+ 897 00fb 07       		.uleb128 0x7
+ 898 00fc 03020000 		.4byte	.LASF22
+ 899 0100 01       		.byte	0x1
+ 900 0101 48       		.byte	0x48
+ 901 0102 B4000000 		.4byte	0xb4
+ 902 0106 10       		.byte	0x10
+ 903 0107 07       		.uleb128 0x7
+ 904 0108 84010000 		.4byte	.LASF23
+ 905 010c 01       		.byte	0x1
+ 906 010d 49       		.byte	0x49
+ 907 010e B4000000 		.4byte	0xb4
+ 908 0112 18       		.byte	0x18
+ 909 0113 07       		.uleb128 0x7
+ 910 0114 8A010000 		.4byte	.LASF24
+ 911 0118 01       		.byte	0x1
+ 912 0119 4A       		.byte	0x4a
+ 913 011a B4000000 		.4byte	0xb4
+ 914 011e 20       		.byte	0x20
+ 915 011f 07       		.uleb128 0x7
+ 916 0120 11010000 		.4byte	.LASF25
+ 917 0124 01       		.byte	0x1
+ 918 0125 4B       		.byte	0x4b
+ 919 0126 BB000000 		.4byte	0xbb
+ 920 012a 28       		.byte	0x28
+ 921 012b 07       		.uleb128 0x7
+ 922 012c 36010000 		.4byte	.LASF26
+ 923 0130 01       		.byte	0x1
+ 924 0131 4C       		.byte	0x4c
+ 925 0132 BB000000 		.4byte	0xbb
+ 926 0136 29       		.byte	0x29
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 25
+
+
+ 927 0137 07       		.uleb128 0x7
+ 928 0138 7F010000 		.4byte	.LASF27
+ 929 013c 01       		.byte	0x1
+ 930 013d 4D       		.byte	0x4d
+ 931 013e 5E010000 		.4byte	0x15e
+ 932 0142 2A       		.byte	0x2a
+ 933 0143 08       		.uleb128 0x8
+ 934 0144 84020000 		.4byte	.LASF28
+ 935 0148 01       		.byte	0x1
+ 936 0149 4E       		.byte	0x4e
+ 937 014a 6F010000 		.4byte	0x16f
+ 938 014e 1803     		.2byte	0x318
+ 939 0150 08       		.uleb128 0x8
+ 940 0151 00000000 		.4byte	.LASF29
+ 941 0155 01       		.byte	0x1
+ 942 0156 4F       		.byte	0x4f
+ 943 0157 6F010000 		.4byte	0x16f
+ 944 015b 7C03     		.2byte	0x37c
+ 945 015d 00       		.byte	0
+ 946 015e 09       		.uleb128 0x9
+ 947 015f BB000000 		.4byte	0xbb
+ 948 0163 6F010000 		.4byte	0x16f
+ 949 0167 0A       		.uleb128 0xa
+ 950 0168 C9000000 		.4byte	0xc9
+ 951 016c ED02     		.2byte	0x2ed
+ 952 016e 00       		.byte	0
+ 953 016f 09       		.uleb128 0x9
+ 954 0170 BB000000 		.4byte	0xbb
+ 955 0174 7F010000 		.4byte	0x17f
+ 956 0178 0B       		.uleb128 0xb
+ 957 0179 C9000000 		.4byte	0xc9
+ 958 017d 63       		.byte	0x63
+ 959 017e 00       		.byte	0
+ 960 017f 03       		.uleb128 0x3
+ 961 0180 CC020000 		.4byte	.LASF30
+ 962 0184 01       		.byte	0x1
+ 963 0185 51       		.byte	0x51
+ 964 0186 D6000000 		.4byte	0xd6
+ 965 018a 0C       		.uleb128 0xc
+ 966 018b BB000000 		.4byte	.LASF64
+ 967 018f 01       		.byte	0x1
+ 968 0190 1301     		.2byte	0x113
+ 969 0192 00000000 		.4byte	.LFB66
+ 970 0196 60010000 		.4byte	.LFE66-.LFB66
+ 971 019a 01       		.uleb128 0x1
+ 972 019b 9C       		.byte	0x9c
+ 973 019c 01020000 		.4byte	0x201
+ 974 01a0 0D       		.uleb128 0xd
+ 975 01a1 BD020000 		.4byte	.LASF34
+ 976 01a5 01       		.byte	0x1
+ 977 01a6 1301     		.2byte	0x113
+ 978 01a8 01020000 		.4byte	0x201
+ 979 01ac 00000000 		.4byte	.LLST0
+ 980 01b0 0E       		.uleb128 0xe
+ 981 01b1 B5020000 		.4byte	.LASF31
+ 982 01b5 01       		.byte	0x1
+ 983 01b6 1501     		.2byte	0x115
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 26
+
+
+ 984 01b8 B4000000 		.4byte	0xb4
+ 985 01bc 2C000000 		.4byte	.LLST1
+ 986 01c0 0E       		.uleb128 0xe
+ 987 01c1 87000000 		.4byte	.LASF32
+ 988 01c5 01       		.byte	0x1
+ 989 01c6 1501     		.2byte	0x115
+ 990 01c8 B4000000 		.4byte	0xb4
+ 991 01cc 74000000 		.4byte	.LLST2
+ 992 01d0 0E       		.uleb128 0xe
+ 993 01d1 10000000 		.4byte	.LASF33
+ 994 01d5 01       		.byte	0x1
+ 995 01d6 1501     		.2byte	0x115
+ 996 01d8 B4000000 		.4byte	0xb4
+ 997 01dc B0000000 		.4byte	.LLST3
+ 998 01e0 0F       		.uleb128 0xf
+ 999 01e1 6C6F6E00 		.ascii	"lon\000"
+ 1000 01e5 01       		.byte	0x1
+ 1001 01e6 1501     		.2byte	0x115
+ 1002 01e8 B4000000 		.4byte	0xb4
+ 1003 01ec EC000000 		.4byte	.LLST4
+ 1004 01f0 0F       		.uleb128 0xf
+ 1005 01f1 6C617400 		.ascii	"lat\000"
+ 1006 01f5 01       		.byte	0x1
+ 1007 01f6 1501     		.2byte	0x115
+ 1008 01f8 B4000000 		.4byte	0xb4
+ 1009 01fc 18010000 		.4byte	.LLST5
+ 1010 0200 00       		.byte	0
+ 1011 0201 05       		.uleb128 0x5
+ 1012 0202 04       		.byte	0x4
+ 1013 0203 7F010000 		.4byte	0x17f
+ 1014 0207 10       		.uleb128 0x10
+ 1015 0208 A9010000 		.4byte	.LASF35
+ 1016 020c 01       		.byte	0x1
+ 1017 020d F4       		.byte	0xf4
+ 1018 020e 00000000 		.4byte	.LFB65
+ 1019 0212 B8000000 		.4byte	.LFE65-.LFB65
+ 1020 0216 01       		.uleb128 0x1
+ 1021 0217 9C       		.byte	0x9c
+ 1022 0218 FE020000 		.4byte	0x2fe
+ 1023 021c 11       		.uleb128 0x11
+ 1024 021d BD020000 		.4byte	.LASF34
+ 1025 0221 01       		.byte	0x1
+ 1026 0222 F4       		.byte	0xf4
+ 1027 0223 01020000 		.4byte	0x201
+ 1028 0227 44010000 		.4byte	.LLST6
+ 1029 022b 12       		.uleb128 0x12
+ 1030 022c 5000     		.ascii	"P\000"
+ 1031 022e 01       		.byte	0x1
+ 1032 022f F6       		.byte	0xf6
+ 1033 0230 D0000000 		.4byte	0xd0
+ 1034 0234 70010000 		.4byte	.LLST7
+ 1035 0238 12       		.uleb128 0x12
+ 1036 0239 6E00     		.ascii	"n\000"
+ 1037 023b 01       		.byte	0x1
+ 1038 023c F7       		.byte	0xf7
+ 1039 023d 7E000000 		.4byte	0x7e
+ 1040 0241 83010000 		.4byte	.LLST8
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 27
+
+
+ 1041 0245 13       		.uleb128 0x13
+ 1042 0246 0A000000 		.4byte	.LVL44
+ 1043 024a 48060000 		.4byte	0x648
+ 1044 024e 13       		.uleb128 0x13
+ 1045 024f 16000000 		.4byte	.LVL45
+ 1046 0253 53060000 		.4byte	0x653
+ 1047 0257 13       		.uleb128 0x13
+ 1048 0258 34000000 		.4byte	.LVL46
+ 1049 025c 48060000 		.4byte	0x648
+ 1050 0260 14       		.uleb128 0x14
+ 1051 0261 48000000 		.4byte	.LVL47
+ 1052 0265 5E060000 		.4byte	0x65e
+ 1053 0269 7D020000 		.4byte	0x27d
+ 1054 026d 15       		.uleb128 0x15
+ 1055 026e 01       		.uleb128 0x1
+ 1056 026f 50       		.byte	0x50
+ 1057 0270 02       		.uleb128 0x2
+ 1058 0271 74       		.byte	0x74
+ 1059 0272 2A       		.sleb128 42
+ 1060 0273 15       		.uleb128 0x15
+ 1061 0274 01       		.uleb128 0x1
+ 1062 0275 51       		.byte	0x51
+ 1063 0276 05       		.uleb128 0x5
+ 1064 0277 03       		.byte	0x3
+ 1065 0278 00000000 		.4byte	.LC0
+ 1066 027c 00       		.byte	0
+ 1067 027d 14       		.uleb128 0x14
+ 1068 027e 72000000 		.4byte	.LVL53
+ 1069 0282 69060000 		.4byte	0x669
+ 1070 0286 A1020000 		.4byte	0x2a1
+ 1071 028a 15       		.uleb128 0x15
+ 1072 028b 01       		.uleb128 0x1
+ 1073 028c 50       		.byte	0x50
+ 1074 028d 02       		.uleb128 0x2
+ 1075 028e 75       		.byte	0x75
+ 1076 028f 00       		.sleb128 0
+ 1077 0290 15       		.uleb128 0x15
+ 1078 0291 01       		.uleb128 0x1
+ 1079 0292 51       		.byte	0x51
+ 1080 0293 05       		.uleb128 0x5
+ 1081 0294 03       		.byte	0x3
+ 1082 0295 08000000 		.4byte	.LC1
+ 1083 0299 15       		.uleb128 0x15
+ 1084 029a 01       		.uleb128 0x1
+ 1085 029b 52       		.byte	0x52
+ 1086 029c 03       		.uleb128 0x3
+ 1087 029d 74       		.byte	0x74
+ 1088 029e FC06     		.sleb128 892
+ 1089 02a0 00       		.byte	0
+ 1090 02a1 14       		.uleb128 0x14
+ 1091 02a2 9E000000 		.4byte	.LVL54
+ 1092 02a6 74060000 		.4byte	0x674
+ 1093 02aa ED020000 		.4byte	0x2ed
+ 1094 02ae 15       		.uleb128 0x15
+ 1095 02af 01       		.uleb128 0x1
+ 1096 02b0 50       		.byte	0x50
+ 1097 02b1 02       		.uleb128 0x2
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 28
+
+
+ 1098 02b2 75       		.byte	0x75
+ 1099 02b3 00       		.sleb128 0
+ 1100 02b4 15       		.uleb128 0x15
+ 1101 02b5 01       		.uleb128 0x1
+ 1102 02b6 51       		.byte	0x51
+ 1103 02b7 05       		.uleb128 0x5
+ 1104 02b8 03       		.byte	0x3
+ 1105 02b9 10000000 		.4byte	.LC2
+ 1106 02bd 15       		.uleb128 0x15
+ 1107 02be 01       		.uleb128 0x1
+ 1108 02bf 52       		.byte	0x52
+ 1109 02c0 02       		.uleb128 0x2
+ 1110 02c1 74       		.byte	0x74
+ 1111 02c2 00       		.sleb128 0
+ 1112 02c3 15       		.uleb128 0x15
+ 1113 02c4 01       		.uleb128 0x1
+ 1114 02c5 53       		.byte	0x53
+ 1115 02c6 02       		.uleb128 0x2
+ 1116 02c7 74       		.byte	0x74
+ 1117 02c8 08       		.sleb128 8
+ 1118 02c9 15       		.uleb128 0x15
+ 1119 02ca 02       		.uleb128 0x2
+ 1120 02cb 7D       		.byte	0x7d
+ 1121 02cc 00       		.sleb128 0
+ 1122 02cd 02       		.uleb128 0x2
+ 1123 02ce 74       		.byte	0x74
+ 1124 02cf 28       		.sleb128 40
+ 1125 02d0 15       		.uleb128 0x15
+ 1126 02d1 02       		.uleb128 0x2
+ 1127 02d2 7D       		.byte	0x7d
+ 1128 02d3 04       		.sleb128 4
+ 1129 02d4 02       		.uleb128 0x2
+ 1130 02d5 74       		.byte	0x74
+ 1131 02d6 10       		.sleb128 16
+ 1132 02d7 15       		.uleb128 0x15
+ 1133 02d8 02       		.uleb128 0x2
+ 1134 02d9 7D       		.byte	0x7d
+ 1135 02da 08       		.sleb128 8
+ 1136 02db 02       		.uleb128 0x2
+ 1137 02dc 74       		.byte	0x74
+ 1138 02dd 29       		.sleb128 41
+ 1139 02de 15       		.uleb128 0x15
+ 1140 02df 02       		.uleb128 0x2
+ 1141 02e0 7D       		.byte	0x7d
+ 1142 02e1 0C       		.sleb128 12
+ 1143 02e2 02       		.uleb128 0x2
+ 1144 02e3 74       		.byte	0x74
+ 1145 02e4 18       		.sleb128 24
+ 1146 02e5 15       		.uleb128 0x15
+ 1147 02e6 02       		.uleb128 0x2
+ 1148 02e7 7D       		.byte	0x7d
+ 1149 02e8 10       		.sleb128 16
+ 1150 02e9 02       		.uleb128 0x2
+ 1151 02ea 74       		.byte	0x74
+ 1152 02eb 20       		.sleb128 32
+ 1153 02ec 00       		.byte	0
+ 1154 02ed 16       		.uleb128 0x16
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 29
+
+
+ 1155 02ee A4000000 		.4byte	.LVL55
+ 1156 02f2 8A010000 		.4byte	0x18a
+ 1157 02f6 15       		.uleb128 0x15
+ 1158 02f7 01       		.uleb128 0x1
+ 1159 02f8 50       		.byte	0x50
+ 1160 02f9 02       		.uleb128 0x2
+ 1161 02fa 74       		.byte	0x74
+ 1162 02fb 00       		.sleb128 0
+ 1163 02fc 00       		.byte	0
+ 1164 02fd 00       		.byte	0
+ 1165 02fe 17       		.uleb128 0x17
+ 1166 02ff 64020000 		.4byte	.LASF65
+ 1167 0303 01       		.byte	0x1
+ 1168 0304 58       		.byte	0x58
+ 1169 0305 7E000000 		.4byte	0x7e
+ 1170 0309 00000000 		.4byte	.LFB64
+ 1171 030d 64010000 		.4byte	.LFE64-.LFB64
+ 1172 0311 01       		.uleb128 0x1
+ 1173 0312 9C       		.byte	0x9c
+ 1174 0313 5F050000 		.4byte	0x55f
+ 1175 0317 12       		.uleb128 0x12
+ 1176 0318 6300     		.ascii	"c\000"
+ 1177 031a 01       		.byte	0x1
+ 1178 031b 5C       		.byte	0x5c
+ 1179 031c 8C000000 		.4byte	0x8c
+ 1180 0320 A1010000 		.4byte	.LLST9
+ 1181 0324 13       		.uleb128 0x13
+ 1182 0325 08000000 		.4byte	.LVL57
+ 1183 0329 7F060000 		.4byte	0x67f
+ 1184 032d 13       		.uleb128 0x13
+ 1185 032e 0C000000 		.4byte	.LVL58
+ 1186 0332 8A060000 		.4byte	0x68a
+ 1187 0336 14       		.uleb128 0x14
+ 1188 0337 16000000 		.4byte	.LVL59
+ 1189 033b 95060000 		.4byte	0x695
+ 1190 033f 49030000 		.4byte	0x349
+ 1191 0343 15       		.uleb128 0x15
+ 1192 0344 01       		.uleb128 0x1
+ 1193 0345 50       		.byte	0x50
+ 1194 0346 01       		.uleb128 0x1
+ 1195 0347 31       		.byte	0x31
+ 1196 0348 00       		.byte	0
+ 1197 0349 14       		.uleb128 0x14
+ 1198 034a 1C000000 		.4byte	.LVL60
+ 1199 034e A0060000 		.4byte	0x6a0
+ 1200 0352 60030000 		.4byte	0x360
+ 1201 0356 15       		.uleb128 0x15
+ 1202 0357 01       		.uleb128 0x1
+ 1203 0358 50       		.byte	0x50
+ 1204 0359 05       		.uleb128 0x5
+ 1205 035a 03       		.byte	0x3
+ 1206 035b 3C000000 		.4byte	.LC3
+ 1207 035f 00       		.byte	0
+ 1208 0360 14       		.uleb128 0x14
+ 1209 0361 24000000 		.4byte	.LVL61
+ 1210 0365 AB060000 		.4byte	0x6ab
+ 1211 0369 75030000 		.4byte	0x375
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 30
+
+
+ 1212 036d 15       		.uleb128 0x15
+ 1213 036e 01       		.uleb128 0x1
+ 1214 036f 50       		.byte	0x50
+ 1215 0370 03       		.uleb128 0x3
+ 1216 0371 0A       		.byte	0xa
+ 1217 0372 F401     		.2byte	0x1f4
+ 1218 0374 00       		.byte	0
+ 1219 0375 14       		.uleb128 0x14
+ 1220 0376 2A000000 		.4byte	.LVL62
+ 1221 037a A0060000 		.4byte	0x6a0
+ 1222 037e 8C030000 		.4byte	0x38c
+ 1223 0382 15       		.uleb128 0x15
+ 1224 0383 01       		.uleb128 0x1
+ 1225 0384 50       		.byte	0x50
+ 1226 0385 05       		.uleb128 0x5
+ 1227 0386 03       		.byte	0x3
+ 1228 0387 4C000000 		.4byte	.LC4
+ 1229 038b 00       		.byte	0
+ 1230 038c 14       		.uleb128 0x14
+ 1231 038d 30000000 		.4byte	.LVL63
+ 1232 0391 A0060000 		.4byte	0x6a0
+ 1233 0395 A3030000 		.4byte	0x3a3
+ 1234 0399 15       		.uleb128 0x15
+ 1235 039a 01       		.uleb128 0x1
+ 1236 039b 50       		.byte	0x50
+ 1237 039c 05       		.uleb128 0x5
+ 1238 039d 03       		.byte	0x3
+ 1239 039e 68000000 		.4byte	.LC5
+ 1240 03a2 00       		.byte	0
+ 1241 03a3 14       		.uleb128 0x14
+ 1242 03a4 36000000 		.4byte	.LVL64
+ 1243 03a8 A0060000 		.4byte	0x6a0
+ 1244 03ac BA030000 		.4byte	0x3ba
+ 1245 03b0 15       		.uleb128 0x15
+ 1246 03b1 01       		.uleb128 0x1
+ 1247 03b2 50       		.byte	0x50
+ 1248 03b3 05       		.uleb128 0x5
+ 1249 03b4 03       		.byte	0x3
+ 1250 03b5 8C000000 		.4byte	.LC6
+ 1251 03b9 00       		.byte	0
+ 1252 03ba 14       		.uleb128 0x14
+ 1253 03bb 3C000000 		.4byte	.LVL65
+ 1254 03bf B6060000 		.4byte	0x6b6
+ 1255 03c3 CE030000 		.4byte	0x3ce
+ 1256 03c7 15       		.uleb128 0x15
+ 1257 03c8 01       		.uleb128 0x1
+ 1258 03c9 50       		.byte	0x50
+ 1259 03ca 02       		.uleb128 0x2
+ 1260 03cb 08       		.byte	0x8
+ 1261 03cc 3E       		.byte	0x3e
+ 1262 03cd 00       		.byte	0
+ 1263 03ce 13       		.uleb128 0x13
+ 1264 03cf 40000000 		.4byte	.LVL66
+ 1265 03d3 C1060000 		.4byte	0x6c1
+ 1266 03d7 14       		.uleb128 0x14
+ 1267 03d8 48000000 		.4byte	.LVL67
+ 1268 03dc B6060000 		.4byte	0x6b6
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 31
+
+
+ 1269 03e0 EB030000 		.4byte	0x3eb
+ 1270 03e4 15       		.uleb128 0x15
+ 1271 03e5 01       		.uleb128 0x1
+ 1272 03e6 50       		.byte	0x50
+ 1273 03e7 02       		.uleb128 0x2
+ 1274 03e8 76       		.byte	0x76
+ 1275 03e9 00       		.sleb128 0
+ 1276 03ea 00       		.byte	0
+ 1277 03eb 14       		.uleb128 0x14
+ 1278 03ec 4E000000 		.4byte	.LVL68
+ 1279 03f0 CC060000 		.4byte	0x6cc
+ 1280 03f4 FF030000 		.4byte	0x3ff
+ 1281 03f8 15       		.uleb128 0x15
+ 1282 03f9 01       		.uleb128 0x1
+ 1283 03fa 50       		.byte	0x50
+ 1284 03fb 02       		.uleb128 0x2
+ 1285 03fc 76       		.byte	0x76
+ 1286 03fd 00       		.sleb128 0
+ 1287 03fe 00       		.byte	0
+ 1288 03ff 14       		.uleb128 0x14
+ 1289 0400 58000000 		.4byte	.LVL69
+ 1290 0404 A0060000 		.4byte	0x6a0
+ 1291 0408 16040000 		.4byte	0x416
+ 1292 040c 15       		.uleb128 0x15
+ 1293 040d 01       		.uleb128 0x1
+ 1294 040e 50       		.byte	0x50
+ 1295 040f 05       		.uleb128 0x5
+ 1296 0410 03       		.byte	0x3
+ 1297 0411 34010000 		.4byte	.LC7
+ 1298 0415 00       		.byte	0
+ 1299 0416 14       		.uleb128 0x14
+ 1300 0417 5E000000 		.4byte	.LVL70
+ 1301 041b D7060000 		.4byte	0x6d7
+ 1302 041f 2D040000 		.4byte	0x42d
+ 1303 0423 15       		.uleb128 0x15
+ 1304 0424 01       		.uleb128 0x1
+ 1305 0425 50       		.byte	0x50
+ 1306 0426 05       		.uleb128 0x5
+ 1307 0427 03       		.byte	0x3
+ 1308 0428 54010000 		.4byte	.LC8
+ 1309 042c 00       		.byte	0
+ 1310 042d 14       		.uleb128 0x14
+ 1311 042e 64000000 		.4byte	.LVL71
+ 1312 0432 D7060000 		.4byte	0x6d7
+ 1313 0436 44040000 		.4byte	0x444
+ 1314 043a 15       		.uleb128 0x15
+ 1315 043b 01       		.uleb128 0x1
+ 1316 043c 50       		.byte	0x50
+ 1317 043d 05       		.uleb128 0x5
+ 1318 043e 03       		.byte	0x3
+ 1319 043f 78010000 		.4byte	.LC9
+ 1320 0443 00       		.byte	0
+ 1321 0444 14       		.uleb128 0x14
+ 1322 0445 6E000000 		.4byte	.LVL72
+ 1323 0449 A0060000 		.4byte	0x6a0
+ 1324 044d 5B040000 		.4byte	0x45b
+ 1325 0451 15       		.uleb128 0x15
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 32
+
+
+ 1326 0452 01       		.uleb128 0x1
+ 1327 0453 50       		.byte	0x50
+ 1328 0454 05       		.uleb128 0x5
+ 1329 0455 03       		.byte	0x3
+ 1330 0456 94010000 		.4byte	.LC10
+ 1331 045a 00       		.byte	0
+ 1332 045b 14       		.uleb128 0x14
+ 1333 045c 74000000 		.4byte	.LVL73
+ 1334 0460 D7060000 		.4byte	0x6d7
+ 1335 0464 72040000 		.4byte	0x472
+ 1336 0468 15       		.uleb128 0x15
+ 1337 0469 01       		.uleb128 0x1
+ 1338 046a 50       		.byte	0x50
+ 1339 046b 05       		.uleb128 0x5
+ 1340 046c 03       		.byte	0x3
+ 1341 046d 54010000 		.4byte	.LC8
+ 1342 0471 00       		.byte	0
+ 1343 0472 14       		.uleb128 0x14
+ 1344 0473 7A000000 		.4byte	.LVL74
+ 1345 0477 D7060000 		.4byte	0x6d7
+ 1346 047b 89040000 		.4byte	0x489
+ 1347 047f 15       		.uleb128 0x15
+ 1348 0480 01       		.uleb128 0x1
+ 1349 0481 50       		.byte	0x50
+ 1350 0482 05       		.uleb128 0x5
+ 1351 0483 03       		.byte	0x3
+ 1352 0484 B4010000 		.4byte	.LC11
+ 1353 0488 00       		.byte	0
+ 1354 0489 14       		.uleb128 0x14
+ 1355 048a 86000000 		.4byte	.LVL75
+ 1356 048e A0060000 		.4byte	0x6a0
+ 1357 0492 9D040000 		.4byte	0x49d
+ 1358 0496 15       		.uleb128 0x15
+ 1359 0497 01       		.uleb128 0x1
+ 1360 0498 50       		.byte	0x50
+ 1361 0499 02       		.uleb128 0x2
+ 1362 049a 74       		.byte	0x74
+ 1363 049b 00       		.sleb128 0
+ 1364 049c 00       		.byte	0
+ 1365 049d 14       		.uleb128 0x14
+ 1366 049e 8C000000 		.4byte	.LVL76
+ 1367 04a2 A0060000 		.4byte	0x6a0
+ 1368 04a6 B4040000 		.4byte	0x4b4
+ 1369 04aa 15       		.uleb128 0x15
+ 1370 04ab 01       		.uleb128 0x1
+ 1371 04ac 50       		.byte	0x50
+ 1372 04ad 05       		.uleb128 0x5
+ 1373 04ae 03       		.byte	0x3
+ 1374 04af 04020000 		.4byte	.LC13
+ 1375 04b3 00       		.byte	0
+ 1376 04b4 14       		.uleb128 0x14
+ 1377 04b5 92000000 		.4byte	.LVL77
+ 1378 04b9 D7060000 		.4byte	0x6d7
+ 1379 04bd C8040000 		.4byte	0x4c8
+ 1380 04c1 15       		.uleb128 0x15
+ 1381 04c2 01       		.uleb128 0x1
+ 1382 04c3 50       		.byte	0x50
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 33
+
+
+ 1383 04c4 02       		.uleb128 0x2
+ 1384 04c5 74       		.byte	0x74
+ 1385 04c6 00       		.sleb128 0
+ 1386 04c7 00       		.byte	0
+ 1387 04c8 14       		.uleb128 0x14
+ 1388 04c9 9E000000 		.4byte	.LVL78
+ 1389 04cd A0060000 		.4byte	0x6a0
+ 1390 04d1 DC040000 		.4byte	0x4dc
+ 1391 04d5 15       		.uleb128 0x15
+ 1392 04d6 01       		.uleb128 0x1
+ 1393 04d7 50       		.byte	0x50
+ 1394 04d8 02       		.uleb128 0x2
+ 1395 04d9 74       		.byte	0x74
+ 1396 04da 00       		.sleb128 0
+ 1397 04db 00       		.byte	0
+ 1398 04dc 14       		.uleb128 0x14
+ 1399 04dd A4000000 		.4byte	.LVL79
+ 1400 04e1 A0060000 		.4byte	0x6a0
+ 1401 04e5 F3040000 		.4byte	0x4f3
+ 1402 04e9 15       		.uleb128 0x15
+ 1403 04ea 01       		.uleb128 0x1
+ 1404 04eb 50       		.byte	0x50
+ 1405 04ec 05       		.uleb128 0x5
+ 1406 04ed 03       		.byte	0x3
+ 1407 04ee 58020000 		.4byte	.LC15
+ 1408 04f2 00       		.byte	0
+ 1409 04f3 14       		.uleb128 0x14
+ 1410 04f4 AA000000 		.4byte	.LVL80
+ 1411 04f8 D7060000 		.4byte	0x6d7
+ 1412 04fc 07050000 		.4byte	0x507
+ 1413 0500 15       		.uleb128 0x15
+ 1414 0501 01       		.uleb128 0x1
+ 1415 0502 50       		.byte	0x50
+ 1416 0503 02       		.uleb128 0x2
+ 1417 0504 74       		.byte	0x74
+ 1418 0505 00       		.sleb128 0
+ 1419 0506 00       		.byte	0
+ 1420 0507 13       		.uleb128 0x13
+ 1421 0508 AE000000 		.4byte	.LVL81
+ 1422 050c 48060000 		.4byte	0x648
+ 1423 0510 13       		.uleb128 0x13
+ 1424 0511 BA000000 		.4byte	.LVL82
+ 1425 0515 53060000 		.4byte	0x653
+ 1426 0519 13       		.uleb128 0x13
+ 1427 051a D6000000 		.4byte	.LVL83
+ 1428 051e 48060000 		.4byte	0x648
+ 1429 0522 13       		.uleb128 0x13
+ 1430 0523 E4000000 		.4byte	.LVL84
+ 1431 0527 E2060000 		.4byte	0x6e2
+ 1432 052b 13       		.uleb128 0x13
+ 1433 052c F8000000 		.4byte	.LVL85
+ 1434 0530 B6060000 		.4byte	0x6b6
+ 1435 0534 14       		.uleb128 0x14
+ 1436 0535 18010000 		.4byte	.LVL86
+ 1437 0539 A0060000 		.4byte	0x6a0
+ 1438 053d 4B050000 		.4byte	0x54b
+ 1439 0541 15       		.uleb128 0x15
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 34
+
+
+ 1440 0542 01       		.uleb128 0x1
+ 1441 0543 50       		.byte	0x50
+ 1442 0544 05       		.uleb128 0x5
+ 1443 0545 03       		.byte	0x3
+ 1444 0546 78020000 		.4byte	.LC16
+ 1445 054a 00       		.byte	0
+ 1446 054b 16       		.uleb128 0x16
+ 1447 054c 1E010000 		.4byte	.LVL87
+ 1448 0550 07020000 		.4byte	0x207
+ 1449 0554 15       		.uleb128 0x15
+ 1450 0555 01       		.uleb128 0x1
+ 1451 0556 50       		.byte	0x50
+ 1452 0557 05       		.uleb128 0x5
+ 1453 0558 03       		.byte	0x3
+ 1454 0559 00000000 		.4byte	GPS_Data
+ 1455 055d 00       		.byte	0
+ 1456 055e 00       		.byte	0
+ 1457 055f 18       		.uleb128 0x18
+ 1458 0560 26010000 		.4byte	.LASF36
+ 1459 0564 01       		.byte	0x1
+ 1460 0565 2601     		.2byte	0x126
+ 1461 0567 00000000 		.4byte	.LFB67
+ 1462 056b 14000000 		.4byte	.LFE67-.LFB67
+ 1463 056f 01       		.uleb128 0x1
+ 1464 0570 9C       		.byte	0x9c
+ 1465 0571 97050000 		.4byte	0x597
+ 1466 0575 0D       		.uleb128 0xd
+ 1467 0576 B5010000 		.4byte	.LASF37
+ 1468 057a 01       		.byte	0x1
+ 1469 057b 2601     		.2byte	0x126
+ 1470 057d D0000000 		.4byte	0xd0
+ 1471 0581 B4010000 		.4byte	.LLST10
+ 1472 0585 16       		.uleb128 0x16
+ 1473 0586 0E000000 		.4byte	.LVL89
+ 1474 058a A0060000 		.4byte	0x6a0
+ 1475 058e 15       		.uleb128 0x15
+ 1476 058f 01       		.uleb128 0x1
+ 1477 0590 50       		.byte	0x50
+ 1478 0591 03       		.uleb128 0x3
+ 1479 0592 F3       		.byte	0xf3
+ 1480 0593 01       		.uleb128 0x1
+ 1481 0594 50       		.byte	0x50
+ 1482 0595 00       		.byte	0
+ 1483 0596 00       		.byte	0
+ 1484 0597 18       		.uleb128 0x18
+ 1485 0598 7C020000 		.4byte	.LASF38
+ 1486 059c 01       		.byte	0x1
+ 1487 059d 2C01     		.2byte	0x12c
+ 1488 059f 00000000 		.4byte	.LFB68
+ 1489 05a3 10000000 		.4byte	.LFE68-.LFB68
+ 1490 05a7 01       		.uleb128 0x1
+ 1491 05a8 9C       		.byte	0x9c
+ 1492 05a9 C1050000 		.4byte	0x5c1
+ 1493 05ad 16       		.uleb128 0x16
+ 1494 05ae 08000000 		.4byte	.LVL90
+ 1495 05b2 A0060000 		.4byte	0x6a0
+ 1496 05b6 15       		.uleb128 0x15
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 35
+
+
+ 1497 05b7 01       		.uleb128 0x1
+ 1498 05b8 50       		.byte	0x50
+ 1499 05b9 05       		.uleb128 0x5
+ 1500 05ba 03       		.byte	0x3
+ 1501 05bb 88020000 		.4byte	.LC17
+ 1502 05bf 00       		.byte	0
+ 1503 05c0 00       		.byte	0
+ 1504 05c1 19       		.uleb128 0x19
+ 1505 05c2 D8020000 		.4byte	.LASF39
+ 1506 05c6 04       		.byte	0x4
+ 1507 05c7 1207     		.2byte	0x712
+ 1508 05c9 CD050000 		.4byte	0x5cd
+ 1509 05cd 1A       		.uleb128 0x1a
+ 1510 05ce 97000000 		.4byte	0x97
+ 1511 05d2 09       		.uleb128 0x9
+ 1512 05d3 8C000000 		.4byte	0x8c
+ 1513 05d7 E2050000 		.4byte	0x5e2
+ 1514 05db 0B       		.uleb128 0xb
+ 1515 05dc C9000000 		.4byte	0xc9
+ 1516 05e0 FF       		.byte	0xff
+ 1517 05e1 00       		.byte	0
+ 1518 05e2 1B       		.uleb128 0x1b
+ 1519 05e3 8F000000 		.4byte	.LASF40
+ 1520 05e7 01       		.byte	0x1
+ 1521 05e8 20       		.byte	0x20
+ 1522 05e9 D2050000 		.4byte	0x5d2
+ 1523 05ed 05       		.uleb128 0x5
+ 1524 05ee 03       		.byte	0x3
+ 1525 05ef 00000000 		.4byte	GPS_UART_RX_Buffer
+ 1526 05f3 1B       		.uleb128 0x1b
+ 1527 05f4 CC000000 		.4byte	.LASF41
+ 1528 05f8 01       		.byte	0x1
+ 1529 05f9 21       		.byte	0x21
+ 1530 05fa A2000000 		.4byte	0xa2
+ 1531 05fe 05       		.uleb128 0x5
+ 1532 05ff 03       		.byte	0x3
+ 1533 0600 00000000 		.4byte	GPS_UART_RX_Wr_Index
+ 1534 0604 1B       		.uleb128 0x1b
+ 1535 0605 56010000 		.4byte	.LASF42
+ 1536 0609 01       		.byte	0x1
+ 1537 060a 22       		.byte	0x22
+ 1538 060b A2000000 		.4byte	0xa2
+ 1539 060f 05       		.uleb128 0x5
+ 1540 0610 03       		.byte	0x3
+ 1541 0611 00000000 		.4byte	GPS_UART_RX_Rd_Index
+ 1542 0615 1B       		.uleb128 0x1b
+ 1543 0616 7B030000 		.4byte	.LASF43
+ 1544 061a 01       		.byte	0x1
+ 1545 061b 23       		.byte	0x23
+ 1546 061c A2000000 		.4byte	0xa2
+ 1547 0620 05       		.uleb128 0x5
+ 1548 0621 03       		.byte	0x3
+ 1549 0622 00000000 		.4byte	GPS_UART_RX_Full
+ 1550 0626 1B       		.uleb128 0x1b
+ 1551 0627 3D010000 		.4byte	.LASF44
+ 1552 062b 01       		.byte	0x1
+ 1553 062c 35       		.byte	0x35
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 36
+
+
+ 1554 062d 7E000000 		.4byte	0x7e
+ 1555 0631 05       		.uleb128 0x5
+ 1556 0632 03       		.byte	0x3
+ 1557 0633 00000000 		.4byte	DTC_DEBUG_TIMER
+ 1558 0637 1B       		.uleb128 0x1b
+ 1559 0638 99030000 		.4byte	.LASF45
+ 1560 063c 01       		.byte	0x1
+ 1561 063d 53       		.byte	0x53
+ 1562 063e 7F010000 		.4byte	0x17f
+ 1563 0642 05       		.uleb128 0x5
+ 1564 0643 03       		.byte	0x3
+ 1565 0644 00000000 		.4byte	GPS_Data
+ 1566 0648 1C       		.uleb128 0x1c
+ 1567 0649 50020000 		.4byte	.LASF46
+ 1568 064d 50020000 		.4byte	.LASF46
+ 1569 0651 05       		.byte	0x5
+ 1570 0652 73       		.byte	0x73
+ 1571 0653 1C       		.uleb128 0x1c
+ 1572 0654 05010000 		.4byte	.LASF47
+ 1573 0658 05010000 		.4byte	.LASF47
+ 1574 065c 05       		.byte	0x5
+ 1575 065d 71       		.byte	0x71
+ 1576 065e 1C       		.uleb128 0x1c
+ 1577 065f C5020000 		.4byte	.LASF48
+ 1578 0663 C5020000 		.4byte	.LASF48
+ 1579 0667 06       		.byte	0x6
+ 1580 0668 28       		.byte	0x28
+ 1581 0669 1C       		.uleb128 0x1c
+ 1582 066a 16020000 		.4byte	.LASF49
+ 1583 066e 16020000 		.4byte	.LASF49
+ 1584 0672 07       		.byte	0x7
+ 1585 0673 E7       		.byte	0xe7
+ 1586 0674 1C       		.uleb128 0x1c
+ 1587 0675 09000000 		.4byte	.LASF50
+ 1588 0679 09000000 		.4byte	.LASF50
+ 1589 067d 07       		.byte	0x7
+ 1590 067e BF       		.byte	0xbf
+ 1591 067f 1C       		.uleb128 0x1c
+ 1592 0680 69020000 		.4byte	.LASF51
+ 1593 0684 69020000 		.4byte	.LASF51
+ 1594 0688 08       		.byte	0x8
+ 1595 0689 54       		.byte	0x54
+ 1596 068a 1C       		.uleb128 0x1c
+ 1597 068b 6B010000 		.4byte	.LASF52
+ 1598 068f 6B010000 		.4byte	.LASF52
+ 1599 0693 05       		.byte	0x5
+ 1600 0694 54       		.byte	0x54
+ 1601 0695 1C       		.uleb128 0x1c
+ 1602 0696 8C030000 		.4byte	.LASF53
+ 1603 069a 8C030000 		.4byte	.LASF53
+ 1604 069e 09       		.byte	0x9
+ 1605 069f 26       		.byte	0x26
+ 1606 06a0 1C       		.uleb128 0x1c
+ 1607 06a1 EE000000 		.4byte	.LASF54
+ 1608 06a5 EE000000 		.4byte	.LASF54
+ 1609 06a9 08       		.byte	0x8
+ 1610 06aa 8B       		.byte	0x8b
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 37
+
+
+ 1611 06ab 1C       		.uleb128 0x1c
+ 1612 06ac 73030000 		.4byte	.LASF55
+ 1613 06b0 73030000 		.4byte	.LASF55
+ 1614 06b4 0A       		.byte	0xa
+ 1615 06b5 76       		.byte	0x76
+ 1616 06b6 1C       		.uleb128 0x1c
+ 1617 06b7 A2030000 		.4byte	.LASF56
+ 1618 06bb A2030000 		.4byte	.LASF56
+ 1619 06bf 08       		.byte	0x8
+ 1620 06c0 8A       		.byte	0x8a
+ 1621 06c1 1C       		.uleb128 0x1c
+ 1622 06c2 E1000000 		.4byte	.LASF57
+ 1623 06c6 E1000000 		.4byte	.LASF57
+ 1624 06ca 08       		.byte	0x8
+ 1625 06cb 71       		.byte	0x71
+ 1626 06cc 1C       		.uleb128 0x1c
+ 1627 06cd BE010000 		.4byte	.LASF58
+ 1628 06d1 BE010000 		.4byte	.LASF58
+ 1629 06d5 05       		.byte	0x5
+ 1630 06d6 8A       		.byte	0x8a
+ 1631 06d7 1C       		.uleb128 0x1c
+ 1632 06d8 18010000 		.4byte	.LASF59
+ 1633 06dc 18010000 		.4byte	.LASF59
+ 1634 06e0 05       		.byte	0x5
+ 1635 06e1 8B       		.byte	0x8b
+ 1636 06e2 1C       		.uleb128 0x1c
+ 1637 06e3 23020000 		.4byte	.LASF60
+ 1638 06e7 23020000 		.4byte	.LASF60
+ 1639 06eb 08       		.byte	0x8
+ 1640 06ec 92       		.byte	0x92
+ 1641 06ed 00       		.byte	0
+ 1642              		.section	.debug_abbrev,"",%progbits
+ 1643              	.Ldebug_abbrev0:
+ 1644 0000 01       		.uleb128 0x1
+ 1645 0001 11       		.uleb128 0x11
+ 1646 0002 01       		.byte	0x1
+ 1647 0003 25       		.uleb128 0x25
+ 1648 0004 0E       		.uleb128 0xe
+ 1649 0005 13       		.uleb128 0x13
+ 1650 0006 0B       		.uleb128 0xb
+ 1651 0007 03       		.uleb128 0x3
+ 1652 0008 0E       		.uleb128 0xe
+ 1653 0009 1B       		.uleb128 0x1b
+ 1654 000a 0E       		.uleb128 0xe
+ 1655 000b 55       		.uleb128 0x55
+ 1656 000c 17       		.uleb128 0x17
+ 1657 000d 11       		.uleb128 0x11
+ 1658 000e 01       		.uleb128 0x1
+ 1659 000f 10       		.uleb128 0x10
+ 1660 0010 17       		.uleb128 0x17
+ 1661 0011 00       		.byte	0
+ 1662 0012 00       		.byte	0
+ 1663 0013 02       		.uleb128 0x2
+ 1664 0014 24       		.uleb128 0x24
+ 1665 0015 00       		.byte	0
+ 1666 0016 0B       		.uleb128 0xb
+ 1667 0017 0B       		.uleb128 0xb
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 38
+
+
+ 1668 0018 3E       		.uleb128 0x3e
+ 1669 0019 0B       		.uleb128 0xb
+ 1670 001a 03       		.uleb128 0x3
+ 1671 001b 0E       		.uleb128 0xe
+ 1672 001c 00       		.byte	0
+ 1673 001d 00       		.byte	0
+ 1674 001e 03       		.uleb128 0x3
+ 1675 001f 16       		.uleb128 0x16
+ 1676 0020 00       		.byte	0
+ 1677 0021 03       		.uleb128 0x3
+ 1678 0022 0E       		.uleb128 0xe
+ 1679 0023 3A       		.uleb128 0x3a
+ 1680 0024 0B       		.uleb128 0xb
+ 1681 0025 3B       		.uleb128 0x3b
+ 1682 0026 0B       		.uleb128 0xb
+ 1683 0027 49       		.uleb128 0x49
+ 1684 0028 13       		.uleb128 0x13
+ 1685 0029 00       		.byte	0
+ 1686 002a 00       		.byte	0
+ 1687 002b 04       		.uleb128 0x4
+ 1688 002c 24       		.uleb128 0x24
+ 1689 002d 00       		.byte	0
+ 1690 002e 0B       		.uleb128 0xb
+ 1691 002f 0B       		.uleb128 0xb
+ 1692 0030 3E       		.uleb128 0x3e
+ 1693 0031 0B       		.uleb128 0xb
+ 1694 0032 03       		.uleb128 0x3
+ 1695 0033 08       		.uleb128 0x8
+ 1696 0034 00       		.byte	0
+ 1697 0035 00       		.byte	0
+ 1698 0036 05       		.uleb128 0x5
+ 1699 0037 0F       		.uleb128 0xf
+ 1700 0038 00       		.byte	0
+ 1701 0039 0B       		.uleb128 0xb
+ 1702 003a 0B       		.uleb128 0xb
+ 1703 003b 49       		.uleb128 0x49
+ 1704 003c 13       		.uleb128 0x13
+ 1705 003d 00       		.byte	0
+ 1706 003e 00       		.byte	0
+ 1707 003f 06       		.uleb128 0x6
+ 1708 0040 13       		.uleb128 0x13
+ 1709 0041 01       		.byte	0x1
+ 1710 0042 03       		.uleb128 0x3
+ 1711 0043 0E       		.uleb128 0xe
+ 1712 0044 0B       		.uleb128 0xb
+ 1713 0045 05       		.uleb128 0x5
+ 1714 0046 3A       		.uleb128 0x3a
+ 1715 0047 0B       		.uleb128 0xb
+ 1716 0048 3B       		.uleb128 0x3b
+ 1717 0049 0B       		.uleb128 0xb
+ 1718 004a 01       		.uleb128 0x1
+ 1719 004b 13       		.uleb128 0x13
+ 1720 004c 00       		.byte	0
+ 1721 004d 00       		.byte	0
+ 1722 004e 07       		.uleb128 0x7
+ 1723 004f 0D       		.uleb128 0xd
+ 1724 0050 00       		.byte	0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 39
+
+
+ 1725 0051 03       		.uleb128 0x3
+ 1726 0052 0E       		.uleb128 0xe
+ 1727 0053 3A       		.uleb128 0x3a
+ 1728 0054 0B       		.uleb128 0xb
+ 1729 0055 3B       		.uleb128 0x3b
+ 1730 0056 0B       		.uleb128 0xb
+ 1731 0057 49       		.uleb128 0x49
+ 1732 0058 13       		.uleb128 0x13
+ 1733 0059 38       		.uleb128 0x38
+ 1734 005a 0B       		.uleb128 0xb
+ 1735 005b 00       		.byte	0
+ 1736 005c 00       		.byte	0
+ 1737 005d 08       		.uleb128 0x8
+ 1738 005e 0D       		.uleb128 0xd
+ 1739 005f 00       		.byte	0
+ 1740 0060 03       		.uleb128 0x3
+ 1741 0061 0E       		.uleb128 0xe
+ 1742 0062 3A       		.uleb128 0x3a
+ 1743 0063 0B       		.uleb128 0xb
+ 1744 0064 3B       		.uleb128 0x3b
+ 1745 0065 0B       		.uleb128 0xb
+ 1746 0066 49       		.uleb128 0x49
+ 1747 0067 13       		.uleb128 0x13
+ 1748 0068 38       		.uleb128 0x38
+ 1749 0069 05       		.uleb128 0x5
+ 1750 006a 00       		.byte	0
+ 1751 006b 00       		.byte	0
+ 1752 006c 09       		.uleb128 0x9
+ 1753 006d 01       		.uleb128 0x1
+ 1754 006e 01       		.byte	0x1
+ 1755 006f 49       		.uleb128 0x49
+ 1756 0070 13       		.uleb128 0x13
+ 1757 0071 01       		.uleb128 0x1
+ 1758 0072 13       		.uleb128 0x13
+ 1759 0073 00       		.byte	0
+ 1760 0074 00       		.byte	0
+ 1761 0075 0A       		.uleb128 0xa
+ 1762 0076 21       		.uleb128 0x21
+ 1763 0077 00       		.byte	0
+ 1764 0078 49       		.uleb128 0x49
+ 1765 0079 13       		.uleb128 0x13
+ 1766 007a 2F       		.uleb128 0x2f
+ 1767 007b 05       		.uleb128 0x5
+ 1768 007c 00       		.byte	0
+ 1769 007d 00       		.byte	0
+ 1770 007e 0B       		.uleb128 0xb
+ 1771 007f 21       		.uleb128 0x21
+ 1772 0080 00       		.byte	0
+ 1773 0081 49       		.uleb128 0x49
+ 1774 0082 13       		.uleb128 0x13
+ 1775 0083 2F       		.uleb128 0x2f
+ 1776 0084 0B       		.uleb128 0xb
+ 1777 0085 00       		.byte	0
+ 1778 0086 00       		.byte	0
+ 1779 0087 0C       		.uleb128 0xc
+ 1780 0088 2E       		.uleb128 0x2e
+ 1781 0089 01       		.byte	0x1
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 40
+
+
+ 1782 008a 03       		.uleb128 0x3
+ 1783 008b 0E       		.uleb128 0xe
+ 1784 008c 3A       		.uleb128 0x3a
+ 1785 008d 0B       		.uleb128 0xb
+ 1786 008e 3B       		.uleb128 0x3b
+ 1787 008f 05       		.uleb128 0x5
+ 1788 0090 27       		.uleb128 0x27
+ 1789 0091 19       		.uleb128 0x19
+ 1790 0092 11       		.uleb128 0x11
+ 1791 0093 01       		.uleb128 0x1
+ 1792 0094 12       		.uleb128 0x12
+ 1793 0095 06       		.uleb128 0x6
+ 1794 0096 40       		.uleb128 0x40
+ 1795 0097 18       		.uleb128 0x18
+ 1796 0098 9642     		.uleb128 0x2116
+ 1797 009a 19       		.uleb128 0x19
+ 1798 009b 01       		.uleb128 0x1
+ 1799 009c 13       		.uleb128 0x13
+ 1800 009d 00       		.byte	0
+ 1801 009e 00       		.byte	0
+ 1802 009f 0D       		.uleb128 0xd
+ 1803 00a0 05       		.uleb128 0x5
+ 1804 00a1 00       		.byte	0
+ 1805 00a2 03       		.uleb128 0x3
+ 1806 00a3 0E       		.uleb128 0xe
+ 1807 00a4 3A       		.uleb128 0x3a
+ 1808 00a5 0B       		.uleb128 0xb
+ 1809 00a6 3B       		.uleb128 0x3b
+ 1810 00a7 05       		.uleb128 0x5
+ 1811 00a8 49       		.uleb128 0x49
+ 1812 00a9 13       		.uleb128 0x13
+ 1813 00aa 02       		.uleb128 0x2
+ 1814 00ab 17       		.uleb128 0x17
+ 1815 00ac 00       		.byte	0
+ 1816 00ad 00       		.byte	0
+ 1817 00ae 0E       		.uleb128 0xe
+ 1818 00af 34       		.uleb128 0x34
+ 1819 00b0 00       		.byte	0
+ 1820 00b1 03       		.uleb128 0x3
+ 1821 00b2 0E       		.uleb128 0xe
+ 1822 00b3 3A       		.uleb128 0x3a
+ 1823 00b4 0B       		.uleb128 0xb
+ 1824 00b5 3B       		.uleb128 0x3b
+ 1825 00b6 05       		.uleb128 0x5
+ 1826 00b7 49       		.uleb128 0x49
+ 1827 00b8 13       		.uleb128 0x13
+ 1828 00b9 02       		.uleb128 0x2
+ 1829 00ba 17       		.uleb128 0x17
+ 1830 00bb 00       		.byte	0
+ 1831 00bc 00       		.byte	0
+ 1832 00bd 0F       		.uleb128 0xf
+ 1833 00be 34       		.uleb128 0x34
+ 1834 00bf 00       		.byte	0
+ 1835 00c0 03       		.uleb128 0x3
+ 1836 00c1 08       		.uleb128 0x8
+ 1837 00c2 3A       		.uleb128 0x3a
+ 1838 00c3 0B       		.uleb128 0xb
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 41
+
+
+ 1839 00c4 3B       		.uleb128 0x3b
+ 1840 00c5 05       		.uleb128 0x5
+ 1841 00c6 49       		.uleb128 0x49
+ 1842 00c7 13       		.uleb128 0x13
+ 1843 00c8 02       		.uleb128 0x2
+ 1844 00c9 17       		.uleb128 0x17
+ 1845 00ca 00       		.byte	0
+ 1846 00cb 00       		.byte	0
+ 1847 00cc 10       		.uleb128 0x10
+ 1848 00cd 2E       		.uleb128 0x2e
+ 1849 00ce 01       		.byte	0x1
+ 1850 00cf 3F       		.uleb128 0x3f
+ 1851 00d0 19       		.uleb128 0x19
+ 1852 00d1 03       		.uleb128 0x3
+ 1853 00d2 0E       		.uleb128 0xe
+ 1854 00d3 3A       		.uleb128 0x3a
+ 1855 00d4 0B       		.uleb128 0xb
+ 1856 00d5 3B       		.uleb128 0x3b
+ 1857 00d6 0B       		.uleb128 0xb
+ 1858 00d7 27       		.uleb128 0x27
+ 1859 00d8 19       		.uleb128 0x19
+ 1860 00d9 11       		.uleb128 0x11
+ 1861 00da 01       		.uleb128 0x1
+ 1862 00db 12       		.uleb128 0x12
+ 1863 00dc 06       		.uleb128 0x6
+ 1864 00dd 40       		.uleb128 0x40
+ 1865 00de 18       		.uleb128 0x18
+ 1866 00df 9742     		.uleb128 0x2117
+ 1867 00e1 19       		.uleb128 0x19
+ 1868 00e2 01       		.uleb128 0x1
+ 1869 00e3 13       		.uleb128 0x13
+ 1870 00e4 00       		.byte	0
+ 1871 00e5 00       		.byte	0
+ 1872 00e6 11       		.uleb128 0x11
+ 1873 00e7 05       		.uleb128 0x5
+ 1874 00e8 00       		.byte	0
+ 1875 00e9 03       		.uleb128 0x3
+ 1876 00ea 0E       		.uleb128 0xe
+ 1877 00eb 3A       		.uleb128 0x3a
+ 1878 00ec 0B       		.uleb128 0xb
+ 1879 00ed 3B       		.uleb128 0x3b
+ 1880 00ee 0B       		.uleb128 0xb
+ 1881 00ef 49       		.uleb128 0x49
+ 1882 00f0 13       		.uleb128 0x13
+ 1883 00f1 02       		.uleb128 0x2
+ 1884 00f2 17       		.uleb128 0x17
+ 1885 00f3 00       		.byte	0
+ 1886 00f4 00       		.byte	0
+ 1887 00f5 12       		.uleb128 0x12
+ 1888 00f6 34       		.uleb128 0x34
+ 1889 00f7 00       		.byte	0
+ 1890 00f8 03       		.uleb128 0x3
+ 1891 00f9 08       		.uleb128 0x8
+ 1892 00fa 3A       		.uleb128 0x3a
+ 1893 00fb 0B       		.uleb128 0xb
+ 1894 00fc 3B       		.uleb128 0x3b
+ 1895 00fd 0B       		.uleb128 0xb
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 42
+
+
+ 1896 00fe 49       		.uleb128 0x49
+ 1897 00ff 13       		.uleb128 0x13
+ 1898 0100 02       		.uleb128 0x2
+ 1899 0101 17       		.uleb128 0x17
+ 1900 0102 00       		.byte	0
+ 1901 0103 00       		.byte	0
+ 1902 0104 13       		.uleb128 0x13
+ 1903 0105 898201   		.uleb128 0x4109
+ 1904 0108 00       		.byte	0
+ 1905 0109 11       		.uleb128 0x11
+ 1906 010a 01       		.uleb128 0x1
+ 1907 010b 31       		.uleb128 0x31
+ 1908 010c 13       		.uleb128 0x13
+ 1909 010d 00       		.byte	0
+ 1910 010e 00       		.byte	0
+ 1911 010f 14       		.uleb128 0x14
+ 1912 0110 898201   		.uleb128 0x4109
+ 1913 0113 01       		.byte	0x1
+ 1914 0114 11       		.uleb128 0x11
+ 1915 0115 01       		.uleb128 0x1
+ 1916 0116 31       		.uleb128 0x31
+ 1917 0117 13       		.uleb128 0x13
+ 1918 0118 01       		.uleb128 0x1
+ 1919 0119 13       		.uleb128 0x13
+ 1920 011a 00       		.byte	0
+ 1921 011b 00       		.byte	0
+ 1922 011c 15       		.uleb128 0x15
+ 1923 011d 8A8201   		.uleb128 0x410a
+ 1924 0120 00       		.byte	0
+ 1925 0121 02       		.uleb128 0x2
+ 1926 0122 18       		.uleb128 0x18
+ 1927 0123 9142     		.uleb128 0x2111
+ 1928 0125 18       		.uleb128 0x18
+ 1929 0126 00       		.byte	0
+ 1930 0127 00       		.byte	0
+ 1931 0128 16       		.uleb128 0x16
+ 1932 0129 898201   		.uleb128 0x4109
+ 1933 012c 01       		.byte	0x1
+ 1934 012d 11       		.uleb128 0x11
+ 1935 012e 01       		.uleb128 0x1
+ 1936 012f 31       		.uleb128 0x31
+ 1937 0130 13       		.uleb128 0x13
+ 1938 0131 00       		.byte	0
+ 1939 0132 00       		.byte	0
+ 1940 0133 17       		.uleb128 0x17
+ 1941 0134 2E       		.uleb128 0x2e
+ 1942 0135 01       		.byte	0x1
+ 1943 0136 3F       		.uleb128 0x3f
+ 1944 0137 19       		.uleb128 0x19
+ 1945 0138 03       		.uleb128 0x3
+ 1946 0139 0E       		.uleb128 0xe
+ 1947 013a 3A       		.uleb128 0x3a
+ 1948 013b 0B       		.uleb128 0xb
+ 1949 013c 3B       		.uleb128 0x3b
+ 1950 013d 0B       		.uleb128 0xb
+ 1951 013e 27       		.uleb128 0x27
+ 1952 013f 19       		.uleb128 0x19
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 43
+
+
+ 1953 0140 49       		.uleb128 0x49
+ 1954 0141 13       		.uleb128 0x13
+ 1955 0142 8701     		.uleb128 0x87
+ 1956 0144 19       		.uleb128 0x19
+ 1957 0145 11       		.uleb128 0x11
+ 1958 0146 01       		.uleb128 0x1
+ 1959 0147 12       		.uleb128 0x12
+ 1960 0148 06       		.uleb128 0x6
+ 1961 0149 40       		.uleb128 0x40
+ 1962 014a 18       		.uleb128 0x18
+ 1963 014b 9742     		.uleb128 0x2117
+ 1964 014d 19       		.uleb128 0x19
+ 1965 014e 01       		.uleb128 0x1
+ 1966 014f 13       		.uleb128 0x13
+ 1967 0150 00       		.byte	0
+ 1968 0151 00       		.byte	0
+ 1969 0152 18       		.uleb128 0x18
+ 1970 0153 2E       		.uleb128 0x2e
+ 1971 0154 01       		.byte	0x1
+ 1972 0155 3F       		.uleb128 0x3f
+ 1973 0156 19       		.uleb128 0x19
+ 1974 0157 03       		.uleb128 0x3
+ 1975 0158 0E       		.uleb128 0xe
+ 1976 0159 3A       		.uleb128 0x3a
+ 1977 015a 0B       		.uleb128 0xb
+ 1978 015b 3B       		.uleb128 0x3b
+ 1979 015c 05       		.uleb128 0x5
+ 1980 015d 27       		.uleb128 0x27
+ 1981 015e 19       		.uleb128 0x19
+ 1982 015f 11       		.uleb128 0x11
+ 1983 0160 01       		.uleb128 0x1
+ 1984 0161 12       		.uleb128 0x12
+ 1985 0162 06       		.uleb128 0x6
+ 1986 0163 40       		.uleb128 0x40
+ 1987 0164 18       		.uleb128 0x18
+ 1988 0165 9742     		.uleb128 0x2117
+ 1989 0167 19       		.uleb128 0x19
+ 1990 0168 01       		.uleb128 0x1
+ 1991 0169 13       		.uleb128 0x13
+ 1992 016a 00       		.byte	0
+ 1993 016b 00       		.byte	0
+ 1994 016c 19       		.uleb128 0x19
+ 1995 016d 34       		.uleb128 0x34
+ 1996 016e 00       		.byte	0
+ 1997 016f 03       		.uleb128 0x3
+ 1998 0170 0E       		.uleb128 0xe
+ 1999 0171 3A       		.uleb128 0x3a
+ 2000 0172 0B       		.uleb128 0xb
+ 2001 0173 3B       		.uleb128 0x3b
+ 2002 0174 05       		.uleb128 0x5
+ 2003 0175 49       		.uleb128 0x49
+ 2004 0176 13       		.uleb128 0x13
+ 2005 0177 3F       		.uleb128 0x3f
+ 2006 0178 19       		.uleb128 0x19
+ 2007 0179 3C       		.uleb128 0x3c
+ 2008 017a 19       		.uleb128 0x19
+ 2009 017b 00       		.byte	0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 44
+
+
+ 2010 017c 00       		.byte	0
+ 2011 017d 1A       		.uleb128 0x1a
+ 2012 017e 35       		.uleb128 0x35
+ 2013 017f 00       		.byte	0
+ 2014 0180 49       		.uleb128 0x49
+ 2015 0181 13       		.uleb128 0x13
+ 2016 0182 00       		.byte	0
+ 2017 0183 00       		.byte	0
+ 2018 0184 1B       		.uleb128 0x1b
+ 2019 0185 34       		.uleb128 0x34
+ 2020 0186 00       		.byte	0
+ 2021 0187 03       		.uleb128 0x3
+ 2022 0188 0E       		.uleb128 0xe
+ 2023 0189 3A       		.uleb128 0x3a
+ 2024 018a 0B       		.uleb128 0xb
+ 2025 018b 3B       		.uleb128 0x3b
+ 2026 018c 0B       		.uleb128 0xb
+ 2027 018d 49       		.uleb128 0x49
+ 2028 018e 13       		.uleb128 0x13
+ 2029 018f 3F       		.uleb128 0x3f
+ 2030 0190 19       		.uleb128 0x19
+ 2031 0191 02       		.uleb128 0x2
+ 2032 0192 18       		.uleb128 0x18
+ 2033 0193 00       		.byte	0
+ 2034 0194 00       		.byte	0
+ 2035 0195 1C       		.uleb128 0x1c
+ 2036 0196 2E       		.uleb128 0x2e
+ 2037 0197 00       		.byte	0
+ 2038 0198 3F       		.uleb128 0x3f
+ 2039 0199 19       		.uleb128 0x19
+ 2040 019a 3C       		.uleb128 0x3c
+ 2041 019b 19       		.uleb128 0x19
+ 2042 019c 6E       		.uleb128 0x6e
+ 2043 019d 0E       		.uleb128 0xe
+ 2044 019e 03       		.uleb128 0x3
+ 2045 019f 0E       		.uleb128 0xe
+ 2046 01a0 3A       		.uleb128 0x3a
+ 2047 01a1 0B       		.uleb128 0xb
+ 2048 01a2 3B       		.uleb128 0x3b
+ 2049 01a3 0B       		.uleb128 0xb
+ 2050 01a4 00       		.byte	0
+ 2051 01a5 00       		.byte	0
+ 2052 01a6 00       		.byte	0
+ 2053              		.section	.debug_loc,"",%progbits
+ 2054              	.Ldebug_loc0:
+ 2055              	.LLST0:
+ 2056 0000 00000000 		.4byte	.LVL0
+ 2057 0004 22000000 		.4byte	.LVL4
+ 2058 0008 0100     		.2byte	0x1
+ 2059 000a 50       		.byte	0x50
+ 2060 000b 22000000 		.4byte	.LVL4
+ 2061 000f 42010000 		.4byte	.LVL42
+ 2062 0013 0100     		.2byte	0x1
+ 2063 0015 5A       		.byte	0x5a
+ 2064 0016 42010000 		.4byte	.LVL42
+ 2065 001a 60010000 		.4byte	.LFE66
+ 2066 001e 0400     		.2byte	0x4
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 45
+
+
+ 2067 0020 F3       		.byte	0xf3
+ 2068 0021 01       		.uleb128 0x1
+ 2069 0022 50       		.byte	0x50
+ 2070 0023 9F       		.byte	0x9f
+ 2071 0024 00000000 		.4byte	0
+ 2072 0028 00000000 		.4byte	0
+ 2073              	.LLST1:
+ 2074 002c 06000000 		.4byte	.LVL1
+ 2075 0030 34000000 		.4byte	.LVL8
+ 2076 0034 0A00     		.2byte	0xa
+ 2077 0036 9E       		.byte	0x9e
+ 2078 0037 08       		.uleb128 0x8
+ 2079 0038 00000000 		.4byte	0
+ 2080 003c 00000000 		.4byte	0
+ 2081 0040 34000000 		.4byte	.LVL8
+ 2082 0044 3B000000 		.4byte	.LVL9-1
+ 2083 0048 0600     		.2byte	0x6
+ 2084 004a 50       		.byte	0x50
+ 2085 004b 93       		.byte	0x93
+ 2086 004c 04       		.uleb128 0x4
+ 2087 004d 51       		.byte	0x51
+ 2088 004e 93       		.byte	0x93
+ 2089 004f 04       		.uleb128 0x4
+ 2090 0050 3B000000 		.4byte	.LVL9-1
+ 2091 0054 C4000000 		.4byte	.LVL27
+ 2092 0058 0200     		.2byte	0x2
+ 2093 005a 7D       		.byte	0x7d
+ 2094 005b 00       		.sleb128 0
+ 2095 005c C4000000 		.4byte	.LVL27
+ 2096 0060 42010000 		.4byte	.LVL42
+ 2097 0064 0600     		.2byte	0x6
+ 2098 0066 58       		.byte	0x58
+ 2099 0067 93       		.byte	0x93
+ 2100 0068 04       		.uleb128 0x4
+ 2101 0069 59       		.byte	0x59
+ 2102 006a 93       		.byte	0x93
+ 2103 006b 04       		.uleb128 0x4
+ 2104 006c 00000000 		.4byte	0
+ 2105 0070 00000000 		.4byte	0
+ 2106              	.LLST2:
+ 2107 0074 06000000 		.4byte	.LVL1
+ 2108 0078 58000000 		.4byte	.LVL14
+ 2109 007c 0A00     		.2byte	0xa
+ 2110 007e 9E       		.byte	0x9e
+ 2111 007f 08       		.uleb128 0x8
+ 2112 0080 00000000 		.4byte	0
+ 2113 0084 00000000 		.4byte	0
+ 2114 0088 58000000 		.4byte	.LVL14
+ 2115 008c 8C000000 		.4byte	.LVL20
+ 2116 0090 0600     		.2byte	0x6
+ 2117 0092 56       		.byte	0x56
+ 2118 0093 93       		.byte	0x93
+ 2119 0094 04       		.uleb128 0x4
+ 2120 0095 57       		.byte	0x57
+ 2121 0096 93       		.byte	0x93
+ 2122 0097 04       		.uleb128 0x4
+ 2123 0098 E8000000 		.4byte	.LVL33
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 46
+
+
+ 2124 009c 1C010000 		.4byte	.LVL39
+ 2125 00a0 0600     		.2byte	0x6
+ 2126 00a2 54       		.byte	0x54
+ 2127 00a3 93       		.byte	0x93
+ 2128 00a4 04       		.uleb128 0x4
+ 2129 00a5 55       		.byte	0x55
+ 2130 00a6 93       		.byte	0x93
+ 2131 00a7 04       		.uleb128 0x4
+ 2132 00a8 00000000 		.4byte	0
+ 2133 00ac 00000000 		.4byte	0
+ 2134              	.LLST3:
+ 2135 00b0 06000000 		.4byte	.LVL1
+ 2136 00b4 70000000 		.4byte	.LVL17
+ 2137 00b8 0A00     		.2byte	0xa
+ 2138 00ba 9E       		.byte	0x9e
+ 2139 00bb 08       		.uleb128 0x8
+ 2140 00bc 00000000 		.4byte	0
+ 2141 00c0 00000000 		.4byte	0
+ 2142 00c4 70000000 		.4byte	.LVL17
+ 2143 00c8 C2000000 		.4byte	.LVL26
+ 2144 00cc 0600     		.2byte	0x6
+ 2145 00ce 58       		.byte	0x58
+ 2146 00cf 93       		.byte	0x93
+ 2147 00d0 04       		.uleb128 0x4
+ 2148 00d1 59       		.byte	0x59
+ 2149 00d2 93       		.byte	0x93
+ 2150 00d3 04       		.uleb128 0x4
+ 2151 00d4 00010000 		.4byte	.LVL36
+ 2152 00d8 42010000 		.4byte	.LVL42
+ 2153 00dc 0600     		.2byte	0x6
+ 2154 00de 56       		.byte	0x56
+ 2155 00df 93       		.byte	0x93
+ 2156 00e0 04       		.uleb128 0x4
+ 2157 00e1 57       		.byte	0x57
+ 2158 00e2 93       		.byte	0x93
+ 2159 00e3 04       		.uleb128 0x4
+ 2160 00e4 00000000 		.4byte	0
+ 2161 00e8 00000000 		.4byte	0
+ 2162              	.LLST4:
+ 2163 00ec 06000000 		.4byte	.LVL1
+ 2164 00f0 0A000000 		.4byte	.LVL2
+ 2165 00f4 0A00     		.2byte	0xa
+ 2166 00f6 9E       		.byte	0x9e
+ 2167 00f7 08       		.uleb128 0x8
+ 2168 00f8 00000000 		.4byte	0
+ 2169 00fc 00000000 		.4byte	0
+ 2170 0100 0A000000 		.4byte	.LVL2
+ 2171 0104 56000000 		.4byte	.LVL13
+ 2172 0108 0600     		.2byte	0x6
+ 2173 010a 56       		.byte	0x56
+ 2174 010b 93       		.byte	0x93
+ 2175 010c 04       		.uleb128 0x4
+ 2176 010d 57       		.byte	0x57
+ 2177 010e 93       		.byte	0x93
+ 2178 010f 04       		.uleb128 0x4
+ 2179 0110 00000000 		.4byte	0
+ 2180 0114 00000000 		.4byte	0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 47
+
+
+ 2181              	.LLST5:
+ 2182 0118 06000000 		.4byte	.LVL1
+ 2183 011c 0E000000 		.4byte	.LVL3
+ 2184 0120 0A00     		.2byte	0xa
+ 2185 0122 9E       		.byte	0x9e
+ 2186 0123 08       		.uleb128 0x8
+ 2187 0124 00000000 		.4byte	0
+ 2188 0128 00000000 		.4byte	0
+ 2189 012c 0E000000 		.4byte	.LVL3
+ 2190 0130 E6000000 		.4byte	.LVL32
+ 2191 0134 0600     		.2byte	0x6
+ 2192 0136 54       		.byte	0x54
+ 2193 0137 93       		.byte	0x93
+ 2194 0138 04       		.uleb128 0x4
+ 2195 0139 55       		.byte	0x55
+ 2196 013a 93       		.byte	0x93
+ 2197 013b 04       		.uleb128 0x4
+ 2198 013c 00000000 		.4byte	0
+ 2199 0140 00000000 		.4byte	0
+ 2200              	.LLST6:
+ 2201 0144 00000000 		.4byte	.LVL43
+ 2202 0148 09000000 		.4byte	.LVL44-1
+ 2203 014c 0100     		.2byte	0x1
+ 2204 014e 50       		.byte	0x50
+ 2205 014f 09000000 		.4byte	.LVL44-1
+ 2206 0153 A8000000 		.4byte	.LVL56
+ 2207 0157 0100     		.2byte	0x1
+ 2208 0159 54       		.byte	0x54
+ 2209 015a A8000000 		.4byte	.LVL56
+ 2210 015e B8000000 		.4byte	.LFE65
+ 2211 0162 0400     		.2byte	0x4
+ 2212 0164 F3       		.byte	0xf3
+ 2213 0165 01       		.uleb128 0x1
+ 2214 0166 50       		.byte	0x50
+ 2215 0167 9F       		.byte	0x9f
+ 2216 0168 00000000 		.4byte	0
+ 2217 016c 00000000 		.4byte	0
+ 2218              	.LLST7:
+ 2219 0170 48000000 		.4byte	.LVL47
+ 2220 0174 6E000000 		.4byte	.LVL52
+ 2221 0178 0100     		.2byte	0x1
+ 2222 017a 50       		.byte	0x50
+ 2223 017b 00000000 		.4byte	0
+ 2224 017f 00000000 		.4byte	0
+ 2225              	.LLST8:
+ 2226 0183 50000000 		.4byte	.LVL48
+ 2227 0187 5A000000 		.4byte	.LVL50
+ 2228 018b 0100     		.2byte	0x1
+ 2229 018d 53       		.byte	0x53
+ 2230 018e 5C000000 		.4byte	.LVL51
+ 2231 0192 71000000 		.4byte	.LVL53-1
+ 2232 0196 0100     		.2byte	0x1
+ 2233 0198 53       		.byte	0x53
+ 2234 0199 00000000 		.4byte	0
+ 2235 019d 00000000 		.4byte	0
+ 2236              	.LLST9:
+ 2237 01a1 40000000 		.4byte	.LVL66
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 48
+
+
+ 2238 01a5 47000000 		.4byte	.LVL67-1
+ 2239 01a9 0100     		.2byte	0x1
+ 2240 01ab 50       		.byte	0x50
+ 2241 01ac 00000000 		.4byte	0
+ 2242 01b0 00000000 		.4byte	0
+ 2243              	.LLST10:
+ 2244 01b4 00000000 		.4byte	.LVL88
+ 2245 01b8 0D000000 		.4byte	.LVL89-1
+ 2246 01bc 0100     		.2byte	0x1
+ 2247 01be 50       		.byte	0x50
+ 2248 01bf 0D000000 		.4byte	.LVL89-1
+ 2249 01c3 14000000 		.4byte	.LFE67
+ 2250 01c7 0400     		.2byte	0x4
+ 2251 01c9 F3       		.byte	0xf3
+ 2252 01ca 01       		.uleb128 0x1
+ 2253 01cb 50       		.byte	0x50
+ 2254 01cc 9F       		.byte	0x9f
+ 2255 01cd 00000000 		.4byte	0
+ 2256 01d1 00000000 		.4byte	0
+ 2257              		.section	.debug_aranges,"",%progbits
+ 2258 0000 3C000000 		.4byte	0x3c
+ 2259 0004 0200     		.2byte	0x2
+ 2260 0006 00000000 		.4byte	.Ldebug_info0
+ 2261 000a 04       		.byte	0x4
+ 2262 000b 00       		.byte	0
+ 2263 000c 0000     		.2byte	0
+ 2264 000e 0000     		.2byte	0
+ 2265 0010 00000000 		.4byte	.LFB66
+ 2266 0014 60010000 		.4byte	.LFE66-.LFB66
+ 2267 0018 00000000 		.4byte	.LFB65
+ 2268 001c B8000000 		.4byte	.LFE65-.LFB65
+ 2269 0020 00000000 		.4byte	.LFB64
+ 2270 0024 64010000 		.4byte	.LFE64-.LFB64
+ 2271 0028 00000000 		.4byte	.LFB67
+ 2272 002c 14000000 		.4byte	.LFE67-.LFB67
+ 2273 0030 00000000 		.4byte	.LFB68
+ 2274 0034 10000000 		.4byte	.LFE68-.LFB68
+ 2275 0038 00000000 		.4byte	0
+ 2276 003c 00000000 		.4byte	0
+ 2277              		.section	.debug_ranges,"",%progbits
+ 2278              	.Ldebug_ranges0:
+ 2279 0000 00000000 		.4byte	.LFB66
+ 2280 0004 60010000 		.4byte	.LFE66
+ 2281 0008 00000000 		.4byte	.LFB65
+ 2282 000c B8000000 		.4byte	.LFE65
+ 2283 0010 00000000 		.4byte	.LFB64
+ 2284 0014 64010000 		.4byte	.LFE64
+ 2285 0018 00000000 		.4byte	.LFB67
+ 2286 001c 14000000 		.4byte	.LFE67
+ 2287 0020 00000000 		.4byte	.LFB68
+ 2288 0024 10000000 		.4byte	.LFE68
+ 2289 0028 00000000 		.4byte	0
+ 2290 002c 00000000 		.4byte	0
+ 2291              		.section	.debug_line,"",%progbits
+ 2292              	.Ldebug_line0:
+ 2293 0000 B4020000 		.section	.debug_str,"MS",%progbits,1
+ 2293      0200E801 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 49
+
+
+ 2293      00000201 
+ 2293      FB0E0D00 
+ 2293      01010101 
+ 2294              	.LASF29:
+ 2295 0000 6C6F6361 		.ascii	"location\000"
+ 2295      74696F6E 
+ 2295      00
+ 2296              	.LASF50:
+ 2297 0009 73736361 		.ascii	"sscanf\000"
+ 2297      6E6600
+ 2298              	.LASF33:
+ 2299 0010 5365635F 		.ascii	"Sec_Val\000"
+ 2299      56616C00 
+ 2300              	.LASF2:
+ 2301 0018 73686F72 		.ascii	"short int\000"
+ 2301      7420696E 
+ 2301      7400
+ 2302              	.LASF19:
+ 2303 0022 73697A65 		.ascii	"sizetype\000"
+ 2303      74797065 
+ 2303      00
+ 2304              	.LASF63:
+ 2305 002b 433A5C55 		.ascii	"C:\\Users\\Mark Hughes\\Desktop\\Work\\WORK\\WORK\\"
+ 2305      73657273 
+ 2305      5C4D6172 
+ 2305      6B204875 
+ 2305      67686573 
+ 2306 0057 53747564 		.ascii	"Study\\Cypress_Study\\Study\\UART_GPS_Serial.cydsn\000"
+ 2306      795C4379 
+ 2306      70726573 
+ 2306      735F5374 
+ 2306      7564795C 
+ 2307              	.LASF32:
+ 2308 0087 4D696E5F 		.ascii	"Min_Val\000"
+ 2308      56616C00 
+ 2309              	.LASF40:
+ 2310 008f 4750535F 		.ascii	"GPS_UART_RX_Buffer\000"
+ 2310      55415254 
+ 2310      5F52585F 
+ 2310      42756666 
+ 2310      657200
+ 2311              	.LASF9:
+ 2312 00a2 6C6F6E67 		.ascii	"long long int\000"
+ 2312      206C6F6E 
+ 2312      6720696E 
+ 2312      7400
+ 2313              	.LASF7:
+ 2314 00b0 5F5F7569 		.ascii	"__uint32_t\000"
+ 2314      6E743332 
+ 2314      5F7400
+ 2315              	.LASF64:
+ 2316 00bb 4E454F5F 		.ascii	"NEO_GPS_Location\000"
+ 2316      4750535F 
+ 2316      4C6F6361 
+ 2316      74696F6E 
+ 2316      00
+ 2317              	.LASF41:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 50
+
+
+ 2318 00cc 4750535F 		.ascii	"GPS_UART_RX_Wr_Index\000"
+ 2318      55415254 
+ 2318      5F52585F 
+ 2318      57725F49 
+ 2318      6E646578 
+ 2319              	.LASF57:
+ 2320 00e1 55415254 		.ascii	"UART_GetChar\000"
+ 2320      5F476574 
+ 2320      43686172 
+ 2320      00
+ 2321              	.LASF54:
+ 2322 00ee 55415254 		.ascii	"UART_PutString\000"
+ 2322      5F507574 
+ 2322      53747269 
+ 2322      6E6700
+ 2323              	.LASF12:
+ 2324 00fd 75696E74 		.ascii	"uint8_t\000"
+ 2324      385F7400 
+ 2325              	.LASF47:
+ 2326 0105 4750535F 		.ascii	"GPS_GetChar\000"
+ 2326      47657443 
+ 2326      68617200 
+ 2327              	.LASF25:
+ 2328 0111 4E5F4F52 		.ascii	"N_OR_S\000"
+ 2328      5F5300
+ 2329              	.LASF59:
+ 2330 0118 4750535F 		.ascii	"GPS_PutString\000"
+ 2330      50757453 
+ 2330      7472696E 
+ 2330      6700
+ 2331              	.LASF36:
+ 2332 0126 4454435F 		.ascii	"DTC_DEBUG\000"
+ 2332      44454255 
+ 2332      4700
+ 2333              	.LASF15:
+ 2334 0130 666C6F61 		.ascii	"float\000"
+ 2334      7400
+ 2335              	.LASF26:
+ 2336 0136 455F4F52 		.ascii	"E_OR_W\000"
+ 2336      5F5700
+ 2337              	.LASF44:
+ 2338 013d 4454435F 		.ascii	"DTC_DEBUG_TIMER\000"
+ 2338      44454255 
+ 2338      475F5449 
+ 2338      4D455200 
+ 2339              	.LASF6:
+ 2340 014d 6C6F6E67 		.ascii	"long int\000"
+ 2340      20696E74 
+ 2340      00
+ 2341              	.LASF42:
+ 2342 0156 4750535F 		.ascii	"GPS_UART_RX_Rd_Index\000"
+ 2342      55415254 
+ 2342      5F52585F 
+ 2342      52645F49 
+ 2342      6E646578 
+ 2343              	.LASF52:
+ 2344 016b 4750535F 		.ascii	"GPS_Start\000"
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 51
+
+
+ 2344      53746172 
+ 2344      7400
+ 2345              	.LASF4:
+ 2346 0175 5F5F7569 		.ascii	"__uint8_t\000"
+ 2346      6E74385F 
+ 2346      7400
+ 2347              	.LASF27:
+ 2348 017f 44617461 		.ascii	"Data\000"
+ 2348      00
+ 2349              	.LASF23:
+ 2350 0184 4B6E6F74 		.ascii	"Knots\000"
+ 2350      7300
+ 2351              	.LASF24:
+ 2352 018a 44617465 		.ascii	"Date\000"
+ 2352      00
+ 2353              	.LASF18:
+ 2354 018f 6C6F6E67 		.ascii	"long double\000"
+ 2354      20646F75 
+ 2354      626C6500 
+ 2355              	.LASF1:
+ 2356 019b 756E7369 		.ascii	"unsigned char\000"
+ 2356      676E6564 
+ 2356      20636861 
+ 2356      7200
+ 2357              	.LASF35:
+ 2358 01a9 4765745F 		.ascii	"Get_GpsData\000"
+ 2358      47707344 
+ 2358      61746100 
+ 2359              	.LASF37:
+ 2360 01b5 64656275 		.ascii	"debugstr\000"
+ 2360      67737472 
+ 2360      00
+ 2361              	.LASF58:
+ 2362 01be 4750535F 		.ascii	"GPS_PutChar\000"
+ 2362      50757443 
+ 2362      68617200 
+ 2363              	.LASF0:
+ 2364 01ca 7369676E 		.ascii	"signed char\000"
+ 2364      65642063 
+ 2364      68617200 
+ 2365              	.LASF10:
+ 2366 01d6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2366      206C6F6E 
+ 2366      6720756E 
+ 2366      7369676E 
+ 2366      65642069 
+ 2367              	.LASF14:
+ 2368 01ed 75696E74 		.ascii	"uint32_t\000"
+ 2368      33325F74 
+ 2368      00
+ 2369              	.LASF11:
+ 2370 01f6 756E7369 		.ascii	"unsigned int\000"
+ 2370      676E6564 
+ 2370      20696E74 
+ 2370      00
+ 2371              	.LASF22:
+ 2372 0203 6C6F6E67 		.ascii	"longitude\000"
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 52
+
+
+ 2372      69747564 
+ 2372      6500
+ 2373              	.LASF21:
+ 2374 020d 6C617469 		.ascii	"latitude\000"
+ 2374      74756465 
+ 2374      00
+ 2375              	.LASF49:
+ 2376 0216 73707269 		.ascii	"sprintf\000"
+ 2376      6E746600 
+ 2377              	.LASF20:
+ 2378 021e 74696D65 		.ascii	"time\000"
+ 2378      00
+ 2379              	.LASF60:
+ 2380 0223 55415254 		.ascii	"UART_GetTxBufferSize\000"
+ 2380      5F476574 
+ 2380      54784275 
+ 2380      66666572 
+ 2380      53697A65 
+ 2381              	.LASF3:
+ 2382 0238 73686F72 		.ascii	"short unsigned int\000"
+ 2382      7420756E 
+ 2382      7369676E 
+ 2382      65642069 
+ 2382      6E7400
+ 2383              	.LASF17:
+ 2384 024b 63686172 		.ascii	"char\000"
+ 2384      00
+ 2385              	.LASF46:
+ 2386 0250 4750535F 		.ascii	"GPS_GetRxBufferSize\000"
+ 2386      47657452 
+ 2386      78427566 
+ 2386      66657253 
+ 2386      697A6500 
+ 2387              	.LASF65:
+ 2388 0264 6D61696E 		.ascii	"main\000"
+ 2388      00
+ 2389              	.LASF51:
+ 2390 0269 55415254 		.ascii	"UART_Start\000"
+ 2390      5F537461 
+ 2390      727400
+ 2391              	.LASF13:
+ 2392 0274 696E7433 		.ascii	"int32_t\000"
+ 2392      325F7400 
+ 2393              	.LASF38:
+ 2394 027c 4E65774C 		.ascii	"NewLine\000"
+ 2394      696E6500 
+ 2395              	.LASF28:
+ 2396 0284 62756666 		.ascii	"buffer\000"
+ 2396      657200
+ 2397              	.LASF62:
+ 2398 028b 6D61696E 		.ascii	"main.c\000"
+ 2398      2E6300
+ 2399              	.LASF8:
+ 2400 0292 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2400      20756E73 
+ 2400      69676E65 
+ 2400      6420696E 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 53
+
+
+ 2400      7400
+ 2401              	.LASF16:
+ 2402 02a4 646F7562 		.ascii	"double\000"
+ 2402      6C6500
+ 2403              	.LASF5:
+ 2404 02ab 5F5F696E 		.ascii	"__int32_t\000"
+ 2404      7433325F 
+ 2404      7400
+ 2405              	.LASF31:
+ 2406 02b5 4465675F 		.ascii	"Deg_Val\000"
+ 2406      56616C00 
+ 2407              	.LASF34:
+ 2408 02bd 47707344 		.ascii	"GpsData\000"
+ 2408      61746100 
+ 2409              	.LASF48:
+ 2410 02c5 73747273 		.ascii	"strstr\000"
+ 2410      747200
+ 2411              	.LASF30:
+ 2412 02cc 4750535F 		.ascii	"GPS_GPSData\000"
+ 2412      47505344 
+ 2412      61746100 
+ 2413              	.LASF39:
+ 2414 02d8 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2414      52784275 
+ 2414      66666572 
+ 2414      00
+ 2415              	.LASF61:
+ 2416 02e5 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2416      43313120 
+ 2416      352E342E 
+ 2416      31203230 
+ 2416      31363036 
+ 2417 0318 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2417      20726576 
+ 2417      6973696F 
+ 2417      6E203233 
+ 2417      37373135 
+ 2418 034b 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 2418      66756E63 
+ 2418      74696F6E 
+ 2418      2D736563 
+ 2418      74696F6E 
+ 2419              	.LASF55:
+ 2420 0373 43794465 		.ascii	"CyDelay\000"
+ 2420      6C617900 
+ 2421              	.LASF43:
+ 2422 037b 4750535F 		.ascii	"GPS_UART_RX_Full\000"
+ 2422      55415254 
+ 2422      5F52585F 
+ 2422      46756C6C 
+ 2422      00
+ 2423              	.LASF53:
+ 2424 038c 50575F47 		.ascii	"PW_GPS_Write\000"
+ 2424      50535F57 
+ 2424      72697465 
+ 2424      00
+ 2425              	.LASF45:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccbVr9K6.s 			page 54
+
+
+ 2426 0399 4750535F 		.ascii	"GPS_Data\000"
+ 2426      44617461 
+ 2426      00
+ 2427              	.LASF56:
+ 2428 03a2 55415254 		.ascii	"UART_PutChar\000"
+ 2428      5F507574 
+ 2428      43686172 
+ 2428      00
+ 2429              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

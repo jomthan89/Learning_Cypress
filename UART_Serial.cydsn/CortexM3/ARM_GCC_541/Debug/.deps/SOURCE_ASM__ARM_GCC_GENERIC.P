@@ -1,0 +1,10 @@
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/CortexM3/ARM_GCC_541/Debug/CyBootAsmGnu.o : D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevicegnu.inc D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyfittergnu.inc 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyBootAsmGnu.s : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevicegnu.inc : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevicegnu_trm.inc : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyfittergnu.inc : 
+

@@ -1,0 +1,11 @@
+C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\LED_Blinking_PWM\LED_BlinkingPWM.cydsn\LED_BlinkingPWM.cyprj|4ce439e8-be08-41a5-80d1-d10b857ec150
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|9c5c3a51-f472-487e-b6cc-aee4ea6e240f
+C:\Users\Mark Hughes\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|8cb8e4c3-7d9e-4182-829b-ab72c58b7ba6
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|cb57ac68-10ec-4dad-9a18-da050084b527
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|c52054af-fa24-48ff-b0fc-5162e3c4bcee
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|c05878c6-6d7f-48b2-a5aa-6b8d5b0ff41e
+C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\LED_Blink\LED_Blinking.cydsn\LED_Blinking.cyprj|de0d20d0-daa7-4895-a1c1-dc999223cef2
+C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\LED_FW\LED_BlinkingFW.cydsn\LED_BlinkingFW.cyprj|f08794c2-1105-4b81-ab34-0167c3dbbf7d
+C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\UART_Serial.cydsn\UART_Serial.cyprj|9ba8e8b6-7127-4356-86e5-fba20f26b07d
+C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\UART_GPS_Serial.cydsn\UART_GPS_Serial.cyprj|c5529b94-3555-4fa7-9c07-702c9dcb6d8d
+C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\UARTBypass.cydsn\UARTBypass.cyprj|a1ec5e05-1404-48b8-84bc-ded5152e4f38

@@ -1,0 +1,46 @@
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/CortexM3/ARM_GCC_541/Debug/main.o : D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/Clock_115200.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyDmac.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyFlash.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyLib.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CySpc.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/UART_Serial.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cmsis_armcc.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cmsis_compiler.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cmsis_gcc.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/core_cm3.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyPm.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevice.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevice_trm.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydisabledsheets.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyfitter.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cypins.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cytypes.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/project.h D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/main.c 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/Clock_115200.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyDmac.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyFlash.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CyLib.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/CySpc.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/UART_Serial.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cmsis_armcc.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cmsis_compiler.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cmsis_gcc.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/core_cm3.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/core_cm3_psoc5.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyPm.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cy_em_eeprom.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevice.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydevice_trm.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cydisabledsheets.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyfitter.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cyfitter_cfg.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cypins.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/cytypes.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/Generated_Source/PSoC5/project.h : 
+
+D:/WORK/Study/Cypress_Study/Study/UART_Serial.cydsn/main.c : 
+
