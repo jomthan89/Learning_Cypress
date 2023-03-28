@@ -85,7 +85,7 @@ int main(void)
     
     char uart2_tx_buffer[UART2_BUFFER_SIZE];
     
-    while(1)
+    while(1) //loop forever
     {
         /* Place your application code here. */
         // Read data from UART1 (GPS)

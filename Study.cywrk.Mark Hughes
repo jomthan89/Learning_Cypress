@@ -16,6 +16,7 @@
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Study\GPS_Extract\Source Files\main.c">
 <ExpandedNodeIds>
 <v>Study</v>
+<v>Study\GPS_Enhanced</v>
 <v>Study\GPS_Enhanced\TopDesign</v>
 <v>Study\GPS_Enhanced\GPS_Enhanced.cydwr</v>
 <v>Study\GPS_Enhanced\GPS_Enhanced.cydwr\Pins</v>
@@ -138,8 +139,32 @@
 <v>Study\UART_Serial\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
-<v>Study</v>
-<v>Study\GPS_Enhanced</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\GPS_UART</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\GPS_UART_IntClock</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\OUTPUT_UART</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\OUTPUT_UART_IntClock</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\PW_GPS</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cycodeshareexport.ld</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cycodeshareimport.ld</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cycodeshareimport.scat</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydevice.h</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydevice_trm.h</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydevicegnu.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydevicegnu_trm.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydeviceiar.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydeviceiar_trm.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydevicerv.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydevicerv_trm.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cydisabledsheets.h</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cyfitter.h</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cyfitter_cfg.c</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cyfitter_cfg.h</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cyfittergnu.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cyfitteriar.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cyfitterrv.inc</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\cymetadata.c</v>
+<v>Study\GPS_Enhanced\Generated_Source\PSoC5\project.h</v>
 <v>Study\GPS_Extract</v>
 <v>Study\GPS_Extract\TopDesign</v>
 <v>Study\GPS_Extract\GPS_Extract.cydwr</v>
@@ -161,30 +186,6 @@
 <v>Study\GPS_Extract\Generated_Source\PSoC5\cy_boot</v>
 <v>Study\GPS_Extract\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
 <v>Study\GPS_Extract\Generated_Source\PSoC5\GPS</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\GPS_IntClock</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\PW_GPS</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\UART</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\UART_IntClock</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cycodeshareexport.ld</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cycodeshareimport.ld</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cycodeshareimport.scat</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevice.h</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevice_trm.h</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicegnu.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicegnu_trm.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydeviceiar.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydeviceiar_trm.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicerv.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicerv_trm.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cydisabledsheets.h</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitter.h</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitter_cfg.c</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitter_cfg.h</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfittergnu.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitteriar.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitterrv.inc</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\cymetadata.c</v>
-<v>Study\GPS_Extract\Generated_Source\PSoC5\project.h</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
@@ -394,51 +395,9 @@
 <VisibleNodeIds>
 <v>Study</v>
 <v>Study\GPS_Enhanced</v>
-<v>Study\GPS_Enhanced\CortexM3</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_BOOT.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_INT.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_IntClock.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_PM.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_BOOT.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_INT.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_IntClock.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_PM.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\PW_GPS.lst</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\GPS_Enhanced.elf</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\GPS_Enhanced.hex</v>
-<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\GPS_Enhanced.map</v>
-<v>Study\GPS_Enhanced\GPS_Enhanced.gpdsc</v>
 <v>Study\GPS_Enhanced\GPS_Enhanced.rpt</v>
 <v>Study\GPS_Enhanced\GPS_Enhanced_timing.html</v>
 <v>Study\GPS_Extract</v>
-<v>Study\GPS_Extract\CortexM3</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
