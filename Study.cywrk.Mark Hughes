@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Study\GPS_Extract\Source Files\main.c">
 <ExpandedNodeIds>
 <v>Study</v>
 <v>Study\GPS_Enhanced\TopDesign</v>
@@ -137,7 +137,55 @@
 <v>Study\UART_Serial\Generated_Source</v>
 <v>Study\UART_Serial\Generated_Source\PSoC5</v>
 </ExpandedNodeIds>
-<VisibleNodeIds />
+<VisibleNodeIds>
+<v>Study</v>
+<v>Study\GPS_Enhanced</v>
+<v>Study\GPS_Extract</v>
+<v>Study\GPS_Extract\TopDesign</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\Pins</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\Analog</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\Clocks</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\Interrupts</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\DMA</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\System</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\Directives</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\Flash Security</v>
+<v>Study\GPS_Extract\GPS_Extract.cydwr\EEPROM</v>
+<v>Study\GPS_Extract\Header Files</v>
+<v>Study\GPS_Extract\Header Files\cyapicallbacks.h</v>
+<v>Study\GPS_Extract\Source Files</v>
+<v>Study\GPS_Extract\Source Files\main.c</v>
+<v>Study\GPS_Extract\Generated_Source</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cy_boot</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\Em_EEPROM_Dynamic</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\GPS</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\GPS_IntClock</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\PW_GPS</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\UART</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\UART_IntClock</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cycodeshareexport.ld</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cycodeshareimport.ld</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cycodeshareimport.scat</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevice.h</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevice_trm.h</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicegnu.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicegnu_trm.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydeviceiar.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydeviceiar_trm.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicerv.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydevicerv_trm.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cydisabledsheets.h</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitter.h</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitter_cfg.c</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitter_cfg.h</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfittergnu.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitteriar.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cyfitterrv.inc</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\cymetadata.c</v>
+<v>Study\GPS_Extract\Generated_Source\PSoC5\project.h</v>
+</VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
@@ -164,7 +212,30 @@
 <v>Study\UART_Serial\TopDesign</v>
 <v>Study\UART_Serial\TopDesign\TopDesign.cysch</v>
 </ExpandedNodeIds>
-<VisibleNodeIds />
+<VisibleNodeIds>
+<v>Study</v>
+<v>Study\GPS_Enhanced</v>
+<v>Study\GPS_Enhanced\TopDesign</v>
+<v>Study\GPS_Enhanced\TopDesign\TopDesign.cysch</v>
+<v>Study\GPS_Extract</v>
+<v>Study\GPS_Extract\TopDesign</v>
+<v>Study\GPS_Extract\TopDesign\TopDesign.cysch</v>
+<v>Study\LED_Blinking</v>
+<v>Study\LED_Blinking\TopDesign</v>
+<v>Study\LED_Blinking\TopDesign\TopDesign.cysch</v>
+<v>Study\LED_BlinkingFW</v>
+<v>Study\LED_BlinkingFW\TopDesign</v>
+<v>Study\LED_BlinkingFW\TopDesign\TopDesign.cysch</v>
+<v>Study\LED_BlinkingPWM</v>
+<v>Study\LED_BlinkingPWM\TopDesign</v>
+<v>Study\LED_BlinkingPWM\TopDesign\TopDesign.cysch</v>
+<v>Study\UART_GPS_Serial</v>
+<v>Study\UART_GPS_Serial\TopDesign</v>
+<v>Study\UART_GPS_Serial\TopDesign\TopDesign.cysch</v>
+<v>Study\UART_Serial</v>
+<v>Study\UART_Serial\TopDesign</v>
+<v>Study\UART_Serial\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 <CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
 <ExpandedNodeIds>
@@ -320,7 +391,55 @@
 <v>Study\UART_Serial\UART_Serial.rpt</v>
 <v>Study\UART_Serial\UART_Serial_timing.html</v>
 </ExpandedNodeIds>
-<VisibleNodeIds />
+<VisibleNodeIds>
+<v>Study</v>
+<v>Study\GPS_Enhanced</v>
+<v>Study\GPS_Enhanced\CortexM3</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\CySpc.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_BOOT.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_INT.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_IntClock.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\GPS_UART_PM.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\main.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_BOOT.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_INT.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_IntClock.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\OUTPUT_UART_PM.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\Listing Files\PW_GPS.lst</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\GPS_Enhanced.elf</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\GPS_Enhanced.hex</v>
+<v>Study\GPS_Enhanced\CortexM3\ARM_GCC_541\Debug\GPS_Enhanced.map</v>
+<v>Study\GPS_Enhanced\GPS_Enhanced.gpdsc</v>
+<v>Study\GPS_Enhanced\GPS_Enhanced.rpt</v>
+<v>Study\GPS_Enhanced\GPS_Enhanced_timing.html</v>
+<v>Study\GPS_Extract</v>
+<v>Study\GPS_Extract\CortexM3</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\Cm3Start.lst</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyDmac.lst</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
+<v>Study\GPS_Extract\CortexM3\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
+</VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
 <TreeKeysV2>
@@ -390,7 +509,55 @@
 <v>Study\UART_Serial\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>Study\UART_Serial\UART_v2_50.pdf</v>
 </ExpandedNodeIds>
-<VisibleNodeIds />
+<VisibleNodeIds>
+<v>Study</v>
+<v>Study\GPS_Enhanced</v>
+<v>Study\GPS_Enhanced\PSoC 5LP Architecture TRM</v>
+<v>Study\GPS_Enhanced\CY8C52LP Family Datasheet</v>
+<v>Study\GPS_Enhanced\System Reference Guides</v>
+<v>Study\GPS_Enhanced\System Reference Guides\cy_boot_v6_0</v>
+<v>Study\GPS_Enhanced\cy_pins_v2_20</v>
+<v>Study\GPS_Enhanced\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Study\GPS_Enhanced\UART_v2_50</v>
+<v>Study\GPS_Enhanced\UART_v2_50\UART_v2_50.pdf</v>
+<v>Study\GPS_Extract</v>
+<v>Study\GPS_Extract\PSoC 5LP Architecture TRM</v>
+<v>Study\GPS_Extract\CY8C52LP Family Datasheet</v>
+<v>Study\GPS_Extract\System Reference Guides</v>
+<v>Study\GPS_Extract\System Reference Guides\cy_boot_v6_0</v>
+<v>Study\GPS_Extract\cy_pins_v2_20</v>
+<v>Study\GPS_Extract\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
+<v>Study\GPS_Extract\UART_v2_50</v>
+<v>Study\GPS_Extract\UART_v2_50\UART_v2_50.pdf</v>
+<v>Study\LED_Blinking</v>
+<v>Study\LED_Blinking\PSoC 5LP Architecture TRM</v>
+<v>Study\LED_Blinking\CY8C52LP Family Datasheet</v>
+<v>Study\LED_Blinking\System Reference Guides</v>
+<v>Study\LED_Blinking\System Reference Guides\cy_boot_v6_0</v>
+<v>Study\LED_Blinking\cy_pins_v2_20.pdf</v>
+<v>Study\LED_BlinkingFW</v>
+<v>Study\LED_BlinkingFW\PSoC 5LP Architecture TRM</v>
+<v>Study\LED_BlinkingFW\CY8C52LP Family Datasheet</v>
+<v>Study\LED_BlinkingFW\System Reference Guides</v>
+<v>Study\LED_BlinkingFW\System Reference Guides\cy_boot_v6_0</v>
+<v>Study\LED_BlinkingFW\cy_pins_v2_20.pdf</v>
+<v>Study\LED_BlinkingPWM</v>
+<v>Study\LED_BlinkingPWM\PSoC 5LP Architecture TRM</v>
+<v>Study\LED_BlinkingPWM\CY8C52LP Family Datasheet</v>
+<v>Study\LED_BlinkingPWM\System Reference Guides</v>
+<v>Study\LED_BlinkingPWM\System Reference Guides\cy_boot_v6_0</v>
+<v>Study\LED_BlinkingPWM\cy_clock_v2_20.pdf</v>
+<v>Study\LED_BlinkingPWM\cy_pins_v2_20.pdf</v>
+<v>Study\LED_BlinkingPWM\PWM_v3_30.pdf</v>
+<v>Study\UART_GPS_Serial</v>
+<v>Study\UART_GPS_Serial\PSoC 5LP Architecture TRM</v>
+<v>Study\UART_GPS_Serial\CY8C52LP Family Datasheet</v>
+<v>Study\UART_GPS_Serial\System Reference Guides</v>
+<v>Study\UART_GPS_Serial\System Reference Guides\cy_boot_v6_0</v>
+<v>Study\UART_GPS_Serial\cy_constant_v1_0</v>
+<v>Study\UART_GPS_Serial\cy_constant_v1_0\cy_constant_v1_0.pdf</v>
+<v>Study\UART_GPS_Serial\cy_pins_v2_20</v>
+</VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStatesV2>
 </CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
@@ -404,10 +571,8 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\GPS_Enhanced.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\GPS_Enhanced.cydsn\GPS_Enhanced.cydwr" />
-<name v=".\GPS_Enhanced.cydsn\main.c" />
-<name v=".\UART_GPS_Serial.cydsn\main.c" />
+<name v=".\GPS_Extract.cydsn\main.c" />
+<name v=".\GPS_Extract.cydsn\GPS_Extract.cydwr" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -415,7 +580,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1371, 703" SelectedTabbedMdiWindow="eb07341e-9ed0-42bf-a78b-48d0039ccb13"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="69d1fe7c-ff96-4882-9de6-181379fa3e71" /><DocumentWindow Key="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\TopDesign\TopDesign.cysch" Guid="a7a6b949-8995-41db-8a1b-0c6509f896a0" /><DocumentWindow Key="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\GPS_Enhanced.cydwr" Guid="1731793a-0a1d-414c-8113-cbc1658a7dc6" /><DocumentWindow Key="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Enhanced.cydsn\main.c" Guid="30ef4380-390c-442e-9349-542eabddb9c0" /><DocumentWindow Key="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\UART_GPS_Serial.cydsn\main.c" Guid="eb07341e-9ed0-42bf-a78b-48d0039ccb13" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="1371, 703" SelectedTabbedMdiWindow="0346946a-1601-485b-a4aa-d278d77ade29"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="69d1fe7c-ff96-4882-9de6-181379fa3e71" /><DocumentWindow Key="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\main.c" Guid="0346946a-1601-485b-a4aa-d278d77ade29" /><DocumentWindow Key="C:\Users\Mark Hughes\Desktop\Work\WORK\WORK\Study\Cypress_Study\Study\GPS_Extract.cydsn\GPS_Extract.cydwr" Guid="03227137-1b71-4892-82e6-6a61a7325098" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

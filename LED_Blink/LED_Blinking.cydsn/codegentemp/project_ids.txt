@@ -1,0 +1,7 @@
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|6562a375-aa04-49a5-b446-a5228b9f899a
+C:\Users\tonkl\Documents\PSoC Creator\4.4\Downloads ( 4.4).cylib\Downloads ( 4.4).cyprj|0c6eec2d-d761-4f0a-8727-e8ee4f35dc90
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|fac457eb-88bf-41e5-b1b9-21efbd83cd90
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|891cb5ae-5928-4500-8cd1-b1a818bdfedc
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|a42fb78a-c64d-4fc0-b424-2c8c41ad1502
+D:\WORK\Study\Cypress_Study\LED_Blink\LED_Blinking.cydsn\LED_Blinking.cyprj|da06d4da-6146-41a8-8dd7-a46c6a011dd7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.4\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|f5a90f63-c473-40d3-8074-b190c18ceb4a

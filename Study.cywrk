@@ -7,13 +7,13 @@
 <wrkspc_folders />
 <files />
 <projects>
-<v>..\LED_Blinking_PWM\LED_BlinkingPWM.cydsn\LED_BlinkingPWM.cyprj</v>
-<v>..\LED_Blink\LED_Blinking.cydsn\LED_Blinking.cyprj</v>
-<v>..\LED_FW\LED_BlinkingFW.cydsn\LED_BlinkingFW.cyprj</v>
 <v>.\UART_Serial.cydsn\UART_Serial.cyprj</v>
 <v>.\UART_GPS_Serial.cydsn\UART_GPS_Serial.cyprj</v>
 <v>.\GPS_Enhanced.cydsn\GPS_Enhanced.cyprj</v>
 <v>.\GPS_Extract.cydsn\GPS_Extract.cyprj</v>
+<v>.\LED_Blink\LED_Blinking.cydsn\LED_Blinking.cyprj</v>
+<v>.\LED_Blinking_PWM\LED_BlinkingPWM.cydsn\LED_BlinkingPWM.cyprj</v>
+<v>.\LED_FW\LED_BlinkingFW.cydsn\LED_BlinkingFW.cyprj</v>
 </projects>
 <workspace_id v="749a65ee-0e42-4363-8267-66675df30bf3" />
 <WriteAppVersionLastSavedWith v="4.4.0.80" />
