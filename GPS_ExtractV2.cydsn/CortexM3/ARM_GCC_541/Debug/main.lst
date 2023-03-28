@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 1
 
 
    1              		.syntax unified
@@ -44,31 +44,27 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
   14:main.c        **** #include <stdio.h>
   15:main.c        **** #include <stdlib.h>
   16:main.c        **** 
-  17:main.c        **** #include <stdio.h>
-  18:main.c        **** #include <stdlib.h>
-  19:main.c        **** #include <string.h>
+  17:main.c        **** #define UART1_BUFFER_SIZE 128
+  18:main.c        **** #define UART2_BUFFER_SIZE 128
+  19:main.c        **** #define MESSAGE_INTERVAL_MS 1000
   20:main.c        **** 
-  21:main.c        **** #define UART1_BUFFER_SIZE 128
-  22:main.c        **** #define UART2_BUFFER_SIZE 128
-  23:main.c        **** #define MESSAGE_INTERVAL_MS 1000
-  24:main.c        **** 
-  25:main.c        **** // Global variables to store the GPS data
-  26:main.c        **** char utc_time[10];
-  27:main.c        **** char latitude[11];
-  28:main.c        **** char longitude[12];
-  29:main.c        **** char speed_over_ground[6];
-  30:main.c        **** char date[7];
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 2
+  21:main.c        **** // Global variables to store the GPS data
+  22:main.c        **** char utc_time[10];
+  23:main.c        **** char latitude[11];
+  24:main.c        **** char longitude[12];
+  25:main.c        **** char speed_over_ground[6];
+  26:main.c        **** char date[7];
+  27:main.c        **** 
+  28:main.c        **** char uart1_rx_buffer[UART1_BUFFER_SIZE];
+  29:main.c        **** uint32_t uart1_rx_buffer_pos = 0;
+  30:main.c        **** char uart2_tx_buffer[UART2_BUFFER_SIZE];
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 2
 
 
   31:main.c        **** 
-  32:main.c        **** char uart1_rx_buffer[UART1_BUFFER_SIZE];
-  33:main.c        **** uint32_t uart1_rx_buffer_pos = 0;
-  34:main.c        **** char uart2_tx_buffer[UART2_BUFFER_SIZE];
-  35:main.c        **** 
-  36:main.c        **** void parse_gnrmc_message(char* message)
-  37:main.c        **** {
-  28              		.loc 1 37 0
+  32:main.c        **** void parse_gnrmc_message(char* message)
+  33:main.c        **** {
+  28              		.loc 1 33 0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 0
   31              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -78,31 +74,31 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
   35              		.cfi_offset 4, -8
   36              		.cfi_offset 14, -4
   37              	.LVL1:
-  38:main.c        ****     // Split the message into individual fields
-  39:main.c        ****     char* field;
-  40:main.c        ****     int field_count = 0;
-  41:main.c        ****     field = strtok(message, ",");
-  38              		.loc 1 41 0
+  34:main.c        ****     // Split the message into individual fields
+  35:main.c        ****     char* field;
+  36:main.c        ****     int field_count = 0;
+  37:main.c        ****     field = strtok(message, ",");
+  38              		.loc 1 37 0
   39 0002 1A49     		ldr	r1, .L10
   40 0004 FFF7FEFF 		bl	strtok
   41              	.LVL2:
-  40:main.c        ****     field = strtok(message, ",");
-  42              		.loc 1 40 0
+  36:main.c        ****     field = strtok(message, ",");
+  42              		.loc 1 36 0
   43 0008 0024     		movs	r4, #0
-  42:main.c        ****     while (field != NULL)
-  44              		.loc 1 42 0
+  38:main.c        ****     while (field != NULL)
+  44              		.loc 1 38 0
   45 000a 2BE0     		b	.L2
   46              	.LVL3:
   47              	.L8:
-  43:main.c        ****     {
-  44:main.c        ****         if (field_count == 1)
-  48              		.loc 1 44 0
+  39:main.c        ****     {
+  40:main.c        ****         if (field_count == 1)
+  48              		.loc 1 40 0
   49 000c 012C     		cmp	r4, #1
   50 000e 05D1     		bne	.L3
-  45:main.c        ****         {
-  46:main.c        ****             // Extract the UTC time
-  47:main.c        ****             strncpy(utc_time, field, 10);
-  51              		.loc 1 47 0
+  41:main.c        ****         {
+  42:main.c        ****             // Extract the UTC time
+  43:main.c        ****             strncpy(utc_time, field, 10);
+  51              		.loc 1 43 0
   52 0010 0A22     		movs	r2, #10
   53 0012 0146     		mov	r1, r0
   54 0014 1648     		ldr	r0, .L10+4
@@ -112,19 +108,19 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
   58 001a 1EE0     		b	.L4
   59              	.LVL6:
   60              	.L3:
-  48:main.c        ****         }
-  49:main.c        ****         else if (field_count == 3)
-  61              		.loc 1 49 0
+  44:main.c        ****         }
+  45:main.c        ****         else if (field_count == 3)
+  61              		.loc 1 45 0
   62 001c 032C     		cmp	r4, #3
   63 001e 05D1     		bne	.L5
-  50:main.c        ****         {
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 3
-
-
-  51:main.c        ****             // Extract the latitude
-  52:main.c        ****             strncpy(latitude, field, 11);
-  64              		.loc 1 52 0
+  46:main.c        ****         {
+  47:main.c        ****             // Extract the latitude
+  48:main.c        ****             strncpy(latitude, field, 11);
+  64              		.loc 1 48 0
   65 0020 0B22     		movs	r2, #11
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 3
+
+
   66 0022 0146     		mov	r1, r0
   67 0024 1348     		ldr	r0, .L10+8
   68              	.LVL7:
@@ -133,15 +129,15 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
   71 002a 16E0     		b	.L4
   72              	.LVL9:
   73              	.L5:
-  53:main.c        ****         }
-  54:main.c        ****         else if (field_count == 5)
-  74              		.loc 1 54 0
+  49:main.c        ****         }
+  50:main.c        ****         else if (field_count == 5)
+  74              		.loc 1 50 0
   75 002c 052C     		cmp	r4, #5
   76 002e 05D1     		bne	.L6
-  55:main.c        ****         {
-  56:main.c        ****             // Extract the longitude
-  57:main.c        ****             strncpy(longitude, field, 12);
-  77              		.loc 1 57 0
+  51:main.c        ****         {
+  52:main.c        ****             // Extract the longitude
+  53:main.c        ****             strncpy(longitude, field, 12);
+  77              		.loc 1 53 0
   78 0030 0C22     		movs	r2, #12
   79 0032 0146     		mov	r1, r0
   80 0034 1048     		ldr	r0, .L10+12
@@ -151,15 +147,15 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
   84 003a 0EE0     		b	.L4
   85              	.LVL12:
   86              	.L6:
-  58:main.c        ****         }
-  59:main.c        ****         else if (field_count == 7)
-  87              		.loc 1 59 0
+  54:main.c        ****         }
+  55:main.c        ****         else if (field_count == 7)
+  87              		.loc 1 55 0
   88 003c 072C     		cmp	r4, #7
   89 003e 05D1     		bne	.L7
-  60:main.c        ****         {
-  61:main.c        ****             // Extract the speed over ground
-  62:main.c        ****             strncpy(speed_over_ground, field, 6);
-  90              		.loc 1 62 0
+  56:main.c        ****         {
+  57:main.c        ****             // Extract the speed over ground
+  58:main.c        ****             strncpy(speed_over_ground, field, 6);
+  90              		.loc 1 58 0
   91 0040 0622     		movs	r2, #6
   92 0042 0146     		mov	r1, r0
   93 0044 0D48     		ldr	r0, .L10+16
@@ -169,45 +165,45 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
   97 004a 06E0     		b	.L4
   98              	.LVL15:
   99              	.L7:
-  63:main.c        ****         }
-  64:main.c        ****         else if (field_count == 9)
- 100              		.loc 1 64 0
+  59:main.c        ****         }
+  60:main.c        ****         else if (field_count == 9)
+ 100              		.loc 1 60 0
  101 004c 092C     		cmp	r4, #9
  102 004e 04D1     		bne	.L4
-  65:main.c        ****         {
-  66:main.c        ****             // Extract the date
-  67:main.c        ****             strncpy(date, field, 7);
- 103              		.loc 1 67 0
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 4
-
-
+  61:main.c        ****         {
+  62:main.c        ****             // Extract the date
+  63:main.c        ****             strncpy(date, field, 7);
+ 103              		.loc 1 63 0
  104 0050 0722     		movs	r2, #7
  105 0052 0146     		mov	r1, r0
  106 0054 0A48     		ldr	r0, .L10+20
  107              	.LVL16:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 4
+
+
  108 0056 FFF7FEFF 		bl	strncpy
  109              	.LVL17:
  110              	.L4:
-  68:main.c        ****         }
-  69:main.c        ****         
-  70:main.c        ****         field = strtok(NULL, ",");
- 111              		.loc 1 70 0
+  64:main.c        ****         }
+  65:main.c        ****         
+  66:main.c        ****         field = strtok(NULL, ",");
+ 111              		.loc 1 66 0
  112 005a 0449     		ldr	r1, .L10
  113 005c 0020     		movs	r0, #0
  114 005e FFF7FEFF 		bl	strtok
  115              	.LVL18:
-  71:main.c        ****         field_count++;
- 116              		.loc 1 71 0
+  67:main.c        ****         field_count++;
+ 116              		.loc 1 67 0
  117 0062 0134     		adds	r4, r4, #1
  118              	.LVL19:
  119              	.L2:
-  42:main.c        ****     {
- 120              		.loc 1 42 0
+  38:main.c        ****     {
+ 120              		.loc 1 38 0
  121 0064 0028     		cmp	r0, #0
  122 0066 D1D1     		bne	.L8
-  72:main.c        ****     }
-  73:main.c        **** }
- 123              		.loc 1 73 0
+  68:main.c        ****     }
+  69:main.c        **** }
+ 123              		.loc 1 69 0
  124 0068 10BD     		pop	{r4, pc}
  125              	.LVL20:
  126              	.L11:
@@ -230,102 +226,102 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  143              		.type	uart1_rx_isr, %function
  144              	uart1_rx_isr:
  145              	.LFB65:
-  74:main.c        **** 
-  75:main.c        **** CY_ISR(uart1_rx_isr)
-  76:main.c        **** {
- 146              		.loc 1 76 0
+  70:main.c        **** 
+  71:main.c        **** CY_ISR(uart1_rx_isr)
+  72:main.c        **** {
+ 146              		.loc 1 72 0
  147              		.cfi_startproc
  148              		@ args = 0, pretend = 0, frame = 0
  149              		@ frame_needed = 0, uses_anonymous_args = 0
  150 0000 08B5     		push	{r3, lr}
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 5
-
-
  151              		.cfi_def_cfa_offset 8
  152              		.cfi_offset 3, -8
  153              		.cfi_offset 14, -4
-  77:main.c        ****     if (UART1_GetRxBufferSize() > 0)
- 154              		.loc 1 77 0
+  73:main.c        ****     if (UART1_GetRxBufferSize() > 0)
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 5
+
+
+ 154              		.loc 1 73 0
  155 0002 FFF7FEFF 		bl	UART1_GetRxBufferSize
  156              	.LVL21:
  157 0006 E8B1     		cbz	r0, .L12
  158              	.LBB2:
-  78:main.c        ****         {
-  79:main.c        ****             char rx_byte = UART1_GetChar();
- 159              		.loc 1 79 0
+  74:main.c        ****         {
+  75:main.c        ****             char rx_byte = UART1_GetChar();
+ 159              		.loc 1 75 0
  160 0008 FFF7FEFF 		bl	UART1_GetChar
  161              	.LVL22:
-  80:main.c        ****             //UART_PutChar(rx_byte);
-  81:main.c        ****             // Check if we have received a complete message
-  82:main.c        ****             if (rx_byte == '\n' || uart1_rx_buffer_pos == UART1_BUFFER_SIZE - 1)
- 162              		.loc 1 82 0
+  76:main.c        ****             //UART_PutChar(rx_byte);
+  77:main.c        ****             // Check if we have received a complete message
+  78:main.c        ****             if (rx_byte == '\n' || uart1_rx_buffer_pos == UART1_BUFFER_SIZE - 1)
+ 162              		.loc 1 78 0
  163 000c 0A28     		cmp	r0, #10
  164 000e 03D0     		beq	.L14
- 165              		.loc 1 82 0 is_stmt 0 discriminator 1
+ 165              		.loc 1 78 0 is_stmt 0 discriminator 1
  166 0010 0D4B     		ldr	r3, .L18
  167 0012 1B68     		ldr	r3, [r3]
  168 0014 7F2B     		cmp	r3, #127
  169 0016 10D1     		bne	.L15
  170              	.L14:
-  83:main.c        ****             {
-  84:main.c        ****                 uart1_rx_buffer[uart1_rx_buffer_pos] = '\0';
- 171              		.loc 1 84 0 is_stmt 1
+  79:main.c        ****             {
+  80:main.c        ****                 uart1_rx_buffer[uart1_rx_buffer_pos] = '\0';
+ 171              		.loc 1 80 0 is_stmt 1
  172 0018 0B4B     		ldr	r3, .L18
  173 001a 1B68     		ldr	r3, [r3]
  174 001c 0B48     		ldr	r0, .L18+4
  175              	.LVL23:
  176 001e 0022     		movs	r2, #0
  177 0020 C254     		strb	r2, [r0, r3]
-  85:main.c        ****                 
-  86:main.c        ****                 // Check if the message is a GNRMC message
-  87:main.c        ****                 if (strncmp(uart1_rx_buffer, "$GNRMC", 6) == 0)
- 178              		.loc 1 87 0
+  81:main.c        ****                 
+  82:main.c        ****                 // Check if the message is a GNRMC message
+  83:main.c        ****                 if (strncmp(uart1_rx_buffer, "$GNRMC", 6) == 0)
+ 178              		.loc 1 83 0
  179 0022 0622     		movs	r2, #6
  180 0024 0A49     		ldr	r1, .L18+8
  181 0026 FFF7FEFF 		bl	strncmp
  182              	.LVL24:
  183 002a 10B9     		cbnz	r0, .L16
-  88:main.c        ****                 {
-  89:main.c        ****                     // Parse the message and extract the required data
-  90:main.c        ****                     parse_gnrmc_message(uart1_rx_buffer);
- 184              		.loc 1 90 0
+  84:main.c        ****                 {
+  85:main.c        ****                     // Parse the message and extract the required data
+  86:main.c        ****                     parse_gnrmc_message(uart1_rx_buffer);
+ 184              		.loc 1 86 0
  185 002c 0748     		ldr	r0, .L18+4
  186 002e FFF7FEFF 		bl	parse_gnrmc_message
  187              	.LVL25:
  188              	.L16:
-  91:main.c        ****                     
-  92:main.c        ****                     // Transmit the data over UART2
-  93:main.c        ****                     //snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Time: %s, Lat: %s, Long: %s, Sp
-  94:main.c        ****                              //utc_time, latitude, longitude, speed_over_ground, date);
-  95:main.c        ****                    //UART_PutString(uart2_tx_buffer);
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 6
+  87:main.c        ****                     
+  88:main.c        ****                     // Transmit the data over UART2
+  89:main.c        ****                     //snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Time: %s, Lat: %s, Long: %s, Sp
+  90:main.c        ****                              //utc_time, latitude, longitude, speed_over_ground, date);
+  91:main.c        ****                    //UART_PutString(uart2_tx_buffer);
+  92:main.c        ****                     //UART_PutString(latitude);
+  93:main.c        ****                     //UART_PutString("\r\n");
+  94:main.c        ****                     //UART_PutString(longitude);
+  95:main.c        ****                     //UART_PutString("\r\n");
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 6
 
 
-  96:main.c        ****                     //UART_PutString(latitude);
-  97:main.c        ****                     //UART_PutString("\r\n");
-  98:main.c        ****                     //UART_PutString(longitude);
-  99:main.c        ****                     //UART_PutString("\r\n");
- 100:main.c        ****                     //snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,T
- 101:main.c        ****                     //UART2_PutString(uart2_tx_buffer);
- 102:main.c        ****                 }
- 103:main.c        ****                 
- 104:main.c        ****                 uart1_rx_buffer_pos = 0;
- 189              		.loc 1 104 0
+  96:main.c        ****                     //snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,T
+  97:main.c        ****                     //UART2_PutString(uart2_tx_buffer);
+  98:main.c        ****                 }
+  99:main.c        ****                 
+ 100:main.c        ****                 uart1_rx_buffer_pos = 0;
+ 189              		.loc 1 100 0
  190 0032 0022     		movs	r2, #0
  191 0034 044B     		ldr	r3, .L18
  192 0036 1A60     		str	r2, [r3]
  193 0038 08BD     		pop	{r3, pc}
  194              	.LVL26:
  195              	.L15:
- 105:main.c        ****             }
- 106:main.c        ****             else
- 107:main.c        ****             {
- 108:main.c        ****                 uart1_rx_buffer[uart1_rx_buffer_pos] = rx_byte;
- 196              		.loc 1 108 0
+ 101:main.c        ****             }
+ 102:main.c        ****             else
+ 103:main.c        ****             {
+ 104:main.c        ****                 uart1_rx_buffer[uart1_rx_buffer_pos] = rx_byte;
+ 196              		.loc 1 104 0
  197 003a 044A     		ldr	r2, .L18+4
  198 003c D054     		strb	r0, [r2, r3]
- 109:main.c        ****                 uart1_rx_buffer_pos++;
- 199              		.loc 1 109 0
+ 105:main.c        ****                 uart1_rx_buffer_pos++;
+ 199              		.loc 1 105 0
  200 003e 0133     		adds	r3, r3, #1
  201 0040 014A     		ldr	r2, .L18
  202 0042 1360     		str	r3, [r2]
@@ -350,94 +346,93 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  221              		.type	main, %function
  222              	main:
  223              	.LFB66:
- 110:main.c        ****             }
- 111:main.c        ****         }
- 112:main.c        **** }
- 113:main.c        **** 
- 114:main.c        **** int main(void)
- 115:main.c        **** {
- 224              		.loc 1 115 0
+ 106:main.c        ****             }
+ 107:main.c        ****         }
+ 108:main.c        **** }
+ 109:main.c        **** 
+ 110:main.c        **** int main(void)
+ 111:main.c        **** {
+ 224              		.loc 1 111 0
  225              		.cfi_startproc
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 7
-
-
  226              		@ Volatile: function does not return.
  227              		@ args = 0, pretend = 0, frame = 0
  228              		@ frame_needed = 0, uses_anonymous_args = 0
  229 0000 00B5     		push	{lr}
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 7
+
+
  230              		.cfi_def_cfa_offset 4
  231              		.cfi_offset 14, -4
  232 0002 83B0     		sub	sp, sp, #12
  233              		.cfi_def_cfa_offset 16
- 116:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
- 234              		.loc 1 116 0
+ 112:main.c        ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 234              		.loc 1 112 0
  235              		.syntax unified
- 236              	@ 116 "main.c" 1
+ 236              	@ 112 "main.c" 1
  237 0004 62B6     		CPSIE   i
  238              	@ 0 "" 2
- 117:main.c        ****     
- 118:main.c        ****     
- 119:main.c        ****     
- 120:main.c        ****     PW_GPS_Write(1);
- 239              		.loc 1 120 0
+ 113:main.c        ****     
+ 114:main.c        ****     PW_GPS_Write(1);
+ 239              		.loc 1 114 0
  240              		.thumb
  241              		.syntax unified
  242 0006 0120     		movs	r0, #1
  243 0008 FFF7FEFF 		bl	PW_GPS_Write
  244              	.LVL28:
- 121:main.c        ****     
- 122:main.c        ****     // Initialize UART1 and UART2
- 123:main.c        ****     UART1_Start();
- 245              		.loc 1 123 0
+ 115:main.c        ****     
+ 116:main.c        ****     // Initialize UART1 and UART2
+ 117:main.c        ****     UART1_Start();
+ 245              		.loc 1 117 0
  246 000c FFF7FEFF 		bl	UART1_Start
  247              	.LVL29:
- 124:main.c        ****     UART2_Start();
- 248              		.loc 1 124 0
+ 118:main.c        ****     UART2_Start();
+ 248              		.loc 1 118 0
  249 0010 FFF7FEFF 		bl	UART2_Start
  250              	.LVL30:
- 125:main.c        ****     
- 126:main.c        ****     UART1_RX_ISR_StartEx(uart1_rx_isr);
- 251              		.loc 1 126 0
+ 119:main.c        ****     
+ 120:main.c        ****     UART1_RX_ISR_StartEx(uart1_rx_isr);
+ 251              		.loc 1 120 0
  252 0014 1548     		ldr	r0, .L24
  253 0016 FFF7FEFF 		bl	UART1_RX_ISR_StartEx
  254              	.LVL31:
- 127:main.c        ****     
- 128:main.c        ****     UART2_PutString("Initializing...\r\n");
- 255              		.loc 1 128 0
+ 121:main.c        ****     
+ 122:main.c        ****     UART2_PutString("Initializing...\r\n");
+ 255              		.loc 1 122 0
  256 001a 1548     		ldr	r0, .L24+4
  257 001c FFF7FEFF 		bl	UART2_PutString
  258              	.LVL32:
- 129:main.c        ****     UART2_PutString("Getting GPS Data...\r\n");
- 259              		.loc 1 129 0
+ 123:main.c        ****     UART2_PutString("Getting GPS Data...\r\n");
+ 259              		.loc 1 123 0
  260 0020 1448     		ldr	r0, .L24+8
  261 0022 FFF7FEFF 		bl	UART2_PutString
  262              	.LVL33:
- 130:main.c        ****     //UART1_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
- 131:main.c        ****     UART1_PutString("$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
- 263              		.loc 1 131 0
+ 124:main.c        ****     //UART1_PutString("$PMTK314,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+ 125:main.c        ****     UART1_PutString("$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
+ 263              		.loc 1 125 0
  264 0026 1448     		ldr	r0, .L24+12
  265 0028 FFF7FEFF 		bl	UART1_PutString
  266              	.LVL34:
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 8
-
-
- 132:main.c        ****     UART2_PutString("GPS data:\r\n");
- 267              		.loc 1 132 0
+ 126:main.c        ****     UART2_PutString("GPS data:\r\n");
+ 267              		.loc 1 126 0
  268 002c 1348     		ldr	r0, .L24+16
  269 002e FFF7FEFF 		bl	UART2_PutString
  270              	.LVL35:
- 133:main.c        ****     
- 134:main.c        ****     CySysTickStart();
- 271              		.loc 1 134 0
+ 127:main.c        ****     
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 8
+
+
+ 128:main.c        ****     CySysTickStart(); //Start_Timer
+ 271              		.loc 1 128 0
  272 0032 FFF7FEFF 		bl	CySysTickStart
  273              	.LVL36:
  274              	.L21:
- 135:main.c        ****     
- 136:main.c        ****     // Main loop
- 137:main.c        ****     while(1)
- 138:main.c        ****     {
- 139:main.c        ****         if (CySysTickGetValue() % (MESSAGE_INTERVAL_MS * 1000) == 0) {
- 275              		.loc 1 139 0
+ 129:main.c        ****     
+ 130:main.c        ****     // Main loop
+ 131:main.c        ****     while(1)
+ 132:main.c        ****     {
+ 133:main.c        ****         // Check if it's time to send a message
+ 134:main.c        ****         if (CySysTickGetValue() % (MESSAGE_INTERVAL_MS * 1000) == 0) {
+ 275              		.loc 1 134 0
  276 0036 FFF7FEFF 		bl	CySysTickGetValue
  277              	.LVL37:
  278 003a 114B     		ldr	r3, .L24+20
@@ -447,9 +442,9 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  282 0044 02FB1303 		mls	r3, r2, r3, r0
  283 0048 002B     		cmp	r3, #0
  284 004a F4D1     		bne	.L21
- 140:main.c        ****             
- 141:main.c        ****             snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,Time: %s \r
- 285              		.loc 1 141 0
+ 135:main.c        ****             
+ 136:main.c        ****             snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,Time: %s \r
+ 285              		.loc 1 136 0
  286 004c 0E4C     		ldr	r4, .L24+28
  287 004e 0F4B     		ldr	r3, .L24+32
  288 0050 0193     		str	r3, [sp, #4]
@@ -461,8 +456,8 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  294 005c 2046     		mov	r0, r4
  295 005e FFF7FEFF 		bl	snprintf
  296              	.LVL38:
- 142:main.c        ****             UART2_PutString(uart2_tx_buffer);
- 297              		.loc 1 142 0
+ 137:main.c        ****             UART2_PutString(uart2_tx_buffer);
+ 297              		.loc 1 137 0
  298 0062 2046     		mov	r0, r4
  299 0064 FFF7FEFF 		bl	UART2_PutString
  300              	.LVL39:
@@ -478,14 +473,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  310 0080 83DE1B43 		.word	1125899907
  311 0084 40420F00 		.word	1000000
  312 0088 00000000 		.word	uart2_tx_buffer
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 9
-
-
  313 008c 00000000 		.word	utc_time
  314 0090 00000000 		.word	longitude
  315 0094 00000000 		.word	latitude
  316 0098 78000000 		.word	.LC6
  317              		.cfi_endproc
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 9
+
+
  318              	.LFE66:
  319              		.size	main, .-main
  320              		.comm	uart2_tx_buffer,128,4
@@ -538,14 +533,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  348      6E677469 
  349              		.bss
  350              		.align	2
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 10
-
-
  351              		.set	.LANCHOR0,. + 0
  352              		.type	uart1_rx_buffer_pos, %object
  353              		.size	uart1_rx_buffer_pos, 4
  354              	uart1_rx_buffer_pos:
  355 0000 00000000 		.space	4
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 10
+
+
  356              		.text
  357              	.Letext0:
  358              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.4\\psoc creator\\import\\gnu\\arm\\5.4.
@@ -598,14 +593,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  405 004e 05       		.byte	0x5
  406 004f 85020000 		.4byte	.LASF4
  407 0053 03       		.uleb128 0x3
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 11
-
-
  408 0054 C7010000 		.4byte	.LASF6
  409 0058 02       		.byte	0x2
  410 0059 41       		.byte	0x41
  411 005a 5E000000 		.4byte	0x5e
  412 005e 02       		.uleb128 0x2
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 11
+
+
  413 005f 04       		.byte	0x4
  414 0060 07       		.byte	0x7
  415 0061 4B010000 		.4byte	.LASF7
@@ -658,14 +653,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  462 00ba 05       		.uleb128 0x5
  463 00bb 04       		.byte	0x4
  464 00bc A5000000 		.4byte	0xa5
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 12
-
-
  465 00c0 06       		.uleb128 0x6
  466 00c1 02020000 		.4byte	.LASF20
  467 00c5 01       		.byte	0x1
- 468 00c6 24       		.byte	0x24
+ 468 00c6 20       		.byte	0x20
  469 00c7 00000000 		.4byte	.LFB64
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 12
+
+
  470 00cb 84000000 		.4byte	.LFE64-.LFB64
  471 00cf 01       		.uleb128 0x1
  472 00d0 9C       		.byte	0x9c
@@ -673,19 +668,19 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  474 00d5 07       		.uleb128 0x7
  475 00d6 68000000 		.4byte	.LASF49
  476 00da 01       		.byte	0x1
- 477 00db 24       		.byte	0x24
+ 477 00db 20       		.byte	0x20
  478 00dc BA000000 		.4byte	0xba
  479 00e0 00000000 		.4byte	.LLST0
  480 00e4 08       		.uleb128 0x8
  481 00e5 76020000 		.4byte	.LASF18
  482 00e9 01       		.byte	0x1
- 483 00ea 27       		.byte	0x27
+ 483 00ea 23       		.byte	0x23
  484 00eb BA000000 		.4byte	0xba
  485 00ef 21000000 		.4byte	.LLST1
  486 00f3 08       		.uleb128 0x8
  487 00f4 1E000000 		.4byte	.LASF19
  488 00f8 01       		.byte	0x1
- 489 00f9 28       		.byte	0x28
+ 489 00f9 24       		.byte	0x24
  490 00fa 73000000 		.4byte	0x73
  491 00fe A2000000 		.4byte	.LLST2
  492 0102 09       		.uleb128 0x9
@@ -718,14 +713,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  519 0132 00000000 		.4byte	utc_time
  520 0136 0A       		.uleb128 0xa
  521 0137 01       		.uleb128 0x1
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 13
-
-
  522 0138 52       		.byte	0x52
  523 0139 01       		.uleb128 0x1
  524 013a 3A       		.byte	0x3a
  525 013b 00       		.byte	0
  526 013c 09       		.uleb128 0x9
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 13
+
+
  527 013d 2A000000 		.4byte	.LVL8
  528 0141 5A040000 		.4byte	0x45a
  529 0145 58010000 		.4byte	0x158
@@ -778,14 +773,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  576 0195 5A040000 		.4byte	0x45a
  577 0199 AC010000 		.4byte	0x1ac
  578 019d 0A       		.uleb128 0xa
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 14
-
-
  579 019e 01       		.uleb128 0x1
  580 019f 50       		.byte	0x50
  581 01a0 05       		.uleb128 0x5
  582 01a1 03       		.byte	0x3
  583 01a2 00000000 		.4byte	date
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 14
+
+
  584 01a6 0A       		.uleb128 0xa
  585 01a7 01       		.uleb128 0x1
  586 01a8 52       		.byte	0x52
@@ -811,7 +806,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  606 01c5 06       		.uleb128 0x6
  607 01c6 2E030000 		.4byte	.LASF21
  608 01ca 01       		.byte	0x1
- 609 01cb 4B       		.byte	0x4b
+ 609 01cb 47       		.byte	0x47
  610 01cc 00000000 		.4byte	.LFB65
  611 01d0 54000000 		.4byte	.LFE65-.LFB65
  612 01d4 01       		.uleb128 0x1
@@ -824,7 +819,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  619 01e7 08       		.uleb128 0x8
  620 01e8 30020000 		.4byte	.LASF22
  621 01ec 01       		.byte	0x1
- 622 01ed 4F       		.byte	0x4f
+ 622 01ed 4B       		.byte	0x4b
  623 01ee A5000000 		.4byte	0xa5
  624 01f2 C1000000 		.4byte	.LLST3
  625 01f6 0D       		.uleb128 0xd
@@ -838,14 +833,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  633 020d 01       		.uleb128 0x1
  634 020e 50       		.byte	0x50
  635 020f 05       		.uleb128 0x5
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 15
-
-
  636 0210 03       		.byte	0x3
  637 0211 00000000 		.4byte	uart1_rx_buffer
  638 0215 0A       		.uleb128 0xa
  639 0216 01       		.uleb128 0x1
  640 0217 51       		.byte	0x51
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 15
+
+
  641 0218 05       		.uleb128 0x5
  642 0219 03       		.byte	0x3
  643 021a 04000000 		.4byte	.LC1
@@ -873,7 +868,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  665 0242 0E       		.uleb128 0xe
  666 0243 D2010000 		.4byte	.LASF50
  667 0247 01       		.byte	0x1
- 668 0248 72       		.byte	0x72
+ 668 0248 6E       		.byte	0x6e
  669 0249 73000000 		.4byte	0x73
  670 024d 00000000 		.4byte	.LFB66
  671 0251 9C000000 		.4byte	.LFE66-.LFB66
@@ -898,14 +893,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  690 027c 9C040000 		.4byte	0x49c
  691 0280 09       		.uleb128 0x9
  692 0281 1A000000 		.4byte	.LVL31
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 16
-
-
  693 0285 A7040000 		.4byte	0x4a7
  694 0289 97020000 		.4byte	0x297
  695 028d 0A       		.uleb128 0xa
  696 028e 01       		.uleb128 0x1
  697 028f 50       		.byte	0x50
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 16
+
+
  698 0290 05       		.uleb128 0x5
  699 0291 03       		.byte	0x3
  700 0292 00000000 		.4byte	uart1_rx_isr
@@ -958,14 +953,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  747 02f4 36000000 		.4byte	.LVL36
  748 02f8 C8040000 		.4byte	0x4c8
  749 02fc 0D       		.uleb128 0xd
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 17
-
-
  750 02fd 3A000000 		.4byte	.LVL37
  751 0301 D3040000 		.4byte	0x4d3
  752 0305 09       		.uleb128 0x9
  753 0306 62000000 		.4byte	.LVL38
  754 030a DE040000 		.4byte	0x4de
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 17
+
+
  755 030e 45030000 		.4byte	0x345
  756 0312 0A       		.uleb128 0xa
  757 0313 01       		.uleb128 0x1
@@ -1018,14 +1013,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  804 0354 00       		.byte	0
  805 0355 00       		.byte	0
  806 0356 0F       		.uleb128 0xf
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 18
-
-
  807 0357 89010000 		.4byte	.LASF23
  808 035b 04       		.byte	0x4
  809 035c 1207     		.2byte	0x712
  810 035e 62030000 		.4byte	0x362
  811 0362 10       		.uleb128 0x10
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 18
+
+
  812 0363 81000000 		.4byte	0x81
  813 0367 11       		.uleb128 0x11
  814 0368 A5000000 		.4byte	0xa5
@@ -1037,7 +1032,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  820 0377 13       		.uleb128 0x13
  821 0378 80010000 		.4byte	.LASF24
  822 037c 01       		.byte	0x1
- 823 037d 1A       		.byte	0x1a
+ 823 037d 16       		.byte	0x16
  824 037e 67030000 		.4byte	0x367
  825 0382 05       		.uleb128 0x5
  826 0383 03       		.byte	0x3
@@ -1052,7 +1047,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  835 0398 13       		.uleb128 0x13
  836 0399 16020000 		.4byte	.LASF25
  837 039d 01       		.byte	0x1
- 838 039e 1B       		.byte	0x1b
+ 838 039e 17       		.byte	0x17
  839 039f 88030000 		.4byte	0x388
  840 03a3 05       		.uleb128 0x5
  841 03a4 03       		.byte	0x3
@@ -1067,7 +1062,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  850 03b9 13       		.uleb128 0x13
  851 03ba 80000000 		.4byte	.LASF26
  852 03be 01       		.byte	0x1
- 853 03bf 1C       		.byte	0x1c
+ 853 03bf 18       		.byte	0x18
  854 03c0 A9030000 		.4byte	0x3a9
  855 03c4 05       		.uleb128 0x5
  856 03c5 03       		.byte	0x3
@@ -1078,14 +1073,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  861 03d3 12       		.uleb128 0x12
  862 03d4 B3000000 		.4byte	0xb3
  863 03d8 05       		.byte	0x5
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 19
-
-
  864 03d9 00       		.byte	0
  865 03da 13       		.uleb128 0x13
  866 03db 46020000 		.4byte	.LASF27
  867 03df 01       		.byte	0x1
- 868 03e0 1D       		.byte	0x1d
+ 868 03e0 19       		.byte	0x19
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 19
+
+
  869 03e1 CA030000 		.4byte	0x3ca
  870 03e5 05       		.uleb128 0x5
  871 03e6 03       		.byte	0x3
@@ -1100,7 +1095,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  880 03fb 13       		.uleb128 0x13
  881 03fc A9000000 		.4byte	.LASF28
  882 0400 01       		.byte	0x1
- 883 0401 1E       		.byte	0x1e
+ 883 0401 1A       		.byte	0x1a
  884 0402 EB030000 		.4byte	0x3eb
  885 0406 05       		.uleb128 0x5
  886 0407 03       		.byte	0x3
@@ -1115,7 +1110,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  895 041c 13       		.uleb128 0x13
  896 041d 8E020000 		.4byte	.LASF29
  897 0421 01       		.byte	0x1
- 898 0422 20       		.byte	0x20
+ 898 0422 1C       		.byte	0x1c
  899 0423 0C040000 		.4byte	0x40c
  900 0427 05       		.uleb128 0x5
  901 0428 03       		.byte	0x3
@@ -1123,7 +1118,7 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  903 042d 13       		.uleb128 0x13
  904 042e AC010000 		.4byte	.LASF30
  905 0432 01       		.byte	0x1
- 906 0433 21       		.byte	0x21
+ 906 0433 1D       		.byte	0x1d
  907 0434 8C000000 		.4byte	0x8c
  908 0438 05       		.uleb128 0x5
  909 0439 03       		.byte	0x3
@@ -1131,21 +1126,21 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  911 043e 13       		.uleb128 0x13
  912 043f 70010000 		.4byte	.LASF31
  913 0443 01       		.byte	0x1
- 914 0444 22       		.byte	0x22
+ 914 0444 1E       		.byte	0x1e
  915 0445 0C040000 		.4byte	0x40c
  916 0449 05       		.uleb128 0x5
  917 044a 03       		.byte	0x3
  918 044b 00000000 		.4byte	uart2_tx_buffer
  919 044f 14       		.uleb128 0x14
  920 0450 E4010000 		.4byte	.LASF32
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 20
-
-
  921 0454 E4010000 		.4byte	.LASF32
  922 0458 05       		.byte	0x5
  923 0459 2A       		.byte	0x2a
  924 045a 14       		.uleb128 0x14
  925 045b 96010000 		.4byte	.LASF33
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 20
+
+
  926 045f 96010000 		.4byte	.LASF33
  927 0463 05       		.byte	0x5
  928 0464 24       		.byte	0x24
@@ -1198,14 +1193,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  975 04c9 3C010000 		.4byte	.LASF43
  976 04cd 3C010000 		.4byte	.LASF43
  977 04d1 0A       		.byte	0xa
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 21
-
-
  978 04d2 AE       		.byte	0xae
  979 04d3 14       		.uleb128 0x14
  980 04d4 0C000000 		.4byte	.LASF44
  981 04d8 0C000000 		.4byte	.LASF44
  982 04dc 0A       		.byte	0xa
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 21
+
+
  983 04dd B6       		.byte	0xb6
  984 04de 14       		.uleb128 0x14
  985 04df 49000000 		.4byte	.LASF45
@@ -1258,14 +1253,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1032 0028 13       		.uleb128 0x13
  1033 0029 00       		.byte	0
  1034 002a 00       		.byte	0
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 22
-
-
  1035 002b 04       		.uleb128 0x4
  1036 002c 24       		.uleb128 0x24
  1037 002d 00       		.byte	0
  1038 002e 0B       		.uleb128 0xb
  1039 002f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 22
+
+
  1040 0030 3E       		.uleb128 0x3e
  1041 0031 0B       		.uleb128 0xb
  1042 0032 03       		.uleb128 0x3
@@ -1318,14 +1313,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1089 0062 49       		.uleb128 0x49
  1090 0063 13       		.uleb128 0x13
  1091 0064 02       		.uleb128 0x2
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 23
-
-
  1092 0065 17       		.uleb128 0x17
  1093 0066 00       		.byte	0
  1094 0067 00       		.byte	0
  1095 0068 08       		.uleb128 0x8
  1096 0069 34       		.uleb128 0x34
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 23
+
+
  1097 006a 00       		.byte	0
  1098 006b 03       		.uleb128 0x3
  1099 006c 0E       		.uleb128 0xe
@@ -1378,14 +1373,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1146 00a2 01       		.uleb128 0x1
  1147 00a3 13       		.uleb128 0x13
  1148 00a4 00       		.byte	0
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 24
-
-
  1149 00a5 00       		.byte	0
  1150 00a6 0D       		.uleb128 0xd
  1151 00a7 898201   		.uleb128 0x4109
  1152 00aa 00       		.byte	0
  1153 00ab 11       		.uleb128 0x11
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 24
+
+
  1154 00ac 01       		.uleb128 0x1
  1155 00ad 31       		.uleb128 0x31
  1156 00ae 13       		.uleb128 0x13
@@ -1438,14 +1433,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1203 00df 00       		.byte	0
  1204 00e0 00       		.byte	0
  1205 00e1 10       		.uleb128 0x10
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 25
-
-
  1206 00e2 35       		.uleb128 0x35
  1207 00e3 00       		.byte	0
  1208 00e4 49       		.uleb128 0x49
  1209 00e5 13       		.uleb128 0x13
  1210 00e6 00       		.byte	0
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 25
+
+
  1211 00e7 00       		.byte	0
  1212 00e8 11       		.uleb128 0x11
  1213 00e9 01       		.uleb128 0x1
@@ -1498,14 +1493,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1260 0118 3B       		.uleb128 0x3b
  1261 0119 0B       		.uleb128 0xb
  1262 011a 00       		.byte	0
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 26
-
-
  1263 011b 00       		.byte	0
  1264 011c 00       		.byte	0
  1265              		.section	.debug_loc,"",%progbits
  1266              	.Ldebug_loc0:
  1267              	.LLST0:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 26
+
+
  1268 0000 00000000 		.4byte	.LVL0
  1269 0004 07000000 		.4byte	.LVL2-1
  1270 0008 0100     		.2byte	0x1
@@ -1558,14 +1553,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1317 0083 50       		.byte	0x50
  1318 0084 56000000 		.4byte	.LVL16
  1319 0088 59000000 		.4byte	.LVL17-1
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 27
-
-
  1320 008c 0100     		.2byte	0x1
  1321 008e 51       		.byte	0x51
  1322 008f 62000000 		.4byte	.LVL18
  1323 0093 84000000 		.4byte	.LFE64
  1324 0097 0100     		.2byte	0x1
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 27
+
+
  1325 0099 50       		.byte	0x50
  1326 009a 00000000 		.4byte	0
  1327 009e 00000000 		.4byte	0
@@ -1618,14 +1613,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1374 0014 9C000000 		.4byte	.LFE66
  1375 0018 00000000 		.4byte	0
  1376 001c 00000000 		.4byte	0
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 28
-
-
  1377              		.section	.debug_line,"",%progbits
  1378              	.Ldebug_line0:
  1379 0000 66020000 		.section	.debug_str,"MS",%progbits,1
  1379      0200FD01 
  1379      00000201 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 28
+
+
  1379      FB0E0D00 
  1379      01010101 
  1380              	.LASF39:
@@ -1678,14 +1673,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1401 008a 666C6F61 		.ascii	"float\000"
  1401      7400
  1402              	.LASF37:
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 29
-
-
  1403 0090 50575F47 		.ascii	"PW_GPS_Write\000"
  1403      50535F57 
  1403      72697465 
  1403      00
  1404              	.LASF0:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 29
+
+
  1405 009d 7369676E 		.ascii	"signed char\000"
  1405      65642063 
  1405      68617200 
@@ -1738,14 +1733,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1423 0189 49544D5F 		.ascii	"ITM_RxBuffer\000"
  1423      52784275 
  1423      66666572 
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 30
-
-
  1423      00
  1424              	.LASF33:
  1425 0196 7374726E 		.ascii	"strncpy\000"
  1425      63707900 
  1426              	.LASF1:
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 30
+
+
  1427 019e 756E7369 		.ascii	"unsigned char\000"
  1427      676E6564 
  1427      20636861 
@@ -1798,14 +1793,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1449      74797065 
  1449      00
  1450              	.LASF22:
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 31
-
-
  1451 0230 72785F62 		.ascii	"rx_byte\000"
  1451      79746500 
  1452              	.LASF8:
  1453 0238 6C6F6E67 		.ascii	"long long int\000"
  1453      206C6F6E 
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 31
+
+
  1453      6720696E 
  1453      7400
  1454              	.LASF27:
@@ -1858,14 +1853,14 @@ ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 1
  1477      696E6700 
  1478              	.LASF48:
  1479 02c6 433A5C55 		.ascii	"C:\\Users\\Mark Hughes\\Desktop\\Work\\WORK\\WORK\\"
-ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccE5jXRZ.s 			page 32
-
-
  1479      73657273 
  1479      5C4D6172 
  1479      6B204875 
  1479      67686573 
  1480 02f2 53747564 		.ascii	"Study\\Cypress_Study\\Study\\GPS_ExtractV2.cydsn\000"
+ARM GAS  C:\Users\MARKHU~1\AppData\Local\Temp\ccI5yE4W.s 			page 32
+
+
  1480      795C4379 
  1480      70726573 
  1480      735F5374 

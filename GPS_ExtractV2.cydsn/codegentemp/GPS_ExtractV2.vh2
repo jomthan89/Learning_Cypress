@@ -2,7 +2,7 @@
 --	Conversion of GPS_ExtractV2.v to vh2:
 --
 --	Cypress Semiconductor - WARP Version 6.3 IR 41
---	Tue Mar 28 16:16:42 2023
+--	Tue Mar 28 17:42:14 2023
 --
 
 USE cypress.cypress.all;
@@ -1443,7 +1443,7 @@ Tx_1:cy_psoc3_pins_v1_10
 		id=>"d817bf86-14b3-49ad-bccd-870f7ca7f9e6/be0a0e37-ad17-42ca-b5a1-1a654d736358",
 		source_clock_id=>"",
 		divisor=>0,
-		period=>"13020833333.3333",
+		period=>"1085069444.44444",
 		is_direct=>'0',
 		is_digital=>'1')
 	PORT MAP(clock_out=>\UART2:Net_9\,

@@ -1,5 +1,5 @@
 -- Project:   GPS_ExtractV2
--- Generated: 03/28/2023 16:16:42
+-- Generated: 03/28/2023 17:42:14
 -- PSoC Creator  4.4
 
 ENTITY GPS_ExtractV2 IS
@@ -525,10 +525,10 @@ BEGIN
             clk_bus => ClockBlock_BUS_CLK_local,
             dsi_clkin_div => open,
             dsi_glb_div => open,
-            dclk_glb_0 => \UART1:Net_9\,
-            dclk_0 => \UART1:Net_9_local\,
-            dclk_glb_1 => \UART2:Net_9\,
-            dclk_1 => \UART2:Net_9_local\);
+            dclk_glb_0 => \UART2:Net_9\,
+            dclk_0 => \UART2:Net_9_local\,
+            dclk_glb_1 => \UART1:Net_9\,
+            dclk_1 => \UART1:Net_9_local\);
 
     Rx_1:logicalport
         GENERIC MAP(

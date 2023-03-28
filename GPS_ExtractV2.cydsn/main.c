@@ -14,10 +14,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #define UART1_BUFFER_SIZE 128
 #define UART2_BUFFER_SIZE 128
 #define MESSAGE_INTERVAL_MS 1000
@@ -129,11 +125,12 @@ int main(void)
     UART1_PutString("$PMTK314,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0*28\r\n");
     UART2_PutString("GPS data:\r\n");
     
-    CySysTickStart();
+    CySysTickStart(); //Start_Timer
     
     // Main loop
     while(1)
     {
+        // Check if it's time to send a message
         if (CySysTickGetValue() % (MESSAGE_INTERVAL_MS * 1000) == 0) {
             
             snprintf(uart2_tx_buffer, UART2_BUFFER_SIZE, "Latitude: %s, Longtitude: %s ,Time: %s \r\n",latitude,longitude,utc_time);

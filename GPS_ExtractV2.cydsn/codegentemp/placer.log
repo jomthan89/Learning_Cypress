@@ -6,7 +6,7 @@
 
 #Build Date:         Sep  9 2019 11:47:43
 
-#File Generated:     Mar 28 2023 16:16:42
+#File Generated:     Mar 28 2023 17:42:14
 
 #Purpose:            
 
@@ -85,8 +85,8 @@ Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
-Clock: UART1_IntClock       | Frequency:  50.9 MHz | Target:   0.1 MHz
-Clock: UART2_IntClock       | Frequency:  52.1 MHz | Target:   0.1 MHz
+Clock: UART1_IntClock       | Frequency:  47.2 MHz | Target:   0.1 MHz
+Clock: UART2_IntClock       | Frequency:  55.5 MHz | Target:   0.9 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -104,8 +104,8 @@ Clock: CyILO                | Frequency: N/A       | Target:   0.0 MHz
 Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
-Clock: UART1_IntClock       | Frequency:   1.3 MHz | Target:   0.1 MHz
-Clock: UART2_IntClock       | Frequency:   1.4 MHz | Target:   0.1 MHz
+Clock: UART1_IntClock       | Frequency:   1.4 MHz | Target:   0.1 MHz
+Clock: UART2_IntClock       | Frequency:   1.3 MHz | Target:   0.9 MHz
 
 ======================================================================
                      End of Clock Summary
@@ -147,7 +147,7 @@ Clock: CyIMO                | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyMASTER_CLK         | Frequency: N/A       | Target:  24.0 MHz
 Clock: CyPLL_OUT            | Frequency: N/A       | Target:  24.0 MHz
 Clock: UART1_IntClock       | Frequency:   1.5 MHz | Target:   0.1 MHz
-Clock: UART2_IntClock       | Frequency:   1.4 MHz | Target:   0.1 MHz
+Clock: UART2_IntClock       | Frequency:   1.4 MHz | Target:   0.9 MHz
 
 ======================================================================
                      End of Clock Summary
